@@ -1,0 +1,27 @@
+.countClock{
+	text-align: center;
+	position: relative;
+	margin-left: 10.66%;
+	margin-right:10.66%;
+	min-width: 20%;
+	max-width: 80%;
+}
+@media screen and (max-width:830px){
+	.countClock{
+		zoom: 0.7;
+		-moz-transform: scale(0.5);
+		-webkit-transform: scale(0.7);
+	}
+}
+
+@media screen and (min-width:830px){
+	.countClock{
+		
+		zoom: 0.7;
+		-moz-transform: scale(3.2);
+		-webkit-transform: scale(0.7);
+		transform: scale(0.7);
+		
+	}
+}
+

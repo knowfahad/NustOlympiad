@@ -1,0 +1,531 @@
+/*mobile display none*/
+.class-mobile{
+	display: none;
+}
+
+/* entire container, keeps perspective */
+.class-flip-container {
+	perspective: 1000px;
+}
+	/* flip the pane when hovered */
+	.class-flip-container:hover .class-flipper, .class-flip-container.hover .class-flipper {
+		transform: rotateY(180deg);
+	}
+
+.class-flip-container, .class-front, .class-back {
+	width: 250px;
+	height: 250px;
+	text-align: center;
+	align-items: center;
+	border-radius: 50%;
+}
+
+.class-front{
+	background-color:rgba(0,0,0,0.3);
+	text-align: center;
+
+}
+.class-back{
+	background-color:rgba(0,0,0,0.3);
+	text-align: center;
+}
+
+.class-center{
+	margin-top: 25%;
+}
+/*fizza---->*/
+/*
+.class-flip-container:hover{
+	background-color:rgba(0,0,0,0.3);
+}*/
+
+.class-flipper .class-front{
+	padding:15px;
+}
+.class-flipper .class-front span{
+	font-size:50px;
+	text-align: center;
+	transition:transform .7s, opacity .6s;
+}
+.class-flipper:hover .class-front span{
+	transform:scale(2.5);
+	opacity:0;
+}
+.class-flipper .class-back h3{
+	font-weight:80;
+	font-size: 20px;
+	transition:opacity .3s;
+}
+.class-flipper:hover .class-back h3{
+	opacity:0;
+}
+.class-flipper p{
+	position:absolute;
+	padding:10px;
+	top:0%;
+	transition:top .6s;
+}
+.class-flipper:hover p{
+	top:0%;
+}/* <----/fizza */
+
+
+
+/* flip speed goes here */
+.class-flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.class-front, .class-back {
+	backface-visibility: hidden;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.class-front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.class-back {
+	transform: rotateY(180deg);
+}
+
+.class-wrapper{
+	width: 200px;
+	height: 800px;
+	text-align: center;
+	align-items: center;
+	display: inline-block;
+	margin-left: 10%;
+}
+
+/* setting width and height of vertical line */
+.class-vertical-line{
+	background-color: black;
+	width: 2px;
+	display: inline-block;
+	position: relative;
+	margin-left: 0;
+}
+.class-large{
+	height: 50px;
+}
+.class-small{
+	height: 50px;
+}
+
+.class-overlap{
+	margin-left: -90px;
+}
+
+.class-base-line{
+	height: 4px;
+	width: 100%;
+	background-color: black;
+	margin-top: -5px;
+}
+
+.class-downward{
+	position: relative;
+	top: 54px;
+}
+
+.class-5px-upward{
+	margin-top: -8px;
+}
+.class-5px-downward{
+	margin-bottom: -3px;
+}
+
+
+
+@media only screen and (min-width: 900px) and (max-width: 1000px){
+	.class-flip-container, .class-front, .class-back {
+	width: 200px;
+	height: 200px;
+	text-align: center;
+	align-items: center;
+	border-radius: 50%;
+	}
+
+	/*.class-front{
+		background-color: green;
+	}
+	.class-back{
+		background-color: green;
+	}*/
+
+	/*fizza---->*/
+
+	
+
+	.class-flipper .class-front{
+		padding:5px;
+	}
+	.class-flipper .class-front span{
+		font-size:30px;
+		text-align: center;
+		transition:transform .7s, opacity .6s;
+	}
+	.class-flipper:hover .class-front span{
+		transform:scale(2.5);
+		opacity:0;
+	}
+	.class-flipper .class-back h3{
+		font-weight:64;
+		font-size: 16px;
+		transition:opacity .3s;
+	}
+	.class-flipper:hover .class-back h3{
+		opacity:0;
+	}
+	.class-flipper p{
+		position:absolute;
+		padding:8px;
+		top:0%;
+		transition:top .6s;
+	}
+	.class-flipper:hover p{
+		top:0%;
+	}/* <----/fizza */
+
+
+
+	/* flip speed goes here */
+	.class-flipper {
+		transition: 0.6s;
+		transform-style: preserve-3d;
+
+		position: relative;
+	}
+
+	/* hide back of pane during swap */
+	.class-front, .class-back {
+		backface-visibility: hidden;
+
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	/* front pane, placed above back */
+	.class-front {
+		z-index: 2;
+		/* for firefox 31 */
+		transform: rotateY(0deg);
+	}
+
+	/* back, initially hidden pane */
+	.class-back {
+		transform: rotateY(180deg);
+	}
+
+	.class-wrapper{
+		width: 160px;
+		height: 400px;
+		text-align: center;
+		align-items: center;
+		display: inline-block;
+		margin-left: 10%;
+	}
+
+	/* setting width and height of vertical line */
+	.class-vertical-line{
+		background-color: black;
+		width: 2px;
+		display: inline-block;
+		position: relative;
+		margin-left: 0;
+	}
+	.class-large{
+		height: 100px;
+	}
+	.class-small{
+		height: 100px;
+	}
+
+	.class-overlap{
+		margin-left: -72px;
+	}
+
+	.class-base-line{
+		height: 3px;
+		width: 100%;
+		background-color: black;
+		margin-top: -5px;
+	}
+
+	.class-downward{
+		position: relative;
+		top: 103px;
+	}
+
+	.class-5px-upward{
+		margin-top: -5px;
+	}
+		
+}
+
+@media only screen and (min-width: 700px) and (max-width: 900px){
+	/*make the desktop timeline visibility none*/
+	.class-desktop{
+		display: none;
+	}
+	/*show mobile display*/
+	.class-mobile{
+		display: initial;
+		margin-top: 50px;
+	}
+	.class-base-line{
+		height: 100%;
+		width: 3px;
+		background-color: black;
+	}
+	.class-large{
+		width: 250px;
+	}
+	.class-small{
+		width: 100px;
+	}
+	.class-horizontal-line{
+		background-color: black;
+		height: 2px;
+		display: inherit;
+		position: relative;
+		margin-left: 0;
+		
+	}
+
+		/* flip the pane when hovered */
+	.class-flip-container:hover .class-flipper, .class-flip-container.hover .class-flipper {
+		transform: rotateY(180deg);
+	}
+
+.class-flip-container, .class-front, .class-back {
+	width: 250px;
+	height: 250px;
+	text-align: center;
+	align-items: center;
+	vertical-align: middle;
+	border-radius: 50%;
+}
+
+/*.class-front{
+	background-color: green;
+}
+.class-back{
+	background-color: green;
+}*/
+
+/*fizza---->*/
+
+
+
+.class-flipper .class-front{
+	padding:15px;
+}
+.class-flipper .class-front span{
+	font-size:50px;
+	text-align: center;
+	transition:transform .7s, opacity .6s;
+}
+.class-flipper:hover .class-front span{
+	transform:scale(2.5);
+	opacity:0;
+}
+.class-flipper .class-back h3{
+	font-weight:80;
+	font-size: 20px;
+	transition:opacity .3s;
+}
+.class-flipper:hover .class-back h3{
+	opacity:0;
+}
+.class-flipper p{
+	position:absolute;
+	padding:10px;
+	top:0%;
+	transition:top .6s;
+}
+.class-flipper:hover p{
+	top:0%;
+}/* <----/fizza */
+
+
+
+/* flip speed goes here */
+.class-flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.class-front, .class-back {
+	backface-visibility: hidden;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.class-front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.class-back {
+	transform: rotateY(180deg);
+}
+
+.class-wrapper{
+	width: 500px;
+	height: 150px;
+	text-align: center;
+	align-items: center;
+	vertical-align: middle;
+	display: inline-flex;
+	margin-left: 10%;
+}
+}
+
+@media only screen and (max-width: 700px){
+	/*make the desktop timeline visibility none*/
+	.class-desktop{
+		display: none;
+	}
+	/*show mobile display*/
+	.class-mobile{
+		display: initial;
+	}
+	.class-base-line{
+		height: 100%;
+		width: 3px;
+		background-color: black;
+		margin-right: -12px;
+	}
+	.class-large{
+		width: 20px;
+	}
+	.class-small{
+		width: 20px;
+	}
+	.class-horizontal-line{
+		background-color: black;
+		height: 20px;
+		display: inherit;
+		position: relative;
+		margin-left: 0;
+		border-radius: 50%;
+	}
+
+		/* flip the pane when hovered */
+	.class-flip-container:hover .class-flipper, .class-flip-container.hover .class-flipper {
+		transform: rotateY(180deg);
+	}
+
+.class-flip-container, .class-front, .class-back {
+	width: 250px;
+	height: 250px;
+	text-align: center;
+	align-items: center;
+	vertical-align: middle;
+}
+
+/*.class-front{
+	background-color: green;
+}
+.class-back{
+	background-color: green;
+}*/
+
+/*fizza---->*/
+
+
+
+.class-flipper .class-front{
+	padding:15px;
+}
+.class-flipper .class-front span{
+	font-size:50px;
+	text-align: center;
+	transition:transform .7s, opacity .6s;
+}
+.class-flipper:hover .class-front span{
+	transform:scale(2.5);
+	opacity:0;
+}
+.class-flipper .class-back h3{
+	font-weight:80;
+	font-size: 20px;
+	transition:opacity .3s;
+}
+.class-flipper:hover .class-back h3{
+	opacity:0;
+}
+.class-flipper p{
+	position:absolute;
+	padding:10px;
+	top:0%;
+	transition:top .6s;
+}
+.class-flipper:hover p{
+	top:0%;
+}/* <----/fizza */
+
+
+
+/* flip speed goes here */
+.class-flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.class-front, .class-back {
+	backface-visibility: hidden;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.class-front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.class-back {
+	transform: rotateY(180deg);
+}
+
+.class-wrapper{
+	width: 500px;
+	height: 200px;
+	text-align: center;
+	align-items: center;
+	vertical-align: middle;
+	display: inline-flex;
+	margin-left: 10%;
+}	
+}
+
