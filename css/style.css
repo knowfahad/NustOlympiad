@@ -216,7 +216,14 @@ h1{
     text-align:center;
     position:relative;
 }
+.arrows
+{
+	border: 2px solid white;
+	padding: 20px;
+	border-radius: 50%;
+	width: 100px;
 
+}
 /*Modified CSS for image upload module by Usama Tahir*/
 .btn-file {
     position: relative;
