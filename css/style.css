@@ -9,11 +9,12 @@ MAIN STYLEHSEET
 6-CONTENT
 7-HELPERS
 ----------------------------------*/
-
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 /* 1-HTML ELEMENTS */
 body{
 	margin:0;
-	font-family: 'Lato', sans-serif;
+	font-family: 'Montserrat', sans-serif;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.9);
 }
 h1{
 	font-weight: 100;
