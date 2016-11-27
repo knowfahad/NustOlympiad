@@ -84,13 +84,13 @@
 }
 
 /* this is just icing */
-body {
+/*body { whoever did it, messed up my whole work.
   font-family: "Oswald", Helvetica, Arial, sans-serif;
   font-weight: 300;
   text-transform: uppercase;
   padding: 0;
   margin: 0;
-}
+}*/
 
 .main, h1 {
   flex-direction: column;
