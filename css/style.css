@@ -222,7 +222,30 @@ h1{
     cursor: inherit;
     display: block;
 }
-/*Modified CSS for image upload module by Usama Tahir*/
+.fa-facebook{
+	color:white;
+}
+.fa-facebook:hover{
+	color:#3b5998;
+	
+	
+}
+
+.fa-twitter
+{
+	color:white;
+}
+.fa-twitter:hover{
+	 color:#0084b4
+}
+.fa-instagram
+{
+	color:white;
+}
+.fa-instagram:hover{
+	color:#fb3958;
+}
+
 
 /* added by mukarram */
 @media only screen and (max-width: 668px){
