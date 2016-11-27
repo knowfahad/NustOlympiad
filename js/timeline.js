@@ -15,18 +15,7 @@ $(document).ready(function(){
 			marginRight = Math.floor((width+60-minWidth)/2);
 			$('.class-desktop').css({"margin-left":marginLeft+"px"});
 		}
-		else if(width >= 700){
-			minWidth = 700;
-			marginLeft = Math.floor((width+10-minWidth)/2);
-			marginRight = Math.floor((width+10-minWidth)/2);
-			$('.class-mobile').css({"margin-left":marginLeft+"px"});	
-		}
-		else{
-			minWidth = 700;
-			marginLeft = Math.floor((width+10-minWidth)/2);
-			marginRight = Math.floor((width+10-minWidth)/2);
-			$('.class-mobile').css({"margin-left":marginLeft+"px"});	
-		}
+		
 	}
 
 

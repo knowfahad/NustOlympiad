@@ -109,7 +109,7 @@
 	text-align: center;
 	align-items: center;
 	display: inline-block;
-	margin-left: 10%;
+	
 }
 
 /* setting width and height of vertical line */
@@ -241,7 +241,6 @@
 		text-align: center;
 		align-items: center;
 		display: inline-block;
-		margin-left: 10%;
 	}
 
 	/* setting width and height of vertical line */
