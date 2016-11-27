@@ -114,7 +114,7 @@
 
 /* setting width and height of vertical line */
 .class-vertical-line{
-	background-color: black;
+	background-color: white;
 	width: 2px;
 	display: inline-block;
 	position: relative;
@@ -134,7 +134,7 @@
 .class-base-line{
 	height: 4px;
 	width: 100%;
-	background-color: black;
+	background-color: white;
 	margin-top: -5px;
 }
 
@@ -246,7 +246,7 @@
 
 	/* setting width and height of vertical line */
 	.class-vertical-line{
-		background-color: black;
+		background-color: white;
 		width: 2px;
 		display: inline-block;
 		position: relative;
@@ -266,7 +266,7 @@
 	.class-base-line{
 		height: 3px;
 		width: 100%;
-		background-color: black;
+		background-color: white;
 		margin-top: -5px;
 	}
 
@@ -294,7 +294,7 @@
 	.class-base-line{
 		height: 100%;
 		width: 3px;
-		background-color: black;
+		background-color: white;
 	}
 	.class-large{
 		width: 250px;
@@ -303,7 +303,7 @@
 		width: 100px;
 	}
 	.class-horizontal-line{
-		background-color: black;
+		background-color: white;
 		height: 2px;
 		display: inherit;
 		position: relative;
@@ -423,7 +423,7 @@
 	.class-base-line{
 		height: 100%;
 		width: 3px;
-		background-color: black;
+		background-color: white;
 		margin-right: -12px;
 	}
 	.class-large{
@@ -433,7 +433,7 @@
 		width: 20px;
 	}
 	.class-horizontal-line{
-		background-color: black;
+		background-color: white;
 		height: 20px;
 		display: inherit;
 		position: relative;
