@@ -14,12 +14,11 @@
 
 .class-flip-container, .class-front, .class-back {
 	width: 200px;
-	height: 170px;
+	height: 160px;
 	text-align: center;
 	align-items: center;
 	vertical-align: middle;
 	word-wrap: break-word;
-	border-radius: 5%;
 }
 
 .class-front{
@@ -106,7 +105,7 @@
 
 .class-wrapper{
 	width: 200px;
-	height: 200px;
+	height: 170px;
 	text-align: center;
 	align-items: center;
 	display: inline-block;
@@ -122,10 +121,10 @@
 	margin-left: 0;
 }
 .class-large{
-	height: 30px;
+	height: 20px;
 }
 .class-small{
-	height: 30px;
+	height: 20px;
 }
 
 .class-overlap{
@@ -141,7 +140,7 @@
 
 .class-downward{
 	position: relative;
-	top: 33px;
+	top: 24px;
 }
 
 .class-5px-upward{
@@ -162,7 +161,6 @@
 	height: 170px;
 	text-align: center;
 	align-items: center;
-	border-radius: 5%;
 	}
 
 	/*.class-front{
@@ -328,7 +326,6 @@
 	text-align: center;
 	align-items: center;
 	vertical-align: middle;
-	border-radius: 5%;
 }
 
 /*.class-front{
