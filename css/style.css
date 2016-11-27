@@ -236,3 +236,7 @@ h1{
 }
 
 /* end */
+/*arrows at the homepage*/
+@media only screen and (max-width: 1026px){
+    .arrows{display: none;}  
+}
