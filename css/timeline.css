@@ -13,11 +13,13 @@
 	}
 
 .class-flip-container, .class-front, .class-back {
-	width: 250px;
-	height: 250px;
+	width: 200px;
+	height: 170px;
 	text-align: center;
 	align-items: center;
-	border-radius: 50%;
+	vertical-align: middle;
+	word-wrap: break-word;
+	border-radius: 5%;
 }
 
 .class-front{
@@ -33,7 +35,7 @@
 }
 
 .class-center{
-	margin-top: 25%;
+	
 }
 /*fizza---->*/
 /*
@@ -104,7 +106,7 @@
 
 .class-wrapper{
 	width: 200px;
-	height: 400px;
+	height: 200px;
 	text-align: center;
 	align-items: center;
 	display: inline-block;
@@ -120,10 +122,10 @@
 	margin-left: 0;
 }
 .class-large{
-	height: 50px;
+	height: 30px;
 }
 .class-small{
-	height: 50px;
+	height: 30px;
 }
 
 .class-overlap{
@@ -139,7 +141,7 @@
 
 .class-downward{
 	position: relative;
-	top: 53px;
+	top: 33px;
 }
 
 .class-5px-upward{
@@ -156,11 +158,11 @@
 
 @media only screen and (min-width: 900px) and (max-width: 1000px){
 	.class-flip-container, .class-front, .class-back {
-	width: 200px;
-	height: 200px;
+	width: 160px;
+	height: 170px;
 	text-align: center;
 	align-items: center;
-	border-radius: 50%;
+	border-radius: 5%;
 	}
 
 	/*.class-front{
@@ -237,7 +239,7 @@
 
 	.class-wrapper{
 		width: 160px;
-		height: 400px;
+		height: 170px;
 		text-align: center;
 		align-items: center;
 		display: inline-block;
@@ -253,10 +255,10 @@
 		margin-left: 0;
 	}
 	.class-large{
-		height: 100px;
+		height: 15px;
 	}
 	.class-small{
-		height: 100px;
+		height: 15px;
 	}
 
 	.class-overlap{
@@ -272,11 +274,11 @@
 
 	.class-downward{
 		position: relative;
-		top: 103px;
+		top: 18px;
 	}
 
 	.class-5px-upward{
-		margin-top: -5px;
+		margin-top: -10px;
 	}
 		
 }
@@ -322,11 +324,11 @@
 
 .class-flip-container, .class-front, .class-back {
 	width: 250px;
-	height: 250px;
+	height: 140px;
 	text-align: center;
 	align-items: center;
 	vertical-align: middle;
-	border-radius: 50%;
+	border-radius: 5%;
 }
 
 /*.class-front{
@@ -449,7 +451,7 @@
 
 .class-flip-container, .class-front, .class-back {
 	width: 250px;
-	height: 250px;
+	height: 140px;
 	text-align: center;
 	align-items: center;
 	vertical-align: middle;
