@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>NUST OLYMPIAD '17</title>
 	<link rel="stylesheet" type="text/css" href="css/timeline.css">
@@ -49,11 +50,19 @@
 					<div class="row homepage" style="margin-bottom: 0px;">
 						<div class="col-md-12 text-center homepageleft" data-animation="fadeInDown" data-animation-delay="100">
 
+<<<<<<< HEAD
 							<div class="arrows col-md-2" style="margin-top:120px; font-size:50px;margin-right: 80px;"><i class="ti-angle-left " style="float: left"></i></div>
+=======
+							<div class="arrows col-md-2" style="margin-top:120px; font-size:50px"><i class="ti-angle-left " style="float: left" onclick="leftArrowClick()"></i></div>
+>>>>>>> origin/master
 
 							<div class="col-md-8"><img src="img/cube.png" alt="Logo" style="width:390px;height:230px" /></div>
 
+<<<<<<< HEAD
 							<div class="arrows col-md-2" style="margin-top:120px; font-size:50px; float: right;"><i class="ti-angle-right " style="float: right"></i></div>
+=======
+							<div class="arrows col-md-2" style="margin-top:120px; font-size:50px"><i class="ti-angle-right " style="float: right" onclick="rightArrowClick()"></i></div>
+>>>>>>> origin/master
 							<!-- <canvas id="myCanvas"></canvas> 
 							<div class="text-uppercase" data-animation="fadeIn" data-animation-delay="200" style="font-size: 40px;">
 							</div>
@@ -888,5 +897,22 @@
 			}
 		});
 	</script>
+<script type="text/javascript">
+	
+	function rightArrowClick(){
+		var e = jQuery.Event("keydown");
+		e.which = 40;
+		e.keyCode = 40; // # Some key code value
+		$("body").trigger(e);
+		
+	}
+	function leftArrowClick(){
+		var e = jQuery.Event("keydown");
+		e.which = 38;
+		e.keyCode = 38; // # Some key code value
+		$("body").trigger(e);
+		
+	}
+</script>
 </body>
 </html>
