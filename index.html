@@ -50,11 +50,11 @@
 					<div class="row homepage" style="margin-bottom: 0px;">
 						<div class="col-md-12 text-center homepageleft" data-animation="fadeInDown" data-animation-delay="100">
 
-							<div class="arrows col-md-2" style="margin-top:120px; font-size:50px"><i class="ti-angle-left " style="float: left"></i></div>
+							<div class="arrows col-md-2" style="margin-top:120px; font-size:50px"><i class="ti-angle-left " style="float: left" onclick="leftArrowClick()"></i></div>
 
 							<div class="col-md-8"><img src="img/cube.png" alt="Logo" style="width:420px;height:230px" /></div>
 
-							<div class="arrows col-md-2" style="margin-top:120px; font-size:50px"><i class="ti-angle-right " style="float: right"></i></div>
+							<div class="arrows col-md-2" style="margin-top:120px; font-size:50px"><i class="ti-angle-right " style="float: right" onclick="rightArrowClick()"></i></div>
 							<!-- <canvas id="myCanvas"></canvas> 
 							<div class="text-uppercase" data-animation="fadeIn" data-animation-delay="200" style="font-size: 40px;">
 							</div>
@@ -890,5 +890,22 @@
 			}
 		});
 	</script>
+<script type="text/javascript">
+	
+	function rightArrowClick(){
+		var e = jQuery.Event("keydown");
+		e.which = 40;
+		e.keyCode = 40; // # Some key code value
+		$("body").trigger(e);
+		
+	}
+	function leftArrowClick(){
+		var e = jQuery.Event("keydown");
+		e.which = 38;
+		e.keyCode = 38; // # Some key code value
+		$("body").trigger(e);
+		
+	}
+</script>
 </body>
 </html>
