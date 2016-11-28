@@ -134,7 +134,7 @@
         		var perspective = options.cubeSize * 5 + 'px';
         		var cubeSizepx = options.cubeSize + 'px';
         		var figurepx = options.cubeSize - 4 + 'px';
-        		var fontSize = Math.round( options.cubeSize / 5 * 3 ) + 'px';
+        		var fontSize = Math.round( options.cubeSize / 5 * 2 ) + 'px';
         		var titleFontSize = Math.round( options.cubeSize / 10 * 2 ) + 'px';
         		var transformSize = Math.round( options.cubeSize / 2 ) + 'px';
         		
