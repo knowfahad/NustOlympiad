@@ -10,11 +10,17 @@
         }
     ],
     "require": {
-        "phpmailer/phpmailer": "^5.2"
+        "phpmailer/phpmailer": "^5.2",
+        "propel/propel": "~2.0@dev",
+        "respect/validation": "^1.1",
+        "swiftmailer/swiftmailer": "^5.4"
     },
     "autoload": {
         "psr-4": {
-            "Register\\": "register/"
-        }
+            "Register\\": "register/",
+            "App\\": "app/",
+            "Model\\Model\\": "Model/Model"
+        },
+        "files" : ["app/helpers.php", "register/helpers.php"]
     }
 }

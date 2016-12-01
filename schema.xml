@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="default" defaultIdMethod="native" namespace="Model" defaultPhpNamingMethod="underscore">
+  <table name="ambassador" idMethod="native" phpName="Ambassador" namespace="Model">
+    <column name="AmbassadorID" phpName="Ambassadorid" type="VARCHAR" size="20" primaryKey="true" required="true"/>
+    <column name="CNIC" phpName="Cnic" type="VARCHAR" size="13" required="true"/>
+    <column name="FirstName" phpName="Firstname" type="VARCHAR" size="25" required="true"/>
+    <column name="LastName" phpName="Lastname" type="VARCHAR" size="15"/>
+    <column name="Email" phpName="Email" type="VARCHAR" size="100" required="true"/>
+    <unique name="CNIC">
+      <unique-column name="CNIC"/>
+    </unique>
+    <unique name="Email">
+      <unique-column name="Email"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="ambassador_participant" idMethod="native" phpName="AmbassadorParticipant" namespace="Model">
+    <column name="id" phpName="Id" type="INTEGER" size="10" primaryKey="true" required="true"/>
+    <column name="ParticipantCNIC" phpName="Participantcnic" type="VARCHAR" size="13" required="true"/>
+    <column name="AmbassadorID" phpName="Ambassadorid" type="VARCHAR" size="20" required="true"/>
+    <column name="EventID" phpName="Eventid" type="INTEGER"/>
+    <column name="SportID" phpName="Sportid" type="INTEGER"/>
+    <foreign-key foreignTable="events" name="Event Refered" onDelete="CASCADE" onUpdate="CASCADE">
+      <reference local="EventID" foreign="EventID"/>
+    </foreign-key>
+    <foreign-key foreignTable="participant" name="Refered Participant" onDelete="CASCADE" onUpdate="CASCADE">
+      <reference local="ParticipantCNIC" foreign="CNIC"/>
+    </foreign-key>
+    <foreign-key foreignTable="ambassador" name="Referer Ambassador" onDelete="CASCADE" onUpdate="CASCADE">
+      <reference local="AmbassadorID" foreign="AmbassadorID"/>
+    </foreign-key>
+    <foreign-key foreignTable="sports" name="Sports Refered" onDelete="CASCADE" onUpdate="CASCADE">
+      <reference local="SportID" foreign="SportID"/>
+    </foreign-key>
+    <index name="Refered Participant">
+      <index-column name="ParticipantCNIC"/>
+    </index>
+    <index name="Referer Ambassador">
+      <index-column name="AmbassadorID"/>
+    </index>
+    <index name="Event Refered">
+      <index-column name="EventID"/>
+    </index>
+    <index name="Sports Refered">
+      <index-column name="SportID"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="challan" idMethod="native" phpName="Challan" namespace="Model">
+    <column name="ChallanID" phpName="Challanid" type="VARCHAR" size="30" primaryKey="true" required="true"/>
+    <column name="AmountPayable" phpName="Amountpayable" type="INTEGER" size="10" required="true"/>
+    <column name="DueDate" phpName="Duedate" type="DATE" required="true"/>
+    <column name="PaymentStatus" phpName="Paymentstatus" type="INTEGER" size="1" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="eventparticipants" idMethod="native" phpName="Eventparticipants" namespace="Model">
+    <column name="ParticipantCNIC" phpName="Participantcnic" type="VARCHAR" size="13" primaryKey="true" required="true"/>
+    <column name="EventID" phpName="Eventid" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="ChallanID" phpName="Challanid" type="VARCHAR" size="30" required="true"/>
+    <column name="PaymentStatus" phpName="Paymentstatus" type="INTEGER" size="1" required="true"/>
+    <column name="DueDate" phpName="Duedate" type="DATE" required="true"/>
+    <foreign-key foreignTable="participant" name="FKEventParti290858">
+      <reference local="ParticipantCNIC" foreign="CNIC"/>
+    </foreign-key>
+    <foreign-key foreignTable="events" name="FKEventParti6428" onUpdate="CASCADE">
+      <reference local="EventID" foreign="EventID"/>
+    </foreign-key>
+    <index name="FKEventParti290858">
+      <index-column name="ParticipantCNIC"/>
+    </index>
+    <index name="FKEventParti6428">
+      <index-column name="EventID"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="events" idMethod="native" phpName="Events" namespace="Model">
+    <column name="EventID" phpName="Eventid" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="Name" phpName="Name" type="VARCHAR" size="30" required="true"/>
+    <column name="EventFee" phpName="Eventfee" type="INTEGER" size="10" required="true"/>
+    <column name="EventType" phpName="Eventtype" type="INTEGER" size="1" required="true"/>
+    <unique name="Name">
+      <unique-column name="Name"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="participant" idMethod="native" phpName="Participant" namespace="Model">
+    <column name="ParticipantID" phpName="Participantid" type="INTEGER" size="10" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="CNIC" phpName="Cnic" type="VARCHAR" size="13" required="true"/>
+    <column name="RegistrationChallanID" phpName="Registrationchallanid" type="VARCHAR" size="30" required="true"/>
+    <column name="AccomodationChallanID" phpName="Accomodationchallanid" type="VARCHAR" size="30"/>
+    <column name="FirstName" phpName="Firstname" type="VARCHAR" size="25" required="true"/>
+    <column name="LastName" phpName="Lastname" type="VARCHAR" size="15"/>
+    <column name="Gender" phpName="Gender" type="VARCHAR" size="6" required="true" defaultValue="Male"/>
+    <column name="Address" phpName="Address" type="VARCHAR" size="100"/>
+    <column name="PhoneNo" phpName="Phoneno" type="VARCHAR" size="13" required="true"/>
+    <column name="NUSTRegNo" phpName="Nustregno" type="VARCHAR" size="35"/>
+    <column name="AmbassadorID" phpName="Ambassadorid" type="VARCHAR" size="20"/>
+    <foreign-key foreignTable="challan" name="AccomodationFee" onDelete="SET NULL" onUpdate="CASCADE">
+      <reference local="AccomodationChallanID" foreign="ChallanID"/>
+    </foreign-key>
+    <foreign-key foreignTable="ambassador" name="FKparticipan905517" onDelete="SET NULL" onUpdate="CASCADE">
+      <reference local="AmbassadorID" foreign="AmbassadorID"/>
+    </foreign-key>
+    <foreign-key foreignTable="challan" name="Registration Fee" onUpdate="CASCADE">
+      <reference local="RegistrationChallanID" foreign="ChallanID"/>
+    </foreign-key>
+    <index name="Registration Fee">
+      <index-column name="RegistrationChallanID"/>
+    </index>
+    <index name="AccomodationFee">
+      <index-column name="AccomodationChallanID"/>
+    </index>
+    <index name="FKparticipan905517">
+      <index-column name="AmbassadorID"/>
+    </index>
+    <unique name="CNINC">
+      <unique-column name="CNIC"/>
+    </unique>
+    <unique name="RegistrationChallanID">
+      <unique-column name="RegistrationChallanID"/>
+    </unique>
+    <unique name="NUSTRegNo">
+      <unique-column name="NUSTRegNo"/>
+    </unique>
+    <unique name="AmbassadorID">
+      <unique-column name="AmbassadorID"/>
+    </unique>
+    <unique name="AccomodationChallanID">
+      <unique-column name="AccomodationChallanID"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="sports" idMethod="native" phpName="Sports" namespace="Model">
+    <column name="SportID" phpName="Sportid" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="Name" phpName="Name" type="VARCHAR" size="30" required="true"/>
+    <column name="FeePerParticipant" phpName="Feeperparticipant" type="INTEGER" size="10" required="true"/>
+    <column name="MaxParticipants" phpName="Maxparticipants" type="INTEGER" size="2" required="true"/>
+    <unique name="Name">
+      <unique-column name="Name"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="sportsparticipants" idMethod="native" phpName="Sportsparticipants" namespace="Model">
+    <column name="TeamID" phpName="Teamid" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="ParticipantCNIC" phpName="Participantcnic" type="VARCHAR" size="13" primaryKey="true" required="true"/>
+    <foreign-key foreignTable="sportsteam" name="FKSportsPart30093" onDelete="CASCADE" onUpdate="CASCADE">
+      <reference local="TeamID" foreign="TeamID"/>
+    </foreign-key>
+    <foreign-key foreignTable="participant" name="FKSportsPart534001" onDelete="CASCADE" onUpdate="CASCADE">
+      <reference local="ParticipantCNIC" foreign="CNIC"/>
+    </foreign-key>
+    <index name="FKSportsPart534001">
+      <index-column name="ParticipantCNIC"/>
+    </index>
+    <index name="FKSportsPart30093">
+      <index-column name="TeamID"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="sportsteam" idMethod="native" phpName="Sportsteam" namespace="Model">
+    <column name="TeamID" phpName="Teamid" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="SportID" phpName="Sportid" type="INTEGER" required="true"/>
+    <column name="TeamName" phpName="Teamname" type="VARCHAR" size="30" required="true"/>
+    <column name="HeadCNIC" phpName="Headcnic" type="VARCHAR" size="13" required="true"/>
+    <column name="ChallanID" phpName="Challanid" type="VARCHAR" size="30" required="true"/>
+    <column name="AmountPayable" phpName="Amountpayable" type="INTEGER" size="10" required="true"/>
+    <column name="DueData" phpName="Duedata" type="DATE" required="true"/>
+    <column name="PaymentStatus" phpName="Paymentstatus" type="INTEGER" size="1" required="true"/>
+    <foreign-key foreignTable="sports" name="Sports Teams" onDelete="CASCADE" onUpdate="CASCADE">
+      <reference local="SportID" foreign="SportID"/>
+    </foreign-key>
+    <foreign-key foreignTable="participant" name="Team Head" onDelete="CASCADE" onUpdate="CASCADE">
+      <reference local="HeadCNIC" foreign="CNIC"/>
+    </foreign-key>
+    <index name="Sports Teams">
+      <index-column name="SportID"/>
+    </index>
+    <index name="Team Head">
+      <index-column name="HeadCNIC"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="useraccount" idMethod="native" phpName="Useraccount" namespace="Model">
+    <column name="Username" phpName="Username" type="VARCHAR" size="15" primaryKey="true" required="true"/>
+    <column name="ParticipantCNIC" phpName="Participantcnic" type="VARCHAR" size="13" required="true"/>
+    <column name="Email" phpName="Email" type="VARCHAR" size="100" required="true"/>
+    <column name="Password" phpName="Password" type="VARCHAR" size="50" required="true"/>
+    <column name="AccountStatus" phpName="Accountstatus" type="INTEGER" size="1" required="true"/>
+    <column name="ActivationCode" phpName="Activationcode" type="VARCHAR" size="10"/>
+    <column name="ResetCode" phpName="Resetcode" type="VARCHAR" size="10"/>
+    <foreign-key foreignTable="participant" name="FKUserAccoun194287" onDelete="CASCADE" onUpdate="CASCADE">
+      <reference local="ParticipantCNIC" foreign="CNIC"/>
+    </foreign-key>
+    <index name="FKUserAccoun194287">
+      <index-column name="ParticipantCNIC"/>
+    </index>
+    <unique name="Email">
+      <unique-column name="Email"/>
+    </unique>
+    <unique name="ParticipantCNIC">
+      <unique-column name="ParticipantCNIC"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+</database>

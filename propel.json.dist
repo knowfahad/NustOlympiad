@@ -1,0 +1,8 @@
+{
+    "propel": {
+        "paths": {
+            "schemaDir": "\/home\/vagrant\/sites\/ol",
+            "phpDir": "\/home\/vagrant\/sites\/ol"
+        }
+    }
+}
