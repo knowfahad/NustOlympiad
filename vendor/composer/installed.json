@@ -644,73 +644,6 @@
         "homepage": "https://symfony.com"
     },
     {
-        "name": "propel/propel",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/propelorm/Propel2.git",
-            "reference": "ea869c7b15ade4fb13a6f5fb4ec00c3280f2e551"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/propelorm/Propel2/zipball/ea869c7b15ade4fb13a6f5fb4ec00c3280f2e551",
-            "reference": "ea869c7b15ade4fb13a6f5fb4ec00c3280f2e551",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.5",
-            "psr/log": "~1.0",
-            "symfony/config": "~2.3||~3.0",
-            "symfony/console": "~2.3||~3.0",
-            "symfony/filesystem": "~2.3||~3.0",
-            "symfony/finder": "~2.3||~3.0",
-            "symfony/validator": "~2.3||~3.0",
-            "symfony/yaml": "~2.3||~3.0"
-        },
-        "require-dev": {
-            "behat/behat": "~2.4",
-            "monolog/monolog": "~1.3",
-            "phpunit/phpunit": "~4.0||~5.0"
-        },
-        "suggest": {
-            "monolog/monolog": "The recommended logging library to use with Propel."
-        },
-        "time": "2016-11-26 00:44:15",
-        "bin": [
-            "bin/propel"
-        ],
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.0-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-0": {
-                "Propel": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "William Durand",
-                "email": "william.durand1@gmail.com"
-            }
-        ],
-        "description": "Propel2 is an open-source Object-Relational Mapping (ORM) for PHP 5.5 and up.",
-        "homepage": "http://www.propelorm.org/",
-        "keywords": [
-            "Active Record",
-            "orm",
-            "persistence"
-        ]
-    },
-    {
         "name": "respect/validation",
         "version": "1.1.10",
         "version_normalized": "1.1.10.0",
@@ -830,6 +763,73 @@
             "email",
             "mail",
             "mailer"
+        ]
+    },
+    {
+        "name": "propel/propel",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/propelorm/Propel2.git",
+            "reference": "ea869c7b15ade4fb13a6f5fb4ec00c3280f2e551"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/propelorm/Propel2/zipball/ea869c7b15ade4fb13a6f5fb4ec00c3280f2e551",
+            "reference": "ea869c7b15ade4fb13a6f5fb4ec00c3280f2e551",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.5",
+            "psr/log": "~1.0",
+            "symfony/config": "~2.3||~3.0",
+            "symfony/console": "~2.3||~3.0",
+            "symfony/filesystem": "~2.3||~3.0",
+            "symfony/finder": "~2.3||~3.0",
+            "symfony/validator": "~2.3||~3.0",
+            "symfony/yaml": "~2.3||~3.0"
+        },
+        "require-dev": {
+            "behat/behat": "~2.4",
+            "monolog/monolog": "~1.3",
+            "phpunit/phpunit": "~4.0||~5.0"
+        },
+        "suggest": {
+            "monolog/monolog": "The recommended logging library to use with Propel."
+        },
+        "time": "2016-11-26 00:44:15",
+        "bin": [
+            "bin/propel"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Propel": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "William Durand",
+                "email": "william.durand1@gmail.com"
+            }
+        ],
+        "description": "Propel2 is an open-source Object-Relational Mapping (ORM) for PHP 5.5 and up.",
+        "homepage": "http://www.propelorm.org/",
+        "keywords": [
+            "Active Record",
+            "orm",
+            "persistence"
         ]
     }
 ]
