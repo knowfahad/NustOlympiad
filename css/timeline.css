@@ -163,10 +163,10 @@
 }
 
 
-@media only screen and (min-width: 900px) and (max-width: 1000px){
+@media only screen and (min-width: 1150px) and (max-width: 1270px){
 	.class-flip-container, .class-front, .class-back {
-	width: 160px;
-	height: 170px;
+	width: 130px;
+	height: 130px;
 	text-align: center;
 	align-items: center;
 	}
@@ -183,7 +183,7 @@
 	
 
 	.class-flipper .class-front{
-		padding:5px;
+		padding:0px;
 	}
 	.class-flipper .class-front span{
 		font-size:30px;
@@ -241,11 +241,19 @@
 	/* back, initially hidden pane */
 	.class-back {
 		transform: rotateY(180deg);
+		transition-delay:0.5;
+		transition: all 1s;
+	}
+	.class-back:hover{
+		width: 160px;
+		height: 170px;
+		margin-top: -40px;
+		margin-right: -10px;
 	}
 
 	.class-wrapper{
-		width: 160px;
-		height: 170px;
+		width: 130px;
+		height: 140px;
 		text-align: center;
 		align-items: center;
 		display: inline-block;
@@ -260,14 +268,14 @@
 		margin-left: 0;
 	}
 	.class-large{
-		height: 15px;
+		height: 50px;
 	}
 	.class-small{
-		height: 15px;
+		height: 50px;
 	}
 
 	.class-overlap{
-		margin-left: -72px;
+		margin-left: 20px;
 	}
 
 	.class-base-line{
@@ -289,7 +297,7 @@
 }
 
 
-@media only screen and (min-width: 700px) and (max-width: 900px){
+@media only screen and (min-width: 700px) and (max-width: 1150px){
 	/*make the desktop timeline visibility none*/
 	.class-desktop{
 		display: none;
@@ -347,7 +355,7 @@
 
 
 .class-flipper .class-front{
-	padding:15px;
+	padding:0px;
 }
 .class-flipper .class-front span{
 	font-size:50px;
@@ -477,7 +485,7 @@
 
 
 .class-flipper .class-front{
-	padding:15px;
+	padding:0px;
 }
 .class-flipper .class-front span{
 	font-size:50px;
