@@ -34,8 +34,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
 </head>
 <body>
-	<?php //if($auth->User()->)  ?>
 	<div class="container">
+		<?php if( !strlen($auth->getParticipant()->getAccomodationChallanID()) ):  ?>
 		<h2>Apply For accomodation:</h2>
 		
 		<div>
@@ -53,6 +53,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				</div>
 			</form>
 		</div>
+		<?php else: ?>
+		<h2>Your challan has already been generated!</h2>
+		<?php endif ?> 
 	</div>
 
 </body>

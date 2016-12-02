@@ -1,6 +1,6 @@
 <?php 
 namespace Dashboard;
-require('../bootstrap.php');
+require(__DIR__ . '/../bootstrap.php');
 
 //blocks users who are not logged in from visiting this page
 $auth->onlyLoggedIn()
@@ -21,6 +21,8 @@ $auth->onlyLoggedIn()
 <h1>Welcome, <?= $auth->user()->getUsername() ?></h1>
 <ul class="list-group">
 	<li class="list-group-item"><a href="/dashboard/accomodation">Accomodation</a></li>
+	<li class="list-group-item"><a href="/dashboard/individual">Individual events</a></li>
+	<li class="list-group-item"><a href="/dashboard/social">Social events</a></li>
 </ul>
 </body>
 </html>
