@@ -18,11 +18,21 @@ $auth->onlyLoggedIn()
 </div>
 <?php endif ?>
 
+
 <h1>Welcome, <?= $auth->user()->getUsername() ?></h1>
+<h3>Your UserID is <?=$auth->getParticipant()->getParticipantID() ?></h3>
 <ul class="list-group">
 	<li class="list-group-item"><a href="/dashboard/accomodation">Accomodation</a></li>
 	<li class="list-group-item"><a href="/dashboard/individual">Individual events</a></li>
 	<li class="list-group-item"><a href="/dashboard/social">Social events</a></li>
 </ul>
+
+<ul class="list-group">
+	<li class="list-group-item"><a href="/dashboard/accomodation">Accomodation</a></li>
+	<li class="list-group-item"><a href="/dashboard/individual">Individual events</a></li>
+	<li class="list-group-item"><a href="/dashboard/social">Social events</a></li>
+</ul>
+
+
 </body>
 </html>

@@ -31,6 +31,7 @@ function preprocess($conn){
  	$data['ambassador'] = strip_tags( trim($_POST["ambassador"]) );  
  	$data['isAmbassador'] = false;
 
+
  	////basic validations
  	$usernamevalidation = v::NotEmpty()->NoWhitespace()->alnum()->length(6,20);
  	$cnicvalidation = v::NotEmpty()->noWhitespace()
@@ -59,7 +60,15 @@ function preprocess($conn){
  		$errors['address'] = "Address is required!";
  	if($data['pwd'] != $data['repwd'])
  		$errors['repwd'] = "Repeat Password doesn't match!";
-
+ 	$ipaddress = \App\get_client_ip();
+ 	$captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
+ 				[
+ 				"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
+ 				"response"	=> $_POST['g-recaptcha-response'],
+ 				"remoteip"	=> $ipaddress
+ 				]);
+ 	if(!$captcha->success)
+ 		$errors['captcha'] = "Captcha is required!";
  	$length = 8;
  	$keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -72,6 +81,9 @@ function preprocess($conn){
 	 	//return an error! 
 	 	$errors['pwd'] = "Passwords dont match!";
  	}
+
+
+
 
  	/////advanced checking
 

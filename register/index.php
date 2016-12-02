@@ -5,6 +5,7 @@ include_once '../OlAssets/dbconnect.php';
 include_once 'random_compat-master/lib/random.php';
 $formsubmitted = $_SERVER['REQUEST_METHOD'] == 'POST'; //saved it as have to use later as well
 if ($formsubmitted){
+	// var_dump($_POST);
 	//validates data and store errors. returns sanitized data ready to be inserted into database
 	list($errors, $data) = preprocess($conn);
 	//continue registeration if there are no errors
@@ -32,6 +33,8 @@ if ($formsubmitted){
 
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- GOOGLE reCaptcha -->
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 
 	<script type="text/javascript">
 $(document).ready(function(){
@@ -224,7 +227,9 @@ return true;
 		</div>
 		<br>
 
-
+		<div class="form-group">
+			<div class="g-recaptcha" data-sitekey="6Ldgtg0UAAAAAIGYMROWOzYRwq_qKR3dFWoRbqA9"></div>
+		</div>
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="pic">Upload a pic:</label>
 			<input type="file" name="pic" accept="image/*">
