@@ -3,6 +3,14 @@
 	display: none;
 }
 
+.class-desktop{
+	width:auto;
+	height: 270px;
+	margin-top: 5%;
+	text-align: center;
+	align-items: center;
+	display: inline-block;
+}
 /* entire container, keeps perspective */
 .class-flip-container {
 	perspective: 1000px;
@@ -13,7 +21,7 @@
 	}
 
 .class-flip-container, .class-front, .class-back {
-	width: 200px;
+	width: 100%;
 	height: 160px;
 	text-align: center;
 	align-items: center;
@@ -43,7 +51,7 @@
 }*/
 
 .class-flipper .class-front{
-	padding:15px;
+	padding:0px;
 }
 .class-flipper .class-front span{
 	font-size:50px;
@@ -104,7 +112,7 @@
 }
 
 .class-wrapper{
-	width: 200px;
+	width: 165px;
 	height: 170px;
 	text-align: center;
 	align-items: center;
@@ -121,14 +129,14 @@
 	margin-left: 0;
 }
 .class-large{
-	height: 20px;
+	height: 100px;
 }
 .class-small{
-	height: 20px;
+	height: 100px;
 }
 
 .class-overlap{
-	margin-left: -90px;
+	margin-left: 0px;
 }
 
 .class-base-line{

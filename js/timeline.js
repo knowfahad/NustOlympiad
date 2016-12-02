@@ -5,14 +5,14 @@ $(document).ready(function(){
 		var marginLeft, marginRight, minWidth;
 		if(width >= 1002){
 			minWidth = 1002;
-			marginLeft = Math.floor((width+20-minWidth)/2);
-			marginRight = Math.floor((width+20-minWidth)/2);
+			marginLeft = Math.floor((width-minWidth)/4);
+			marginRight = Math.floor((width-minWidth)/4);
 			$('.class-desktop').css({"margin-left":marginLeft+"px"});
 		}
 		else if(width >= 900){
 			minWidth = 900;
-			marginLeft = Math.floor((width+60-minWidth)/2);
-			marginRight = Math.floor((width+60-minWidth)/2);
+			marginLeft = Math.floor((width+60-minWidth)/4);
+			marginRight = Math.floor((width+60-minWidth)/4);
 			$('.class-desktop').css({"margin-left":marginLeft+"px"});
 		}
 		
