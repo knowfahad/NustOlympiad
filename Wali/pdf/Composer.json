@@ -1,0 +1,12 @@
+{
+	"autoload":{
+		"psr-4":{
+			"codeCourse\\":"app/codeCourse"
+		}
+	},
+	"require": {
+		"twig/twig": "^1.28",
+		"symfony/process": "^3.1",
+		"symfony/http-foundation": "^3.1"
+	}
+}
