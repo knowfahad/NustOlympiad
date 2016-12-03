@@ -60,15 +60,15 @@ function preprocess($conn){
  		$errors['address'] = "Address is required!";
  	if($data['pwd'] != $data['repwd'])
  		$errors['repwd'] = "Repeat Password doesn't match!";
- 	$ipaddress = \App\get_client_ip();
- 	$captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
- 				[
- 				"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
- 				"response"	=> $_POST['g-recaptcha-response'],
- 				"remoteip"	=> $ipaddress
- 				]);
- 	if(!$captcha->success)
- 		$errors['captcha'] = "Captcha is required!";
+ 	// $ipaddress = \App\get_client_ip();
+ 	// $captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
+ 	// 			[
+ 	// 			"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
+ 	// 			"response"	=> $_POST['g-recaptcha-response'],
+ 	// 			"remoteip"	=> $ipaddress
+ 	// 			]);
+ 	// if(!$captcha->success)
+ 	// 	$errors['captcha'] = "Captcha is required!";
  	$length = 8;
  	$keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -293,6 +293,30 @@ function persistUser($data, $conn){ //execution will only start if there are no 
 		$stmt->execute();
 		$stmt->close();
 	}
+
+	require_once 'PHPMailer-master/PHPMailerAutoload.php';
+	$m= new \PHPMailer;
+	$m->isSMTP();
+	$m->SMTPAuth=true;
+
+	$m->Host='gator3087.hostgator.com';
+	$m->Username='web_it@nustolymiad.com';
+	$m->Password='olympiad@391';
+	$m->SMTPSecure='ssl';
+	$m->Port=465;
+
+
+	$m->From='web_it@nustolymiad.com';
+	$m->FromName='nust olympiad 17';
+	$m->addReplyTo('web_it@nustolymiad.com', 'Nust');
+	$m->addAddress("suchalriaz@gmail.com", "suchal riaz");
+
+	$message = "To verify your account click on the link:  
+	http://localhost/tempScripts/register/verifyemail/verifyEmail.php?Username=$username&ActivationCode=$acCode";
+	$m->Subject='Verify your account | NUST OLYMPIAD 17';
+	$m->Body=$message;
+
+	$m->send();
 
 	return $errors;
 }

@@ -70,6 +70,7 @@ class Auth
 			$url = '/login';
 		if($this->isGuest())
 			\App\redirect($url);
+		// exit();
 	}
 	public function onlyGuests($url = null){
 		if(!$url)
