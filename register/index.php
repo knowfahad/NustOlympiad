@@ -197,6 +197,12 @@ return true;
 			</div>
 		</div>
 		<div class="form-group">
+			<label class="control-label col-sm-2" for="pwd">Institute:</label>
+			<div class="col-sm-4"> 
+				<input type="text" value="<?=$_POST['institute']??''?>" class="form-control" id="institute"  name = "institute" placeholder="Institute">
+			</div>
+		</div>
+		<div class="form-group">
 			<label class="control-label col-sm-2" >Are you a nust student?</label>
 			<select class="selectpicker" name = "isNustian" id="student_nust">
 				<option value="n_no">No</option>

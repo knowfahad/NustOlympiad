@@ -32,6 +32,7 @@ function preprocess($conn){
  	$data['ambassador'] = strip_tags( trim($_POST["ambassador"]) );  
  	$data['isAmbassador'] = false;
  	$data['ambassadorid'] = strip_tags( trim($_POST["ambassador"] ?? ""));
+ 	$data['institute'] = strip_tags( trim($_POST["institute"] ?? ""));
 
  	////basic validations
  	$usernamevalidation = v::NotEmpty()->NoWhitespace()->alnum()->length(6,20);
@@ -61,15 +62,18 @@ function preprocess($conn){
  		$errors['address'] = "Address is required!";
  	if($data['pwd'] != $data['repwd'])
  		$errors['repwd'] = "Repeat Password doesn't match!";
- 	// $ipaddress = \App\get_client_ip();
- 	// $captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
- 	// 			[
- 	// 			"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
- 	// 			"response"	=> $_POST['g-recaptcha-response'],
- 	// 			"remoteip"	=> $ipaddress
- 	// 			]);
- 	// if(!$captcha->success)
- 	// 	$errors['captcha'] = "Captcha is required!";
+ 	if(!$namevalidation->validate($data['institute']))
+ 		$errors['institute'] = "Please enter the valid name of your institute.";
+
+ 	$ipaddress = \App\get_client_ip();
+ 	$captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
+				[
+				"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
+				"response"	=> $_POST['g-recaptcha-response'],
+				"remoteip"	=> $ipaddress
+				]);
+ 	if(!$captcha->success)
+ 		$errors['captcha'] = "Captcha is required!";
 
  	if($data['pwd'] != $data['repwd']){
 	 	//return an error! 
@@ -162,40 +166,25 @@ function preprocess($conn){
  		$data['isNustian'] = false;
 
  	if($data['ambassador'] == "a_yes"){
-	 	$data['ambassador_id'] = $_POST["ambassadorID"];
+	 	$data['ambassador_id'] = $_POST["ambassadorid"];
 	 	$data['isAmbassador'] = true;
 	 	//check whether the ambassador exists in database. Else return error!
-	 	if ($stmt = $conn->prepare("SELECT * FROM Ambassador WHERE AmbassadorID =?")) {
-
-	 		/* bind parameters for markers */
-	 		$stmt->bind_param("s", $data['ambassador_id']);
-
-	 		/* execute query */
-	 		$stmt->execute();
-	 		
-	 		$result = $stmt->get_result();
-
-	 		//if abassador id DOES NOT exist!
-	 		
-	 		if(mysqli_num_rows($result) == 0) {
-	 			//return error
-	 			/* free results */
-	 			$stmt->free_result();
-	 			/* close statement */
-	 			$stmt->close();
-	 			
-	 			//return error
-	 			$errors['ambassadorID'] = "Ambassador id doesnot exist!";
-	 		}
-	 		
-	 		/* free results */
-	 		$stmt->free_result();
-	 		/* close statement */
-	 		$stmt->close();
-	 	}
+		///check if the CNIC provided matches the CNIC of the ambassador id provided
+		if($stmt = $conn->prepare("SELECT * from ambassador where AmbassadorID = ? AND CNIC = ?")){
+			$stmt->bind_param("ss", $data['ambassador_id'], $data['cnic']);
+			$stmt->execute();
+			$result = $stmt->get_result();
+			if(mysqli_num_rows($result) == 0){
+				$errors["ambassadorid"] = 'Wrong ambassador credidentials!';
+				$stmt->free_result();
+				$stmt->close();
+			}
+		}
 	 }
 	else
 		$data['isAmbassador'] = false;
+
+
  	return [$errors, $data];
 }
 
@@ -229,6 +218,8 @@ function persistUser($data, $conn){ //execution will only start if there are no 
 		$stmt->bind_param("sisi", $regChallan,$am,$date, $s);
 		
 		$stmt->execute();
+
+		$stmt->free_result();
 		
 		$stmt->close();
 	}
@@ -239,15 +230,36 @@ function persistUser($data, $conn){ //execution will only start if there are no 
 
 
 		//insert into participant
-		
-		
-		$stmt = $conn->prepare("INSERT INTO participant (CNIC,FirstName,LastName,Gender,Address,PhoneNo, RegistrationChallanID, NUSTRegNo) VALUES (?,?,?,?,?,?,?,?)");
-			$stmt->bind_param("ssssssss", $data['cnic'], $data['fname'], $data['lname'], $data['gender'], $data['address'], $data['phone'], $regChallan, $data['nustid']);
+	try{
+		if($data['isAmbassador'] == true){
+			$stmt = $conn->prepare("INSERT INTO participant (institution, CNIC,FirstName,LastName,Gender,Address,PhoneNo, RegistrationChallanID, NUSTRegNo, AmbassadorID) VALUES (?,?,?,?,?,?,?,?,?, ?)");
+			$stmt->bind_param("ssssssssss", $data['institute'], $data['cnic'], $data['fname'], $data['lname'], $data['gender'], $data['address'], $data['phone'], $regChallan, $data['nustid'], $data['ambassador_id']);
 			$stmt->execute();
-			
+			if($result = $stmt->get_result()){
+				if(!$result && mysqli_num_rows($result) == 0){
+					$errors['fatal'] = $stmt->error;
+				}
+			}
+			else{
+				$errors['fatal'] = $stmt->error;
+			}
 			echo $stmt->error;
 			$stmt->close();
-		
+		}
+		else{
+			$stmt = $conn->prepare("INSERT INTO participant (institution, CNIC,FirstName,LastName,Gender,Address,PhoneNo, RegistrationChallanID, NUSTRegNo) VALUES (?,?,?,?,?,?,?,?,?)");
+			$stmt->bind_param("sssssssss", $data['insitute'], $data['cnic'], $data['fname'], $data['lname'], $data['gender'], $data['address'], $data['phone'], $regChallan, $data['nustid']);
+			$stmt->execute();
+			$result = $stmt->get_result();
+			if(mysqli_num_rows($result) == 0){
+				$errors['fatal'] = $stmt->error;
+			}
+			echo $stmt->error;
+			$stmt->close();
+		}
+	}
+	catch(Exception $e){
+	}
 
 		
 		// insert into account!
@@ -269,25 +281,25 @@ function persistUser($data, $conn){ //execution will only start if there are no 
 	}
 // sending mail
 
-// 	$heading = "Welcome to NUST OLYMPIAD!";
-// 	$link = $_SERVER['SERVER_NAME']."/register/verify/?Username=".$data['username']."&ActivationCode=$acCode";
+	$heading = "Welcome to NUST OLYMPIAD!";
+	$link = $_SERVER['SERVER_NAME']."/register/verify/?Username=".$data['username']."&ActivationCode=$acCode";
 
-// $htmlmessage = 
-// <<<emailmessage
-// <html>
-// <body>
-// <h2>$heading</h2>
-// <p>Plese click on this link to verify your email:</p>
-// <a href="$link">$link</a>
-// <hr />
-// </body>
-// </html>
-// emailmessage;
+$htmlmessage = 
+<<<emailmessage
+<html>
+<body>
+<h2>$heading</h2>
+<p>Plese click on this link to verify your email:</p>
+<a href="$link">$link</a>
+<hr />
+</body>
+</html>
+emailmessage;
 
-// $txtmessage = "$heading /n Please open this link to verify your email: $link";
+$txtmessage = "$heading /n Please open this link to verify your email: $link";
 	
-// 	$mail = new olmail(['name'=>$data['username'], 'email'=>$data['email']], 'Verify your account | NUST OLYMPIAD 17', $htmlmessage, $txtmessage );
-// 	$mail->send();
+	$mail = new olmail(['name'=>$data['username'], 'email'=>$data['email']], 'Verify your account | NUST OLYMPIAD 17', $htmlmessage, $txtmessage );
+	$mail->send();
 
 	return $errors;
 }
