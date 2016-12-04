@@ -155,7 +155,7 @@ header h1 {
   margin-top: -12px;
 }
 .cd-timeline-img.cd-picture {
-  background: #FFFF00;
+  background: #d7934b;
 }
 .cd-timeline-img.cd-movie {
   background: #c03b44;
@@ -271,12 +271,13 @@ header h1 {
 .cd-timeline-content .cd-read-more {
   float: right;
   padding: .8em 1em;
-  background: #acb7c0;
+  background: #d7934b;
   color: white;
   border-radius: 0.25em;
 }
 .no-touch .cd-timeline-content .cd-read-more:hover {
   background-color: #bac4cb;
+  color: black;
 }
 .cd-timeline-content .cd-date {
   float: left;
