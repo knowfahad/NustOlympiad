@@ -35,7 +35,7 @@ $challans = \Dashboard\getChallans($auth, $conn);
 	<li class="list-group-item <?=($challan['PaymentStatus'])?"list-group-item-success":"list-group-item-danger" ?>">
 		<h4><?=$challan['Name']?></h4>
 		<?php if(!$challan['PaymentStatus']): ?>
-		<form method="POST" action="http://pdf.app">
+		<form method="POST" action="http://ol-challan-generator.herokuapp.com/">
 			<input type="hidden" value="<?= $challan['Name'] ?>" name="eventname">
 			<input type="hidden" value="<?= $challan['ChallanID'] ?>" name="challanid">
 			<input type="hidden" value="<?= $challan['DueDate'] ?>" name="duedate">
