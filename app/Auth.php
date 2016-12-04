@@ -23,6 +23,8 @@ class Auth
 			return 0;
 		$user = $this->userquery->filterByUsername($username)
 						->findOne();
+		if(!$user)
+			return false;
 		if(!password_verify($password, $user->getPassword())){
 			return false;
 		}
@@ -30,9 +32,6 @@ class Auth
 		return true;
 	}
 	private function queryUser(){
-		if($this->isGuest()){
-			return false;
-		}
 		$this->user = $this->userquery->findPK($_SESSION['username']);
 		return $this->user;
 	}
@@ -82,5 +81,9 @@ class Auth
 	public function onlyVerified(){
 		if(!$this->user->isVerified())
 			\App\redirect('/dashboard');
+	}
+
+	public function getCNIC(){
+		return $this->getParticipant()->getCNIC();
 	}
 }

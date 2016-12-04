@@ -12,12 +12,12 @@ if ($formsubmitted){
 	if(!count($errors)){
 		//persistUser is function to save the data to the database
 		$errors = persistUser($data, $conn);
-		if(!count($errors))
-			//it means that registration is successfull.
-			//now log them in and redirect to dashboard
-			//they will get message to verify email in dashboard
-			$auth->login($data['username'], $data['password']);
-			\App\redirect("/dashboard");
+		// if(!count($errors))
+		// 	//it means that registration is successfull.
+		// 	//now log them in and redirect to dashboard
+		// 	//they will get message to verify email in dashboard
+		// 	if($auth->login($data['username'], $data['pwd']))
+		// 		\App\redirect("/dashboard");
 	}	
 }
 ?>
@@ -222,7 +222,7 @@ return true;
 		<div class="form-group" id="amb_hid" style="display:none;">
 			<label class="control-label col-sm-2" for="amb_id">Ambassador ID:</label>
 			<div class="col-sm-4"> 
-				<input type="text" class="form-control" id="amb_id" name = "ambassadorID" placeholder="Enter id">
+				<input type="text" class="form-control" id="amb_id" name = "ambassadorid" placeholder="Enter id">
 			</div>
 		</div>
 		<br>

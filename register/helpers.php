@@ -1,6 +1,7 @@
 <?php 
 namespace Register;
 require_once (__DIR__ . '/../bootstrap.php');
+use App\olmail;
 use Respect\Validation\Validator as v;
 
 
@@ -30,7 +31,7 @@ function preprocess($conn){
  	$data['isNustian'] = strip_tags( trim($_POST["isNustian"]) );
  	$data['ambassador'] = strip_tags( trim($_POST["ambassador"]) );  
  	$data['isAmbassador'] = false;
-
+ 	$data['ambassadorid'] = strip_tags( trim($_POST["ambassador"] ?? ""));
 
  	////basic validations
  	$usernamevalidation = v::NotEmpty()->NoWhitespace()->alnum()->length(6,20);
@@ -69,14 +70,7 @@ function preprocess($conn){
  	// 			]);
  	// if(!$captcha->success)
  	// 	$errors['captcha'] = "Captcha is required!";
- 	$length = 8;
- 	$keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
- 	$acCode = '';
- 	$max = mb_strlen($keyspace, '8bit') - 1;
- 	for ($i = 0; $i < $length; ++$i) {
-	 	$acCode .= $keyspace[random_int(0, $max)];
- 	}
  	if($data['pwd'] != $data['repwd']){
 	 	//return an error! 
 	 	$errors['pwd'] = "Passwords dont match!";
@@ -162,7 +156,7 @@ function preprocess($conn){
  	}
 
  	if($data['isNustian'] == "n_yes"){
-	 	$data['nustid'] = $_POST["nustid"];
+	 	$data['nustid'] = strip_tags(trim($_POST["nustid"]));
  	}
  	else
  		$data['isNustian'] = false;
@@ -213,7 +207,7 @@ function preprocess($conn){
  */
 function persistUser($data, $conn){ //execution will only start if there are no errors
 	$errors = [];
-  
+
 	//image processing part will go here
 
 
@@ -244,79 +238,56 @@ function persistUser($data, $conn){ //execution will only start if there are no 
 	}
 
 
-	//insert into participant
-	
-	if($data['isAmbassador'] == true){
-		if($stmt = $conn->prepare("INSERT INTO participant (CNIC,FirstName,LastName,Gender,Address,PhoneNo, RegistrationChallanID,NUSTRegNo,AmbassadorID) VALUES (?,?,?,?,?,?,?,?,?)")){
+		//insert into participant
+		
+		
+		$stmt = $conn->prepare("INSERT INTO participant (CNIC,FirstName,LastName,Gender,Address,PhoneNo, RegistrationChallanID, NUSTRegNo) VALUES (?,?,?,?,?,?,?,?)");
+			$stmt->bind_param("ssssssss", $data['cnic'], $data['fname'], $data['lname'], $data['gender'], $data['address'], $data['phone'], $regChallan, $data['nustid']);
+			$stmt->execute();
+			
+			echo $stmt->error;
+			$stmt->close();
+		
 
 		
+		// insert into account!
 		
-		$stmt->bind_param("sssssssss", $data['cnic'], $data['fname'], $data['lname'], $data['gender'], $data['address'], $data['phone'], $regChallan,$data['nustid'], $data['ambassador_id']);
-		
-		$stmt->execute();
-		
-		echo $stmt->error;
-		$stmt->close();
-		}
-		else{
-			echo("\ninsert into participant not executed!\n");
-		}
-	
-	}
-	else{
-		if($stmt = $conn->prepare(
-			"INSERT INTO participant (CNIC,FirstName,LastName,Gender,Address,PhoneNo, RegistrationChallanID,NUSTRegNo) VALUES (?,?,?,?,?,?,?,?)")){
-
-		
-		
-		$stmt->bind_param("ssssssss", $data['cnic'], $data['fname'], $data['lname'], $data['gender'], $data['address'], $data['phone'], $regChallan, $data['nustid']);
-		
-		$stmt->execute();
-		
-		$stmt->close();
-		}
-		else{
-			$errors['fatal'] = ("insert participant not executed!");
-			exit();
-		}
+	try{
+		$stmt = $conn->prepare("INSERT INTO useraccount (username, ParticipantCNIC,Email,Password, AccountStatus, ActivationCode,ResetCode) VALUES (?,?,?,?,?,?,?)");
+				$rCode= 'Null';
+				$status = 0;
+				$acCode = bin2hex(mcrypt_create_iv(30, MCRYPT_DEV_URANDOM));
+				$pwdhash = password_hash($data['pwd'], PASSWORD_BCRYPT );
+				$stmt->bind_param("ssssiss", $data['username'],$data['cnic'],$data['email'], $pwdhash, $status, $acCode, $rCode);
+				
+				$stmt->execute();
+				$stmt->close();
 		
 	}
-	// insert into account!
-	
-	if($stmt = $conn->prepare("INSERT INTO useraccount (username, ParticipantCNIC,Email,Password, AccountStatus, ActivationCode,ResetCode) VALUES (?,?,?,?,?,?,?)")){
-
-		$rCode= 'Null';
-		$status = 0;
-		$pwdhash = password_hash($data['pwd'], PASSWORD_BCRYPT );
-		$stmt->bind_param("ssssiss", $data['username'],$data['cnic'],$data['email'], $pwdhash, $status, $acCode, $rCode);
-		
-		$stmt->execute();
-		$stmt->close();
+	catch(Exception $e){
+		var_dump($e);
 	}
+// sending mail
 
-	require_once 'PHPMailer-master/PHPMailerAutoload.php';
-	$m= new \PHPMailer;
-	$m->isSMTP();
-	$m->SMTPAuth=true;
+// 	$heading = "Welcome to NUST OLYMPIAD!";
+// 	$link = $_SERVER['SERVER_NAME']."/register/verify/?Username=".$data['username']."&ActivationCode=$acCode";
 
-	$m->Host='gator3087.hostgator.com';
-	$m->Username='web_it@nustolymiad.com';
-	$m->Password='olympiad@391';
-	$m->SMTPSecure='ssl';
-	$m->Port=465;
+// $htmlmessage = 
+// <<<emailmessage
+// <html>
+// <body>
+// <h2>$heading</h2>
+// <p>Plese click on this link to verify your email:</p>
+// <a href="$link">$link</a>
+// <hr />
+// </body>
+// </html>
+// emailmessage;
 
-
-	$m->From='web_it@nustolymiad.com';
-	$m->FromName='nust olympiad 17';
-	$m->addReplyTo('web_it@nustolymiad.com', 'Nust');
-	$m->addAddress("suchalriaz@gmail.com", "suchal riaz");
-
-	$message = "To verify your account click on the link:  
-	http://localhost/tempScripts/register/verifyemail/verifyEmail.php?Username=$username&ActivationCode=$acCode";
-	$m->Subject='Verify your account | NUST OLYMPIAD 17';
-	$m->Body=$message;
-
-	$m->send();
+// $txtmessage = "$heading /n Please open this link to verify your email: $link";
+	
+// 	$mail = new olmail(['name'=>$data['username'], 'email'=>$data['email']], 'Verify your account | NUST OLYMPIAD 17', $htmlmessage, $txtmessage );
+// 	$mail->send();
 
 	return $errors;
 }

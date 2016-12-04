@@ -13,7 +13,10 @@
         "phpmailer/phpmailer": "^5.2",
         "propel/propel": "~2.0@dev",
         "respect/validation": "^1.1",
-        "swiftmailer/swiftmailer": "^5.4"
+        "swiftmailer/swiftmailer": "^5.4",
+        "guzzlehttp/guzzle": "^6.2",
+        "php-http/guzzle6-adapter": "^1.1",
+        "sparkpost/sparkpost": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -21,6 +24,6 @@
             "App\\": "app/",
             "Model\\Model\\": "Model/Model"
         },
-        "files" : ["app/helpers.php", "register/helpers.php"]
+        "files" : ["app/helpers.php", "register/helpers.php", "dashboard/helpers.php"]
     }
 }
