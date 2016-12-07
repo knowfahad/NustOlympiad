@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -566,20 +566,20 @@
 								<form method="POST" action="/contact/index.php">
 									<div class="row">
 										<div class="col-md-6">
-											<input class="form-control" style="background:transparent; color:white" type="text" name="name" placeholder="NAME">
+											<input class="form-control  clckd" style="background:transparent; color:white" type="text" name="name" placeholder="NAME">
 										</div>
 										<div class="col-md-6">
-											<input class="form-control" style="background:transparent; color:white" type="email" name="email" placeholder="EMAIL">
+											<input class="form-control clckd" style="background:transparent; color:white" type="email" name="email" placeholder="EMAIL">
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-12">
-											<textarea class="form-control" style="background:transparent; color:white" rows="5" name="message" placeholder="MESSAGE"></textarea>
+											<textarea id = "txtr" class="form-control  clckd" style="background:transparent; color:white" rows="5" name="message" placeholder="MESSAGE"></textarea>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-12">
-											<div class="form-group">
+											<div id = "capt" class="form-group">
 												<div class="g-recaptcha" data-sitekey="6Ldgtg0UAAAAAIGYMROWOzYRwq_qKR3dFWoRbqA9"></div>
 											</div>
 										</div>
@@ -806,9 +806,23 @@
 <script type="text/javascript" src="js/timeline.js"></script>
 <script type="text/javascript">
 		$(document).ready(function(){
+			
+			$("#capt").hide();	//hussains			
+			
 			if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
 			alert('Browser not supported!  Please use Chrome, Mozilla Firefox, Opera or Internet Explorer for best Experience :)');
 			}
+//Hussain's work
+//hiding captcha and decreasing rows			
+			$(".clckd").click(function(){
+				$("#txtr").attr('rows',2); 
+				$("#capt").show(1000);
+				
+			})
+
+//end of Hussain's works
+			
+			
 		});
 	</script>
 <script type="text/javascript">
