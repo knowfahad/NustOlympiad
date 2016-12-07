@@ -7,25 +7,104 @@ require(__DIR__ . '/../../bootstrap.php');
 $auth->onlyLoggedIn();
 
 $sports = SportsQuery::create()->find();
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+	$ids = $_POST['team_member_ids'];
 
+	foreach(array_count_values($ids) as $dupids){
+		if ($dupids != 1){
+			$errors['duplicates'] = "You've selected one team member more than once!";
+		}
+	}
+	$teamname = trim(strip_tags($_POST['teamname']??''));
+	if(str_len($teamname)<5 || strlen($teamname)>50)
+		$errors['teamname'] = "Team name too long or too short!";
+	if(isset($_POST['sport']))
+		$sport = $_POST['sport'];
+	else
+		$errors['sport'] = "Please select a sport";
+	if(!count($errors)){
+		// validate that the sport is a valid sport
+		$stmt = "select * from sports where SportID = ?";
+		$stmt->bind_param($sport);
+		$stmt->execute();
+		if(!mysql_num_rows($stmt->get_result()))
+			$errors['sport'] = "Sport selected is not valid!";
+		$stmt->close();
+
+		//validate the each member has already not participated in that sport already
+		$in = join(',', array_fill(0, count($ids), '?'));
+		$stmt = " select * from sportsteam where SportID = ? AND TeamID IN (SELECT TeamID from sportsparticipant as sp inner join participants as p on p.CNIC = sp.ParticipantCNIC where p.ParticipantID in $in)";
+		$stmt->bind_param( str_repeat('i', count($ids)) . "i", $sport, ...$ids);
+		$stmt->execute();
+		if(mysql_num_rows($stmt->get_result()))
+			$errors['team_members'] = "One or more of your team members are already enrolled in this sport!";
+
+
+		// populate the challan table
+		$duedate = "12-10-17";
+		$AmountPayable = 400;
+		//find the new team ID first
+		$teamID = $stmt->get_result()->fetch_all()[0][0];
+		$challanID = "S".$teamID."e".$sport;
+		$stmt = $conn->prepare("insert into challan(ChallanID, AmountPayable, DueDate, PaymentStatus) values(?,?,?,0)");
+		$stmt->bind_param("sis",$challanID, $AmountPayable, $duedate);
+		$stmt->execute();		
+		$stmt->close();
+		//populate the team table
+		$stmt = $conn->prepare("insert into sportsteam(TeamID, SportID, TeamName, HeadCNIC, ChallanID, AmountPayable, DueDate, PaymentStatus)) values(?,?,?,?,?,?,?,0)");
+		$HeadCNIC = $auth->getCNIC();
+		$stmt->bind_param("sssssis", $teamID, $sport, $teamname, $HeadCNIC, $challanID, $AmountPayable, $duedate);
+		$stmt->execute();
+		$stmt->close();
+
+		//
+		//populat the sportsparticipant table
+		$stmt = $conn->prepare("insert into sportsparticipant(TeamID, ParticipantID) values(?,?)");
+		foreach($ids as $id){
+			$stmt->bind_param("ss", $teamID, $id);
+			$stmt->execute();
+		}
+		
+	}
+
+	
+
+
+
+
+}
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Make a team</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 </head>
 <body>
+<div class="container">
+	
+<?php if( $formsubmitted && count($errors) ): ?>
+	<div class="alert-danger">
+		<ul class="list-group">
+		<?php foreach($errors as $field => $error): ?>
+			<li class="list-group-item"><?=$error ?></li>
+		<?php endforeach ?>
+		</ul>
+	</div>
+<?php endif ?>
 <h2>Make a new team</h2>
-<form>
-<?php foreach($sports as $sport): ?>
+
+<form method="POST">
+
+	<?php foreach($sports as $sport): ?>
 	<div>
 		<label>
 			<input type="radio" value="<?=$sport->getSportID() ?>" name="sport">
 			<?=$sport->getName() ?>
 		</label>
 	</div>
-<?php endforeach ?>
+	<?php endforeach ?>
 	<div>
 		<label>
 		Add a team member:
@@ -38,34 +117,40 @@ $sports = SportsQuery::create()->find();
 		<?=$auth->User()->getUsername() ?>
 		<input type="hidden" value="<?=$auth->getParticipant()->getParticipantID()?>" name="team_member_ids[]">
 	</div>
-	<div>
-		<!--list the team members here
-		like a hidden input 
-		<div>
-			Name of the team member
-			<input type="hidden" name="team_member_ids[]">
-		</div>
-		send the userid to /dashboard/search.php
-		returns empty json if no user found
-		example of a valid response:
-		{
-		  "Participantid": 1487,
-		  "Cnic": "3120278943379",
-		  "Registrationchallanid": "RC10",
-		  "Accomodationchallanid": "AC1487g",
-		  "Firstname": "suchal",
-		  "Lastname": "riaz",
-		  "Gender": "M",
-		  "Address": "LOrem Ipsum ...",
-		  "Phoneno": "03030766865",
-		  "Nustregno": null,
-		  "Ambassadorid": null
-		}
-		-->
-
-	</div>
+	<div id="members"></div>
 	<hr>
 	<button type="submit">Send</button>
 </form>
-</body>
+</div>
+
+
+<script type="text/javascript" src="..\..\js\jquery.min.js">
+</script>
+<script type="text/javascript">
+$(function(){
+	$("#SearchBtn").click(function(e){
+		console.log($("#SearchTeamId").val());
+		var destination="/dashboard/search.php";
+		$.post(destination, {'id' : $("#SearchTeamId").val()}, function(result){
+  				if(result){
+  					$result = JSON.parse(result);
+  					console.log($result);
+  					$newelement = "<div class='member'><h3>";
+  					$newelement += $result.Firstname + " " + $result.Lastname;
+  					$newelement += "</h3>";
+  					$newelement += "<input type='hidden' name='team_member_ids[]' value='"+$result.Participantid+"' >";
+  					$newelement += "</div>";
+  					$("#members").append($newelement);
+  					console.log($newelement);
+  				}
+  			}
+		);
+		e.preventDefault();
+	});
+
+
+});
+</script>
+</body>	
+
 </html>

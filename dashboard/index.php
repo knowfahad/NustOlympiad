@@ -1,113 +1,63 @@
 <?php 
 namespace Dashboard;
-
-use Model\Model\SportsQuery;
-require(__DIR__ . '/../../bootstrap.php');
+require(__DIR__ . '/../bootstrap.php');
 //blocks users who are not logged in from visiting this page
 $auth->onlyLoggedIn();
-
-$sports = SportsQuery::create()->find();
-
+$challans = \Dashboard\getChallans($auth, $conn);
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Make a team</title>
+	<title>Dashboard | NUST Olymiad '17</title>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 </head>
 <body>
-<h2>Make a new team</h2>
-<form>
-<?php foreach($sports as $sport): ?>
-	<div>
-		<label>
-			<input type="radio" value="<?=$sport->getSportID() ?>" name="sport">
-			<?=$sport->getName() ?>
-		</label>
-	</div>
-<?php endforeach ?>
-	<div>
-		<label>
-		Add a team member:
-		<input type="text" placeholder="User ID" id="SearchTeamId">
-		</label>
-		<button id="SearchBtn">Search</button>
-	</div>
-	<h3>Members added:</h3>
-	<div>
-		<?=$auth->User()->getUsername() ?>
-		<input type="hidden" value="<?=$auth->getParticipant()->getParticipantID()?>" name="team_member_ids[]">
-	</div>
-	<div>
-		<!--list the team members here
-		like a hidden input 
-		<div>
-			Name of the team member
-			<input type="hidden" name="team_member_ids[]">
-		</div>
-		send the userid to /dashboard/search.php
-		returns empty json if no user found
-		example of a valid response:
-		{
-		  "Participantid": 1487,
-		  "Cnic": "3120278943379",
-		  "Registrationchallanid": "RC10",
-		  "Accomodationchallanid": "AC1487g",
-		  "Firstname": "suchal",
-		  "Lastname": "riaz",
-		  "Gender": "M",
-		  "Address": "LOrem Ipsum ...",
-		  "Phoneno": "03030766865",
-		  "Nustregno": null,
-		  "Ambassadorid": null
-		}
-		-->
-
-	</div>
-	<hr>
-	<button type="submit">Send</button>
-</form>
-<div class="hidden">
-			Name of the team member
+<?php if(!$auth->User()->isVerified()): ?>
+<div class="alert-warning">
+	Please verify your email to continue the registration!
 </div>
-<script type="text/javascript" src="..\..\js\jquery.min.js">
-</script>
-<script type="text/javascript">
-$(function(){
-	$("#SearchBtn").click(function(e){
-
-		var destination="../search.php";
-		$.ajax({                    
-  			url: destination,     
-  			Type: 'post', // performing a POST request
-  			contentType: "application/json",
-  			
-  			data : {
-    			'id' : $("#SearchTeamId").val() // will be accessible in $_POST['data1']
-  			},
-  			                   
-  			success: function(data)         
-
-  			{
-  				if(data){
+<?php endif ?>
 
 
-  					$(".hidden").append("<input type=hidden name=team_member_ids[] id=hide"+data['Participantid']+"value="+data['Participantid']+">")
-  					
-  				}
-  				else{
-  				}
+<h1>Welcome, <?= $auth->user()->getUsername() ?></h1>
+<h3>Your UserID is <?=$auth->getParticipant()->getParticipantID() ?></h3>
+<ul class="list-group">
+	<li class="list-group-item"><a href="/dashboard/accomodation">Accomodation</a></li>
+	<li class="list-group-item"><a href="/dashboard/individual">Individual events</a></li>
+	<li class="list-group-item"><a href="/dashboard/social">Social events</a></li>
+</ul>
+<!---list-group-item-warning-->
+<h3>Challans</h3>
+<ul class="list-group">
 
-  			} 
-  			
-});
+<?php foreach($challans as $challan): ?>
+	<li class="list-group-item <?=($challan['PaymentStatus'])?"list-group-item-success":"list-group-item-danger" ?>">
+		<h4><?=$challan['Name']?></h4>
+		<?php if(!$challan['PaymentStatus']): ?>
+		<form method="POST" action="http://ol-challan-generator.herokuapp.com/">
+			<input type="hidden" value="<?= $challan['Name'] ?>" name="eventname">
+			<input type="hidden" value="<?= $challan['ChallanID'] ?>" name="challanid">
+			<input type="hidden" value="<?= $challan['DueDate'] ?>" name="duedate">
+			<input type="hidden" value="<?= $challan['Name'] ?>" name="eventname">
+			<input type="hidden" value="<?= $challan['EventFee'] ?>" name="fee">
+			<input type="hidden" value="<?php
+			if($challan['EventType'] == 1)
+				echo "Individual Event"; 
+			elseif($challan['EventType'] == 2)
+				echo "Social Event";
+			?>" name="type">
+			<button class="btn btn-xs btn-default" type="submit">Print</button>	
+		</form>
+		<form method="POST" action="/dashboard/challans/delete.php">
+			<input type="hidden" name="challanid" value="<?=$challan['ChallanID'] ?>">
+			<button class="btn btn-xs btn-danger" type="submit">Delete</button>	
+		</form>
+		<?php endif ?>
 
-		e.preventDefault();
-	})
+	</li>
+<?php endforeach ?>
+</ul>
 
 
-})
-</script>
-</body>	
-
+</body>
 </html>
