@@ -32,5 +32,38 @@ epquery
 	}
 }
 
+function accomodationChallan($auth, $conn){
+	$cnic = $auth->getCNIC();
+	$query = <<<epquery
+	select 	challan.ChallanID, challan.DueDate, challan.AmountPayable, challan.PaymentStatus
+	from 	challan
+	where 	challan.ChallanID = (
+			select 	AccomodationChallanID 
+			from 	participant
+			where 	participant.CNIC = ?
+	)
+epquery;
+	$stmt = $conn->prepare($query);
+	$stmt->bind_param("s",$cnic);
+	$stmt->execute();
+	return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+}
+
+function registrationChallan($auth, $conn){
+	$cnic = $auth->getCNIC();
+	$query = <<<epquery
+	select 	challan.ChallanID, challan.DueDate, challan.AmountPayable, challan.PaymentStatus
+	from 	challan
+	where 	challan.ChallanID = (
+			select 	RegistrationChallanID 
+			from 	participant
+			where 	participant.CNIC = ?
+	)
+epquery;
+	$stmt = $conn->prepare($query);
+	$stmt->bind_param("s",$cnic);
+	$stmt->execute();
+	return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+}
 
  ?>

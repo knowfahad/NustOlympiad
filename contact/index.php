@@ -63,4 +63,4 @@ if(isset($errors) && count($errors)){
 		echo $error;
 	}
 }
-\App\redirect("/");
+// \App\redirect("/");

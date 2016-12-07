@@ -11,7 +11,7 @@ $auth->onlyLoggedIn();
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	if(isset($_POST['agree'])){
 		$participant = $auth->getParticipant();
-		$gender = ($participant->getGender() == "male") ? "m" : "g";
+		$gender = ($participant->getGender() == "Male") ? "m" : "g";
 		$challanid = "AC" . $participant->getParticipantID() .  $gender;
 		$challan = new Challan();
 		$challan->setChallanID($challanid);

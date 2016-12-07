@@ -4,6 +4,8 @@ require(__DIR__ . '/../bootstrap.php');
 //blocks users who are not logged in from visiting this page
 $auth->onlyLoggedIn();
 $challans = \Dashboard\getChallans($auth, $conn);
+$accomodationChallan = accomodationChallan($auth, $conn);
+$registrationChallan = registrationChallan($auth, $conn);
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,11 +27,46 @@ $challans = \Dashboard\getChallans($auth, $conn);
 	<li class="list-group-item"><a href="/dashboard/accomodation">Accomodation</a></li>
 	<li class="list-group-item"><a href="/dashboard/individual">Individual events</a></li>
 	<li class="list-group-item"><a href="/dashboard/social">Social events</a></li>
+	<li class="list-group-item"><a href="/dashboard/teams">Make a team</a></li>
+
 </ul>
 <!---list-group-item-warning-->
 <h3>Challans</h3>
 <ul class="list-group">
+	<li class="list-group-item <?=($accomodationChallan['PaymentStatus'])?"list-group-item-success":"list-group-item-danger" ?>">
+		<h4>Accomodation Challan</h4>
+		<?php if(!$accomodationChallan['PaymentStatus']): ?>
+		<form method="POST" action="http://ol-challan-generator.herokuapp.com/">
+			<input type="hidden" value="Accomodation" name="eventname">
+			<input type="hidden" value="<?= $accomodationChallan['ChallanID'] ?>" name="challanid">
+			<input type="hidden" value="<?= $accomodationChallan['DueDate'] ?>" name="duedate">
+			<input type="hidden" value="Accomodation" name="eventname">
+			<input type="hidden" value="<?= $accomodationChallan['AmountPayable'] ?>" name="fee">
+			<input type="hidden" value="accomodation" name="type">
+			<button class="btn btn-xs btn-default" type="submit">Print</button>	
+		</form>
+		<form method="POST" action="/dashboard/challans/delete.php">
+			<input type="hidden" name="challanid" value="<?=$accomodationChallan['ChallanID'] ?>">
+			<button class="btn btn-xs btn-danger" type="submit">Delete</button>	
+		</form>
+		<?php endif ?>
 
+	</li>
+	<li class="list-group-item <?=($registrationChallan['PaymentStatus'])?"list-group-item-success":"list-group-item-danger" ?>">
+		<h4>Registration Challan</h4>
+		<?php if(!$registrationChallan['PaymentStatus']): ?>
+		<form method="POST" action="http://ol-challan-generator.herokuapp.com/">
+			<input type="hidden" value="registration" name="eventname">
+			<input type="hidden" value="<?= $registrationChallan['ChallanID'] ?>" name="challanid">
+			<input type="hidden" value="<?= $registrationChallan['DueDate'] ?>" name="duedate">
+			<input type="hidden" value="registration" name="eventname">
+			<input type="hidden" value="<?= $registrationChallan['AmountPayable'] ?>" name="fee">
+			<input type="hidden" value="registration" name="type">
+			<button class="btn btn-xs btn-default" type="submit">Print</button>	
+		</form>
+		<?php endif ?>
+
+	</li>
 <?php foreach($challans as $challan): ?>
 	<li class="list-group-item <?=($challan['PaymentStatus'])?"list-group-item-success":"list-group-item-danger" ?>">
 		<h4><?=$challan['Name']?></h4>

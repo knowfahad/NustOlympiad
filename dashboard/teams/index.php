@@ -7,16 +7,17 @@ require(__DIR__ . '/../../bootstrap.php');
 $auth->onlyLoggedIn();
 
 $sports = SportsQuery::create()->find();
-if($_SERVER['REQUEST_METHOD'] == "POST"){
+$formsubmitted = $_SERVER['REQUEST_METHOD'] == "POST"; 
+if($formsubmitted){
 	$ids = $_POST['team_member_ids'];
-
+	$errors = [];
 	foreach(array_count_values($ids) as $dupids){
 		if ($dupids != 1){
 			$errors['duplicates'] = "You've selected one team member more than once!";
 		}
 	}
 	$teamname = trim(strip_tags($_POST['teamname']??''));
-	if(str_len($teamname)<5 || strlen($teamname)>50)
+	if(strlen($teamname)<5 || strlen($teamname)>50)
 		$errors['teamname'] = "Team name too long or too short!";
 	if(isset($_POST['sport']))
 		$sport = $_POST['sport'];
@@ -24,26 +25,45 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 		$errors['sport'] = "Please select a sport";
 	if(!count($errors)){
 		// validate that the sport is a valid sport
-		$stmt = "select * from sports where SportID = ?";
-		$stmt->bind_param($sport);
+		$stmt = $conn->prepare("select * from sports where SportID = ?");
+		$stmt->bind_param("i",$sport);
 		$stmt->execute();
-		if(!mysql_num_rows($stmt->get_result()))
+		if(!mysqli_num_rows($stmt->get_result()))
 			$errors['sport'] = "Sport selected is not valid!";
 		$stmt->close();
 
 		//validate the each member has already not participated in that sport already
 		$in = join(',', array_fill(0, count($ids), '?'));
-		$stmt = " select * from sportsteam where SportID = ? AND TeamID IN (SELECT TeamID from sportsparticipant as sp inner join participants as p on p.CNIC = sp.ParticipantCNIC where p.ParticipantID in $in)";
+		var_dump($in, $ids);
+		if($stmt = $conn->prepare(
+<<<participatedquery
+select *
+from sportsteam
+where SportID = ?
+AND TeamID IN (
+	SELECT TeamID
+	from sportsparticipants
+	where ParticipantID in ($in)
+)
+participatedquery
+)){
+
 		$stmt->bind_param( str_repeat('i', count($ids)) . "i", $sport, ...$ids);
 		$stmt->execute();
-		if(mysql_num_rows($stmt->get_result()))
+		if(mysqli_num_rows($stmt->get_result()))
 			$errors['team_members'] = "One or more of your team members are already enrolled in this sport!";
+		}
+		else{
+			die($conn->error);
+		}
 
 
 		// populate the challan table
 		$duedate = "12-10-17";
 		$AmountPayable = 400;
 		//find the new team ID first
+		$stmt = $conn->prepare("select max(TeamID) as max from sportsteam");
+		$stmt->execute();
 		$teamID = $stmt->get_result()->fetch_all()[0][0];
 		$challanID = "S".$teamID."e".$sport;
 		$stmt = $conn->prepare("insert into challan(ChallanID, AmountPayable, DueDate, PaymentStatus) values(?,?,?,0)");
@@ -51,7 +71,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 		$stmt->execute();		
 		$stmt->close();
 		//populate the team table
-		$stmt = $conn->prepare("insert into sportsteam(TeamID, SportID, TeamName, HeadCNIC, ChallanID, AmountPayable, DueDate, PaymentStatus)) values(?,?,?,?,?,?,?,0)");
+		$stmt = $conn->prepare("insert into sportsteam(TeamID, SportID, TeamName, HeadCNIC, ChallanID, AmountPayable, DueData, PaymentStatus) values(?,?,?,?,?,?,?,0)");
 		$HeadCNIC = $auth->getCNIC();
 		$stmt->bind_param("sssssis", $teamID, $sport, $teamname, $HeadCNIC, $challanID, $AmountPayable, $duedate);
 		$stmt->execute();
@@ -59,19 +79,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 		//
 		//populat the sportsparticipant table
-		$stmt = $conn->prepare("insert into sportsparticipant(TeamID, ParticipantID) values(?,?)");
+		$stmt = $conn->prepare("insert into sportsparticipants(TeamID, ParticipantID) values(?,?)");
 		foreach($ids as $id){
 			$stmt->bind_param("ss", $teamID, $id);
 			$stmt->execute();
 		}
-		
 	}
-
-	
-
-
-
-
 }
 ?>
 
@@ -105,6 +118,13 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 		</label>
 	</div>
 	<?php endforeach ?>
+	<div class="form-group">
+		<label class="control-label">
+		Add a team member:
+		</label>
+		<input class="form-control" type="text" placeholder="Team Name" name="teamname">
+	</div>
+	<hr>
 	<div>
 		<label>
 		Add a team member:

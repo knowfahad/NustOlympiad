@@ -1,6 +1,4 @@
 <?php 
 require("bootstrap.php");
-
-$stmt = $conn->prepare("select max(TeamID) as max from sportsteam");
-$stmt->execute();
-var_dump($stmt->get_result()->fetch_all());
+$auth->onlyLoggedIn();
+var_dump(\Dashboard\getChallans($auth, $conn));
