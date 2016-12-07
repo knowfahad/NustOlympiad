@@ -18,6 +18,7 @@
 	<link rel="stylesheet" href="css/style.css"/>
 	<link rel="stylesheet" href="css/demo3.css"/>
 	<link rel="stylesheet" href="css/contactus.css">
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 
 	<!-- countdown
     <link href="countdown/css/jquery.classycountdown.css" rel="stylesheet" type="text/css">
@@ -562,7 +563,7 @@
 								</div>
 							</div>
 							<div class="col-md-5 contact_us__form">
-								<form>
+								<form method="POST" action="/contact">
 									<div class="row">
 										<div class="col-md-6">
 											<input class="form-control" style="background:transparent; color:white" type="text" name="name" placeholder="NAME">
@@ -573,12 +574,20 @@
 									</div>
 									<div class="row">
 										<div class="col-md-12">
-											<textarea class="form-control" style="background:transparent; color:white" rows="5" name="Message" placeholder="MESSAGE"></textarea>
+											<textarea class="form-control" style="background:transparent; color:white" rows="5" name="message" placeholder="MESSAGE"></textarea>
 										</div>
 									</div>
 									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<div class="g-recaptcha" data-sitekey="6Ldgtg0UAAAAAIGYMROWOzYRwq_qKR3dFWoRbqA9"></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
 										<div class="col-md-4 col-md-offset-4">
-											<button class="btn btn-default btn-lg" type="button">Submit</button>
+											<button class="btn btn-default btn-lg" type="submit">Submit</button>
 										</div>
 									</div>
 								</form>
