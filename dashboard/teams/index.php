@@ -9,8 +9,14 @@ $auth->onlyLoggedIn();
 $sports = SportsQuery::create()->find();
 $formsubmitted = $_SERVER['REQUEST_METHOD'] == "POST"; 
 if($formsubmitted){
-	$ids = $_POST['team_member_ids'];
 	$errors = [];
+	$ids = $_POST['team_member_ids'];
+	if(count($ids)!=4){ 
+		// for testing the members must be 4
+		// we'll have 11 once the application is complete
+		$errors['team members'] = "There must be exactly 11 members in a team!";
+	}
+	
 	foreach(array_count_values($ids) as $dupids){
 		if ($dupids != 1){
 			$errors['duplicates'] = "You've selected one team member more than once!";
@@ -34,7 +40,6 @@ if($formsubmitted){
 
 		//validate the each member has already not participated in that sport already
 		$in = join(',', array_fill(0, count($ids), '?'));
-		var_dump($in, $ids);
 		if($stmt = $conn->prepare(
 <<<participatedquery
 select *
@@ -65,10 +70,12 @@ participatedquery
 		$stmt = $conn->prepare("select max(TeamID) as max from sportsteam");
 		$stmt->execute();
 		$teamID = $stmt->get_result()->fetch_all()[0][0];
+		if($teamID == 0)
+			$teamID = 1753;
 		$challanID = "S".$teamID."e".$sport;
 		$stmt = $conn->prepare("insert into challan(ChallanID, AmountPayable, DueDate, PaymentStatus) values(?,?,?,0)");
 		$stmt->bind_param("sis",$challanID, $AmountPayable, $duedate);
-		$stmt->execute();		
+		$stmt->execute();
 		$stmt->close();
 		//populate the team table
 		$stmt = $conn->prepare("insert into sportsteam(TeamID, SportID, TeamName, HeadCNIC, ChallanID, AmountPayable, DueData, PaymentStatus) values(?,?,?,?,?,?,?,0)");
@@ -78,7 +85,7 @@ participatedquery
 		$stmt->close();
 
 		//
-		//populat the sportsparticipant table
+		//populate the sportsparticipant table
 		$stmt = $conn->prepare("insert into sportsparticipants(TeamID, ParticipantID) values(?,?)");
 		foreach($ids as $id){
 			$stmt->bind_param("ss", $teamID, $id);
@@ -152,23 +159,20 @@ $(function(){
 		console.log($("#SearchTeamId").val());
 		var destination="/dashboard/search.php";
 		$.post(destination, {'id' : $("#SearchTeamId").val()}, function(result){
-  				if(result){
-  					$result = JSON.parse(result);
-  					console.log($result);
-  					$newelement = "<div class='member'><h3>";
-  					$newelement += $result.Firstname + " " + $result.Lastname;
-  					$newelement += "</h3>";
-  					$newelement += "<input type='hidden' name='team_member_ids[]' value='"+$result.Participantid+"' >";
-  					$newelement += "</div>";
-  					$("#members").append($newelement);
-  					console.log($newelement);
-  				}
-  			}
-		);
+			if(result){
+				$result = JSON.parse(result);
+				console.log($result);
+				$newelement = "<div class='member'><h3>";
+				$newelement += $result.Firstname + " " + $result.Lastname;
+				$newelement += "</h3>";
+				$newelement += "<input type='hidden' name='team_member_ids[]' value='"+$result.Participantid+"' >";
+				$newelement += "</div>";
+				$("#members").append($newelement);
+				console.log($newelement);
+			}
+  		});
 		e.preventDefault();
 	});
-
-
 });
 </script>
 </body>	

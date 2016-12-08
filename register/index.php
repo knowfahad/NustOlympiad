@@ -3,6 +3,7 @@ namespace Register;
 require_once "../bootstrap.php";
 include_once '../OlAssets/dbconnect.php';
 include_once 'random_compat-master/lib/random.php';
+$auth->onlyGuests();
 $formsubmitted = $_SERVER['REQUEST_METHOD'] == 'POST'; //saved it as have to use later as well
 if ($formsubmitted){
 	// var_dump($_POST);
@@ -12,12 +13,12 @@ if ($formsubmitted){
 	if(!count($errors)){
 		//persistUser is function to save the data to the database
 		$errors = persistUser($data, $conn);
-		// if(!count($errors))
-		// 	//it means that registration is successfull.
-		// 	//now log them in and redirect to dashboard
-		// 	//they will get message to verify email in dashboard
-		// 	if($auth->login($data['username'], $data['pwd']))
-		// 		\App\redirect("/dashboard");
+		if(!count($errors))
+			//it means that registration is successfull.
+			//now log them in and redirect to dashboard
+			//they will get message to verify email in dashboard
+			if($auth->login($data['username'], $data['pwd']))
+				\App\redirect("/dashboard");
 	}	
 }
 ?>
@@ -25,93 +26,14 @@ if ($formsubmitted){
 <html>
 <head>
 	<title>Register</title>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!-- GOOGLE reCaptcha -->
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<script src="/js/jquery.min.js"></script>
+	<!-- <script src="https://maxdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 	<script src='https://www.google.com/recaptcha/api.js'></script>
-
 	<script type="text/javascript">
-$(document).ready(function(){
-			$('#student_nust').on('change',function()
-			{
-				if( $(this).val()==="n_yes"){
-					$("#nust_hid").show()
-				}
-				else{
-					$("#nust_hid").hide()
-				}
-			});
-			$('#ambassador').on('change',function(){
-				if( $(this).val()==="a_yes"){
-					$("#amb_hid").show()
-				}
-				else{
-					$("#amb_hid").hide()
-				}
-			});
-
-
-			function checkForm(form)
-			{
-    /*if(form.username.value == "") {
-      alert("Error: Username cannot be blank!");
-      form.username.focus();
-      return false;
-    }
-    re = /^\w+$/;
-    if(!re.test(form.username.value)) {
-      alert("Error: Username must contain only letters, numbers and underscores!");
-      form.username.focus();
-      return false;
-  }*/
-
-  if(form.pwd.value != "" && form.pwd.value == form.repwd.value) {
-      /*if(form.pwd.value.length < 6) {
-        alert("Error: Password must contain at least six characters!");
-        form.pwd.focus();
-        return false;
-      }
-      if(form.pwd.value == form.username.value) {
-        alert("Error: Password must be different from Username!");
-        form.pwd.focus();
-        return false;
-      }
-      re = /[0-9]/;
-      if(!re.test(form.pwd.value)) {
-        alert("Error: password must contain at least one number (0-9)!");
-        form.pwd.focus();
-        return false;
-      }
-      re = /[a-z]/;
-      if(!re.test(form.pwd.value)) {
-        alert("Error: password must contain at least one lowercase letter (a-z)!");
-        form.pwd.focus();
-        return false;
-      }
-      re = /[A-Z]/;
-      if(!re.test(form.pwd.value)) {
-        alert("Error: password must contain at least one uppercase letter (A-Z)!");
-        form.pwd.focus();
-        return false;
-    }*/
-
-} 
-else 
-{
-	alert("Error: Password fields don't match.");
-	form.pwd.focus();
-	return false;
-}
-
-/*alert("You entered a valid password: " + form.pwd.value);*/
-return true;
-}
+		$(document).ready(function(){
+			$("#student_nust").on("change",function(){"n_yes"===$(this).val()?$("#nust_hid").show():$("#nust_hid").hide()}),$("#ambassador").on("change",function(){"a_yes"===$(this).val()?$("#amb_hid").show():$("#amb_hid").hide()});
+			// function checkForm(a){return""==a.username.value?(alert("Error: Username cannot be blank!"),a.username.focus(),!1):(re=/^\w+$/,re.test(a.username.value)?""==a.pwd.value||a.pwd.value!=a.repwd.value?(alert("Error: Password fields don't match."),a.pwd.focus(),!1):a.pwd.value.length<6?(alert("Error: Password must contain at least six characters!"),a.pwd.focus(),!1):a.pwd.value==a.username.value?(alert("Error: Password must be different from Username!"),a.pwd.focus(),!1):(re=/[0-9]/,re.test(a.pwd.value)?(re=/[a-z]/,re.test(a.pwd.value)?(re=/[A-Z]/,!!re.test(a.pwd.value)||(alert("Error: password must contain at least one uppercase letter (A-Z)!"),a.pwd.focus(),!1)):(alert("Error: password must contain at least one lowercase letter (a-z)!"),a.pwd.focus(),!1)):(alert("Error: password must contain at least one number (0-9)!"),a.pwd.focus(),!1)):(alert("Error: Username must contain only letters, numbers and underscores!"),a.username.focus(),!1))}
 });
 </script>
 </head>
@@ -126,9 +48,6 @@ return true;
 			</ul>
 		</div>
 	<?php endif ?>
-
-
-
 	<div class="alert-danger"></div>
 	<form class="form-horizontal"  method = "POST" id="reg_form">
 		<div class="form-group">

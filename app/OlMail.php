@@ -42,9 +42,6 @@ class OlMail
         $this->sparky->setOptions(['async' => false]);
         try {
             $response = $this->sparky->transmissions->get();
-
-            echo $response->getStatusCode()."\n";
-            print_r($response->getBody())."\n";
         }
         catch (\Exception $e) {
             echo $e->getCode()."\n";
@@ -52,17 +49,3 @@ class OlMail
         }
     }
 }
-
-
-$cmail = new olmail(['name'=>'suchal riaz', 'email'=>'suchal@live.com'], 'Welcome onboard!', '<p>Just a reminder that this is the last time you are testing like this.</p>', 'Welcome onboard! Just a reminder, that this is the last time you are testing like this.');
-$cmail->send();
-
-// // $message = "To verify your account click on the link:  
-// // http://localhost/tempScripts/register/verifyemail/verifyEmail.php?";
-
-// // $m->Subject='Verify your account | NUST OLYMPIAD 17';
-// // $m->Body=$message;
-
-// // $m->send();
-
-

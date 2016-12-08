@@ -74,7 +74,7 @@ class Auth
 	public function onlyGuests($url = null){
 		if(!$url)
 			$url = '/dashboard';
-		if($this->isGuest())
+		if(!$this->isGuest())
 			\App\redirect($url);
 	}
 

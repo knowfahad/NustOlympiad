@@ -6,6 +6,7 @@ $auth->onlyLoggedIn();
 $challans = \Dashboard\getChallans($auth, $conn);
 $accomodationChallan = accomodationChallan($auth, $conn);
 $registrationChallan = registrationChallan($auth, $conn);
+$teams = enrolledTeams($auth, $conn);
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,6 +34,7 @@ $registrationChallan = registrationChallan($auth, $conn);
 <!---list-group-item-warning-->
 <h3>Challans</h3>
 <ul class="list-group">
+	<?php if($accomodationChallan): ?>
 	<li class="list-group-item <?=($accomodationChallan['PaymentStatus'])?"list-group-item-success":"list-group-item-danger" ?>">
 		<h4>Accomodation Challan</h4>
 		<?php if(!$accomodationChallan['PaymentStatus']): ?>
@@ -50,8 +52,10 @@ $registrationChallan = registrationChallan($auth, $conn);
 			<button class="btn btn-xs btn-danger" type="submit">Delete</button>	
 		</form>
 		<?php endif ?>
-
 	</li>
+	<?php endif ?>
+
+	<?php if($registrationChallan): ?>
 	<li class="list-group-item <?=($registrationChallan['PaymentStatus'])?"list-group-item-success":"list-group-item-danger" ?>">
 		<h4>Registration Challan</h4>
 		<?php if(!$registrationChallan['PaymentStatus']): ?>
@@ -65,8 +69,8 @@ $registrationChallan = registrationChallan($auth, $conn);
 			<button class="btn btn-xs btn-default" type="submit">Print</button>	
 		</form>
 		<?php endif ?>
-
 	</li>
+	<?php endif ?>
 <?php foreach($challans as $challan): ?>
 	<li class="list-group-item <?=($challan['PaymentStatus'])?"list-group-item-success":"list-group-item-danger" ?>">
 		<h4><?=$challan['Name']?></h4>
@@ -93,8 +97,53 @@ $registrationChallan = registrationChallan($auth, $conn);
 
 	</li>
 <?php endforeach ?>
+
+<?php if(count($teams)): ?>
+<?php foreach($teams as $team): ?>
+	<?php $challan = $team->challan() ?>
+	<li class="list-group-item 
+	<?=($challan['PaymentStatus'])?"list-group-item-success":"list-group-item-danger" ?>">
+		<h4><?=$team->TeamName?></h4>
+		<?php if(!$challan['PaymentStatus']): ?>
+		<form method="POST" action="http://ol-challan-generator.herokuapp.com/">
+			<input type="hidden" value="Sports team: <?=$team->TeamName?>" name="eventname">
+			<input type="hidden" value="<?= $challan['ChallanID'] ?>" name="challanid">
+			<input type="hidden" value="<?= $challan['DueDate'] ?>" name="duedate">
+			<input type="hidden" value="<?= $challan['AmountPayable'] ?>" name="fee">
+			<input type="hidden" value="Sports" name="type">
+			<button class="btn btn-xs btn-default" type="submit">Print</button>	
+		</form>
+		<form method="POST" action="/dashboard/challans/delete.php">
+			<input type="hidden" name="challanid" value="<?=$challan['ChallanID'] ?>">
+			<button class="btn btn-xs btn-danger" type="submit">Delete</button>	
+		</form>
+		<?php endif ?>
+
+	</li>
+
+<?php endforeach ?>
+<?php endif ?>
 </ul>
 
+<?php if(count($teams)): ?>
+<h3>Teams</h3>
+<ul>
+<?php foreach($teams as $team): ?>
+<li>
+<h4><?=$team->TeamName?></h4>
+<ul>
+	<?php foreach($team->members() as $member): ?>
+
+	<li>
+		<?=$member->FirstName?> <?=$member->LastName?>
+	</li>
+
+	<?php endforeach ?>
+</ul>
+</li>
+<?php endforeach ?>
+</ul>
+<?php endif ?>
 
 </body>
 </html>

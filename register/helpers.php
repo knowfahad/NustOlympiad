@@ -183,8 +183,6 @@ function preprocess($conn){
 	 }
 	else
 		$data['isAmbassador'] = false;
-
-
  	return [$errors, $data];
 }
 
@@ -250,11 +248,6 @@ function persistUser($data, $conn){ //execution will only start if there are no 
 			$stmt = $conn->prepare("INSERT INTO participant (institution, CNIC,FirstName,LastName,Gender,Address,PhoneNo, RegistrationChallanID, NUSTRegNo) VALUES (?,?,?,?,?,?,?,?,?)");
 			$stmt->bind_param("sssssssss", $data['insitute'], $data['cnic'], $data['fname'], $data['lname'], $data['gender'], $data['address'], $data['phone'], $regChallan, $data['nustid']);
 			$stmt->execute();
-			$result = $stmt->get_result();
-			if(mysqli_num_rows($result) == 0){
-				$errors['fatal'] = $stmt->error;
-			}
-			echo $stmt->error;
 			$stmt->close();
 		}
 	}

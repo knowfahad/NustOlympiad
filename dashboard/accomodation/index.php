@@ -11,7 +11,7 @@ $auth->onlyLoggedIn();
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	if(isset($_POST['agree'])){
 		$participant = $auth->getParticipant();
-		$gender = ($participant->getGender() == "Male") ? "m" : "g";
+		$gender = ($participant->getGender() == "M") ? "m" : "f";
 		$challanid = "AC" . $participant->getParticipantID() .  $gender;
 		$challan = new Challan();
 		$challan->setChallanID($challanid);
@@ -22,6 +22,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 		$participant->setAccomodationChallanID($challanid);
 		$participant->save();
+		if(strlen($auth->getParticipant()->getAccomodationChallanID()))
+			\App\redirect("/dashboard");
 	}
 }
 

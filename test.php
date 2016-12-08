@@ -1,4 +1,7 @@
 <?php 
 require("bootstrap.php");
 $auth->onlyLoggedIn();
-var_dump(\Dashboard\getChallans($auth, $conn));
+$teams = \Dashboard\enrolledTeams($auth, $conn);
+foreach($teams as $team){
+	var_dump($team->challan());
+}
