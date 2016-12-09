@@ -49,15 +49,23 @@
 				<div class="td-sheet-title">Home</div>
 				<div class="container-fluid"><!--fizza-->
 					<div class="row homepage" style="margin-bottom: 0px;">
-						<div class="col-md-12 text-center homepageleft" data-animation="fadeInDown" data-animation-delay="100">
+						<div class="col-md-12 text-center homepageleft" data-animation="fadeInDown" data-animation-delay="100" style="display: flex; flex-direction: row;">
 
 
 
-							<div class="arrows col-md-2" style="margin: 120px 130px 0 0 ;font-size:15px;" onclick="leftArrowClick()"><i class="ti-angle-left " style="float: left" ></i></div>
+							<div class="col-md-2" style="padding-top:12%; display: flex; justify-content: flex-start;" onclick="leftArrowClick()">
+							<div class="arrows">
+								<i class="fa fa-angle-left arrow-inside" ></i>
+							</div>
+						</div>
 
-							<div class="col-md-8"><img src="img/cube.png" alt="Logo" style="width:390px;height:230px" /></div>
+							<div class="col-md-8 col-xs-12"><img src="img/cube.png" alt="Logo" style="width:390px;height:230px" /></div>
 
-							<div class="arrows col-md-2" style="margin-top:120px; font-size:15px; float: right;" onclick="rightArrowClick()"><i class="ti-angle-right " style="float: right" ></i></div>
+							<div class="col-md-2" style="padding-top:12%; display: flex; justify-content: flex-end;" onclick="rightArrowClick()">
+							<div class="arrows">
+								<i class="fa fa-angle-right arrow-inside" ></i>
+							</div>
+						</div>
 
 							
 							
@@ -97,13 +105,17 @@
 					</div>
 					<div class="row">
 					<center>
-						<div class="col-md-11 col-xs-12 col-md-offset-1">
+						<div class="col-md-12 col-xs-12">
 							<!--<div id="countdown9" class="ClassyCountdownDemo"></div>-->
-							<div class="arrows col-md-2" style="margin:80px 145px 0 -90px; font-size:15px;" onclick="leftArrowClick()"><i class="ti-angle-left " style="float: left"></i></div>
+							<div class="col-md-2" style="padding-top:8.5%; display: flex; justify-content: flex-start;" onclick="leftArrowClick()"><div class="arrows">
+									<i class="fa fa-angle-left arrow-inside" ></i>
+								</div></div>
 
 							<div class="col-md-8" id='counter'></div>
 
-							<div class="arrows col-md-2" style="margin-top:80px; font-size:15px; float: right;" onclick="rightArrowClick()"><i class="ti-angle-right " style="float: right" ></i></div>
+							<div class="col-md-2" onclick="rightArrowClick()" style="padding-top:8.5%; display: flex; justify-content: flex-end;"><div class="arrows">
+									<i class="fa fa-angle-right arrow-inside" ></i>
+								</div></div>
 
 							<!-- <form>
 							  <div class="form-group" data-animation="fadeInLeft" data-animation-delay="100">
@@ -277,10 +289,8 @@
 							</p>
 						</div> -->
 						<div class="row">
-							<div class="arrows col-md-2" style="margin: 110px 20px 30px 30px; font-size:15px;" onclick="leftArrowClick()">
-								<i class="ti-angle-left " style="float: left" ></i>
-							</div>
-						<div class="class-desktop col-md-8">
+							
+						<div class="class-desktop col-md-12">
 							<div class="class-wrapper">
 								<div class="class-flip-container class-5px-downward" ontouchstart="this.classList.toggle('hover');">
 									<div class="class-flipper">
@@ -459,9 +469,7 @@
 							
 
 						</div>
-						<div class="arrows col-md-2" style="margin: 110px 30px 30px 12px; font-size:15px; float: right;" onclick="rightArrowClick()">
-							<i class="ti-angle-right " style="float: right" ></i>
-						</div>
+						
 						</div>
 					</div>
 				</div>
@@ -484,16 +492,13 @@
 						</div>
 					</div>
 
-					<div class="row text-center whitelinks">
-						<div class="arrows col-md-2" style="margin: 80px 20px 30px 12px; font-size:15px;" onclick="leftArrowClick()">
-							<i class="ti-angle-left " style="float: left" ></i>
-						</div>
-						<div class="arrows col-md-2" style="margin: 80px 12px 30px 0; font-size:15px; float: right;" onclick="rightArrowClick()">
-							<i class="ti-angle-right" style="float: right" ></i>
-						</div>
+					<div class="row text-center whitelinks" style="display: flex; flex-direction: row;">
+						<div class="col-md-2" style="padding-top:8.25%; display: flex; justify-content: flex-start;padding-left: 2.8%" onclick="leftArrowClick()"><div class="arrows">
+							<i class="fa fa-angle-left arrow-inside" ></i>
+						</div></div>
 
 						
-						<div class="col-md-8 class-desktop-push-2" data-animation="fadeIn" data-animation-delay="600" style="margin: -25px 50px 0 100px">
+						<div class="col-md-8 class-desktop-push-2" data-animation="fadeIn" data-animation-delay="600" style="margin-top: -2%">
 							<div data-animation="fadeIn" data-animation-delay="500" style="margin-bottom:26px;">
 								<img class="img-responsive" src="img/cube2.png" alt="LOGO" style="margin-left: auto; margin-right: auto; height:180px; width:300px"/>
 							</div>
@@ -502,6 +507,9 @@
 							</p>
 
 						</div>
+						<div class="col-md-2" onclick="rightArrowClick()" style="padding-top:8.25%; display: flex; justify-content: flex-end;padding-right: 2.8%"><div class="arrows">
+							<i class="fa fa-angle-right arrow-inside" ></i>
+						</div></div>
 					</div>
 				</div>
 			</div>
@@ -521,14 +529,19 @@
 							</div>
 						</div>
 					</div>
-					<div id="parent" class="container contact_us">
-					<div class="contact_us__overlay">
+
+					<div class="col-md-12">
+<div class="col-md-2" style="padding-top:10.5%;padding-left:0;display: flex; justify-content: flex-start;" onclick="leftArrowClick()"><div class="arrows">
+							<i class="fa fa-angle-left arrow-inside" ></i>
+						</div></div>
+
+
+					<div id="parent" class="contact_us col-md-8" style="display: flex; flex-direction: row;">
+					<div style="margin-top: -2%">
 					
-						<div class="row" style="margin-top:50px;">
-							<div class="arrows col-md-1" style="margin-left: -100px;margin-top:50px; font-size:15px;" onclick="leftArrowClick()">
-								<i class="ti-angle-left " style="float: left" ></i>
-							</div>
-							<div class="col-md-5" style="margin-left:63px;">
+						<div class="row" style="margin-top:5%;">
+							
+							<div class="col-md-6">
 								<div class="row">
 									<div class="col-md-6 contact_us__address" style="height:160px;text-align:left;">
 										<div class="h3" style="margin-top:0px;">
@@ -562,7 +575,7 @@
 										</div>
 								</div>
 							</div>
-							<div class="col-md-5 contact_us__form">
+							<div class="col-md-6 contact_us__form">
 								<form method="POST" action="/contact/index.php">
 									<div class="row">
 										<div class="col-md-6">
@@ -592,14 +605,14 @@
 									</div>
 								</form>
 							</div>
-							<div class="arrows col-md-1" style="margin-right:-100px;margin-top:50px; font-size:15px; float: right;" onclick="rightArrowClick()">
-								<i class="ti-angle-right" style="float: right" ></i>
-							</div>
+							
 						</div>
 					</div>
 				</div>
-
-				
+<div class="col-md-2" onclick="rightArrowClick()" style="padding-top:10.5%;padding-right: 0; display: flex; justify-content: flex-end;"><div class="arrows">
+							<i class="fa fa-angle-right arrow-inside" ></i>
+						</div></div>
+			</div>
 
 				</div>
 			<!--/fizza, end-->

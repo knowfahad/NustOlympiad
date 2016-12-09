@@ -217,12 +217,20 @@ h1{
 }
 .arrows
 {
-	border: 1.5px solid white;
-	padding: 12px;
+	width: 3em;
+	height: 3em;
+	border: 0.14em solid white;
 	border-radius: 50%;
-	width: 43px;
+	display: flex;
+  align-items: center;
+  justify-content: center 
 
 }
+.arrow-inside{
+	font-size: 25px;
+    margin: 0
+}
+
 /*Modified CSS for image upload module by Usama Tahir*/
 .btn-file {
     position: relative;
