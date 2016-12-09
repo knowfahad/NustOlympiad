@@ -3,10 +3,10 @@ namespace Dashboard;
 require(__DIR__ . '/../bootstrap.php');
 //blocks users who are not logged in from visiting this page
 $auth->onlyLoggedIn();
-$challans = \Dashboard\getChallans($auth, $conn);
-$accomodationChallan = accomodationChallan($auth, $conn);
-$registrationChallan = registrationChallan($auth, $conn);
-$teams = enrolledTeams($auth, $conn);
+$challans = \Dashboard\getChallans($auth, $mpdo);
+$accomodationChallan = accomodationChallan($auth, $mpdo);
+$registrationChallan = registrationChallan($auth, $mpdo);
+$teams = enrolledTeams($auth, $mpdo);
 ?>
 <!DOCTYPE html>
 <html>

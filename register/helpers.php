@@ -1,7 +1,7 @@
 <?php 
 namespace Register;
 require_once (__DIR__ . '/../bootstrap.php');
-use App\olmail;
+use App\OlMail;
 use Respect\Validation\Validator as v;
 
 
@@ -13,7 +13,7 @@ use Respect\Validation\Validator as v;
  * @param  mysqli connection
  * @return arrays of errors and data
  */
-function preprocess($conn){
+function preprocess($mpdo){
  	$errors = [];
  	$data = [];
 
@@ -35,7 +35,7 @@ function preprocess($conn){
  	$data['institute'] = strip_tags( trim($_POST["institute"] ?? ""));
 
  	////basic validations
- 	$usernamevalidation = v::NotEmpty()->NoWhitespace()->alnum()->length(6,20);
+ 	$usernamevalidation = v::NotEmpty()->NoWhitespace()->alnum()->length(3,20);
  	$cnicvalidation = v::NotEmpty()->noWhitespace()
  						->digit()->between(1000000000000, 9999999999999);
  	$emailvalidation = v::NotEmpty()->email();
@@ -57,7 +57,7 @@ function preprocess($conn){
  	if(!$phonevalidation->validate($data['mobile']))
  		$errors['mobile'] = "Please enter a valid mobile number";
  	if(!$pwdvalidation->validate($data['pwd']))
- 		$errors['pwd'] = "Please enter a valid password";
+ 		$errors['pwd'] = "Password must be minimum 8 characters";
  	if(!strlen($data['address']))
  		$errors['address'] = "Address is required!";
  	if($data['pwd'] != $data['repwd'])
@@ -75,81 +75,31 @@ function preprocess($conn){
  	if(!$captcha->success)
  		$errors['captcha'] = "Captcha is required!";
 
- 	if($data['pwd'] != $data['repwd']){
-	 	//return an error! 
-	 	$errors['pwd'] = "Passwords dont match!";
- 	}
-
-
-
-
  	/////advanced checking
 
 
  	//check if username already exists!
- 	if ($stmt = $conn->prepare("SELECT * FROM useraccount WHERE Username =?")) {
-	 	$stmt->bind_param("s", $data['username']);
-	 	$stmt->execute();
-	 	$result = $stmt->get_result();
-	 	//if username already exists! 
-	 	if(mysqli_num_rows($result) > 0) {
-	 		
-	 		//return error
+ 	if ($stmt = $mpdo->prepare("SELECT * FROM useraccount WHERE Username =?")) {
+	 	$stmt->execute([$data['username']]);
+	 	if($stmt->rowCount() > 0) {
 	 		$errors['username'] = "username already exists!";
 	 	}
-
-	 	/* free results */
-	 	$stmt->free_result();
-	 	/* close statement */
-	 	$stmt->close();
  	}
+
  	//check if nic exists
-
- 	if ($stmt = $conn->prepare("SELECT * FROM participant WHERE CNIC =?")) {
-
-	 	/* bind parameters for markers */
-	 	$stmt->bind_param("s", $data['cnic']);
-
-	 	/* execute query */
-	 	$stmt->execute();
-	 	$result = $stmt->get_result();
-
-	 	//if cnic already exists! 
-
-	 	if(mysqli_num_rows($result) > 0) {
-	 		
-	 		//return error
+ 	if ($stmt = $mpdo->prepare("SELECT * FROM participant WHERE CNIC =?")) {
+	 	$stmt->execute([$data['cnic']]);
+	 	if($stmt->rowCount()  > 0) {
 	 		$errors['cnic'] = "CNIC already exists!";
 	 	}
-
-	 	/* free results */
-	 	$stmt->free_result();
-	 	/* close statement */
-	 	$stmt->close();
  	}
 
  	//check if email already exists
- 	if ($stmt = $conn->prepare("SELECT * FROM useraccount WHERE Email =?")) {
-
-	 	/* bind parameters for markers */
-	 	$stmt->bind_param("s", $data['email']);
-
-	 	/* execute query */
-	 	$stmt->execute();
-	 	$result = $stmt->get_result();
-
-	 	//if email already exists! 
-
-	 	if(mysqli_num_rows($result) > 0) {
-	 		
-	 		//return error
+ 	if ($stmt = $mpdo->prepare("SELECT * FROM useraccount WHERE Email =?")) {
+	 	$stmt->execute([$data['email']]);
+	 	if($stmt->rowCount()  > 0) {
 	 		$errors['email'] = "email already exists!";
 	 	}
-
-	 	/* free results */
-	 	$stmt->free_result();
-	 	/* close statement */
-	 	$stmt->close();
  	}
 
  	if (isset($_POST['gender'])) {
@@ -168,16 +118,14 @@ function preprocess($conn){
  	if($data['ambassador'] == "a_yes"){
 	 	$data['ambassador_id'] = $_POST["ambassadorid"];
 	 	$data['isAmbassador'] = true;
+
+
 	 	//check whether the ambassador exists in database. Else return error!
 		///check if the CNIC provided matches the CNIC of the ambassador id provided
-		if($stmt = $conn->prepare("SELECT * from ambassador where AmbassadorID = ? AND CNIC = ?")){
-			$stmt->bind_param("ss", $data['ambassador_id'], $data['cnic']);
-			$stmt->execute();
-			$result = $stmt->get_result();
-			if(mysqli_num_rows($result) == 0){
+		if($stmt = $mpdo->prepare("SELECT * from ambassador where AmbassadorID = ? AND CNIC = ?")){
+			$stmt->execute([$data['ambassador_id'], $data['cnic']]);
+			if($stmt->rowCount() == 0){
 				$errors["ambassadorid"] = 'Wrong ambassador credidentials!';
-				$stmt->free_result();
-				$stmt->close();
 			}
 		}
 	 }
@@ -192,7 +140,7 @@ function preprocess($conn){
  * @param  data
  * @return errors
  */
-function persistUser($data, $conn){ //execution will only start if there are no errors
+function persistUser($data, $mpdo){ //execution will only start if there are no errors
 	$errors = [];
 
 	//image processing part will go here
@@ -202,24 +150,18 @@ function persistUser($data, $conn){ //execution will only start if there are no 
 
 	//create reg Challan and account Ac Code
 
-    $nextid = $conn->query("select max(`ParticipantID`) as max from `participant`")
-    		->fetch_object()
+    $nextid = $mpdo->query("select max(`ParticipantID`) as max from `participant`")
+    		->fetchObject()
     		->max + 1;
     $regChallan = "RC";
     $regChallan .= $nextid;
 	$regChallan .= ($data['isAmbassador']) ? '1' : '0';
 	
-    if($stmt = $conn->prepare("INSERT INTO challan (ChallanID, AmountPayable, DueDate, PaymentStatus) VALUES (?,?,?,?)")){
+    if($stmt = $mpdo->prepare("INSERT INTO challan (ChallanID, AmountPayable, DueDate, PaymentStatus) VALUES (?,?,?,?)")){
 		$date= '20170101';
 		$am = 1000;
 		$s= 0;
-		$stmt->bind_param("sisi", $regChallan,$am,$date, $s);
-		
-		$stmt->execute();
-
-		$stmt->free_result();
-		
-		$stmt->close();
+		$stmt->execute([$regChallan,$am,$date, $s]);
 	}
 	else{
 		$errors['Fatal'] =("\ninsert challan not executed!\n");
@@ -230,25 +172,15 @@ function persistUser($data, $conn){ //execution will only start if there are no 
 		//insert into participant
 	try{
 		if($data['isAmbassador'] == true){
-			$stmt = $conn->prepare("INSERT INTO participant (institution, CNIC,FirstName,LastName,Gender,Address,PhoneNo, RegistrationChallanID, NUSTRegNo, AmbassadorID) VALUES (?,?,?,?,?,?,?,?,?, ?)");
-			$stmt->bind_param("ssssssssss", $data['institute'], $data['cnic'], $data['fname'], $data['lname'], $data['gender'], $data['address'], $data['phone'], $regChallan, $data['nustid'], $data['ambassador_id']);
-			$stmt->execute();
-			if($result = $stmt->get_result()){
-				if(!$result && mysqli_num_rows($result) == 0){
-					$errors['fatal'] = $stmt->error;
-				}
-			}
-			else{
+			$stmt = $mpdo->prepare("INSERT INTO participant (institution, CNIC,FirstName,LastName,Gender,Address,PhoneNo, RegistrationChallanID, NUSTRegNo, AmbassadorID) VALUES (?,?,?,?,?,?,?,?,?, ?)");
+			$stmt->execute([$data['institute'], $data['cnic'], $data['fname'], $data['lname'], $data['gender'], $data['address'], $data['phone'], $regChallan, $data['nustid'], $data['ambassador_id']]);
+			if($stmt->rowCount() == 0){
 				$errors['fatal'] = $stmt->error;
 			}
-			echo $stmt->error;
-			$stmt->close();
 		}
 		else{
-			$stmt = $conn->prepare("INSERT INTO participant (institution, CNIC,FirstName,LastName,Gender,Address,PhoneNo, RegistrationChallanID, NUSTRegNo) VALUES (?,?,?,?,?,?,?,?,?)");
-			$stmt->bind_param("sssssssss", $data['insitute'], $data['cnic'], $data['fname'], $data['lname'], $data['gender'], $data['address'], $data['phone'], $regChallan, $data['nustid']);
-			$stmt->execute();
-			$stmt->close();
+			$stmt = $mpdo->prepare("INSERT INTO participant (institution, CNIC,FirstName,LastName,Gender,Address,PhoneNo, RegistrationChallanID, NUSTRegNo) VALUES (?,?,?,?,?,?,?,?,?)");
+			$stmt->execute([ $data['institute'], $data['cnic'], $data['fname'], $data['lname'], $data['gender'], $data['address'], $data['phone'], $regChallan, $data['nustid']]);
 		}
 	}
 	catch(Exception $e){
@@ -258,16 +190,12 @@ function persistUser($data, $conn){ //execution will only start if there are no 
 		// insert into account!
 		
 	try{
-		$stmt = $conn->prepare("INSERT INTO useraccount (username, ParticipantCNIC,Email,Password, AccountStatus, ActivationCode,ResetCode) VALUES (?,?,?,?,?,?,?)");
+		$stmt = $mpdo->prepare("INSERT INTO useraccount (username, ParticipantCNIC,Email,Password, AccountStatus, ActivationCode,ResetCode) VALUES (?,?,?,?,?,?,?)");
 				$rCode= 'Null';
 				$status = 0;
 				$acCode = bin2hex(mcrypt_create_iv(30, MCRYPT_DEV_URANDOM));
 				$pwdhash = password_hash($data['pwd'], PASSWORD_BCRYPT );
-				$stmt->bind_param("ssssiss", $data['username'],$data['cnic'],$data['email'], $pwdhash, $status, $acCode, $rCode);
-				
-				$stmt->execute();
-				$stmt->close();
-		
+				$stmt->execute([$data['username'],$data['cnic'],$data['email'], $pwdhash, $status, $acCode, $rCode]);
 	}
 	catch(Exception $e){
 		var_dump($e);
@@ -291,7 +219,7 @@ emailmessage;
 
 $txtmessage = "$heading /n Please open this link to verify your email: $link";
 	
-	$mail = new olmail(['name'=>$data['username'], 'email'=>$data['email']], 'Verify your account | NUST OLYMPIAD 17', $htmlmessage, $txtmessage );
+	$mail = new OlMail(['name'=>$data['username'], 'email'=>$data['email']], 'Verify your account | NUST OLYMPIAD 17', $htmlmessage, $txtmessage );
 	$mail->send();
 
 	return $errors;

@@ -1,7 +1,13 @@
 <?php 
 require("bootstrap.php");
-$auth->onlyLoggedIn();
-$teams = \Dashboard\enrolledTeams($auth, $conn);
-foreach($teams as $team){
-	var_dump($team->challan());
-}
+
+	$username = "adamsmith";
+ 	if ($stmt = $mpdo->prepare("SELECT * FROM useraccount WHERE Username =?")) {
+	 	$stmt->execute([$username]);
+	 	if($stmt->rowCount() > 0) {
+	 		
+	 		//return error
+	 		echo ("username already exists!");
+	 	}
+ 	}
+

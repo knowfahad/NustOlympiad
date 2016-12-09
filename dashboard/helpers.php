@@ -9,6 +9,7 @@ use Model\Model\Sportsparticipants;
 use Model\Model\SportsparticipantsQuery;
 use Model\Model\Sportsteam;
 use Model\Model\SportsteamQuery;
+use PDO;
 require_once(__DIR__."/../bootstrap.php");
 
 
@@ -27,10 +28,8 @@ epquery
 	try{
 
 		$cnic = $auth->getParticipant()->getCNIC();
-		$stmt->bind_param('s', $cnic);
-		$stmt->execute();
-		// echo $stmt->error;
-		return ($stmt->get_result()->fetch_all(MYSQLI_ASSOC));
+		$stmt->execute([$cnic]);
+		return ($stmt->fetchAll(PDO::FETCH_ASSOC));
 	}
 	catch(Exception $e){
 		var_dump($e);
@@ -49,9 +48,8 @@ function accomodationChallan($auth, $conn){
 	)
 epquery;
 	$stmt = $conn->prepare($query);
-	$stmt->bind_param("s",$cnic);
-	$stmt->execute();
-	$challans = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+	$stmt->execute([$cnic]);
+	$challans = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	if(!$challans)
 		return false;
 	return $challans[0];
@@ -69,9 +67,8 @@ function registrationChallan($auth, $conn){
 	)
 epquery;
 	$stmt = $conn->prepare($query);
-	$stmt->bind_param("s",$cnic);
-	$stmt->execute();
-	$challans = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+	$stmt->execute([$cnic]);
+	$challans = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	if(!$challans)
 		return false;
 	return $challans[0];
@@ -82,17 +79,15 @@ function enrolledTeams($auth, $conn){
 	$teamids = [];
 	$stmt = $conn->prepare("select TeamID from sportsparticipants where ParticipantID = ?");
 	$ParticipantID = $auth->getParticipant()->getParticipantID();
-	$stmt->bind_param("i", $ParticipantID);
-	$stmt->execute();
-	$stmt->bind_result($tempteamid);
-	while($stmt->fetch()){
+	$stmt->execute([$ParticipantID]);
+	$stmt->bindColumn(1, $tempteamid);
+	while($stmt->fetch(PDO::FETCH_BOUND)){
 		$teamids[] = $tempteamid;
 	}
 	foreach($teamids as $teamid){
 		if($nstmt = $conn->prepare("select * from sportsteam where TeamID = ?")){
-			$nstmt->bind_param("i", $teamid);
-			$nstmt->execute();
-			$teams[] = $nstmt->get_result()->fetch_object(Team::class, [$auth, $conn]);
+			$nstmt->execute([$teamid]);
+			$teams = $nstmt->fetchAll(PDO::FETCH_CLASS, Team::class, [$auth, $conn]);
 		}
 		else
 			var_dump($conn->error);

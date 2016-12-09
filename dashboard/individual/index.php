@@ -1,6 +1,7 @@
 <?php 
 namespace Dashboard;
 require(__DIR__ . '/../../bootstrap.php');
+use PDO;
 use Model\Model\AmbassadorParticipant;
 use Model\Model\AmbassadorQuery;
 use Model\Model\Challan;
@@ -10,12 +11,10 @@ use Model\Model\EventsQuery;
 //blocks users who are not logged in from visiting this page
 $auth->onlyLoggedIn();
 //find the list of events to display
-$stmt = $conn->prepare("select e.EventID, e.Name from events as e where e.EventType = 1 and e.EventID not in (select ep.EventID from eventparticipants as ep where ep.ParticipantCNIC = ?)");
+$stmt = $mpdo->prepare("select e.EventID, e.Name from events as e where e.EventType = 1 and e.EventID not in (select ep.EventID from eventparticipants as ep where ep.ParticipantCNIC = ?)");
 $cnic = $auth->getParticipant()->getCNIC();
-$stmt->bind_param('s', $cnic);
-$stmt->execute();
-$eventlist = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-$stmt->close();
+$stmt->execute([$cnic]);
+$eventlist = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 //process the form if it was submitted
@@ -26,12 +25,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$error = "Please select on option!";
 	}
 	else{
-		$stmt = $conn->prepare("select e.EventID from eventparticipants as e where e.EventID = ?");
-		$stmt->bind_param('s', $eventname);
-		$stmt->execute();
-		if(mysqli_num_rows($stmt->get_result()))
+		$stmt = $mpdo->prepare("select e.EventID from eventparticipants as e where e.EventID = ?");
+		$stmt->execute([$eventname]);
+		if($stmt->rowCount())
 			$error = "You have already participated in this event!";
-		$stmt->close();
 	}
 	if(!isset($error)){
 		$event = EventsQuery::create()->filterByEventId($eventname)

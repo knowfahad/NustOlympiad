@@ -38,9 +38,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 	if(!count($errors)){
 		//first populate the messages table
-		$stmt = $conn->prepare("insert into messages(name, email, message) values(?,?,?)");
-		$stmt->bind_param("sss", $name, $email, $message);
-		$stmt->execute();
+		$stmt = $mpdo->prepare("insert into messages(name, email, message) values(?,?,?)");
+		$stmt->execute([$name, $email, $message]);
 		//then send the email to web_it@nustolympiad.com
 		$txtmessage = "A new message has been left by $name($email): \"$message\"";
 		$htmlmessage = 

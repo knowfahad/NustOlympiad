@@ -2,6 +2,7 @@
 namespace Dashboard;
 
 use Model\Model\SportsQuery;
+use PDO;
 require(__DIR__ . '/../../bootstrap.php');
 //blocks users who are not logged in from visiting this page
 $auth->onlyLoggedIn();
@@ -31,16 +32,14 @@ if($formsubmitted){
 		$errors['sport'] = "Please select a sport";
 	if(!count($errors)){
 		// validate that the sport is a valid sport
-		$stmt = $conn->prepare("select * from sports where SportID = ?");
-		$stmt->bind_param("i",$sport);
-		$stmt->execute();
-		if(!mysqli_num_rows($stmt->get_result()))
+		$stmt = $mpdo->prepare("select * from sports where SportID = ?");
+		$stmt->execute([$sport]);
+		if(!$stmt->rowCount())
 			$errors['sport'] = "Sport selected is not valid!";
-		$stmt->close();
 
 		//validate the each member has already not participated in that sport already
 		$in = join(',', array_fill(0, count($ids), '?'));
-		if($stmt = $conn->prepare(
+		if($stmt = $mpdo->prepare(
 <<<participatedquery
 select *
 from sportsteam
@@ -52,14 +51,14 @@ AND TeamID IN (
 )
 participatedquery
 )){
-
-		$stmt->bind_param( str_repeat('i', count($ids)) . "i", $sport, ...$ids);
-		$stmt->execute();
-		if(mysqli_num_rows($stmt->get_result()))
+		$params = [$sport];
+		$params = array_merge($params, $ids);
+		$stmt->execute( $params);
+		if($stmt->rowCount())
 			$errors['team_members'] = "One or more of your team members are already enrolled in this sport!";
 		}
 		else{
-			die($conn->error);
+			die($sth->errorInfo());
 		}
 
 
@@ -67,29 +66,26 @@ participatedquery
 		$duedate = "12-10-17";
 		$AmountPayable = 400;
 		//find the new team ID first
-		$stmt = $conn->prepare("select max(TeamID) as max from sportsteam");
+		$stmt = $mpdo->prepare("select max(TeamID) as max from sportsteam");
 		$stmt->execute();
-		$teamID = $stmt->get_result()->fetch_all()[0][0];
+		$teamID = $stmt->fetch();
+		if(count($teamID))
+			$teamID = $teamID[0];
 		if($teamID == 0)
 			$teamID = 1753;
 		$challanID = "S".$teamID."e".$sport;
-		$stmt = $conn->prepare("insert into challan(ChallanID, AmountPayable, DueDate, PaymentStatus) values(?,?,?,0)");
-		$stmt->bind_param("sis",$challanID, $AmountPayable, $duedate);
-		$stmt->execute();
-		$stmt->close();
-		//populate the team table
-		$stmt = $conn->prepare("insert into sportsteam(TeamID, SportID, TeamName, HeadCNIC, ChallanID, AmountPayable, DueData, PaymentStatus) values(?,?,?,?,?,?,?,0)");
-		$HeadCNIC = $auth->getCNIC();
-		$stmt->bind_param("sssssis", $teamID, $sport, $teamname, $HeadCNIC, $challanID, $AmountPayable, $duedate);
-		$stmt->execute();
-		$stmt->close();
+		$stmt = $mpdo->prepare("insert into challan(ChallanID, AmountPayable, DueDate, PaymentStatus) values(?,?,?,0)");
+		$stmt->execute([$challanID, $AmountPayable, $duedate]);
 
-		//
+		//populate the team table
+		$stmt = $mpdo->prepare("insert into sportsteam(TeamID, SportID, TeamName, HeadCNIC, ChallanID, AmountPayable, DueData, PaymentStatus) values(?,?,?,?,?,?,?,0)");
+		$HeadCNIC = $auth->getCNIC();
+		$stmt->execute([$teamID, $sport, $teamname, $HeadCNIC, $challanID, $AmountPayable, $duedate]);
+
 		//populate the sportsparticipant table
-		$stmt = $conn->prepare("insert into sportsparticipants(TeamID, ParticipantID) values(?,?)");
+		$stmt = $mpdo->prepare("insert into sportsparticipants(TeamID, ParticipantID) values(?,?)");
 		foreach($ids as $id){
-			$stmt->bind_param("ss", $teamID, $id);
-			$stmt->execute();
+			$stmt->execute([$teamID, $id]);
 		}
 	}
 }

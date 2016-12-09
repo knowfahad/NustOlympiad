@@ -9,7 +9,7 @@
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-
+    $mpdo = new PDO("mysql:host=localhost;port=3306;dbname=olympiad", $dbusername, $password_db);
 
 
 ?>

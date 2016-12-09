@@ -8,11 +8,11 @@ $formsubmitted = $_SERVER['REQUEST_METHOD'] == 'POST'; //saved it as have to use
 if ($formsubmitted){
 	// var_dump($_POST);
 	//validates data and store errors. returns sanitized data ready to be inserted into database
-	list($errors, $data) = preprocess($conn);
+	list($errors, $data) = preprocess($mpdo);
 	//continue registeration if there are no errors
 	if(!count($errors)){
 		//persistUser is function to save the data to the database
-		$errors = persistUser($data, $conn);
+		$errors = persistUser($data, $mpdo);
 		if(!count($errors))
 			//it means that registration is successfull.
 			//now log them in and redirect to dashboard
