@@ -55,6 +55,9 @@
         </div>
     </div>-->
         <div class="td-sheets-container td-hide td-sheet-active-1">
+        <div class="col-md-1 col-xs-12">
+            <button type="button" class="class-button-home">Home</button>
+        </div>
             <div id="scrollbar-container" class="td-sheet active">
                 <div class="container-fluid">
                     <div class="row homepage" style="margin-bottom: 0px;">
@@ -63,107 +66,110 @@
                                  <div class="col-md-10 col-md-offset-1 col-xs-12">
                                      <div class="container-fluid">
                             <form class="form-horizontal" method="POST" id="reg_form" action="form.php">
-                                      <div class="h3">Create an account</div>
+                                      <div class="h3" style="margin-left: -17px;">Create an account</div>
                             <div class="form-group">
                                 <div>
-                                    <input id="username" name="username" placeholder="Username" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'UserName'">
+                                    <input id="username" name="username" placeholder="Username" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'UserName'"  required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 
                                 <div class="">
-                                    <input id="pwd" name="pwd" placeholder="Password" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'password'">
+                                    <input id="pwd" name="pwd" placeholder="Password" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'password'"  required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="">
-                                    <input id="repwd" name="repwd" placeholder="Re-Enter Password" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Re Enter password'">
+                                    <input id="repwd" name="repwd" placeholder="Re-Enter Password" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Re Enter password'" required>
                                 </div>
                             </div>
                             
                             <div class="form-group">
                                 <div class="">
-                                    <input id="fname" name="fname" placeholder="First Name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'">
+                                    <input id="fname" name="fname" placeholder="First Name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="">
-                                    <input  id="lname" name="lname" placeholder="Last Name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'">
+                                    <input  id="lname" name="lname" placeholder="Last Name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required>
                                 </div>
                             </div>
                             <!--insert label Gender-->
                             <div class="form-group">
                             <label style="margin-right:20%;" for="name">&nbsp;&nbsp;Gender</label>
-                            <label style="margin-right:5%;"><input type="radio" value = "M" name="gender"> Male</label>
-                            <label><input type="radio" name="gender" value="F" > Female</label>
+                            <label style="margin-right:5%;"><input type="radio" value = "M" name="gender" required> Male</label>
+                            <label><input type="radio" name="gender" value="F"  required> Female</label>
                             </div>
                             <!--end label -->
                             <div class="form-group">
                                 <div class="">
-                                    <input id="cnic" name="cnic" placeholder="CNIC NO" type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'CNIC'">
+                                    <input id="cnic" name="cnic" placeholder="CNIC NO" type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'CNIC'" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="">
-                                    <input id="mobile" name="mobile" placeholder="Mobile Number" type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mobile Number'">
+                                    <input id="mobile" name="mobile" placeholder="Mobile Number" type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mobile Number'" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="">
-                                    <input id="email" name="email" placeholder="Email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
+                                    <input id="email" name="email" placeholder="Email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class=""> 
-                                    <input id="address" name="address" placeholder="Address" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address'">
+                                    <input id="address" name="address" placeholder="Address" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address'" required>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="margin-bottom: 1%">
                                 <div class=""> 
-                                    <input id="institute" name="institute" placeholder="Institute" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Institute'">
+                                    <input id="institute" name="institute" placeholder="Institute" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Institute'" required>
                                 </div>
                             </div>
-                            <div class="form-group" id="makeinline">
-                              
-                                
-                            <p style="color:white;">Are you a Nust student?</p>
-                            <select class=" selectpicker form-control selectWidth" name="isNustian" id="student_nust" style="background-color:#757575;">
+                        <div class="makeinline form-group" style="margin-left: auto;margin-right: auto;">
+
+
+                            <p class="col-md-8" style="color:white;">Are You a NUST Student?</p>
+                            <select class="col-md-4 selectpicker form-control selectWidth" name="isNustian" id="student_nust" style="background-color:#757575;">
                                 <option value="n_no" selected="selected">No</option>
-                                    <option value="n_yes" style="color:black;">Yes</option>
+                                <option value="n_yes" style="color:black;">Yes</option>
                             </select>
                             
-                            </div>
-                            <div class="form-group" id="nust_hid" style="display:none;">
-                                <label class="control-label" for="nust_id">Nust ID:</label>
+                        </div>
+                        <div class="form-group hidden_items" id="nust_hid" style="display:none;">
                                 <div class=""> 
-                                    <input id="nust_id" name="nustid" placeholder="Enter ID" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter ID'">
+                                    <input id="nust_id" name="nustid" placeholder="Enter NUST ID" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter ID'">
                                 </div>
-                            </div>
+                        </div>
                             <br>
 
-                            <div class="form-group" id="makeinline2">
-                                <p style="color:white;">Are you an Ambassador?</p>
-                            <select class="form-control selectWidth selectpicker" name="ambassador" id="ambassador" style="background-color:#757575;;">
+                            <div class="form-group makeinline" style="margin-left: auto;margin-right: auto;">
+                                <p class="col-md-8" style="color:white;">Are You an Ambassador?</p>
+                            <select class="col-md-4 form-control selectWidth selectpicker" name="ambassador" id="ambassador" style="background-color:#757575;;">
                                     <option value="a_no" selected="selected">No</option>
                                     <option value="a_yes">Yes</option>
                             </select>
 
                             </div>
-                            <div class="form-group" id="amb_hid" style="display:none;">
-                                <label class="control-label" for="amb_id">Ambassador ID:</label>
+                            <div class="form-group hidden_items" id="amb_hid" style="display:none;">
                                 <div class=""> 
-                                    <input class="form-control" id="amb_id" name="ambassadorid" placeholder="Enter ID" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter ID'">
+                                    <input id="amb_id" name="ambassadorid" placeholder="Enter Ambassador ID" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter ID'">
                                 </div>
                             </div>
                             <br>
+
+                             <div class="form-group makeinline" style="margin-left: auto;margin-right: auto;font-size: 12px">
+                            <div>
+                                <p class="col-md-8" style="color:white;">Upload an image</p>
+                                <input class="col-md-3" style="padding: 8px;margin-left: -12%;" name="pic" accept="image/*" type="file">
+                            </div>
+                            </div>
 
                             <div class="form-group">
                                 <div class="g-recaptcha" data-sitekey="6Ldgtg0UAAAAAIGYMROWOzYRwq_qKR3dFWoRbqA9"><div style="width: 304px; height: 78px;"><div><iframe src="Register_files/anchor.htm" title="recaptcha widget" scrolling="no" name="undefined" width="304" height="78" frameborder="0"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid #c1c1c1; margin: 10px 25px; padding: 0px; resize: none;  display: none; "></textarea></div></div>
                             </div>
                             
-                                <label class="control-label" for="pic">Upload a pic:</label>
-                                <input name="pic" accept="image/*" type="file">
-                                
+                           
                             
                             <div class="form-inline">
                                 <div class="form-group"> 
@@ -343,6 +349,7 @@
 
 //end of Hussain's works
 			
+
 			
 		});
 	</script>
