@@ -1,8 +1,4 @@
-body
-{
-    background-color:white; 
-    overflow-x:hidden; 
-}
+
 input{
     background-color: transparent;
     color: black;
@@ -11,23 +7,37 @@ input{
 
 input[type=text] {
     border-style: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid white;
     /*font-size: 18px;*/
-    margin-bottom: 5%;
+    margin-bottom: 2%;
     width: 100%;
 }
-.form-control{
-    border-style: none;
-    border-bottom: 1px solid black;
-    /*font-size: 18px;*/
-    margin-bottom: 5%;
-    width: 100%;
-}
+
 input[type=password] {
     border-style: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid white;
     /*font-size: 18px;*/
-    margin-bottom: 5%;
+    margin-bottom: 2%;
+    width: 100%;
+}
+
+input[type=number] {
+    border-style: none;
+    border-bottom: 1px solid white;
+    /*font-size: 18px;*/
+    margin-bottom: 2%;
+    width: 100%;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type=email] {
+    border-style: none;
+    border-bottom: 1px solid white;
+    /*font-size: 18px;*/
+    margin-bottom: 2%;
     width: 100%;
 }
 
@@ -71,7 +81,7 @@ input:focus {
 {
     display: inline-block;
 }
-#makeinline3 p,#makeinline3 input{
+#makeinline3 label,#makeinline3 input{
     display: inline;
 }
 input[type='file'] {
@@ -81,9 +91,9 @@ input[type='file'] {
 #makeborder
 {
     border-style:solid;
-    border-color:black;
+    border-color:white;
     background-color: transparent;
-    color: black;
+    color: white;
     border-width:1px;
     padding: 5%;
     text-align: center;
@@ -110,4 +120,8 @@ input[type='file'] {
         margin-left: 0;
     }
 }
+
+
+/*usama*/
+
 
