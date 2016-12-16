@@ -106,12 +106,12 @@ font-weight:normal;
                             <div class="form-group">
                                 
                                 <div class="">
-                                    <input id="pwd" name="pwd" placeholder="Password" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'password'"  required>
+                                    <input id="pwd" name="pwd" placeholder="Password (min 8 characters)" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password (min 8 characters)'"  required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="">
-                                    <input id="repwd" name="repwd" placeholder="Re-Enter Password" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Re Enter password'" required>
+                                    <input id="repwd" name="repwd" placeholder="Re-Enter Password" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Re-Enter Password'" required>
                                 </div>
                             </div>
                             
@@ -130,7 +130,7 @@ font-weight:normal;
 							<div class = "row">
 								<div class="form-group">
 								
-									<div class="col-md-4 col-xs-4">
+									<div class="col-md-4 col-xs-3">
 									<label  for="name">Gender</label>
 									</div>
 									
@@ -138,7 +138,7 @@ font-weight:normal;
 									<label><input type="radio" value = "M" name="gender" required> Male</label>
 									</div>
 									
-									<div class="col-md-4 col-xs-4"> 
+									<div class="col-md-4 col-xs-5"> 
 									<label><input type="radio" name="gender" value="F"  required> Female</label>
 									</div>
 									
@@ -148,7 +148,7 @@ font-weight:normal;
                             <!--end label -->
                             <div class="form-group">
                                 <div class="">
-                                    <input id="cnic" name="cnic" placeholder="CNIC NO" type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'CNIC'" required>
+                                    <input id="cnic" name="cnic" placeholder="CNIC/ B.Form Number (Without Dashes)" type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'CNIC/ B.Form Number (Without Dashes)'" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -177,7 +177,7 @@ font-weight:normal;
 						<div class= "row">
 						<div class="makeinline form-group" >
 
-							<p class="col-md-9 col-xs-6" style="color:white;">Are You a NUST Student?</p>
+							<p class="col-md-9 col-xs-6" style="color:white;">Are You a NUSTian?</p>
                             <select class="col-md-4 selectpicker form-control selectWidth" name="isNustian" id="student_nust" style="background-color:#757575;">
                                 <option value="n_no" selected="selected">No</option>
                                 <option value="n_yes" style="color:black;">Yes</option>
@@ -190,15 +190,15 @@ font-weight:normal;
 						<div class= "row">
                         <div class="form-group hidden_items" id="nust_hid" style="display:none;">
                                 <div class=""> 
-                                    <input id="nust_id" name="nustid" placeholder="Enter CMS ID" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter ID'">
+                                    <input id="nust_id" name="nustid" placeholder="Enter CMS ID" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter CMS ID'">
                                 </div>
                         </div>
 						</div>
                           
 						<div class= "row">
                             <div class="form-group makeinline" >
-                                <p class="col-md-9 col-xs-6" style="color:white;">Are You an Ambassador?</p>
-                            <select class="col-md-3 col-xs-6 form-control selectWidth selectpicker" name="ambassador" id="ambassador" style="background-color:#757575;;">
+                                <p class="col-md-9 col-xs-7" style="color:white;">Are You an Ambassador?</p>
+                            <select class="col-md-3 col-xs-5 form-control selectWidth selectpicker" name="ambassador" id="ambassador" style="background-color:#757575;;">
                                     <option value="a_no" selected="selected">No</option>
                                     <option value="a_yes">Yes</option>
                             </select>
@@ -208,9 +208,9 @@ font-weight:normal;
 						
 						<div class= "row">
                             <div class="form-group hidden_items" id="amb_hid" style="display:none;">
-                                <div class=""> 
-                                    <input id="amb_id" name="ambassadorid" placeholder="Enter Ambassador ID" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter ID'">
-                                </div>
+                               <br>
+                                    <input id="amb_id" name="ambassadorid" placeholder="Enter Ambassador ID" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Ambassador ID'">
+                               
                             </div>
 						</div>
                             <br>
