@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NUST OLYMPIAD '17</title>
+    <title>Register | NUST Olympiad '17</title>
     <link rel="stylesheet" type="text/css" href="../css/timeline.css">
     <link href="css/lato.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/themify-icons.css">
@@ -14,20 +14,15 @@
     <link rel="stylesheet" href="../css/buttons.css" />
     <link rel="stylesheet" href="../css/animate.css" />
     <link rel="stylesheet" href="../css/tooltip.css" />
-    <link rel="stylesheet" type="text/css" href="../fonts/lato.css">
+    <link rel="stylesheet" type="text/css" href="../fonts/Montserrat-Light.css">
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/demo3.css" />
-    <link rel="stylesheet" href="../css/contactus.css">
+    
     <script src='https://www.google.com/recaptcha/api.js'></script>
 
-    <link rel="stylesheet" href="../countdown/cubical/countdowncube.css">
+    
     <link rel="stylesheet" href="style.css">
-    <style class="inlinestyle">
-        #counter {
-            margin: 10 auto;
-            text-align: center;
-        }
-    </style>
+    
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>Register</title>
     <link rel="stylesheet" href="Register_files/bootstrap.css">
@@ -42,6 +37,16 @@
             // function checkForm(a){return""==a.username.value?(alert("Error: Username cannot be blank!"),a.username.focus(),!1):(re=/^\w+$/,re.test(a.username.value)?""==a.pwd.value||a.pwd.value!=a.repwd.value?(alert("Error: Password fields don't match."),a.pwd.focus(),!1):a.pwd.value.length<6?(alert("Error: Password must contain at least six characters!"),a.pwd.focus(),!1):a.pwd.value==a.username.value?(alert("Error: Password must be different from Username!"),a.pwd.focus(),!1):(re=/[0-9]/,re.test(a.pwd.value)?(re=/[a-z]/,re.test(a.pwd.value)?(re=/[A-Z]/,!!re.test(a.pwd.value)||(alert("Error: password must contain at least one uppercase letter (A-Z)!"),a.pwd.focus(),!1)):(alert("Error: password must contain at least one lowercase letter (a-z)!"),a.pwd.focus(),!1)):(alert("Error: password must contain at least one number (0-9)!"),a.pwd.focus(),!1)):(alert("Error: Username must contain only letters, numbers and underscores!"),a.username.focus(),!1))}
 });
 </script>
+<style>
+a{
+color:white;
+}
+a:hover,a:focus{
+color:white;
+}
+
+</style>
+
 </head>
 
 <body id="id-body">
@@ -56,8 +61,10 @@
     </div>-->
         <div class="td-sheets-container td-hide td-sheet-active-1">
             <div class="row">
-        <div class="col-md-1 col-xs-12">
-            <button type="button" class="class-button-home"><a href="../index.html">Home</a></button>
+        <div class="col-md-1 col-xs-3">
+		<a href="../index.html">
+            <button type="button" class="class-button-home">Home</button>
+			</a>
         </div>
             </div>
             <div id="scrollbar-container" class="td-sheet active">
@@ -68,7 +75,7 @@
                                  <div class="col-md-10 col-md-offset-1 col-xs-12">
                                      <div class="container-fluid">
                             <form class="form-horizontal" method="POST" id="reg_form" action="form.php">
-                                      <div class="h3" style="margin-left: -17px;">Create an account</div>
+                                      <div class="h3" style="margin-left: -17px;">Create an Account</div>
                             <div class="form-group">
                                 <div>
                                     <input id="username" name="username" placeholder="Username" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'UserName'"  required>
@@ -140,7 +147,7 @@
                         </div>
                         <div class="form-group hidden_items" id="nust_hid" style="display:none;">
                                 <div class=""> 
-                                    <input id="nust_id" name="nustid" placeholder="Enter NUST ID" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter ID'">
+                                    <input id="nust_id" name="nustid" placeholder="Enter CMS ID" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter ID'">
                                 </div>
                         </div>
                             <br>
@@ -218,160 +225,9 @@
             <script src="../js/classie.js"></script>
             <script src="../js/detectanimation.js"></script>
             <script src="../js/modernizr.custom.js"></script>
-            
-            <!-- countdown -->
-            <script src="countdown/cubical/countdowncube.js"></script>
-            <script>
-                    $('#counter').countdownCube({target: new Date(2017,0,1), cubeSize: 100 } );
-       </script>
-            <!-- <script src="compiled/flipclock.js"></script>
-
-    <script type="text/javascript">
-			var clock;
-
-			$(document).ready(function() {
-
-				// Grab the current date
-				var currentDate = new Date();
-
-				// Set some date in the future. In this case, it's always Jan 1
-				var futureDate  = new Date(currentDate.getFullYear(), 11, 14);
-
-				// Calculate the difference in seconds between the future and current date
-				var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
-
-				// Instantiate a coutdown FlipClock
-				clock = $('.countClock').FlipClock(diff, {
-					clockFace: 'DailyCounter',
-					countdown: true
-				});
-			});
-	</script> -->
-            <!-- countdown  -->
-            <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="countdown/js/jquery.knob.js"></script>
-<script src="countdown/js/jquery.throttle.js"></script>
-
-<script src="countdown/js/jquery.classycountdown.js"></script>
-
-<script>
-    $(document).ready(function() {
-
-        // Grab the current date
-        var currentDate = new Date();
-
-        // Set some date in the future. In this case, it's always Jan 1
-        var futureDate  = new Date(currentDate.getFullYear() + 1, 2, 3);
-
-        // Calculate the difference in seconds between the future and current date
-        var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
-
-        $('#countdown9').ClassyCountdown({
-            end: diff+'',
-            now: '0',
-            labels: true,
-            style: {
-                element: "",
-                textResponsive: .5,
-                days: {
-                    gauge: {
-                        thickness: .05,
-                        bgColor: "rgba(0,0,0,0)",
-                        fgColor: "#1abc9c",
-                        lineCap: 'round'
-                    },
-                    textCSS: 'font-family:\'Open Sans\'; font-size:25px; font-weight:300; color:#34495e;'
-                },
-                hours: {
-                    gauge: {
-                        thickness: .05,
-                        bgColor: "rgba(0,0,0,0)",
-                        fgColor: "#2980b9",
-                        lineCap: 'round'
-                    },
-                    textCSS: 'font-family:\'Open Sans\'; font-size:25px; font-weight:300; color:#34495e;'
-                },
-                minutes: {
-                    gauge: {
-                        thickness: .05,
-                        bgColor: "rgba(0,0,0,0)",
-                        fgColor: "#8e44ad",
-                        lineCap: 'round'
-                    },
-                    textCSS: 'font-family:\'Open Sans\'; font-size:25px; font-weight:300; color:#34495e;'
-                },
-                seconds: {
-                    gauge: {
-                        thickness: .05,
-                        bgColor: "rgba(0,0,0,0)",
-                        fgColor: "#f39c12",
-                        lineCap: 'round'
-                    },
-                    textCSS: 'font-family:\'Open Sans\'; font-size:25px; font-weight:300; color:#34495e;'
-                }
-
-            },
-            onEndCallback: function() {
-                console.log("Time out!");
-            }
-        });
-
-    });
-</script>
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-36251023-1']);
-  _gaq.push(['_setDomainName', 'jqueryscript.net']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>-->
+           
             <script type="text/javascript" src="../js/timeline.js"></script>
-            <script type="text/javascript">
-		$(document).ready(function(){
-			
-			$("#capt").hide();	//hussains			
-			
-			if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
-			alert('Browser not supported!  Please use Chrome, Mozilla Firefox, Opera or Internet Explorer for best Experience :)');
-			}
-//Hussain's work
-//hiding captcha and decreasing rows			
-			$(".clckd").click(function(){
-				$("#txtr").attr('rows',2); 
-				$("#capt").show(1000);
-				
-			})
-
-//end of Hussain's works
-			
-
-			
-		});
-	</script>
-            <script type="text/javascript">
-	
-	function rightArrowClick(){
-		var e = jQuery.Event("keydown");
-		e.which = 40;
-		e.keyCode = 40; // # Some key code value
-		$("body").trigger(e);
-		
-	}
-	function leftArrowClick(){
-		var e = jQuery.Event("keydown");
-		e.which = 38;
-		e.keyCode = 38; // # Some key code value
-		$("body").trigger(e);
-		
-	}
-</script>
+           
 </body>
 
 </html>
