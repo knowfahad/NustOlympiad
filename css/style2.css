@@ -492,5 +492,11 @@ input[type='file'] {
     }
 }
 
-
+.btn-file{
+    background:#757575;
+    color: #fff;
+}
+.btn-file:hover{
+    background: grey;
+}
 
