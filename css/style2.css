@@ -62,7 +62,7 @@ h1{
 	position:absolute;
 	width:100%;
 	height:100%;
-	background-image:url('../img/stars.jpg');
+	background-image:url('../img/stars.png');
 	background-size:cover;
 	background-repeat:none;
 	perspective:5000px;
@@ -198,9 +198,7 @@ h1{
 
 
 /* 7-HELPERS */
-.row{
-	margin-bottom:30px;
-}
+
 .whitelinks a{
 	color: white !important;
 }
