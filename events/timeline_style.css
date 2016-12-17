@@ -1,0 +1,17 @@
+.cd-timeline-content{
+	border: solid;
+    border-color: white;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    box-shadow: none;
+    border-width: 1px;
+  /*  padding: 5%;
+    text-align: center;*/
+}
+.cd-timeline-content h2{
+	color: white;
+}
+.cd-timeline-img.cd-picture {
+    background: white;
+    box-shadow: none;
+}
