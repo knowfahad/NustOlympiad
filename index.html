@@ -47,48 +47,20 @@
 					<i class="ti-home"></i>
 				</div>
 				<div class="td-sheet-title">Home</div>
+					<div class="" style="position:absolute; float:left; top:40%; left:1%; display: flex; justify-content: flex-start;" onclick="leftArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-left arrow-inside" ></i>
+						</div>
+					</div>
+					<div class="" style="position:absolute; float:right; right:1%; top:40%; display: flex; justify-content: flex-end;" onclick="rightArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-right arrow-inside" ></i>
+						</div>
+					</div>
 				<div class="container-fluid"><!--fizza-->
 					<div class="row homepage" style="margin-bottom: 0px;">
-						<div class="col-md-12 text-center homepageleft" data-animation="fadeInDown" data-animation-delay="100" style="display: flex; flex-direction: row;">
-
-
-
-							<div class="col-md-2" style="padding-top:12%; display: flex; justify-content: flex-start;" onclick="leftArrowClick()">
-							<div class="arrows">
-								<i class="fa fa-angle-left arrow-inside" ></i>
-							</div>
-						</div>
-
-							<div class="col-md-8 col-xs-12">
-							<center>
-							
-							<img src="img/cube.png" alt="Logo" style="width:390px;height:230px" />
-							
-							</center>
-							</div>
-
-							<div class="col-md-2" style="padding-top:12%; display: flex; justify-content: flex-end;" onclick="rightArrowClick()">
-							<div class="arrows">
-								<i class="fa fa-angle-right arrow-inside" ></i>
-							</div>
-						</div>
-
-							
-							
-
-							<!-- <canvas id="myCanvas"></canvas> 
-							<div class="text-uppercase" data-animation="fadeIn" data-animation-delay="200" style="font-size: 40px;">
-							</div>
-							<div data-animation="fadeInUp" data-animation-delay="500" data-tdchangetext="2.5" >
-								<span>Olympiad '17</span>
-								<span>Olympiad '17</span>
-								<span>Olympiad '17</span>
-							</div> 
-
-							<div data-animation="fadeInUp" data-animation-delay="500" data-tdchangetext="2.5" >
-								<span>Welcome to the next dimension</span>
-								<span>The ultimate in website</span>
-							</div>-->
+						<div class="col-md-6 col-md-offset-3 col-xs-6 col-xs-offset-3 text-center homepageleft" data-animation="fadeInDown" data-animation-delay="100" style="display: flex; flex-direction: row;">
+							<img src="img/cube.png" alt="Logo" style="width:390px;height:230px"/>
 						</div>
 						
 					</div>
@@ -101,6 +73,16 @@
 					<i class="ti-pencil-alt"></i>
 				</div>
 				<div class="td-sheet-title">Register</div>
+					<div class="" style="position:absolute; float:left; top:40%; left:1%; display: flex; justify-content: flex-start;z-index:9999;" onclick="leftArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-left arrow-inside" ></i>
+						</div>
+					</div>
+					<div class="" style="position:absolute; float:right; right:1%; top:40%; display: flex; justify-content: flex-end;z-index:9999;" onclick="rightArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-right arrow-inside" ></i>
+						</div>
+					</div>
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12 text-center">
@@ -112,50 +94,21 @@
 					<div class="row">
 					<center>
 						<div class="col-md-12 col-xs-12">
-							<!--<div id="countdown9" class="ClassyCountdownDemo"></div>-->
-							<div class="col-md-2" style="padding-top:8.5%; display: flex; justify-content: flex-start;" onclick="leftArrowClick()"><div class="arrows">
-									<i class="fa fa-angle-left arrow-inside" ></i>
-								</div></div>
+							
+							<div class="row">
+								<div class="col-md-8 col-md-push-2" id='counter'></div>
+							</div>
+					
 
-							<div class="col-md-8" id='counter'></div>
-
-							<div class="col-md-2" onclick="rightArrowClick()" style="padding-top:8.5%; display: flex; justify-content: flex-end;"><div class="arrows">
-									<i class="fa fa-angle-right arrow-inside" ></i>
-								</div></div>
-
-							<!-- <form>
-							  <div class="form-group" data-animation="fadeInLeft" data-animation-delay="100">
-								<label for="exampleInputName1">Name</label>
-								<input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
-							  </div>
-							  <div class="form-group" data-animation="fadeInLeft" data-animation-delay="300">
-								<label for="exampleInputEmail1">Email address</label>
-								<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-							  </div>
-							  <div class="form-group" data-animation="fadeInLeft" data-animation-delay="500">
-								<label for="exampleInputMessage1">Message</label>
-								<textarea id="exampleInputMessage1" class="form-control" rows="3"></textarea>
-							  </div>
-							  <button type="submit" class="btn btn-default" data-animation="fadeInLeft" data-animation-delay="700">Submit</button>
-							</form> -->
+							
 						</div></center>
 
-						<!-- <div class="col-md-6 contactdata">
-							<img class="img-responsive" src="http://placehold.it/960x640" alt="Headquarters"/>
-							<address>
-							  <strong>SilverWolf, Inc.</strong><br>
-							  1234 Fake Street, Office 600<br>
-							  Planet Earth, CP <br>
-							  <abbr title="Phone">P:</abbr> (123) 456-7890
-							  <br><strong>Email</strong><br>
-							  <a href="mailto:#">first.last@example.com</a>
-							</address>
-						</div> -->
+						
 					</div>
 
 					<div class="row">
 						<div class="col-md-8 col-md-offset-2 col-xs-12" id="id-calendar">
-							<center class = "blink_me" style="font-size: 30px;padding-top: 30px; font-weight: bold;">
+							<center class = "blink_me" style="font-size: 30px; font-weight: bold;">
 								<dd style="font-weight: 200;">Mark Your Calendars</dd>
 								<dd style="font-weight: 200;">1<sup style = "text-transform: lowercase; ">st</sup> January, 2017</dd>
 							</center>
@@ -219,6 +172,17 @@
 					<i class="ti-announcement"></i>
 				</div>
 				<div class="td-sheet-title">Services</div>
+
+					<div class="" style="position:absolute; float:left; top:40%; left:1%; display: flex; justify-content: flex-start;z-index:9999;" onclick="leftArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-left arrow-inside" ></i>
+						</div>
+					</div>
+					<div class="" style="position:absolute; float:right; right:1%; top:40%; display: flex; justify-content: flex-end;z-index:9999;" onclick="rightArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-right arrow-inside" ></i>
+						</div>
+					</div>
 
 				<div class="container">
 					<div class="row">
@@ -422,6 +386,18 @@
 					<i class="ti-info-alt"></i>
 				</div>
 				<div class="td-sheet-title">About</div>
+
+					<div class="" style="position:absolute; float:left; top:40%; left:1%; display: flex; justify-content: flex-start;z-index:9999;" onclick="leftArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-left arrow-inside" ></i>
+						</div>
+					</div>
+					<div class="" style="position:absolute; float:right; right:1%; top:40%; display: flex; justify-content: flex-end;z-index:9999;" onclick="rightArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-right arrow-inside" ></i>
+						</div>
+					</div>
+
 				<div class="container">
 				<!--Hira Naveed-->
 
@@ -434,12 +410,10 @@
 					</div>
 
 					<div class="row text-center whitelinks" style="display: flex; flex-direction: row;">
-						<!-- <div class="col-md-2" style="padding-top:8.25%; display: flex; justify-content: flex-start;padding-left: 2.8%" onclick="leftArrowClick()"><div class="arrows">
-							<i class="fa fa-angle-left arrow-inside" ></i>
-						</div></div> -->
+						
 
 						
-						<div class="col-md-8 class-desktop-push-2" data-animation="fadeIn" data-animation-delay="600" style="margin-top: -2%">
+						<div class="col-md-8 col-md-push-2" data-animation="fadeIn" data-animation-delay="600" style="margin-top: -2%">
 							<div data-animation="fadeIn" data-animation-delay="500" style="margin-bottom:26px;">
 								<img class="img-responsive" src="img/cube2.png" alt="LOGO" style="margin-left: auto; margin-right: auto; height:180px; width:300px"/>
 							</div>
@@ -448,9 +422,7 @@
 							</p>
 
 						</div>
-						<!-- <div class="col-md-2" onclick="rightArrowClick()" style="padding-top:8.25%; display: flex; justify-content: flex-end;padding-right: 2.8%"><div class="arrows">
-							<i class="fa fa-angle-right arrow-inside" ></i>
-						</div></div> -->
+						
 					</div>
 				</div>
 			</div>
@@ -462,6 +434,18 @@
 				</div>
 
 				<div class="td-sheet-title">Contact</div>
+
+					<div class="" style="position:absolute; float:left; top:40%; left:1%; display: flex; justify-content: flex-start;z-index:9999;" onclick="leftArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-left arrow-inside" ></i>
+						</div>
+					</div>
+					<div class="" style="position:absolute; float:right; right:1%; top:40%; display: flex; justify-content: flex-end;z-index:9999;" onclick="rightArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-right arrow-inside" ></i>
+						</div>
+					</div>
+
 				<div class="container">
 					<div style="margin-bottom: 10px" class="row">
 						<div class="col-md-12 text-center">
@@ -471,13 +455,10 @@
 						</div>
 					</div>
 
-					<div class="col-md-12">
-<div class="col-md-2" style="padding-top:10.5%;padding-left:0;display: flex; justify-content: flex-start;" onclick="leftArrowClick()"><div class="arrows">
-							<i class="fa fa-angle-left arrow-inside" ></i>
-						</div></div>
+					
 
 
-					<div id="parent" class="contact_us col-md-8" style="display: flex; flex-direction: row;">
+					<div id="parent" class="contact_us col-md-8 col-md-push-2" style="display: flex; flex-direction: row;">
 					<div style="margin-top: -2%">
 					
 						<div class="row" style="margin-top:5%;">
@@ -550,9 +531,7 @@
 						</div>
 					</div>
 				</div>
-<div class="col-md-2" onclick="rightArrowClick()" style="padding-top:10.5%;padding-right: 0; display: flex; justify-content: flex-end;"><div class="arrows">
-							<i class="fa fa-angle-right arrow-inside" ></i>
-						</div></div>
+
 			</div>
 
 				</div>
