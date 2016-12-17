@@ -1,279 +1,353 @@
-<!doctype html>
-<html lang="en" class="no-js">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Register | NUST Olympiad '17</title>
+	<link rel="stylesheet" type="text/css" href="../css/timeline.css">
 
-	<link href='http://fonts.googleapis.com/css?family=Droid+Serif|Open+Sans:400,700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="../css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="../css/themify-icons.css">
 	<link rel="stylesheet" href="../css/font-awesome.min.css">
+	<link rel='stylesheet' href='../css/perfect-scrollbar.min.css' />
+	<link rel="stylesheet" href="../css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../css/buttons.css" />
+	<link rel="stylesheet" href="../css/animate.css" />
+	<link rel="stylesheet" href="../css/tooltip.css" />
 	<link rel="stylesheet" href="../vertical-timeline/css/reset.css"> <!-- CSS reset -->
 	<link rel="stylesheet" href="../vertical-timeline/css/style.css"> <!-- Resource style -->
 	<script src="../vertical-timeline/js/modernizr.js"></script> <!-- Modernizr -->
 
-	<style type="text/css">
-		.cover-mobile{
-			display: none;
-		}
-		@media only screen and (max-width: 400px){
-			.cover-mobile{
-				display: inherit;
-			}
-			.cover-desktop{
-				display: none;
-			}
+	<link rel="stylesheet" href="../css/demo3.css" />
 
-		}
-	</style>
-  	
-	<title>NUST Olympiad | Events</title>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+
+	<link rel="stylesheet" href="../css/style2.css" />
+
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Register</title>
+
+	<!--<script type="text/javascript" async="" src="Register_files/recaptcha__en.js"></script><script src="Register_files/jquery.js"></script> -->
+	
+	<!-- <script src="https://maxdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
+	<!--<script src="Register_files/api.js"></script> -->
+	
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script> -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#student_nust").on("change",function(){"n_yes"===$(this).val()?$("#nust_hid").show():$("#nust_hid").hide()}),$("#ambassador").on("change",function(){"a_yes"===$(this).val()?$("#amb_hid").show():$("#amb_hid").hide()});
+            // function checkForm(a){return""==a.username.value?(alert("Error: Username cannot be blank!"),a.username.focus(),!1):(re=/^\w+$/,re.test(a.username.value)?""==a.pwd.value||a.pwd.value!=a.repwd.value?(alert("Error: Password fields don't match."),a.pwd.focus(),!1):a.pwd.value.length<6?(alert("Error: Password must contain at least six characters!"),a.pwd.focus(),!1):a.pwd.value==a.username.value?(alert("Error: Password must be different from Username!"),a.pwd.focus(),!1):(re=/[0-9]/,re.test(a.pwd.value)?(re=/[a-z]/,re.test(a.pwd.value)?(re=/[A-Z]/,!!re.test(a.pwd.value)||(alert("Error: password must contain at least one uppercase letter (A-Z)!"),a.pwd.focus(),!1)):(alert("Error: password must contain at least one lowercase letter (a-z)!"),a.pwd.focus(),!1)):(alert("Error: password must contain at least one number (0-9)!"),a.pwd.focus(),!1)):(alert("Error: Username must contain only letters, numbers and underscores!"),a.username.focus(),!1))}
+        });
+    </script>
+    <style>
+    	a{
+    		color:white;
+    	}
+    	a:hover,a:focus{
+    		color:white;
+    	}
+    	input{
+    		color:white;
+
+    	}
+    	label{
+    		font-weight:normal;
+
+    	}
+
+    	.col-centered{
+    		float: none;
+    		margin: 0 auto;
+    	}
+    </style>
+
 </head>
-<body>
-	<div>
-		<img src="../vertical-timeline/img/coverfinal.jpg"  class="cover-desktop" alt="cover-photo-nust-olympiad-17" id="id-cover-img-2">
-		<img src="../vertical-timeline/img/cover-400x200.png" style="width: 100%; height: 100%;" class="cover-mobile" alt="cover-photo-nust-olympiad-17">
+
+<body id="id-body" >
+	<div class="td-preloading">
+		<span class="fa fa-spinner fa-spin"></span>
 	</div>
-	<br/>
-	<div class="row">
-			<div class="col-md-4 col-sm-offset-1">
-				<a href="../index.html" type="button" class="btn btn-default" style="background-color:#d7934b;color:white;"><span><i class="fa fa-arrow-left" aria-hidden="true"></i></span>&nbsp;Home</a>
-			</div>
-		</div>
-	<section id="cd-timeline" class="cd-container">
-		
-		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Picture">
-			</div> <!-- cd-timeline-img -->
 
-			<div class="cd-timeline-content">
-				<h2>Cricket</h2>
-				<p>Spin your way to a five-wicket haul or bat the fastest century and recreate the magic of the game of legends.</p>
-				<a href="#0" class="cd-read-more">Read more</a>
-				
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
+	<div class="td-container">
+        <!--<div class="row">
+        <div class="col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2  col-sm-4 col-sm-offset-4">
+            <img src="../img/cube.png" alt="" style="margin-bottom:0;">
+        </div>
+    </div>-->
+    <div class="td-sheets-container td-hide td-sheet-active-1">
+    	<div class="row">
 
-		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
-				
-			</div> 
-			
-			
+    	</div>
+    	<div id="scrollbar-container" class="td-sheet active">
+    		<div class="container-fluid">
 
-			<div class="cd-timeline-content">
-				<h2>Badminton</h2>
-				<p>Level up to the strongest opponents and impress us with clean shots and skillful footwork.</p>
-				<a href="#0" class="cd-read-more">Read more</a>
-				
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
+    			<div class = "row">
+    				<div class = "col-md-3 col-centered col-sm-3" >
 
-		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Picture">
-			</div> <!-- cd-timeline-img -->
 
-			<div class="cd-timeline-content">
-				<h2>Squash</h2>
-				<p> Contained within four walls, merely holding a racket; a test of pure alertness and stamina.</p>
-				<a href="#0" class="cd-read-more">Read more</a>
-				
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
+    					<a href="../index.html">
+    						<img src="../img/logo.png" class="img-responsive" alt="LOGO"/>
+    					</a>	
 
-		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Location">
-			</div> <!-- cd-timeline-img -->
+    				</div>
+    			</div>  
 
-			<div class="cd-timeline-content">
-				<h2>Table Tennis</h2>
-				<p>Perfect your backhand, forehand, footwork and go for the “Kill” against the best.</p>
-				<a href="#0" class="cd-read-more">Read more</a>
-				
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
+    			<div class="row homepage" >
+    			<div class="row col-md-12">
+    				<section id="cd-timeline" class="cd-container">
 
-		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Location">
-			</div> <!-- cd-timeline-img -->
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Picture">
+    						</div> <!-- cd-timeline-img -->
 
-			<div class="cd-timeline-content">
-				<h2>Chess</h2>
-				<p>To masterminds who work best alone, take your 16 pieces, strategize your game and participate to be acclaimed the chess master!</p>
-				<a href="#0" class="cd-read-more">Read more</a>
-				
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
+    						<div class="cd-timeline-content">
+    							<h2>Cricket</h2>
+    							<p>Spin your way to a five-wicket haul or bat the fastest century and recreate the magic of the game of legends.</p>
+    							<a href="#0" class="cd-read-more">Read more</a>
 
-		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Location">
-			</div> <!-- cd-timeline-img -->
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
 
-			<div class="cd-timeline-content">
-				<h2>Volleyball</h2>
-				<p>Have you got the flair for solid teamwork and essentially, keeping the ball afloat?  </p>
-				<a href="#0" class="cd-read-more">Read more</a>
-				
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
 
-		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Location">
-			</div> <!-- cd-timeline-img -->
+    						</div> 
 
-			<div class="cd-timeline-content">
-				<h2>Basketball</h2>
-				<p>The complexity yet simplicity of this age-old game is best observed through actions. Are you up for the task?</p>
-				<a href="#0" class="cd-read-more">Read more</a>
-				
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
 
-		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Location">
-			</div> <!-- cd-timeline-img -->
 
-			<div class="cd-timeline-content">
-				<h2>Crime line road</h2>
-				<p>Whether you secretly enjoy an episode of CID or are a devoted Sherlock fan, this is the event for you.</p>
-				<a href="#0" class="cd-read-more">Read more</a>
-				
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
+    						<div class="cd-timeline-content">
+    							<h2>Badminton</h2>
+    							<p>Level up to the strongest opponents and impress us with clean shots and skillful footwork.</p>
+    							<a href="#0" class="cd-read-more">Read more</a>
 
-		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Location">
-			</div> <!-- cd-timeline-img -->
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
 
-			<div class="cd-timeline-content">
-				<h2>Mathletics</h2>
-				<p>Mathletics will take you for a whirlpool ride into the majestic world of arithmetic, algebra, puzzles and more.</p>
-				<a href="#0" class="cd-read-more">Read more</a>
-				
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Picture">
+    						</div> <!-- cd-timeline-img -->
 
-		<!--changes made by usama-->
+    						<div class="cd-timeline-content">
+    							<h2>Squash</h2>
+    							<p> Contained within four walls, merely holding a racket; a test of pure alertness and stamina.</p>
+    							<a href="#0" class="cd-read-more">Read more</a>
 
-		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
-			</div> <!-- cd-timeline-img -->
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
 
-			<div class="cd-timeline-content">
-				<h2>Human Foosball</h2>
-				<p>A sport that will consistently confuse exhilarating fun and intensifying competitiveness in your mind.</p>
-				
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Location">
+    						</div> <!-- cd-timeline-img -->
 
-		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
-			</div> <!-- cd-timeline-img -->
+    						<div class="cd-timeline-content">
+    							<h2>Table Tennis</h2>
+    							<p>Perfect your backhand, forehand, footwork and go for the “Kill” against the best.</p>
+    							<a href="#0" class="cd-read-more">Read more</a>
 
-			<div class="cd-timeline-content">
-				<h2>E-Gaming</h2>
-				<p>A haven for sport enthusiasts who prefer indoor serenity to outdoor hustle-bustle.</p>
-				
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
 
-		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
-			</div> <!-- cd-timeline-img -->
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Location">
+    						</div> <!-- cd-timeline-img -->
 
-			<div class="cd-timeline-content">
-				<h2>Speed Programming</h2>
-				<p>Manipulate 1s and 0s, in pre-set time, to solve real-life problems using coherent and comprehensive logic.</p>
-				
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
-		
+    						<div class="cd-timeline-content">
+    							<h2>Chess</h2>
+    							<p>To masterminds who work best alone, take your 16 pieces, strategize your game and participate to be acclaimed the chess master!</p>
+    							<a href="#0" class="cd-read-more">Read more</a>
 
-		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
-			</div> <!-- cd-timeline-img -->
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
 
-			<div class="cd-timeline-content">
-				<h2>Minute to win it</h2>
-				<p>To experience the pinnacle of activeness and an absolute nerve-wracking time, beat the clock and win it.</p>
-				
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Location">
+    						</div> <!-- cd-timeline-img -->
 
-		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
-			</div> <!-- cd-timeline-img -->
+    						<div class="cd-timeline-content">
+    							<h2>Volleyball</h2>
+    							<p>Have you got the flair for solid teamwork and essentially, keeping the ball afloat?  </p>
+    							<a href="#0" class="cd-read-more">Read more</a>
 
-			<div class="cd-timeline-content">
-				<h2>Public Speaking Challenge</h2>
-				<p>A knack for words, competent speech delivery and adequate confidence are all the requirements for you to enter this event.</p>
-				
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
 
-		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
-			</div> <!-- cd-timeline-img -->
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Location">
+    						</div> <!-- cd-timeline-img -->
 
-			<div class="cd-timeline-content">
-				<h2>Archery</h2>
-				<p>A calm and composed sport, archery, has been added for those with great precision and expertise.</p>
-				
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
+    						<div class="cd-timeline-content">
+    							<h2>Basketball</h2>
+    							<p>The complexity yet simplicity of this age-old game is best observed through actions. Are you up for the task?</p>
+    							<a href="#0" class="cd-read-more">Read more</a>
 
-		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
-			</div> <!-- cd-timeline-img -->
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
 
-			<div class="cd-timeline-content">
-				<h2>Paintball</h2>
-				<p>Combat and jollity merge to present an exciting event for anyone and everyone.</p>
-				
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Location">
+    						</div> <!-- cd-timeline-img -->
 
-		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
-			</div> <!-- cd-timeline-img -->
+    						<div class="cd-timeline-content">
+    							<h2>Crime line road</h2>
+    							<p>Whether you secretly enjoy an episode of CID or are a devoted Sherlock fan, this is the event for you.</p>
+    							<a href="#0" class="cd-read-more">Read more</a>
 
-			<div class="cd-timeline-content">
-				<h2>Product Photography</h2>
-				<p>Create high–quality, aesthetically pleasing images of everyday items simply using a camera and some imagination.</p>
-				
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
 
-		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
-			</div> <!-- cd-timeline-img -->
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Location">
+    						</div> <!-- cd-timeline-img -->
 
-			<div class="cd-timeline-content">
-				<h2>Final Section</h2>
-				<p>This is the content of the last section</p>
-				
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
-	</section> <!-- cd-timeline -->
-<script src="../js/jquery.min.js"></script>
-<script src="../vertical-timeline/js/main.js"></script> <!-- Resource jQuery -->
+    						<div class="cd-timeline-content">
+    							<h2>Mathletics</h2>
+    							<p>Mathletics will take you for a whirlpool ride into the majestic world of arithmetic, algebra, puzzles and more.</p>
+    							<a href="#0" class="cd-read-more">Read more</a>
 
-</body>
-</html>
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<!--changes made by usama-->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Human Foosball</h2>
+    							<p>A sport that will consistently confuse exhilarating fun and intensifying competitiveness in your mind.</p>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>E-Gaming</h2>
+    							<p>A haven for sport enthusiasts who prefer indoor serenity to outdoor hustle-bustle.</p>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Speed Programming</h2>
+    							<p>Manipulate 1s and 0s, in pre-set time, to solve real-life problems using coherent and comprehensive logic.</p>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Minute to win it</h2>
+    							<p>To experience the pinnacle of activeness and an absolute nerve-wracking time, beat the clock and win it.</p>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Public Speaking Challenge</h2>
+    							<p>A knack for words, competent speech delivery and adequate confidence are all the requirements for you to enter this event.</p>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Archery</h2>
+    							<p>A calm and composed sport, archery, has been added for those with great precision and expertise.</p>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Paintball</h2>
+    							<p>Combat and jollity merge to present an exciting event for anyone and everyone.</p>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Product Photography</h2>
+    							<p>Create high–quality, aesthetically pleasing images of everyday items simply using a camera and some imagination.</p>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Final Section</h2>
+    							<p>This is the content of the last section</p>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+    				</section> <!-- cd-timeline -->
+    			</div>
+
+
+
+    			</div>
+    		</div>
+    	</div>
+    	<script src="../js/jquery.min.js"></script>
+    	<script src="../js/responsive.js"></script>
+    	<script src="../js/perfect-scrollbar.min.js"></script>
+    	<script src="../js/bootstrap.min.js"></script>
+    	<script src="../js/jquery.visible.min.js"></script>
+    	<script src="../js/scriptdemo3.js"></script>
+    	<script src="../js/classie.js"></script>
+    	<script src="../js/detectanimation.js"></script>
+    	<script src="../js/modernizr.custom.js"></script>
+
+    	<script type="text/javascript" src="../js/timeline.js"></script>
+
+    </body>
+
+    </html>
