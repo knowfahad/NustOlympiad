@@ -2,287 +2,352 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register | NUST Olympiad '17</title>
-    <link rel="stylesheet" type="text/css" href="../css/timeline.css">
-    
-    <link rel="stylesheet" href="../css/themify-icons.css">
-    <link rel="stylesheet" href="../css/font-awesome.min.css">
-    <link rel='stylesheet' href='../css/perfect-scrollbar.min.css' />
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../css/buttons.css" />
-    <link rel="stylesheet" href="../css/animate.css" />
-    <link rel="stylesheet" href="../css/tooltip.css" />
-    
-    <link rel="stylesheet" href="../css/demo3.css" />
-    
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Register | NUST Olympiad '17</title>
+	<link rel="stylesheet" type="text/css" href="../css/timeline.css">
 
-<link rel="stylesheet" href="../css/style2.css" />
-    
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>Register</title>
-   
-    <!--<script type="text/javascript" async="" src="Register_files/recaptcha__en.js"></script><script src="Register_files/jquery.js"></script> -->
+	<link rel="stylesheet" href="../css/themify-icons.css">
+	<link rel="stylesheet" href="../css/font-awesome.min.css">
+	<link rel='stylesheet' href='../css/perfect-scrollbar.min.css' />
+	<link rel="stylesheet" href="../css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../css/buttons.css" />
+	<link rel="stylesheet" href="../css/animate.css" />
+	<link rel="stylesheet" href="../css/tooltip.css" />
+	<link rel="stylesheet" href="../vertical-timeline/css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="../vertical-timeline/css/style.css"> <!-- Resource style -->
+	<script src="../vertical-timeline/js/modernizr.js"></script> <!-- Modernizr -->
+
+	<link rel="stylesheet" href="../css/demo3.css" />
+
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+
+	<link rel="stylesheet" href="../css/style2.css" />
+
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Register</title>
+
+	<!--<script type="text/javascript" async="" src="Register_files/recaptcha__en.js"></script><script src="Register_files/jquery.js"></script> -->
 	
-    <!-- <script src="https://maxdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-    
+	<!-- <script src="https://maxdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
 	<!--<script src="Register_files/api.js"></script> -->
 	
-    <script type="text/javascript" src="../js/jquery.min.js"></script>
-   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script> -->
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $("#student_nust").on("change",function(){"n_yes"===$(this).val()?$("#nust_hid").show():$("#nust_hid").hide()}),$("#ambassador").on("change",function(){"a_yes"===$(this).val()?$("#amb_hid").show():$("#amb_hid").hide()});
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script> -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#student_nust").on("change",function(){"n_yes"===$(this).val()?$("#nust_hid").show():$("#nust_hid").hide()}),$("#ambassador").on("change",function(){"a_yes"===$(this).val()?$("#amb_hid").show():$("#amb_hid").hide()});
             // function checkForm(a){return""==a.username.value?(alert("Error: Username cannot be blank!"),a.username.focus(),!1):(re=/^\w+$/,re.test(a.username.value)?""==a.pwd.value||a.pwd.value!=a.repwd.value?(alert("Error: Password fields don't match."),a.pwd.focus(),!1):a.pwd.value.length<6?(alert("Error: Password must contain at least six characters!"),a.pwd.focus(),!1):a.pwd.value==a.username.value?(alert("Error: Password must be different from Username!"),a.pwd.focus(),!1):(re=/[0-9]/,re.test(a.pwd.value)?(re=/[a-z]/,re.test(a.pwd.value)?(re=/[A-Z]/,!!re.test(a.pwd.value)||(alert("Error: password must contain at least one uppercase letter (A-Z)!"),a.pwd.focus(),!1)):(alert("Error: password must contain at least one lowercase letter (a-z)!"),a.pwd.focus(),!1)):(alert("Error: password must contain at least one number (0-9)!"),a.pwd.focus(),!1)):(alert("Error: Username must contain only letters, numbers and underscores!"),a.username.focus(),!1))}
-});
-</script>
-<style>
-a{
-color:white;
-}
-a:hover,a:focus{
-color:white;
-}
-input{
-	color:white;
-	
-}
-label{
-font-weight:normal;
+        });
+    </script>
+    <style>
+    	a{
+    		color:white;
+    	}
+    	a:hover,a:focus{
+    		color:white;
+    	}
+    	input{
+    		color:white;
 
-}
+    	}
+    	label{
+    		font-weight:normal;
 
-.col-centered{
-    float: none;
-    margin: 0 auto;
-}
-</style>
+    	}
+
+    	.col-centered{
+    		float: none;
+    		margin: 0 auto;
+    	}
+    </style>
 
 </head>
 
 <body id="id-body" >
-    <div class="td-preloading">
-        <span class="fa fa-spinner fa-spin"></span>
-    </div>
-    
-    <div class="td-container">
+	<div class="td-preloading">
+		<span class="fa fa-spinner fa-spin"></span>
+	</div>
+
+	<div class="td-container">
         <!--<div class="row">
         <div class="col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2  col-sm-4 col-sm-offset-4">
             <img src="../img/cube.png" alt="" style="margin-bottom:0;">
         </div>
     </div>-->
-        <div class="td-sheets-container td-hide td-sheet-active-1">
-            <div class="row">
-        
-            </div>
-            <div id="scrollbar-container" class="td-sheet active">
-                <div class="container-fluid">
-				
-				<div class = "row">
-					<div class = "col-md-3 col-centered col-sm-3" >
-					
-					
-					<a href="../index.html">
-						<img src="../img/logo.png" class="img-responsive" alt="LOGO"/>
-					</a>	
-					
-					</div>
-				</div>  
-				
-                    <div class="row homepage" >
-					<div  id =  'errorShow' class = "row">
-					
-					<!--append errors here! -->
-					
-					</div>
-					
-                        <div class="col-md-6">
-                            <div class="row">
-                                 <div class="col-md-10 col-md-offset-1 col-xs-12">
-                                     <div class="container-fluid">
-                            <form class="form-horizontal" method="POST" id="reg_form" action="form.php">
-                                      <div class="h3">Create an Account</div>
-                            <br>
-							<div class="form-group">
-                                <div>
-                                    <input id="username" name="username" placeholder="Username" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'UserName'"  required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                
-                                <div class="">
-                                    <input id="pwd" name="pwd" placeholder="Password (min 8 characters)" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password (min 8 characters)'"  required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="">
-                                    <input id="repwd" name="repwd" placeholder="Re-Enter Password" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Re-Enter Password'" required>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="">
-                                    <input id="fname" name="fname" placeholder="First Name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="">
-                                    <input  id="lname" name="lname" placeholder="Last Name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required>
-                                </div>
-                            </div>
-                            <!--insert label Gender-->
-							
-							<div class = "row">
-								<div class="form-group">
-								
-									<div class="col-md-4 col-xs-3">
-									<label  for="name">Gender</label>
-									</div>
-									
-									<div class="col-md-4 col-xs-4"> 
-									<label><input type="radio" value = "M" name="gender" required> Male</label>
-									</div>
-									
-									<div class="col-md-4 col-xs-5"> 
-									<label><input type="radio" name="gender" value="F"  required> Female</label>
-									</div>
-									
-								</div>
-							</div>
-							
-                            <!--end label -->
-                            <div class="form-group">
-                                <div class="">
-                                    <input id="cnic" name="cnic" placeholder="CNIC/ B.Form Number (Without Dashes)" type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'CNIC/ B.Form Number (Without Dashes)'" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="">
-                                    <input id="mobile" name="mobile" placeholder="Mobile Number" type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mobile Number'" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="">
-                                    <input id="email" name="email" placeholder="Email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class=""> 
-                                    <input id="address" name="address" placeholder="Address" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address'" required>
-                                </div>
-                            </div>
-                            <div class="form-group" style="margin-bottom: 1%">
-                                <div class=""> 
-                                    <input id="institute" name="institute" placeholder="Institute" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Institute'" required>
-                                </div>
-                            </div>
-                        
-						
-						
-						<div class= "row">
-						<div class="makeinline form-group" >
+    <div class="td-sheets-container td-hide td-sheet-active-1">
+    	<div class="row">
 
-							<p class="col-md-9 col-xs-6" style="color:white;">Are You a NUSTian?</p>
-                            <select class="col-md-4 selectpicker form-control selectWidth" name="isNustian" id="student_nust" style="background-color:#757575;">
-                                <option value="n_no" selected="selected">No</option>
-                                <option value="n_yes" style="color:black;">Yes</option>
-                            </select>
-                         </div>   
-                        </div>
-						
-						<br>
-						
-						<div class= "row">
-                        <div class="form-group hidden_items" id="nust_hid" style="display:none;">
-                                <div class=""> 
-                                    <input id="nust_id" name="nustid" placeholder="Enter CMS ID" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter CMS ID'">
-                                </div>
-                        </div>
-						</div>
-                          
-						<div class= "row">
-                            <div class="form-group makeinline" >
-                                <p class="col-md-9 col-xs-7" style="color:white;">Are You an Ambassador?</p>
-                            <select class="col-md-3 col-xs-5 form-control selectWidth selectpicker" name="ambassador" id="ambassador" style="background-color:#757575;;">
-                                    <option value="a_no" selected="selected">No</option>
-                                    <option value="a_yes">Yes</option>
-                            </select>
+    	</div>
+    	<div id="scrollbar-container" class="td-sheet active">
+    		<div class="container-fluid">
 
-                            </div>
-						</div>
-						
-						<div class= "row">
-                            <div class="form-group hidden_items" id="amb_hid" style="display:none;">
-                               <br>
-                                    <input id="amb_id" name="ambassadorid" placeholder="Enter Ambassador ID" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Ambassador ID'">
-                               
-                            </div>
-						</div>
-                            <br>
-						    
-							<div class = "row">
-								<div class="form-group makeinline" >
-							   
-									<h5 class="col-md-8 col-xs-6 makeline" style="color:white; font-weight:normal;">Upload an image</h5>
-									<input class="col-md-4 col-xs-6"   name="pic" accept="image/*" type="file">
-								</div>
-                            </div>
+    			<div class = "row">
+    				<div class = "col-md-3 col-centered col-sm-3" >
 
-                            <div class="form-group">
-                                <div class="g-recaptcha" data-sitekey="6Ldgtg0UAAAAAIGYMROWOzYRwq_qKR3dFWoRbqA9"><div style="width: 304px; height: 78px;"><div><iframe src="" title="recaptcha widget" scrolling="no" name="undefined" width="304" height="78" frameborder="0"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid #c1c1c1; margin: 10px 25px; padding: 0px; resize: none;  display: none; "></textarea></div></div>
-                            </div>
-                        
-							<div class = "row">
-						      
-                                    <center>
-                                        <a href="#">Already have an Account? Login here!</a>
-                                    </center>
-                              
-							</div>
-							<br>
-							<div class = "row">
-						    
-                                <div class="form-group"> 
-                                    <center>
-                                        <button type="submit" class="btn btn-default">Submit</button>
-                                    </center>
-                                </div>
-								
-                           
-							</div>
-                        </form>
-                                     </div>
-                                 </div>
-                            </div>
-                        </div>
-                         <div class="col-md-6 col-xs-12">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1 col-xs-12">
-                    <div class="h3">Instructions</div>
-                    <br>
-                    <p id = "makeborder">
-                            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                    </p>
-                </div>
-            </div>
-        </div>
-                    </div>
-                </div>
-            </div>
-            <script src="../js/jquery.min.js"></script>
-            <script src="../js/responsive.js"></script>
-            <script src="../js/perfect-scrollbar.min.js"></script>
-            <script src="../js/bootstrap.min.js"></script>
-            <script src="../js/jquery.visible.min.js"></script>
-            <script src="../js/scriptdemo3.js"></script>
-            <script src="../js/classie.js"></script>
-            <script src="../js/detectanimation.js"></script>
-            <script src="../js/modernizr.custom.js"></script>
-           
-            <script type="text/javascript" src="../js/timeline.js"></script>
-           
-</body>
 
-</html>
+    					<a href="../index.html">
+    						<img src="../img/logo.png" class="img-responsive" alt="LOGO"/>
+    					</a>	
+
+    				</div>
+    			</div>  
+
+    			<div class="row homepage" >
+    			<div class="row col-md-12">
+    				<section id="cd-timeline" class="cd-container">
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Picture">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Cricket</h2>
+    							<p>Spin your way to a five-wicket haul or bat the fastest century and recreate the magic of the game of legends.</p>
+    							<a href="#0" class="cd-read-more">Read more</a>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+
+    						</div> 
+
+
+
+    						<div class="cd-timeline-content">
+    							<h2>Badminton</h2>
+    							<p>Level up to the strongest opponents and impress us with clean shots and skillful footwork.</p>
+    							<a href="#0" class="cd-read-more">Read more</a>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Picture">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Squash</h2>
+    							<p> Contained within four walls, merely holding a racket; a test of pure alertness and stamina.</p>
+    							<a href="#0" class="cd-read-more">Read more</a>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Location">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Table Tennis</h2>
+    							<p>Perfect your backhand, forehand, footwork and go for the “Kill” against the best.</p>
+    							<a href="#0" class="cd-read-more">Read more</a>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Location">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Chess</h2>
+    							<p>To masterminds who work best alone, take your 16 pieces, strategize your game and participate to be acclaimed the chess master!</p>
+    							<a href="#0" class="cd-read-more">Read more</a>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Location">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Volleyball</h2>
+    							<p>Have you got the flair for solid teamwork and essentially, keeping the ball afloat?  </p>
+    							<a href="#0" class="cd-read-more">Read more</a>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Location">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Basketball</h2>
+    							<p>The complexity yet simplicity of this age-old game is best observed through actions. Are you up for the task?</p>
+    							<a href="#0" class="cd-read-more">Read more</a>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Location">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Crime line road</h2>
+    							<p>Whether you secretly enjoy an episode of CID or are a devoted Sherlock fan, this is the event for you.</p>
+    							<a href="#0" class="cd-read-more">Read more</a>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Location">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Mathletics</h2>
+    							<p>Mathletics will take you for a whirlpool ride into the majestic world of arithmetic, algebra, puzzles and more.</p>
+    							<a href="#0" class="cd-read-more">Read more</a>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<!--changes made by usama-->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Human Foosball</h2>
+    							<p>A sport that will consistently confuse exhilarating fun and intensifying competitiveness in your mind.</p>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>E-Gaming</h2>
+    							<p>A haven for sport enthusiasts who prefer indoor serenity to outdoor hustle-bustle.</p>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Speed Programming</h2>
+    							<p>Manipulate 1s and 0s, in pre-set time, to solve real-life problems using coherent and comprehensive logic.</p>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Minute to win it</h2>
+    							<p>To experience the pinnacle of activeness and an absolute nerve-wracking time, beat the clock and win it.</p>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Public Speaking Challenge</h2>
+    							<p>A knack for words, competent speech delivery and adequate confidence are all the requirements for you to enter this event.</p>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Archery</h2>
+    							<p>A calm and composed sport, archery, has been added for those with great precision and expertise.</p>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Paintball</h2>
+    							<p>Combat and jollity merge to present an exciting event for anyone and everyone.</p>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Product Photography</h2>
+    							<p>Create high–quality, aesthetically pleasing images of everyday items simply using a camera and some imagination.</p>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+
+    					<div class="cd-timeline-block">
+    						<div class="cd-timeline-img cd-picture">
+    							<img src="../vertical-timeline/img/cd-icon-star.svg" alt="Movie">
+    						</div> <!-- cd-timeline-img -->
+
+    						<div class="cd-timeline-content">
+    							<h2>Final Section</h2>
+    							<p>This is the content of the last section</p>
+
+    						</div> <!-- cd-timeline-content -->
+    					</div> <!-- cd-timeline-block -->
+    				</section> <!-- cd-timeline -->
+    			</div>
+
+
+
+    			</div>
+    		</div>
+    	</div>
+    	<script src="../js/jquery.min.js"></script>
+    	<script src="../js/responsive.js"></script>
+    	<script src="../js/perfect-scrollbar.min.js"></script>
+    	<script src="../js/bootstrap.min.js"></script>
+    	<script src="../js/jquery.visible.min.js"></script>
+    	<script src="../js/scriptdemo3.js"></script>
+    	<script src="../js/classie.js"></script>
+    	<script src="../js/detectanimation.js"></script>
+    	<script src="../js/modernizr.custom.js"></script>
+
+    	<script type="text/javascript" src="../js/timeline.js"></script>
+
+    </body>
+
+    </html>
