@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="css/style.css"/>
 	<link rel="stylesheet" href="css/demo3.css"/>
 	<link rel="stylesheet" href="css/contactus.css">
+	<link rel="stylesheet" type="text/css" href="css/snippet.css">
 	<script src='https://www.google.com/recaptcha/api.js'></script>
 
 	<!-- countdown
@@ -35,7 +36,24 @@
 </head>
 <body id="id-body">
 	<div class="td-preloading">
-		<span class="fa fa-spinner fa-spin"></span>
+		<!-- <span class="fa fa-spinner fa-spin"></span> -->
+		<div class="container">
+	<div class="row">
+	<svg viewBox="0 0 960 300">
+    <symbol id="s-text">
+		<text text-anchor="middle" x="50%" y="90%">Olympiad '17' </text>
+	</symbol>
+
+	<g class = "g-ants">
+		<use xlink:href="#s-text" class="text-copy"></use>
+		<use xlink:href="#s-text" class="text-copy"></use>
+		<use xlink:href="#s-text" class="text-copy"></use>
+		<use xlink:href="#s-text" class="text-copy"></use>
+		<use xlink:href="#s-text" class="text-copy"></use>
+	</g>
+</svg>
+	</div>
+</div>
 	</div>
 	<div class="td-container">
 		<div class="td-menu">
@@ -299,7 +317,7 @@
 
 											<p class="class-center"> Over 30+ sports and gaming events to give you a chance to prove your mettle!
 												<br>
-												<a href="#" class="btn btn-default fadeInLeft animated" data-animation-delay="700" style="opacity: 1;">SEE ALL EVENTS</a>
+												<a href="events/events.html" class="btn btn-default fadeInLeft animated" data-animation-delay="700" style="opacity: 1;">SEE ALL EVENTS</a>
 												<br><span class="ti-line-double"></span>
 											</p>
 										</div>
