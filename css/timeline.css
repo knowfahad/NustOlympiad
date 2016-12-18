@@ -44,6 +44,12 @@
 .class-center{
 	
 }
+
+.vertically-center{
+	margin-top: 30%;
+}
+
+
 /*fizza---->*/
 /*
 .class-flip-container:hover{
@@ -330,6 +336,11 @@
 		top: 103px;
 	}
 
+	.vertically-center{
+		margin-top: 20%;
+	}
+
+
 		/* flip the pane when hovered */
 	.class-flip-container:hover .class-flipper, .class-flip-container.hover .class-flipper {
 		transform: rotateY(180deg);
@@ -447,6 +458,10 @@
 	.class-small{
 		width: 20px;
 	}
+	.vertically-center{
+		margin-top: 20%;
+	}
+
 	.class-horizontal-line{
 		background-color: white;
 		height: 20px;
