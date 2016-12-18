@@ -44,3 +44,24 @@
 		display: none;
 	}
 }
+
+.challan-buttons{
+	display: flex;
+	justify-content: center;
+}
+
+.challan-buttons button{
+	margin-right: 10px;
+}
+
+.challan_item{
+	border: 1px solid white;
+	padding-bottom: 2px;
+	padding: 5px;
+}
+.paid{
+	background-color: rgba(0,255,0,0.4);
+}
+.unpaid{
+	background-color: rgba(255,0,0,0.4);
+}

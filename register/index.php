@@ -6,181 +6,307 @@ include_once 'random_compat-master/lib/random.php';
 $auth->onlyGuests();
 $formsubmitted = $_SERVER['REQUEST_METHOD'] == 'POST'; //saved it as have to use later as well
 if ($formsubmitted){
-	// var_dump($_POST);
-	//validates data and store errors. returns sanitized data ready to be inserted into database
-	list($errors, $data) = preprocess($mpdo);
-	//continue registeration if there are no errors
-	if(!count($errors)){
-		//persistUser is function to save the data to the database
-		$errors = persistUser($data, $mpdo);
-		if(!count($errors))
-			//it means that registration is successfull.
-			//now log them in and redirect to dashboard
-			//they will get message to verify email in dashboard
-			if($auth->login($data['username'], $data['pwd']))
-				\App\redirect("/dashboard");
-	}	
+    list($errors, $data) = preprocess($mpdo);
+    if(!count($errors)){
+        $errors = persistUser($data, $mpdo);
+        if(!count($errors))
+            if($auth->login($data['username'], $data['pwd']))
+                \App\redirect("/dashboard");
+    }   
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Register</title>
-	<link rel="stylesheet" href="/css/bootstrap.min.css">
-	<script src="/js/jquery.min.js"></script>
-	<!-- <script src="https://maxdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-	<script src='https://www.google.com/recaptcha/api.js'></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#student_nust").on("change",function(){"n_yes"===$(this).val()?$("#nust_hid").show():$("#nust_hid").hide()}),$("#ambassador").on("change",function(){"a_yes"===$(this).val()?$("#amb_hid").show():$("#amb_hid").hide()});
-			// function checkForm(a){return""==a.username.value?(alert("Error: Username cannot be blank!"),a.username.focus(),!1):(re=/^\w+$/,re.test(a.username.value)?""==a.pwd.value||a.pwd.value!=a.repwd.value?(alert("Error: Password fields don't match."),a.pwd.focus(),!1):a.pwd.value.length<6?(alert("Error: Password must contain at least six characters!"),a.pwd.focus(),!1):a.pwd.value==a.username.value?(alert("Error: Password must be different from Username!"),a.pwd.focus(),!1):(re=/[0-9]/,re.test(a.pwd.value)?(re=/[a-z]/,re.test(a.pwd.value)?(re=/[A-Z]/,!!re.test(a.pwd.value)||(alert("Error: password must contain at least one uppercase letter (A-Z)!"),a.pwd.focus(),!1)):(alert("Error: password must contain at least one lowercase letter (a-z)!"),a.pwd.focus(),!1)):(alert("Error: password must contain at least one number (0-9)!"),a.pwd.focus(),!1)):(alert("Error: Username must contain only letters, numbers and underscores!"),a.username.focus(),!1))}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | NUST Olympiad '17</title>
+    <link rel="stylesheet" type="text/css" href="../css/timeline.css">
+    
+    <link rel="stylesheet" href="../css/themify-icons.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel='stylesheet' href='../css/perfect-scrollbar.min.css' />
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/buttons.css" />
+    <link rel="stylesheet" href="../css/animate.css" />
+    <link rel="stylesheet" href="../css/tooltip.css" />
+    
+    <link rel="stylesheet" href="../css/demo3.css" />
+    
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+<link rel="stylesheet" href="../css/style2.css" />
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Register</title>
+   
+    <!--<script type="text/javascript" async="" src="Register_files/recaptcha__en.js"></script><script src="Register_files/jquery.js"></script> -->
+	
+    <!-- <script src="https://maxdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    
+	<!--<script src="Register_files/api.js"></script> -->
+	
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script> -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#student_nust").on("change",function(){"n_yes"===$(this).val()?$("#nust_hid").show():$("#nust_hid").hide()}),$("#ambassador").on("change",function(){"a_yes"===$(this).val()?$("#amb_hid").show():$("#amb_hid").hide()});
+            // function checkForm(a){return""==a.username.value?(alert("Error: Username cannot be blank!"),a.username.focus(),!1):(re=/^\w+$/,re.test(a.username.value)?""==a.pwd.value||a.pwd.value!=a.repwd.value?(alert("Error: Password fields don't match."),a.pwd.focus(),!1):a.pwd.value.length<6?(alert("Error: Password must contain at least six characters!"),a.pwd.focus(),!1):a.pwd.value==a.username.value?(alert("Error: Password must be different from Username!"),a.pwd.focus(),!1):(re=/[0-9]/,re.test(a.pwd.value)?(re=/[a-z]/,re.test(a.pwd.value)?(re=/[A-Z]/,!!re.test(a.pwd.value)||(alert("Error: password must contain at least one uppercase letter (A-Z)!"),a.pwd.focus(),!1)):(alert("Error: password must contain at least one lowercase letter (a-z)!"),a.pwd.focus(),!1)):(alert("Error: password must contain at least one number (0-9)!"),a.pwd.focus(),!1)):(alert("Error: Username must contain only letters, numbers and underscores!"),a.username.focus(),!1))}
 });
 </script>
+<style>
+a{
+color:white;
+}
+a:hover,a:focus{
+color:white;
+}
+input{
+	color:white;
+	
+}
+label{
+font-weight:normal;
+
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+</style>
+
 </head>
-<body>
-	<h1>Register An Account</h1>
-	<?php if( $formsubmitted && count($errors) ): ?>
-		<div class="alert-danger">
-			<ul class="list-group">
-			<?php foreach($errors as $field => $error): ?>
-				<li class="list-group-item"><?=$error ?></li>
-			<?php endforeach ?>
-			</ul>
-		</div>
-	<?php endif ?>
-	<div class="alert-danger"></div>
-	<form class="form-horizontal"  method = "POST" id="reg_form">
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="username">Username:</label>
-			<div class="col-sm-4">
-				<input type="text" value="<?=$_POST['username']??''?>" class="form-control" id="username" name = "username" placeholder="Enter username">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="pwd">Password:</label>
-			<div class="col-sm-4">
-				<input type="password" class="form-control" id="pwd" name = "pwd" placeholder="Enter password">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="repwd">Repeat password:</label>
-			<div class="col-sm-4">
-				<input type="password" class="form-control" id="repwd" name = "repwd" placeholder="re-enter password">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="name">Gender:</label>
-			<div class="col-sm-4">
-				<label class="radio-inline">
-					<input type="radio" name="gender" value = "M">Male
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="gender" value = "F">Female
-				</label>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="fname">First Name:</label>
-			<div class="col-sm-4">
-				<input type="text" value="<?=$_POST['fname']??''?>" class="form-control" id="fname"  name = "fname" placeholder="Enter fname">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="lname">Last Name:</label>
-			<div class="col-sm-4">
-				<input type="text" value="<?=$_POST['lname']??''?>" class="form-control" id="lname" name = "lname" placeholder="Enter lname">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="cnic">CNIC:</label>
-			<div class="col-sm-4">
-				<input type="number" value="<?=$_POST['cnic']??''?>" class="form-control" id="cnic" name = "cnic" placeholder="Enter cnic">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="mobile">Mobile Number:</label>
-			<div class="col-sm-4">
-				<input type="number" value="<?=$_POST['mobile']??''?>" class="form-control" id="mobile" name = "mobile" placeholder="Enter mobile number">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="email">Email ID:</label>
-			<div class="col-sm-4">
-				<input type="email" value="<?=$_POST['email']??''?>" class="form-control" id="email" name = "email" placeholder="Enter email">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="pwd">Address:</label>
-			<div class="col-sm-4"> 
-				<input type="text" value="<?=$_POST['address']??''?>" class="form-control" id="address"  name = "address" placeholder="Enter address">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="pwd">Institute:</label>
-			<div class="col-sm-4"> 
-				<input type="text" value="<?=$_POST['institute']??''?>" class="form-control" id="institute"  name = "institute" placeholder="Institute">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" >Are you a nust student?</label>
-			<select class="selectpicker" name = "isNustian" id="student_nust">
-				<option value="n_no">No</option>
-				<option value="n_yes">Yes</option>
 
-			</select>
-		</div>
-		<div class="form-group" id="nust_hid" style="display:none;">
-			<label class="control-label col-sm-2" for="nust_id">Nust ID:</label>
-			<div class="col-sm-4"> 
-				<input type="text" class="form-control" id="nust_id" name = "nustid" placeholder="Enter id">
-			</div>
-		</div>
-		<br>
+<body id="id-body" >
+    <div class="td-preloading">
+        <span class="fa fa-spinner fa-spin"></span>
+    </div>
+    
+    <div class="td-container">
+        <!--<div class="row">
+        <div class="col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2  col-sm-4 col-sm-offset-4">
+            <img src="../img/cube.png" alt="" style="margin-bottom:0;">
+        </div>
+    </div>-->
+        <div class="td-sheets-container td-hide td-sheet-active-1">
+            <div class="row">
+        
+            </div>
+            <div id="scrollbar-container" class="td-sheet active">
+                <div class="container-fluid">
+				
+				<div class = "row">
+					<div class = "col-md-3 col-centered col-sm-3" >
+					
+					
+					<a href="../index.html">
+						<img src="../img/logo.png" class="img-responsive" alt="LOGO"/>
+					</a>	
+					
+					</div>
+				</div>  
+				
+                    <div class="row homepage" >
+					<?php if( $formsubmitted && count($errors) ): ?>
+                        <div class="col-md-10 col-md-offset-1 col-xs-12">
+                            <div class="container-fluid">
+                    <div  id =  'errorShow' class = "row">
+                    <!--append errors here! -->
+                        <?php foreach($errors as $field => $error): ?>
+                        <div class="row"><?=$error?></div>
+                        <?php endforeach ?>
+                    </div>
+                    </div></div>
+                    <?php endif ?>
+					
+                        <div class="col-md-6">
+                            <div class="row">
+                                 <div class="col-md-10 col-md-offset-1 col-xs-11 col-xs-offset-1">
+                                     <div class="container-fluid">
+                            <form class="form-horizontal" method="POST" id="reg_form" >
+                                      <div class="h3">Create an Account</div>
+                            <br>
+							<div class="form-group">
+                                <div>
+                                    <input id="username" name="username" placeholder="Username" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'UserName'"  required value="<?=$_POST['username']??''?>"
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                
+                                <div class="">
+                                    <input id="pwd" name="pwd" placeholder="Password (min 8 characters)" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password (min 8 characters)'"  required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="">
+                                    <input id="repwd" name="repwd" placeholder="Re-Enter Password" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Re-Enter Password'" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="">
+                                    <input id="fname" name="fname" placeholder="First Name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required value="<?=$_POST['fname']??''?>" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="">
+                                    <input  id="lname" name="lname" placeholder="Last Name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required value="<?=$_POST['lname']??''?>">
+                                </div>
+                            </div>
+                            <!--insert label Gender-->
+							
+							<div class = "row">
+								<div class="form-group">
+								
+									<div class="col-md-4 col-xs-3">
+									<label  for="name">Gender</label>
+									</div>
+									
+									<div class="col-md-4 col-xs-4"> 
+									<label><input type="radio" value = "M" name="gender" required> Male</label>
+									</div>
+									
+									<div class="col-md-4 col-xs-5"> 
+									<label><input type="radio" name="gender" value="F"  required> Female</label>
+									</div>
+									
+								</div>
+							</div>
+							
+                            <!--end label -->
+                            <div class="form-group">
+                                <div class="">
+                                    <input id="cnic" name="cnic" placeholder="CNIC/ B.Form Number (Without Dashes)" type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'CNIC/ B.Form Number (Without Dashes)'" required value="<?=$_POST['cnic']??''?>" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="">
+                                    <input id="mobile" name="mobile" placeholder="Mobile Number" type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mobile Number'" required value="<?=$_POST['mobile']??''?>" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="">
+                                    <input id="email" name="email" placeholder="Email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required value="<?=$_POST['email']??''?>" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class=""> 
+                                    <input id="address" name="address" placeholder="Address" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address'" required value="<?=$_POST['address']??''?>" >
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 1%">
+                                <div class=""> 
+                                    <input id="institute" name="institute" placeholder="Institute" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Institute'" required value="<?=$_POST['institute']??''?>" >
+                                </div>
+                            </div>
+                        
+						
+						
+						<div class= "row">
+						<div class="makeinline form-group" >
 
-		<div class="form-group">
-			<label class="control-label col-sm-2" >Are you an ambassador?</label>
-			<select class="selectpicker" name = "ambassador" id="ambassador">
-				<option value="a_no">No</option>
-				<option value="a_yes">Yes</option>
-			</select>
-		</div>
-		<div class="form-group" id="amb_hid" style="display:none;">
-			<label class="control-label col-sm-2" for="amb_id">Ambassador ID:</label>
-			<div class="col-sm-4"> 
-				<input type="text" class="form-control" id="amb_id" name = "ambassadorid" placeholder="Enter id">
-			</div>
-		</div>
-		<br>
+							<p class="col-md-9 col-xs-6" style="color:white;">Are You a NUSTian?</p>
+                            <select class="col-md-4 selectpicker form-control selectWidth" name="isNustian" id="student_nust" style="background-color:#757575;">
+                                <option value="n_no" selected="selected">No</option>
+                                <option value="n_yes" style="color:black;">Yes</option>
+                            </select>
+                         </div>   
+                        </div>
+						
+						<br>
+						
+						<div class= "row">
+                        <div class="form-group hidden_items" id="nust_hid" style="display:none;">
+                                <div class=""> 
+                                    <input id="nust_id" name="nustid" placeholder="Enter CMS ID" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter CMS ID'">
+                                </div>
+                        </div>
+						</div>
+                          
+						<div class= "row">
+                            <div class="form-group makeinline" >
+                                <p class="col-md-9 col-xs-7" style="color:white;">Are You an Ambassador?</p>
+                            <select class="col-md-3 col-xs-5 form-control selectWidth selectpicker" name="ambassador" id="ambassador" style="background-color:#757575;;">
+                                    <option value="a_no" selected="selected">No</option>
+                                    <option value="a_yes">Yes</option>
+                            </select>
 
-		<div class="form-group">
-			<div class="g-recaptcha" data-sitekey="6Ldgtg0UAAAAAIGYMROWOzYRwq_qKR3dFWoRbqA9"></div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="pic">Upload a pic:</label>
-			<input type="file" name="pic" accept="image/*">
-			
-		</div>
-		<div class="form-inline">
-			<div class="form-group"> 
-				<div class="col-sm-offset-2 col-sm-4">
-					<button type="submit" class="btn btn-default">Submit</button>
-				</div>
-			</div>
-			<div class="form-group"> 
-				<div class="col-sm-offset-4 col-sm-4">
-					<button type="button" class="btn btn-default">Reset</button>
-				</div>
-			</div>
-			<div class="form-group"> 
-				<div class="col-sm-offset-5 col-sm-4">
-					<button type="button" name="submit" class="btn btn-default">Cancel</button>
-				</div>
-			</div>
-		</div>
-	</form>
+                            </div>
+						</div>
+						
+						<div class= "row">
+                            <div class="form-group hidden_items" id="amb_hid" style="display:none;">
+                               <br>
+                                    <input id="amb_id" name="ambassadorid" placeholder="Enter Ambassador ID" type="text"  onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Ambassador ID'">
+                               
+                            </div>
+						</div>
+                            <br>
+						    
+							<div class = "row">
+								<div class="form-group makeinline" >
+							   
+									<h5 class="col-md-8 col-xs-6 makeline" style="color:white; font-weight:normal;">Upload an image</h5>
+									<input class="col-md-4 col-xs-6"   name="pic" accept="image/*" type="file">
+								</div>
+                            </div>
+
+                            <div class="form-group">
+                                <!-- <div class="g-recaptcha" data-sitekey="6Ldgtg0UAAAAAIGYMROWOzYRwq_qKR3dFWoRbqA9"><div style="width: 304px; height: 78px;"><div><iframe src="" title="recaptcha widget" scrolling="no" name="undefined" width="304" height="78" frameborder="0"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid #c1c1c1; margin: 10px 25px; padding: 0px; resize: none;  display: none; "></textarea></div></div> -->
+                                <div class="g-recaptcha" data-sitekey="6Ldgtg0UAAAAAIGYMROWOzYRwq_qKR3dFWoRbqA9"></div>
+                            </div>
+                        
+							<div class = "row">
+						      
+                                    <center>
+                                        <a href="/login">Already have an Account? Login here!</a>
+                                    </center>
+                              
+							</div>
+							<br>
+							<div class = "row">
+						    
+                                <div class="form-group"> 
+                                    <center>
+                                        <button type="submit" class="btn btn-default">Submit</button>
+                                    </center>
+                                </div>
+								
+                           
+							</div>
+                        </form>
+                                     </div>
+                                 </div>
+                            </div>
+                        </div>
+                         <div class="col-md-6 col-xs-12">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-xs-12">
+                    <div class="h3">Instructions</div>
+                    <br>
+                    <p id = "makeborder">
+                            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                    </p>
+                </div>
+            </div>
+        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="../js/jquery.min.js"></script>
+            <script src="../js/responsive.js"></script>
+            <script src="../js/perfect-scrollbar.min.js"></script>
+            <script src="../js/bootstrap.min.js"></script>
+            <script src="../js/jquery.visible.min.js"></script>
+            <script src="../js/scriptdemo3.js"></script>
+            <script src="../js/classie.js"></script>
+            <script src="../js/detectanimation.js"></script>
+            <script src="../js/modernizr.custom.js"></script>
+           
+            <script type="text/javascript" src="../js/timeline.js"></script>
+           
 </body>
-
-
-
 
 </html>

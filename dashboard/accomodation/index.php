@@ -8,6 +8,8 @@ require_once(__DIR__."/../../bootstrap.php");
 
 //blocks users who are not logged in from visiting this page
 $auth->onlyLoggedIn();
+$auth->onlyVerified();
+
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	if(isset($_POST['agree'])){
 		$participant = $auth->getParticipant();

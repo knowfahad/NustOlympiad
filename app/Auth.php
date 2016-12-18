@@ -79,8 +79,8 @@ class Auth
 	}
 
 	public function onlyVerified(){
-		if(!$this->user->isVerified())
-			\App\redirect('/dashboard');
+		if(!$this->User()->isVerified())
+			\App\redirect('/dashboard/verify');
 	}
 
 	public function getCNIC(){

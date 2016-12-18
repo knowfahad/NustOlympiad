@@ -10,6 +10,8 @@ use Model\Model\EventsQuery;
 use PDO;
 //blocks users who are not logged in from visiting this page
 $auth->onlyLoggedIn();
+$auth->onlyVerified();
+
 //find the list of events to display
 $stmt = $mpdo->prepare("select e.EventID, e.Name from events as e where e.EventType = 2 and e.EventID not in (select ep.EventID from eventparticipants as ep where ep.ParticipantCNIC = ?)");
 $cnic = $auth->getParticipant()->getCNIC();

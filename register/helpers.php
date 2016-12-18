@@ -21,7 +21,7 @@ function preprocess($mpdo){
  	$data['cnic'] = strip_tags( trim($_POST["cnic"]) );
  	$data['email'] = strtolower( strip_tags( trim($_POST["email"]) ) );
  	$data['pwd'] = $_POST["pwd"];
- 	$data['repwd'] = strip_tags( trim($_POST["repwd"]) );  
+ 	$data['repwd'] = $_POST["repwd"];  
  	$data['gender'] = "";
  	$data['phone'] = strip_tags( trim($_POST["mobile"]) );
  	$data['fname'] = strtolower( strip_tags( trim($_POST["fname"]) ) );
@@ -40,8 +40,9 @@ function preprocess($mpdo){
  						->digit()->between(1000000000000, 9999999999999);
  	$emailvalidation = v::NotEmpty()->email();
  	$pwdvalidation = v::notEmpty()->length(8, null);
- 	$phonevalidation = v::notEmpty()->numeric()->between(1000000000, 9999999999999);
+ 	$phonevalidation = v::notEmpty()->numeric()->between(3000000000, 3499999999);
  	$namevalidation = v::notEmpty()->alpha();
+ 	$nustidvalidation = v::notEmpty()->numeric()->numeric->between(100000, 99999999);
  	if(!$usernamevalidation->validate($data['username']))
  		$errors['username'] = "Please enter a valid username!";
  	if(!$cnicvalidation->validate($data['cnic']))
@@ -64,7 +65,6 @@ function preprocess($mpdo){
  		$errors['repwd'] = "Repeat Password doesn't match!";
  	if(!$namevalidation->validate($data['institute']))
  		$errors['institute'] = "Please enter the valid name of your institute.";
-
  	$ipaddress = \App\get_client_ip();
  	$captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
 				[
@@ -111,6 +111,10 @@ function preprocess($mpdo){
 
  	if($data['isNustian'] == "n_yes"){
 	 	$data['nustid'] = strip_tags(trim($_POST["nustid"]));
+	 	if(!$nustidvalidation->validate($data['nustid'])){
+	 		$errors['nustid'] = "Please enter a valid CMS ID";
+	 	}
+
  	}
  	else
  		$data['isNustian'] = false;
@@ -175,12 +179,15 @@ function persistUser($data, $mpdo){ //execution will only start if there are no 
 			$stmt = $mpdo->prepare("INSERT INTO participant (institution, CNIC,FirstName,LastName,Gender,Address,PhoneNo, RegistrationChallanID, NUSTRegNo, AmbassadorID) VALUES (?,?,?,?,?,?,?,?,?, ?)");
 			$stmt->execute([$data['institute'], $data['cnic'], $data['fname'], $data['lname'], $data['gender'], $data['address'], $data['phone'], $regChallan, $data['nustid'], $data['ambassador_id']]);
 			if($stmt->rowCount() == 0){
-				$errors['fatal'] = $stmt->error;
+				$errors['fatal'] = "Some error occured!";
 			}
 		}
 		else{
 			$stmt = $mpdo->prepare("INSERT INTO participant (institution, CNIC,FirstName,LastName,Gender,Address,PhoneNo, RegistrationChallanID, NUSTRegNo) VALUES (?,?,?,?,?,?,?,?,?)");
 			$stmt->execute([ $data['institute'], $data['cnic'], $data['fname'], $data['lname'], $data['gender'], $data['address'], $data['phone'], $regChallan, $data['nustid']]);
+			if($stmt->rowCount() == 0){
+				$errors['fatal'] = "Some error occured!";
+			}
 		}
 	}
 	catch(Exception $e){
