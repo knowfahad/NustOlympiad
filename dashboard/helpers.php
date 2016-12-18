@@ -77,7 +77,14 @@ epquery;
 function enrolledTeams($auth, $conn){
 	$teams = [];
 	$teamids = [];
-	$stmt = $conn->prepare("select TeamID from sportsparticipants where ParticipantID = ?");
+	$stmt = $conn->prepare("
+		select sp.TeamID
+		from sportsparticipants as sp
+		inner join sportsteam as st
+		on sp.TeamID = st.TeamID
+		inner join challan as ch
+		on ch.ChallanID = st.ChallanID
+		where sp.ParticipantID = ? AND ch.PaymentStatus = 1");
 	$ParticipantID = $auth->getParticipant()->getParticipantID();
 	$stmt->execute([$ParticipantID]);
 	$stmt->bindColumn(1, $tempteamid);
@@ -94,5 +101,19 @@ function enrolledTeams($auth, $conn){
 	}
 	return ($teams);	
 }
+
+function teamChallans($auth, $conn){
+	$stmt = $conn->prepare("
+		select st.TeamName, ch.ChallanID, ch.AmountPayable, ch.DueDate, ch.PaymentStatus
+		from sportsteam as st
+		inner join challan as ch
+		on st.ChallanID = ch.ChallanID
+		where st.HeadCNIC = ?");
+	$stmt->execute([$auth->getCNIC()]);
+
+	return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
 
  ?>

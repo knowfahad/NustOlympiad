@@ -8,6 +8,7 @@ $challans = \Dashboard\getChallans($auth, $mpdo);
 $accomodationChallan = accomodationChallan($auth, $mpdo);
 $registrationChallan = registrationChallan($auth, $mpdo);
 $teams = enrolledTeams($auth, $mpdo);
+$teamChallans = teamChallans($auth, $mpdo);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -244,16 +245,15 @@ $teams = enrolledTeams($auth, $mpdo);
                                          </div>
                                      <?php endforeach ?>
 
-                                     <?php if(count($teams)): ?>
-                                     <?php foreach($teams as $team): ?>
-                                         <?php $challan = $team->challan() ?>
+                                     <?php if(count($teamChallans)): ?>
+                                     <?php foreach($teamChallans as $challan): ?>
                                          <div class="challan_item   
                                          <?=($challan['PaymentStatus'])?"paid":"unpaid" ?>">
-                                             <h5><?=$team->TeamName?></h4>
+                                             <h5><?=$challan['TeamName']?></h4>
                                              <div class="challan-buttons">
                                                  <?php if(!$challan['PaymentStatus']): ?>
                                                  <form method="POST" action="http://ol-challan-generator.herokuapp.com/">
-                                                     <input type="hidden" value="Sports team: <?=$team->TeamName?>" name="eventname">
+                                                     <input type="hidden" value="Sports team: <?=$challan['TeamName']?>" name="eventname">
                                                      <input type="hidden" value="<?= $challan['ChallanID'] ?>" name="challanid">
                                                      <input type="hidden" value="<?= $challan['DueDate'] ?>" name="duedate">
                                                      <input type="hidden" value="<?= $challan['AmountPayable'] ?>" name="fee">

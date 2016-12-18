@@ -3,7 +3,6 @@
 namespace Contact;
 require_once(__DIR__."/../bootstrap.php");
 
-var_dump([$_POST, $_GET]);
 
 use App\OlMail;
 use Respect\Validation\Validator as v;
@@ -26,28 +25,29 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 	$emailvalidation = v::NotEmpty()->email();
 	if(!$emailvalidation->validate($email??''))
 		$errors['email'] = "Please enter a valid email address";
- 	// $ipaddress = \App\get_client_ip();
- 	// $captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
-		// 		[
-		// 		"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
-		// 		"response"	=> $_POST['g-recaptcha-response'],
-		// 		"remoteip"	=> $ipaddress
-		// 		]);
- 	// if(!$captcha->success)
- 	// 	$errors['captcha'] = "Captcha is required!";
+ 	$ipaddress = \App\get_client_ip();
+ 	$captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
+				[
+				"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
+				"response"	=> $_POST['g-recaptcha-response'],
+				"remoteip"	=> $ipaddress
+				]);
+ 	if(!$captcha->success)
+ 		$errors['captcha'] = "Captcha is required!";
 
 	if(!count($errors)){
 		//first populate the messages table
 		$stmt = $mpdo->prepare("insert into messages(name, email, message) values(?,?,?)");
 		$stmt->execute([$name, $email, $message]);
 		//then send the email to web_it@nustolympiad.com
-		$txtmessage = "A new message has been left by $name($email): \"$message\"";
+		$txtmessage = "A new message has arrived from contact us form. \n Name:$name \n Email: $email \n Message: \"$message\"";
+		$brmessage = nl2br($txtmessage);
 		$htmlmessage = 
 <<<htmlmessage
 <html>
 <body>
 <p>
-$txtmessage
+$brmessage
 </p>
 </body>
 </html>
