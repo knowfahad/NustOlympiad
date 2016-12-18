@@ -3,7 +3,7 @@ $(document).ready(function(){
 	function adjustLogo(){
 		var width = $(window).width();
 		if(width < 668){
-			$('#id-img-logo').attr("src","img/logoMobile.png");
+			$('#id-img-logo').attr("src","img/cube2.png");
 		}
 		else{
 			$('#id-img-logo').attr("src","img/cube.png");
