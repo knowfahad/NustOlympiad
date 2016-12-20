@@ -122,7 +122,7 @@ $teamChallans = teamChallans($auth, $mpdo);
                                 <div class="row">
                                     <div class="col-md-2"></div>
                                     <div class="col-md-4 col-xs-10">
-                                        <a href="/dashboard/sports" class="btn btn-default btn-sm my-btn">
+                                        <a href="/dashboard/sports/instructions" class="btn btn-default btn-sm my-btn">
                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPORTS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         </a>
                                         </div>
