@@ -1,8 +1,9 @@
 <?php
 namespace Register;
 require (__DIR__.'/../../bootstrap.php');
+use App\OlMail;
 use Respect\Validation\Validator as v;
-
+$auth->onlyGuests();
 $error = [];
 $success = 0;
 if($_SERVER['REQUEST_METHOD'] == "POST"){
@@ -44,60 +45,61 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 	if(!$emailvalidation->validate($email))
 		$error['email'] = "Please enter a valid email address";
 	$ipaddress = \App\get_client_ip();
-	$captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
-				[
-				"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
-				"response"	=> $_POST['g-recaptcha-response'],
-				"remoteip"	=> $ipaddress
-				]);
-	if(!$captcha->success)
-		$error['captcha'] = "Captcha is required!";
+	// $captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
+	// 			[
+	// 			"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
+	// 			"response"	=> $_POST['g-recaptcha-response'],
+	// 			"remoteip"	=> $ipaddress
+	// 			]);
+	// if(!$captcha->success)
+	// 	$error['captcha'] = "Captcha is required!";
 
 
 	if(!count($error)){
 		//validate the inputs further
-		if($stmt = $conn->prepare("select * from ambassador where CNIC = ?")){
-			$stmt->bind_param("s", $cnic);
-			$stmt->execute();
-			if(count($stmt->get_result()->fetch_all(MYSQLI_ASSOC))){
+		if($stmt = $mpdo->prepare("select * from ambassador where CNIC = ?")){
+			$stmt->execute([$cnic]);
+			if(count($stmt->fetchAll())){
 				$error['CNIC'] = "The CNIC is already registered!";
 			}
-			$stmt->close();
 		}
 
-		if($stmt = $conn->prepare("select * from ambassador where email = ?")){
-			$stmt->bind_param("s", $email);
-			$stmt->execute();
-			if(count($stmt->get_result()->fetch_all(MYSQLI_ASSOC))){
+		if($stmt = $mpdo->prepare("select * from ambassador where email = ?")){
+			$stmt->execute([$email]);
+			if(count($stmt->fetchAll())){
 				$error['CNIC'] = "The email is already in use!";
 			}
-			$stmt->close();
 		}
 
-		if($stmt = $conn->prepare("select * from ambassador where phone = ?")){
-			$stmt->bind_param("s", $phone);
-			$stmt->execute();
-			if(count($stmt->get_result()->fetch_all(MYSQLI_ASSOC))){
+		if($stmt = $mpdo->prepare("select * from ambassador where phone = ?")){
+			$stmt->execute([$phone]);
+			if(count($stmt->fetchAll())){
 				$error['CNIC'] = "The phone number is already in use";
 			}
-			$stmt->close();
 		}
 	}
 
 	if(!count($error)){
-		$AmbassadorID = bin2hex(mcrypt_create_iv(10, MCRYPT_DEV_URANDOM));
+		$AmbassadorID = $first_name;
+		$AmbassadorID .= bin2hex(mcrypt_create_iv(2, MCRYPT_DEV_URANDOM));
 		// prepare and bind
-		$stmt = $conn->prepare("INSERT INTO ambassador (AmbassadorID, CNIC, FirstName, LastName, phone_number, Email, Institution) VALUES (?, ?, ?, ?, ?,?, ?)");
-		$stmt->bind_param("sssssss", $AmbassadorID, $cnic, $first_name, $last_name, $phone, $email, $institution);
-
-
-	    if($stmt->execute()){
+		$stmt = $mpdo->prepare("INSERT INTO ambassador (AmbassadorID, CNIC, FirstName, LastName, phone_number, Email, Institution) VALUES (?, ?, ?, ?, ?,?, ?)");
+		if($stmt->execute([$AmbassadorID, $cnic, $first_name, $last_name, $phone, $email, $institution])){
 			$success = 1;
-	    }
+			$txtMessage = "Congratulations, \n \n You have been selected as an Ambassador for NUST Olympiad'17. \n These are your details as entered in the google form:\n \n Ambassador ID: $AmbassadorID \n Name: $first_name $last_name \n CNIC: $cnic \n Phone Number: $phone \n Institution:  $institution \n \n \n Please use the Ambassador ID above for future references. \n In case of any query or ambiguity, please contact er@nustolympiad.com.";
+			$brmessage = nl2br($txtMessage);
+			$htmlMessage = <<<htmlMessage
+<html>
+<body>
+$brmessage
+</body>
+</html>
+htmlMessage;
+			$olmail = new OlMail(['name'=>$first_name.' '.$last_name,'email'=> $email], "Ambassador Info", $htmlMessage, $txtMessage );
+			$olmail->send();
+		}
 		else
 			$error['fatal'] = $stmt->error;
-		$stmt->close();
-		//$conn->close();
 	}
 }
 function test_input($data) {
@@ -113,9 +115,7 @@ function test_input($data) {
 		<meta charset="UTF-8">
 		<title>Ambassador Registration</title>
 		
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 		<script src='https://www.google.com/recaptcha/api.js'></script>
 	</head>
 	<body>
@@ -184,7 +184,7 @@ function test_input($data) {
 				<div class="col-md-4 inputGroupContainer">
 				<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-			  <input value="<?=$_POST['phone']?? ''?>" name="phone" placeholder="0313-XXXXXXX" class="form-control" type="text">
+			  <input value="<?=$_POST['phone']?? ''?>" name="phone" placeholder="0313XXXXXXX" class="form-control" type="text">
 				</div>
 			  </div>
 			</div>
@@ -196,7 +196,7 @@ function test_input($data) {
 				<div class="col-md-4 inputGroupContainer">
 				<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-			  <input value="<?=$_POST['cnic']?? ''?>"  name="cnic" placeholder="CNIC e.g., 7140X-XXXXXXX-X" class="form-control" type="text">
+			  <input value="<?=$_POST['cnic']?? ''?>"  name="cnic" placeholder="CNIC without dashes" class="form-control" type="numeric">
 				</div>
 			  </div>
 			</div>
@@ -231,11 +231,11 @@ function test_input($data) {
 		</div> <!-- /.container -->
 
 		<!--- Scripts-->
-		<script src="js/jquery.js" type="text/javascript"></script>
-		<script src="js/app.js" type="text/javascript"></script>
-		<script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js" type="text/javascript"></script>
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="/js/jquery.js" type="text/javascript"></script>
+		<script src="/js/app.js" type="text/javascript"></script>
+		<!-- <script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script> -->
+		<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js" type="text/javascript"></script> -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="/js/bootstrap.min.js" type="text/javascript"></script>
 	</body>
 </html>
