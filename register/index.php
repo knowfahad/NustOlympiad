@@ -10,8 +10,7 @@ if ($formsubmitted){
     if(!count($errors)){
         $errors = persistUser($data, $mpdo);
         if(!count($errors))
-            if($auth->login($data['username'], $data['pwd']))
-                \App\redirect("/dashboard");
+                \App\redirect("/login");
     }   
 }
 ?>
@@ -124,7 +123,7 @@ font-weight:normal;
                             <div class="row">
                                  <div class="col-md-10 col-md-offset-1 col-xs-11 col-xs-offset-1">
                                      <div class="container-fluid">
-                            <form class="form-horizontal" method="POST" id="reg_form" >
+                            <form class="form-horizontal" method="POST" id="reg_form" enctype="multipart/form-data" >
                                       <div class="h3">Create an Account</div>
                             <br>
 							<div class="form-group">
@@ -249,12 +248,11 @@ font-weight:normal;
 								<div class="form-group makeinline" >
 							   
 									<h5 class="col-md-8 col-xs-6 makeline" style="color:white; font-weight:normal;">Upload an image</h5>
-									<input class="col-md-4 col-xs-6"   name="pic" accept="image/*" type="file">
+									<input class="col-md-4 col-xs-6"   name="img" accept="image/*" type="file">
 								</div>
                             </div>
 
                             <div class="form-group">
-                                <!-- <div class="g-recaptcha" data-sitekey="6Ldgtg0UAAAAAIGYMROWOzYRwq_qKR3dFWoRbqA9"><div style="width: 304px; height: 78px;"><div><iframe src="" title="recaptcha widget" scrolling="no" name="undefined" width="304" height="78" frameborder="0"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid #c1c1c1; margin: 10px 25px; padding: 0px; resize: none;  display: none; "></textarea></div></div> -->
                                 <div class="g-recaptcha" data-sitekey="6Ldgtg0UAAAAAIGYMROWOzYRwq_qKR3dFWoRbqA9"></div>
                             </div>
                         

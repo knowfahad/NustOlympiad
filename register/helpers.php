@@ -35,14 +35,20 @@ function preprocess($mpdo){
  	$data['institute'] = strip_tags( trim($_POST["institute"] ?? ""));
 
  	////basic validations
- 	$usernamevalidation = v::NotEmpty()->NoWhitespace()->alnum()->length(3,20);
+ 	
+ 	if(!isset($_FILES['img']))
+	 	$errors["file"] = "Please upload your photo";
+	else
+		$data['img'] = $_FILES['img'];
+ 	
+ 	$usernamevalidation = v::NotEmpty()->NoWhitespace()->alnum()->length(3,15);
  	$cnicvalidation = v::NotEmpty()->noWhitespace()
  						->digit()->between(1000000000000, 9999999999999);
- 	$emailvalidation = v::NotEmpty()->email();
+ 	$emailvalidation = v::NotEmpty()->email()->length(3,90);
  	$pwdvalidation = v::notEmpty()->length(8, null);
- 	$phonevalidation = v::notEmpty()->numeric()->between(3000000000, 3499999999);
- 	$namevalidation = v::notEmpty()->alpha();
- 	$nustidvalidation = v::notEmpty()->numeric()->numeric->between(100000, 99999999);
+ 	$phonevalidation = v::notEmpty()->digit()->between(3000000000, 3499999999);
+ 	$namevalidation = v::notEmpty()->alpha()->length(1,50);
+ 	$nustidvalidation = v::notEmpty()->digit()->between(100000, 99999999);
  	if(!$usernamevalidation->validate($data['username']))
  		$errors['username'] = "Please enter a valid username!";
  	if(!$cnicvalidation->validate($data['cnic']))
@@ -114,10 +120,10 @@ function preprocess($mpdo){
 	 	if(!$nustidvalidation->validate($data['nustid'])){
 	 		$errors['nustid'] = "Please enter a valid CMS ID";
 	 	}
-
  	}
- 	else
- 		$data['isNustian'] = false;
+ 	else{
+ 		$data['nustid'] = null;
+ 	}
 
  	if($data['ambassador'] == "a_yes"){
 	 	$data['ambassador_id'] = $_POST["ambassadorid"];
@@ -149,7 +155,9 @@ function persistUser($data, $mpdo){ //execution will only start if there are no 
 
 	//image processing part will go here
 
-
+	$errors = uploadimg($data['img'], "photos", $data['cnic'], 2);
+	if(count($errors))
+		return $errors;
 	//Populate challan table first!
 
 	//create reg Challan and account Ac Code
@@ -210,7 +218,7 @@ function persistUser($data, $mpdo){ //execution will only start if there are no 
 // sending mail
 
 	$heading = "Welcome to NUST OLYMPIAD!";
-	$link = $_SERVER['SERVER_NAME']."/register/verify/?Username=".$data['username']."&ActivationCode=$acCode";
+	$link = $_SERVER['SERVER_NAME']."/register/verify/?username=".$data['username']."&activationcode=$acCode";
 
 $htmlmessage = 
 <<<emailmessage
@@ -232,4 +240,37 @@ $txtmessage = "$heading /n Please open this link to verify your email: $link";
 	return $errors;
 }
 
+function resize_image($file, $newwidth, $newheight) {
+    list($width, $height) = getimagesize($file);
+    $src = imagecreatefromjpeg($file);
+    $dst = imagecreatetruecolor( $newwidth, $newheight);
+    imagecopyresampled($dst, $src, 0, 0, 0, 0,  $newwidth, $newheight, $width, $height);
+    imagejpeg($dst, $file, 100);
+}
 
+function uploadimg($img, $dir, $name, $max_size){
+	$errors = [];
+	$path = "";
+	$allowed = ['jpg', 'jpeg'];
+
+	$info = pathinfo($img['name']);
+	$ext = $info['extension'];
+	$size=$img['size']/1048576;
+	
+	if($size>$max_size){
+		$errors["size"] = "The photos must be less than ".$max_size.".";	
+	}
+	if(!in_array($ext,$allowed)){
+		$errors["ext"] = "The photo must be in JPEG format.";
+	}
+	if(!count($errors)){
+		$newname = $name.".jpg"; 
+		$target = __DIR__."/../".$dir."/".$newname;
+
+		if (!move_uploaded_file($img['tmp_name'], $target))
+			$errors['An unknown error occured uploading your photo.'];
+		else
+			resize_image($target, 200, 200);
+	}
+	return $errors;
+}

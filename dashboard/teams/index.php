@@ -1,0 +1,577 @@
+<?php 
+namespace Dashboard;
+require(__DIR__ . '/../../bootstrap.php');
+
+use PDO;
+use Model\Model\SportsQuery;
+use Respect\Validation\Validator as v;
+
+//blocks users who are not logged in from visiting this page
+$auth->onlyLoggedIn();
+$auth->onlyVerified();
+
+$sports = SportsQuery::create()->find();
+$formsubmitted = $_SERVER['REQUEST_METHOD'] == "POST"; 
+if($formsubmitted){
+    $errors = [];
+    $ids = $_POST['team_member_ids'] ?? [];
+    if(!count($ids)){
+        $errors["ids"] = "You didn't add any members to the team!";
+    }
+    else{
+    	//every member must be unique    
+        foreach(array_count_values($ids) as $dupids){
+            if ($dupids != 1){
+                $errors['duplicates'] = "You've selected one team member more than once!";
+            }
+        }
+    }
+
+
+    $teamname = trim(strip_tags($_POST['teamname']??''));
+    $teamnamevalidation = v::NotEmpty()->NoWhitespace()->alnum()->length(3,20);
+    if(!$teamnamevalidation->validate($teamname))
+        $errors['teamname'] = "Please enter a valid team name.";
+    if(isset($_POST['sport']))
+        $sport = $_POST['sport'];
+    else
+        $errors['sport'] = "Please select a sport";
+
+    
+    if(!count($errors)){
+        // validate that the sport is a valid sport
+        $stmt = $mpdo->prepare("select * from sports where SportID = ?");
+        $stmt->execute([$sport]);
+        if(!$stmt->rowCount())
+            $errors['sport'] = "Sport selected is not valid!";
+        else{
+            $sport = $stmt->fetch(PDO::FETCH_OBJ);
+            $stmt = $mpdo->prepare("select * from sportsteam where TeamName = ? AND SportID = ?");
+            $stmt->execute([$teamname, $sport->SportID]);
+            if($stmt->rowCount()){
+                $errors['teamname'] = "The team name has already been reserved!";
+            }
+        }
+        if(isset($_POST['ambassador_id']) && strlen(trim($_POST['ambassador_id']))){
+            $stmt = $mpdo->prepare("select * from ambassador where AmbassadorID = ?");
+            $stmt->execute([$_POST['ambassador_id']]);
+            if(!$stmt->rowCount()){
+                $errors["ambassador_id"] = "The ambassador id you entered is incorrect.";
+            }
+            else{
+                $ambassador_id = $_POST['ambassador_id'];
+            }
+        }
+
+	}
+/*//validate the each member has already not participated in that sport already
+//      $in = join(',', array_fill(0, count($ids), '?'));
+//      if($stmt = $mpdo->prepare(
+// <<<participatedquery
+// select *
+// from sportsteam
+// where SportID = ?
+// AND TeamID IN (
+//  SELECT TeamID
+//  from sportsparticipants
+//  where ParticipantID in ($in)
+// )
+// participatedquery
+// )){
+//      $params = [$sport];
+//      $params = array_merge($params, $ids);
+//      $stmt->execute( $params);
+//      if($stmt->rowCount())
+//          $errors['team_members'] = "One or more of your team members are already enrolled in this sport!";
+//      }
+//      else{
+//          die($sth->errorInfo());
+//      }*/
+	if(!count($errors)){
+        $numOfMembers = count($ids);
+        // check if the total number of members are within range
+        if($numOfMembers < $sport->MinParticipants || $numOfMembers > $sport->MaxParticipants){
+        	$errors['NoOfMembers'] = "Number of team members should be between ".$sport->MinParticipants." and " .$sport->MaxParticipants." members";
+        }
+    }
+
+    if(!count($errors)){
+		 
+        // populate the challan table
+        $duedate = "12-10-17";
+        $AmountPayable = $numOfMembers * $sport->FeePerParticipant + $sport->RegistrationFee;
+        //find the new team ID first
+        $stmt = $mpdo->prepare("select max(TeamID) as max from sportsteam");
+        $stmt->execute();
+        $teamID = $stmt->fetch();
+        if(count($teamID))
+            $teamID = $teamID[0]+1;
+        if($teamID == 0)
+            $teamID = 1752;
+        $challanID = "T".$teamID."e".$sport->SportID;
+        $stmt = $mpdo->prepare("insert into challan(ChallanID, AmountPayable, DueDate, PaymentStatus) values(?,?,?,0)");
+        $stmt->execute([$challanID, $AmountPayable, $duedate]);
+
+        //populate the team table
+        $stmt = $mpdo->prepare("insert into sportsteam(TeamID, SportID, TeamName, HeadCNIC, ChallanID, AmountPayable, DueData, PaymentStatus) values(?,?,?,?,?,?,?,0)");
+        $HeadCNIC = $auth->getCNIC();
+        $stmt->execute([$teamID, $sport->SportID, $teamname, $HeadCNIC, $challanID, $AmountPayable, $duedate]);
+
+        //populate the sportsparticipant table
+        $stmt = $mpdo->prepare("insert into sportsparticipants(TeamID, ParticipantID) values(?,?)");
+        foreach($ids as $id){
+            $stmt->execute([$teamID, $id]);
+        }
+        if(isset($ambassador_id)){
+            foreach($ids as $id){
+                $stmt = $mpdo->prepare("insert into ambassador_participant(ParticipantID, AmbassadorID, EventID, SportID, ChallanID) values(?,?,?,?,?)");
+                $stmt->execute([$id, $ambassador_id, null, $sport->SportID, $challanID]);
+            }
+        }
+
+
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports | NUST Olympiad '17</title>
+    <link rel="stylesheet" type="text/css" href="../css/timeline.css">
+    <link rel="stylesheet" href="/css/themify-icons.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel='stylesheet' href='/css/perfect-scrollbar.min.css' />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/buttons.css" />
+    <link rel="stylesheet" href="/css/animate.css" />
+    <link rel="stylesheet" href="/css/tooltip.css" />
+    <link rel="stylesheet" href="/css/demo3.css" />
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <link rel="stylesheet" href="/css/style2.css" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Sports | NUST Olympiad '17</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+
+    <style>
+    a {
+        color: white;
+    }
+    
+    a:hover,
+    a:focus {
+        color: white;
+    }
+    
+    input {
+        color: white;
+    }
+    
+    label {
+        font-weight: normal;
+    }
+    
+    .col-centered {
+        float: none;
+        margin: 0 auto;
+    }
+    
+    .my-box {
+        border-style: solid;
+        border-color: white;
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        border-width: 1px;
+        padding: 2%;
+    }
+    
+    .my-btn {
+        background-color: transparent;
+        color: white;
+        border-radius: 0 !important;
+    }
+    input
+    {
+        width: 80%;
+        
+    }
+    </style>
+</head>
+
+<body id="id-body">
+<!-- Modal -->
+					  <div class="modal fade" id="myModal" role="dialog">
+						<div class="modal-dialog">
+						
+						  <!-- Modal content-->
+						  <div class="modal-content">
+							<div class="modal-header">
+							  <button type="button" class="close" data-dismiss="modal">&times;</button>
+							  <h4 class="modal-title">Modal Header</h4>
+							</div>
+							<div class="modal-body">
+                            <!--Insert all the errors here-->
+                            <!---if there are no errors, then add a success message -->
+
+                              <form id="sportsform" method="POST">
+                              <input id="sportid" type="hidden" name="sport">
+                            <!--submit this form to /dashboard/teams/register.php with a POST request(using ajax method) -->
+							  	<div class="form-group">
+							  		<label class="control-label">
+							  		Team Name:
+							  		</label>
+							  		<input class="form-control" type="text" placeholder="Team Name" name="teamname">
+							  	</div>
+							  	<hr>
+							  	<div class="form-group">
+							  		<label for="SearchTeamId" class="control-label">
+							  		Add a team member:
+							  		</label>
+							  		<input type="text" placeholder="User ID" class="form-control" id="SearchTeamId">
+							  		<button id="SearchBtn">Search</button>
+							  	</div>
+							  	<h3>Members added:</h3>
+							  	<div>
+							  	</div>
+							  	<div id="members"></div>
+                                <div class="form-group">
+                                    <label class="control-label">Ambassador ID(optional)</label>
+                                    <input class="form-control" type="text" placeholder="Ambassador ID(optional)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ambassador ID(optional)'"  name="ambassador_id">
+                                </div>  
+							  	<hr>
+                                <button type="submit">Apply</button>
+							  </form>
+
+
+							</div>
+							<div class="modal-footer">
+							  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						  </div>
+						  
+						</div>
+					  </div>
+    <div class="td-preloading">
+        <span class="fa fa-spinner fa-spin"></span>
+    </div>
+    <div class="td-container">
+        <!--<div class="row">
+        <div class="col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2  col-sm-4 col-sm-offset-4">
+            <img src="../img/cube.png" alt="" style="margin-bottom:0;">
+        </div>
+    </div>-->
+        <div class="td-sheets-container td-hide td-sheet-active-1">
+            <div class="row">
+            </div>
+            <div id="scrollbar-container" class="td-sheet active">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3 col-centered col-sm-3">
+                           
+                                <img src="/img/logo.png" class="img-responsive" alt="LOGO" />
+                            
+                        </div>
+                    </div>
+                    <div class="row homepage">
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-xs-5 col-sm-7"></div>
+                        <div class="col-md-2 col-xs-7 col-sm-5">
+                            <div id="userId">
+                                <p style="display:inline;color:orange;">User Id:<?=$auth->getParticipant()->getParticipantID()?></p><span> | </span><a href="#">Logout</a></div>
+                        </div>
+                        <hr>
+                    </div>
+						
+                    <div class="row">
+                      <div class = "col-md-1"></div>
+                            <div class="col-md-10 my-box ">
+                            	<div class="row">
+                					<?php if( $formsubmitted && count($errors) ): ?>
+                                        <div class="col-md-10 col-md-offset-1 col-xs-12">
+                                            <div class="container-fluid">
+                                    <div  id =  'errorShow' class = "row">
+                                    <!--append errors here! -->
+                                        <?php foreach($errors as $field => $error): ?>
+                                        <div class="row"><?=$error?></div>
+                                        <?php endforeach ?>
+                                    </div>
+                                    </div></div>
+                                    <?php endif ?>
+                            	</div>
+                                <h4 style="text-align:left;">Select a Sport</h4>
+                                <br>
+								<br>
+                                <!--new -->
+                                <div class="row">
+                                    <div class = "col-md-2 col-xs-3"></div>
+									<div class = "col-md-8 col-xs-6">
+									<center>
+									<div class="row">
+                                        <div class="col-md-4">
+                                            <input type="button" id="1" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Volleyball(Male)"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" id="2" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Volleyball(Female)"
+                                            />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" id="3" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Basketball(Male)"
+                                            />
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <input type="button" id="4" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Basketball(Female)"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" id="5" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Table Tennis(Male)"
+                                            />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" id="6" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Table Tennis(Female)"
+                                            />
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                     <div class="row">
+                                        <div class="col-md-4">
+                                            <input type="button" id="7" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Badminton(Male)"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" id="8" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Badminton(Female)"
+                                            />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" id="9" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Cricket"
+                                            />
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <input type="button" id="10" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="FootyMania"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" id="11" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="COD: Modern Warfare 5"
+                                            />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" id="12" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Counter Strike 1.6 5"
+                                            />
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                     <div class="row">
+                                        <div class="col-md-4">
+                                            <input type="button" id="13" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Counter Strike Go 5"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" id="14" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="DOTA 2 5"
+                                            />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" id="15" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Bait Bazi"
+                                            />
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <input type="button" id="16" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Capture The Flag"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" id="17" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Human Foosball"
+                                            />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" id="18" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="The Crimeline Road"
+                                            />
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <input type="button" id="19" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Mathletics"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" id="20" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="The Egg Rover Mission"
+                                            />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" id="21" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Olympiad Feud"
+                                            />
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                      <div class="row">
+                                        <div class="col-md-4">
+                                            <input type="button" id="22" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Graffiti"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" id="23" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Pakistan Got Talent"
+                                            />
+                                        </div>
+                                        <!--<div class="col-md-4">
+                                            <input type="button" id="24" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Olympiad Feud"
+                                            />
+                                        </div>-->
+                                    </div>
+                                    <br>
+									</center>
+									</div>
+									<div class = "col-md-2 col-xs-3"></div>
+                                </div>
+                                <!--new-->
+                            </div>
+					  <div class = "col-md-1"></div>
+                     
+                    </div>
+                    <br>
+                    <br>
+
+					
+                    
+                </div>
+            </div>
+			
+					  
+            <script src="/js/jquery.min.js"></script>
+            <script src="/js/responsive.js"></script>
+            <script src="/js/perfect-scrollbar.min.js"></script>
+            <script src="/js/bootstrap.min.js"></script>         
+            <script src="/js/jquery.visible.min.js"></script>
+            <script src="/js/scriptdemo3.js"></script>
+            <script src="/js/classie.js"></script>
+            <script src="/js/detectanimation.js"></script>
+            <script src="/js/modernizr.custom.js"></script>
+            <script type="text/javascript" src="/js/timeline.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$("#SearchBtn").click(function(e){
+			console.log($("#SearchTeamId").val());
+			var destination="/dashboard/search.php";
+			$.post(destination, {'id' : $("#SearchTeamId").val()}, function(result){
+				if(result){
+					$result = JSON.parse(result);
+					console.log($result);
+					$newelement = "<div class='member'>";
+					$newelement += $result.Firstname + " " + $result.Lastname;
+					$newelement += "<input type='hidden' name='team_member_ids[]' value='"+$result.Participantid+"' >";
+					$newelement += "</div>";
+					$("#members").append($newelement);
+					console.log($newelement);
+				}
+	  		});
+			e.preventDefault();
+		});
+	});
+	</script>
+
+    <script type="text/javascript">
+    $(document).ready(function()
+    {
+
+
+        $('#myModal').on('hidden.bs.modal', function () {
+          $('#myModal').html(`
+                                    <div class="modal-dialog">
+                                    
+                                      <!-- Modal content-->
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                          <h4 class="modal-title">Modal Header</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                        <!--Insert all the errors here-->
+                                        <!---if there are no errors, then add a success message -->
+
+                                          <form id="sportsform" method="POST">
+                                          <input id="sportid" type="hidden" name="sport">
+                                        <!--submit this form to /dashboard/teams/register.php with a POST request(using ajax method) -->
+                                            <div class="form-group">
+                                                <label class="control-label">
+                                                Team Name:
+                                                </label>
+                                                <input class="form-control" type="text" placeholder="Team Name" name="teamname">
+                                            </div>
+                                            <hr>
+                                            <div class="form-group">
+                                                <label for="SearchTeamId" class="control-label">
+                                                Add a team member:
+                                                </label>
+                                                <input type="text" placeholder="User ID" class="form-control" id="SearchTeamId">
+                                                <button id="SearchBtn">Search</button>
+                                            </div>
+                                            <h3>Members added:</h3>
+                                            <div>
+                                            </div>
+                                            <div id="members"></div>
+                                            <div class="form-group">
+                                                <label class="control-label">Ambassador ID(optional)</label>
+                                                <input class="form-control" type="text" placeholder="Ambassador ID(optional)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ambassador ID(optional)'"  name="ambassador_id">
+                                            </div>  
+                                            <hr>
+                                            <button type="submit">Apply</button>
+
+                                          </form>
+
+
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                      </div>
+                                      
+                                    </div>
+
+
+           `);
+        })
+
+
+
+
+
+
+        teamEvent = ["none","Volleyball(Male)","Volleyball(Female)","Basketball(Male)","Basketball(Female)",
+        "Table Tennis(Male)","Table Tennis(Female)","Badminton(Male)","Badminton(Female)",
+        "Cricket","FootyMania","Call of Duty: Modern Warfare 5","Counter Strike 1.6 5",
+        "Counter Strike Go 5","DOTA 2 5","Bait Bazi","Capture The Flag","Human Foosball",
+        "The Crimeline Road","Mathletics","The Egg Rover Mission","Olympiad Feud","Graffiti",
+        "Pakistan Got Talent"];
+
+        $(".modal-title").html('Register for ' +teamEvent[0]);
+        
+        $(document).on("click", ".btn", function () {
+
+            var id = $(this).attr('id');
+            $("#sportid").val(id);
+            
+                $(".modal-title").html('Register for ' +teamEvent[id]);
+            
+
+
+        });
+    
+
+    });
+
+    </script>
+   
+</body>
+
+</html>

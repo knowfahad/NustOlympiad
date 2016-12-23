@@ -82,7 +82,10 @@ class Auth
 		if(!$this->User()->isVerified())
 			\App\redirect('/dashboard/verify');
 	}
-
+	public function onlyUnVerified(){
+		if($this->User()->isVerified())
+			\App\redirect('/dashboard');
+	}
 	public function getCNIC(){
 		return $this->getParticipant()->getCNIC();
 	}

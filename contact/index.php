@@ -58,8 +58,7 @@ htmlmessage;
 
  }
 if(isset($errors) && count($errors)){
-	foreach($errors as $field=>$error){
-		echo $error;
-	}
+	$ajax = json_encode($errors);
+	echo $ajax;
 }
 // \App\redirect("/");

@@ -1,42 +1,10 @@
-<?php
-namespace Dashboard;
-
-use Model\Model\Challan;
-use Model\Model\ChallanQuery;
-use Model\Model\ParticipantQuery;
-require_once(__DIR__."/../../bootstrap.php");
-
-//blocks users who are not logged in from visiting this page
-$auth->onlyLoggedIn();
-$auth->onlyVerified();
-
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    if(isset($_POST['agree'])){
-        $participant = $auth->getParticipant();
-        $gender = ($participant->getGender() == "M") ? "m" : "f";
-        $challanid = "AC" . $participant->getParticipantID() .  $gender;
-        $challan = new Challan();
-        $challan->setChallanID($challanid);
-        $challan->setAmountPayable(500);
-        $challan->setDueDate("10-10-2016");
-        $challan->setPaymentStatus(0);
-        $challan->save();
-
-        $participant->setAccomodationChallanID($challanid);
-        $participant->save();
-        if(strlen($auth->getParticipant()->getAccomodationChallanID()))
-            \App\redirect("/dashboard");
-    }
-}
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accommodation | NUST Olympiad '17</title>
+    <title>Instructions | NUST Olympiad '17</title>
     <link rel="stylesheet" type="text/css" href="/css/timeline.css">
     <link rel="stylesheet" href="/css/themify-icons.css">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
@@ -54,6 +22,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <!-- <script src="https://maxdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
     <!--<script src="Register_files/api.js"></script> -->
     <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script> -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#student_nust").on("change",function(){"n_yes"===$(this).val()?$("#nust_hid").show():$("#nust_hid").hide()}),$("#ambassador").on("change",function(){"a_yes"===$(this).val()?$("#amb_hid").show():$("#amb_hid").hide()});
+            // function checkForm(a){return""==a.username.value?(alert("Error: Username cannot be blank!"),a.username.focus(),!1):(re=/^\w+$/,re.test(a.username.value)?""==a.pwd.value||a.pwd.value!=a.repwd.value?(alert("Error: Password fields don't match."),a.pwd.focus(),!1):a.pwd.value.length<6?(alert("Error: Password must contain at least six characters!"),a.pwd.focus(),!1):a.pwd.value==a.username.value?(alert("Error: Password must be different from Username!"),a.pwd.focus(),!1):(re=/[0-9]/,re.test(a.pwd.value)?(re=/[a-z]/,re.test(a.pwd.value)?(re=/[A-Z]/,!!re.test(a.pwd.value)||(alert("Error: password must contain at least one uppercase letter (A-Z)!"),a.pwd.focus(),!1)):(alert("Error: password must contain at least one lowercase letter (a-z)!"),a.pwd.focus(),!1)):(alert("Error: password must contain at least one number (0-9)!"),a.pwd.focus(),!1)):(alert("Error: Username must contain only letters, numbers and underscores!"),a.username.focus(),!1))}
+});
 </script>
     <style>
         a {
@@ -98,7 +72,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <div class="td-container">
         <!--<div class="row">
         <div class="col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2  col-sm-4 col-sm-offset-4">
-            <img src="/img/cube.png" alt="" style="margin-bottom:0;">
+            <img src="../img/cube.png" alt="" style="margin-bottom:0;">
         </div>
     </div>-->
         <div class="td-sheets-container td-hide td-sheet-active-1">
@@ -108,7 +82,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-3 col-centered col-sm-3">
-                            <a href="/index.html">
+                            <a href="../index.html">
                                 <img src="/img/logo.png" class="img-responsive" alt="LOGO" />
                             </a>
                         </div>
@@ -118,13 +92,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         <div id='errorShow' class="row">
                             <!--append errors here! -->
                         </div>
-                        <?php if( !strlen($auth->getParticipant()->getAccomodationChallanID()) ):  ?>
                         <div class="col-md-10 col-md-offset-1">
                             <div class="row">
                                 <div class="col-md-12  col-xs-12">
                                     <div class="container-fluid">
                                         <center>
-                                            <h2 style="font-family:Montserrat font-weight:200;">Instructions for accomodation</h2>
+                                            <h2 style="font-family:Montserrat font-weight:200;">Read instructions before proceeding</h2>
                                         </center>
                                         <br>
                                     </div>
@@ -151,7 +124,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                 <div class="col-md-6 col-xs-6">
                                    <center>
                                        <div class="arrows">
-                                      <a href="#"> <i class="fa fa-angle-left arrow-inside"></i></a>
+                                      <a href="/dashboard/"> <i class="fa fa-angle-left arrow-inside"></i></a>
                                        </div>
                                       <a href="/dashboard"> Go Back </a>
                                    </center>
@@ -159,22 +132,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                 <div class="col-md-6 col-xs-6">
                                    <center>
                                        <div class="arrows">
-                                       <form method="POST">
-                                        <div class="form-group">
-                                            <button class="btn btn-primary" value="yes" name="agree">
-                                            <i class="fa fa-angle-right arrow-inside"></i>
-                                            I agree</button>
-                                        </div>
-                                       </form>
+                                     <a href="/dashboard/teams/"> <i class="fa fa-angle-right arrow-inside"></i></a>
                                        </div>
+                                      <a href="/dashboard/teams/"> Proceed </a>
                                    </center>
                                 </div>
                             </div>
                         </div>
                         </div>
-                        <?php else: ?>
-                        <h2 styles="text-align: center;">Your challan has already been generated!</h2>
-                        <?php endif ?> 
                     </div>
                 </div>
             </div>
@@ -184,9 +149,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             <script src="/js/bootstrap.min.js"></script>
             <script src="/js/jquery.visible.min.js"></script>
             <script src="/js/scriptdemo3.js"></script>
-            <!--<script src="/js/classie.js"></script>-->
+            <script src="/js/classie.js"></script>
             <script src="/js/detectanimation.js"></script>
             <script src="/js/modernizr.custom.js"></script>
 </body>
-    
+
 </html>
