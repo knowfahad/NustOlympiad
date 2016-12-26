@@ -9,6 +9,26 @@ $accomodationChallan = accomodationChallan($auth, $mpdo);
 $registrationChallan = registrationChallan($auth, $mpdo);
 $teams = enrolledTeams($auth, $mpdo);
 $teamChallans = teamChallans($auth, $mpdo);
+
+if(!$auth->getParticipant()->isPaid()){
+    $errorMessage = "You must pay the registration challan to complete registration!";
+}
+
+$message = 0;
+
+if(isset($_GET['feedback'])){
+    switch($_GET['feedback']){
+        case "accomodation":
+        $message = "Your accomodation challan has been generated successfully!";
+        break;
+        case "team":
+        $message = "Your team challan has been generated successfully!";
+        break;
+        case "event":
+        $message = "Your challan has been generated successfully!";
+        break;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,8 +119,21 @@ $teamChallans = teamChallans($auth, $mpdo);
                         </div>
                     </div>
                     <div class="row homepage">
-                        <div id='errorShow' class="row">
-                            <!--append errors here! -->
+                            <?php if($message): ?> 
+                            <div id='errorShow' class="row">
+                                <div class="col-md-8 col-md-offset-2 alert alert-success">
+                                    <?=$message?>
+                                </div>
+                            </div>
+                            <?php endif ?>
+                            <?php if(isset($errorMessage)): ?> 
+                                <div id='errorShow' class="row">
+                                <div class="col-md-8 col-md-offset-2 alert alert-danger">
+                                    <?=$errorMessage?>
+                                </div>
+                                </div>
+                            <?php endif ?>
+            
                         </div>
                     </div>
                     <div class="row">
@@ -173,9 +206,29 @@ $teamChallans = teamChallans($auth, $mpdo);
 
                                <!-- insert challans here-->
                                 
-                                <div class="row" id = "challans"> 
-                                       <?php if($accomodationChallan): ?>
-                                        <div class="col-md-8 col-md-offset-2">
+                                <div class="row" id = "challans clearfix"> 
+                                    <div class="col-md-8 col-md-offset-2">
+                                        <?php if($registrationChallan): ?>
+                                        <div class="challan_item <?=($registrationChallan['PaymentStatus'])?"paid":"unpaid" ?>">
+                                            <h5>Registration Challan</h4>
+                                            <div class="challan-buttons">
+                                                <?php if(!$registrationChallan['PaymentStatus']): ?>
+                                                <form method="POST" action="http://ol-challan-generator.herokuapp.com/">
+                                                    <input type="hidden" value="registration" name="eventname">
+                                                    <input type="hidden" value="<?= $registrationChallan['ChallanID'] ?>" name="challanid">
+                                                    <input type="hidden" value="<?= $registrationChallan['DueDate'] ?>" name="duedate">
+                                                    <input type="hidden" value="registration" name="eventname">
+                                                    <input type="hidden" value="<?= $registrationChallan['AmountPayable'] ?>" name="fee">
+                                                    <input type="hidden" value="registration" name="type">
+                                                    <button class="btn btn-xs btn-default" type="submit">Print</button> 
+                                                </form>
+                                                <?php endif ?>
+                                            </div>
+                                        </div>
+                                        <?php endif ?>
+
+
+                                           <?php if($accomodationChallan): ?>
                                          <div class="challan_item <?=($accomodationChallan['PaymentStatus'])?" paid ":" unpaid " ?>" >
                                              <h5>Accomodation Challan</h4>
                                              <div class="challan-buttons">
@@ -193,29 +246,12 @@ $teamChallans = teamChallans($auth, $mpdo);
                                                      <input type="hidden" name="challanid" value="<?=$accomodationChallan['ChallanID'] ?>">
                                                      <button class="btn btn-xs btn-danger" type="submit">Delete</button> 
                                                  </form>
+                                                 </div>
                                                  <?php endif ?>
-                                             </div>
                                          </div>
                                          <?php endif ?>
 
-                                         <?php if($registrationChallan): ?>
-                                         <div class="challan_item <?=($registrationChallan['PaymentStatus'])?"paid":"unpaid" ?>">
-                                             <h5>Registration Challan</h4>
-                                             <div class="challan-buttons">
-                                                 <?php if(!$registrationChallan['PaymentStatus']): ?>
-                                                 <form method="POST" action="http://ol-challan-generator.herokuapp.com/">
-                                                     <input type="hidden" value="registration" name="eventname">
-                                                     <input type="hidden" value="<?= $registrationChallan['ChallanID'] ?>" name="challanid">
-                                                     <input type="hidden" value="<?= $registrationChallan['DueDate'] ?>" name="duedate">
-                                                     <input type="hidden" value="registration" name="eventname">
-                                                     <input type="hidden" value="<?= $registrationChallan['AmountPayable'] ?>" name="fee">
-                                                     <input type="hidden" value="registration" name="type">
-                                                     <button class="btn btn-xs btn-default" type="submit">Print</button> 
-                                                 </form>
-                                                 <?php endif ?>
-                                             </div>
-                                         </div>
-                                         <?php endif ?>
+                                                 
                                      <?php foreach($challans as $challan): ?>
                                          <div class="challan_item <?=($challan['PaymentStatus'])?"paid":"unpaid" ?>">
                                              <h5><?=$challan['Name']?></h4>
@@ -249,7 +285,7 @@ $teamChallans = teamChallans($auth, $mpdo);
                                      <?php foreach($teamChallans as $challan): ?>
                                          <div class="challan_item   
                                          <?=($challan['PaymentStatus'])?"paid":"unpaid" ?>">
-                                             <h5><?=$challan['TeamName']?></h4>
+                                             <h5><?=$challan['TeamName']?></h5>
                                              <div class="challan-buttons">
                                                  <?php if(!$challan['PaymentStatus']): ?>
                                                  <form method="POST" action="http://ol-challan-generator.herokuapp.com/">
@@ -271,8 +307,10 @@ $teamChallans = teamChallans($auth, $mpdo);
 
                                      <?php endforeach ?>
                                      <?php endif ?> 
-                                          
-                                        </div>
+                                                  
+                                                </div>
+                                    </div>
+                                
                                 </div>
                                 <!--challans div ended-->
                                     

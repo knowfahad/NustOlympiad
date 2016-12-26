@@ -213,17 +213,7 @@ h1{
     text-align:center;
     position:relative;
 }
-.arrows
-{
-	width: 3em;
-	height: 3em;
-	border: 0.14em solid white;
-	border-radius: 50%;
-	display: flex;
-  align-items: center;
-  justify-content: center 
 
-}
 .arrow-inside{
 	font-size: 25px;
     margin: 0

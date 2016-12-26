@@ -81,7 +81,7 @@ if($formsubmitted){
 				// $ap->setChallanID($challanid);
 				// $ap->save();
 			}
-			\App\redirect("/dashboard");
+			\App\redirect("/dashboard?feedback=event");
 		}
 	}
 }
