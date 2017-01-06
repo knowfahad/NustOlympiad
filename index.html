@@ -27,12 +27,18 @@
        text-align: center;
     }</style>
 
-   
+<!-- preloading flame css-->
+
 
 </head>
 <body id="id-body">
 	<div class="td-preloading">
-		<span class="fa fa-spinner fa-spin"></span>
+		<!-- <span class="fa fa-spinner fa-spin"></span> -->
+		
+			<canvas id="c" width="300px" height="300px" ></canvas>
+			<img src="img/torch.png" widht="150px" height="150px" id="id-img-preload">
+				
+		</div>
 	</div>
 	<div class="td-container">
 		<div class="td-menu">
@@ -202,7 +208,7 @@
 										<div class="class-back center-block">
 											<!-- back content -->
 											<div class="vertically-center">
-												<a href="events/events.html" target="_blank" class="btn btn-default fadeInLeft">SEE SPORTS</a>
+												<a href="events/sports.html" target="_blank" class="btn btn-default fadeInLeft">SEE SPORTS</a>
 												<br><span class="ti-line-double"></span>
 											</div>
 										</div>
@@ -289,7 +295,7 @@
 										<div class="class-back center-block">
 											<!-- back content -->
 											<div class="vertically-center">
-												<a href="events/events.html" target="_blank" class="btn btn-default fadeInLeft animated" data-animation-delay="700" style="opacity: 1;">SEE SPORTS</a>
+												<a href="events/sports.html" target="_blank" class="btn btn-default fadeInLeft animated" data-animation-delay="700" style="opacity: 1;">SEE SPORTS</a>
 												<br><span class="ti-line-double"></span>
 											</div>
 											
@@ -599,6 +605,19 @@
 	  </div>
 	</div>
     <script src="js/jquery.min.js"></script>
+     <script type="text/javascript">
+   		$(document).ready(function(){
+   			function setPreLoadMargin(){
+   				var width = $(window).width();
+   				
+   				$('#c').css({"position":"absolute","left":((width-300)/2)+"px"});
+   				$('#id-img-preload').css({"position":"absolute","top":"50%","left":((width-95)/2)+"px"});
+   			}
+   			setPreLoadMargin();
+   			$(window).resize(function(){setPreLoadMargin();});
+
+   		});
+   </script>
 	<script src="js/responsive.js"></script>
 	<script src="js/perfect-scrollbar.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -613,6 +632,11 @@
         <script>
                     $('#counter').countdownCube({target: new Date(2017,0,10), cubeSize: 100 } );
        </script>
+
+   <!-- preloading flame js-->
+   <script type="text/javascript" src="js/flame.js"></script>
+
+
 	<!-- <script src="compiled/flipclock.js"></script>
 
     <script type="text/javascript">

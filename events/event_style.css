@@ -1,0 +1,41 @@
+  a{
+    color:white;
+  }
+  a:hover,a:focus{
+    color:white;
+  }
+  input{
+    color:white;
+
+  }
+  label{
+    font-weight:normal;
+
+  }
+
+  .col-centered{
+    float: none;
+    margin: 0 auto;
+  }
+
+  .cd-timeline-content::before{
+    display: none;
+  }
+  button{
+    opacity: 0.7
+    color:white;
+    background-color: #1e3863;
+    border: 1px solid black;
+  }
+  .class-content{
+    border: 1px solid white;
+    background: rgba(255,255,255,0.15);
+  }
+  .class-separator{
+    width: 2px;
+    height: 100%;
+    background-color: white;
+  }
+  .class-separator-conatiner{
+    height: inherit;
+  }
