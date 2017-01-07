@@ -245,10 +245,11 @@ font-weight:normal;
 							<div class = "row">
 								<div class="form-group makeinline" >
 							   
-									<h5 class="col-md-8 col-xs-6 makeline" style="color:white; font-weight:normal;">Upload an image</h5>
-									<input class="col-md-4 col-xs-6"   name="img" accept="image/*" type="file">
+									<h5 class="col-md-4 col-xs-6 makeline" style="color:white; font-weight:normal;">Upload an image</h5>
+									<input class="col-md-8 col-xs-6"   name="img" accept="image/*" type="file">
 								</div>
                             </div>
+							<br>
 
                             <div class="form-group">
                                 <div class="g-recaptcha" data-sitekey="6Ldgtg0UAAAAAIGYMROWOzYRwq_qKR3dFWoRbqA9"></div>

@@ -423,9 +423,7 @@ input:focus {
 .makeinline label,.makeinline input{
     display: inline;
 }
-input[type='file'] {
-  color: transparent;
-}
+
 
 #makeborder
 {
