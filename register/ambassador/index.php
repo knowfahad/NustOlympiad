@@ -45,14 +45,14 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 	if(!$emailvalidation->validate($email))
 		$error['email'] = "Please enter a valid email address";
 	$ipaddress = \App\get_client_ip();
-	// $captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
-	// 			[
-	// 			"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
-	// 			"response"	=> $_POST['g-recaptcha-response'],
-	// 			"remoteip"	=> $ipaddress
-	// 			]);
-	// if(!$captcha->success)
-	// 	$error['captcha'] = "Captcha is required!";
+	$captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
+				[
+				"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
+				"response"	=> $_POST['g-recaptcha-response'],
+				"remoteip"	=> $ipaddress
+				]);
+	if(!$captcha->success)
+		$error['captcha'] = "Captcha is required!";
 
 
 	if(!count($error)){
@@ -71,7 +71,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 			}
 		}
 
-		if($stmt = $mpdo->prepare("select * from ambassador where phone = ?")){
+		if($stmt = $mpdo->prepare("select * from ambassador where phone_number	 = ?")){
 			$stmt->execute([$phone]);
 			if(count($stmt->fetchAll())){
 				$error['CNIC'] = "The phone number is already in use";

@@ -112,15 +112,15 @@ font-weight:normal;
 					
 					</div>
 				</div>  
-				
-                    <div class="row homepage" >
-					<?php if(isset($error)): ?>
-                    <div  id =  'errorShow' class = "row">
-                    <div class="row">
-                        <?=$error?>
+	                <div class="row" >
+    					<?php if(isset($error)): ?>
+                        <div class="col-md-10 col-md-offset-1 col-xs-12">
+                            <!--append errors here! -->
+                                <div class="alert alert-danger"><?=$error?></div>
+                        </div>
+                        <?php endif ?>
                     </div>
-                    </div>
-                    <?php endif ?>
+                    
 					
                         <div class="col-md-6 col-md-offset-3">
                             <div class="row">

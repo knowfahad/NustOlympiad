@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $participant->setAccomodationChallanID($challanid);
         $participant->save();
         if(strlen($auth->getParticipant()->getAccomodationChallanID()))
-            \App\redirect("/dashboard");
+            \App\redirect("/dashboard/?feedback=accomodation");
     }
 }
 
@@ -72,11 +72,29 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         label {
             font-weight: normal;
         }
-        
+        .arrows
+        {
+            width: 5em;
+            height: 5em;
+            /*padding: 10px;*/
+            border: 0.14em solid white;
+            border-radius: 50%;
+
+            display: flex;
+          align-items: center;
+          justify-content: center 
+
+        }
         .col-centered {
             float: none;
             margin: 0 auto;
         }
+
+        .tbtn, .tbtn:hover, .tbtn:active{
+            background: none;
+            /*border:0;*/
+        }
+
         
         #makeborder {
             border-style: solid;
@@ -150,19 +168,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                             <div class="row">
                                 <div class="col-md-6 col-xs-6">
                                    <center>
-                                       <div class="arrows">
-                                      <a href="#"> <i class="fa fa-angle-left arrow-inside"></i></a>
-                                       </div>
-                                      <a href="/dashboard"> Go Back </a>
+                                       <div >
+                                      <!-- <a href="#"> <i class="fa fa-angle-left arrow-inside"></i></a>
+                                       </div> -->
+                                      <a class="arrows btn btn-primary tbtn" href="/dashboard"> Go Back </a>
                                    </center>
                                 </div>
                                 <div class="col-md-6 col-xs-6">
                                    <center>
-                                       <div class="arrows">
+                                       <div>
                                        <form method="POST">
                                         <div class="form-group">
-                                            <button class="btn btn-primary" value="yes" name="agree">
-                                            <i class="fa fa-angle-right arrow-inside"></i>
+                                            <button class=" arrows btn btn-primary tbtn" value="yes" name="agree">
+                                            <!-- <i class="fa fa-angle-right arrow-inside"></i> -->
                                             I agree</button>
                                         </div>
                                        </form>

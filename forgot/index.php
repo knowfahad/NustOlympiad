@@ -3,6 +3,7 @@ require_once(__DIR__."/../bootstrap.php");
 use Respect\Validation\Validator as v;
 $auth->onlyGuests();
 $formsubmitted = $_SERVER['REQUEST_METHOD'] == 'POST';
+$success = false;
 if($formsubmitted){
     $errors = [];
 	$email = $_POST['email'] ?? "";
@@ -39,7 +40,8 @@ htmlMessage;
 		$mail = new App\OlMail(["name"=>$userdetails->Username, "email"=>$email], "Reset Your Olympiad Password", $txtMessage.$link, $htmlmessage);
 		$mail->send();
 	}
-    \App\redirect("/");
+    $success = true;
+
 }
 
 ?>
@@ -135,59 +137,54 @@ font-weight:normal;
                                 <div class="container-fluid">
                         <div  id =  'errorShow' class = "row">
                         <!--append errors here! -->
-                            <?php foreach($errors as $field => $error): ?>
+                            <?php foreach($errors as $error): ?>
                             <div class="row"><?=$error?></div>
                             <?php endforeach ?>
                         </div>
                         </div></div>
                         <?php endif ?>
-					
+                        <?php if($success): ?>
+                            <div class="col-md-10 col-md-offset-1 col-xs-12">
+                                <div class="container-fluid">
+                                    <div  id =  'errorShow' class = "row">
+                                        <div class="alert alert-success">
+                                            Link to reset password has been sent to your email address.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php else: ?>
                         <div class="col-md-6 col-md-offset-3">
                             <div class="row">
-                                 <div class="col-md-10 col-md-offset-1 col-xs-12">
-                                     <div class="container-fluid">
-                            <form class="form-horizontal" method="POST" id="log_form">
-                                      <div class="h3">Reset password</div>
-                            <br>
-							<div class="form-group">
-                                <div class="">
-                                    <input id="email" name="email" placeholder="Enter Your Email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Your Email'" required>
+                                <div class="col-md-10 col-md-offset-1 col-xs-12">
+                                    <div class="container-fluid">
+                                    <form class="form-horizontal" method="POST" id="log_form">
+                                        <div class="h3">Reset password</div>
+                                        <br>
+                                    	<div class="form-group">
+                                            <div class="">
+                                            <input id="email" name="email" placeholder="Enter Your Email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Your Email'" required>
+                                            </div>
+                                        </div>                             
+            							<div class = "row">
+                                            <div class="form-group"> 
+                                                <center>
+                                                    <button type="submit" class="btn btn-default">Submit</button>
+                                                </center>
+                                            </div>
+            							</div>
+                                        <div class = "row">
+                                                <center>
+                                                    <a href="/login">Login</a>
+                                                </center>
+            							</div>
+            							<br>
+                                    </form>
+                                    </div>
                                 </div>
-                            </div>
-                            
-                        
-							<!--<div class = "row">
-						      
-                                    <center>
-                                        <a href="#">Already have an Account? Login here!</a>
-                                    </center>
-                              
-							</div>
-							<br>-->
-							<div class = "row">
-						    
-                                <div class="form-group"> 
-                                    <center>
-                                        <button type="submit" class="btn btn-default">Submit</button>
-                                    </center>
-                                </div>
-								
-                           
-							</div>
-                            <div class = "row">
-						      
-                                    <center>
-                                        <a href="../login/login.html">Login</a>
-                                        
-                                    </center>
-                              
-							</div>
-							<br>
-                        </form>
-                                     </div>
-                                 </div>
                             </div>
                         </div>
+                        <?php endif ?>
                     </div>
                 </div>
             </div>

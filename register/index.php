@@ -106,18 +106,16 @@ font-weight:normal;
 					</div>
 				</div>  
 				
-                    <div class="row homepage" >
-					<?php if( $formsubmitted && count($errors) ): ?>
+                    <div class="row" >
+    					<?php if( $formsubmitted && count($errors) ): ?>
                         <div class="col-md-10 col-md-offset-1 col-xs-12">
-                            <div class="container-fluid">
-                    <div  id =  'errorShow' class = "row">
-                    <!--append errors here! -->
-                        <?php foreach($errors as $field => $error): ?>
-                        <div class="row"><?=$error?></div>
-                        <?php endforeach ?>
+                            <!--append errors here! -->
+                                <?php foreach($errors as $field => $error): ?>
+                                <div class="alert alert-danger"><?=$error?></div>
+                                <?php endforeach ?>
+                        </div>
+                        <?php endif ?>
                     </div>
-                    </div></div>
-                    <?php endif ?>
 					
                         <div class="col-md-6">
                             <div class="row">

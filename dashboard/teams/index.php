@@ -9,129 +9,6 @@ use Respect\Validation\Validator as v;
 //blocks users who are not logged in from visiting this page
 $auth->onlyLoggedIn();
 $auth->onlyVerified();
-
-$sports = SportsQuery::create()->find();
-$formsubmitted = $_SERVER['REQUEST_METHOD'] == "POST"; 
-if($formsubmitted){
-    $errors = [];
-    $ids = $_POST['team_member_ids'] ?? [];
-    if(!count($ids)){
-        $errors["ids"] = "You didn't add any members to the team!";
-    }
-    else{
-    	//every member must be unique    
-        foreach(array_count_values($ids) as $dupids){
-            if ($dupids != 1){
-                $errors['duplicates'] = "You've selected one team member more than once!";
-            }
-        }
-    }
-
-
-    $teamname = trim(strip_tags($_POST['teamname']??''));
-    $teamnamevalidation = v::NotEmpty()->NoWhitespace()->alnum()->length(3,20);
-    if(!$teamnamevalidation->validate($teamname))
-        $errors['teamname'] = "Please enter a valid team name.";
-    if(isset($_POST['sport']))
-        $sport = $_POST['sport'];
-    else
-        $errors['sport'] = "Please select a sport";
-
-    
-    if(!count($errors)){
-        // validate that the sport is a valid sport
-        $stmt = $mpdo->prepare("select * from sports where SportID = ?");
-        $stmt->execute([$sport]);
-        if(!$stmt->rowCount())
-            $errors['sport'] = "Sport selected is not valid!";
-        else{
-            $sport = $stmt->fetch(PDO::FETCH_OBJ);
-            $stmt = $mpdo->prepare("select * from sportsteam where TeamName = ? AND SportID = ?");
-            $stmt->execute([$teamname, $sport->SportID]);
-            if($stmt->rowCount()){
-                $errors['teamname'] = "The team name has already been reserved!";
-            }
-        }
-        if(isset($_POST['ambassador_id']) && strlen(trim($_POST['ambassador_id']))){
-            $stmt = $mpdo->prepare("select * from ambassador where AmbassadorID = ?");
-            $stmt->execute([$_POST['ambassador_id']]);
-            if(!$stmt->rowCount()){
-                $errors["ambassador_id"] = "The ambassador id you entered is incorrect.";
-            }
-            else{
-                $ambassador_id = $_POST['ambassador_id'];
-            }
-        }
-
-	}
-/*//validate the each member has already not participated in that sport already
-//      $in = join(',', array_fill(0, count($ids), '?'));
-//      if($stmt = $mpdo->prepare(
-// <<<participatedquery
-// select *
-// from sportsteam
-// where SportID = ?
-// AND TeamID IN (
-//  SELECT TeamID
-//  from sportsparticipants
-//  where ParticipantID in ($in)
-// )
-// participatedquery
-// )){
-//      $params = [$sport];
-//      $params = array_merge($params, $ids);
-//      $stmt->execute( $params);
-//      if($stmt->rowCount())
-//          $errors['team_members'] = "One or more of your team members are already enrolled in this sport!";
-//      }
-//      else{
-//          die($sth->errorInfo());
-//      }*/
-	if(!count($errors)){
-        $numOfMembers = count($ids);
-        // check if the total number of members are within range
-        if($numOfMembers < $sport->MinParticipants || $numOfMembers > $sport->MaxParticipants){
-        	$errors['NoOfMembers'] = "Number of team members should be between ".$sport->MinParticipants." and " .$sport->MaxParticipants." members";
-        }
-    }
-
-    if(!count($errors)){
-		 
-        // populate the challan table
-        $duedate = "12-10-17";
-        $AmountPayable = $numOfMembers * $sport->FeePerParticipant + $sport->RegistrationFee;
-        //find the new team ID first
-        $stmt = $mpdo->prepare("select max(TeamID) as max from sportsteam");
-        $stmt->execute();
-        $teamID = $stmt->fetch();
-        if(count($teamID))
-            $teamID = $teamID[0]+1;
-        if($teamID == 0)
-            $teamID = 1752;
-        $challanID = "T".$teamID."e".$sport->SportID;
-        $stmt = $mpdo->prepare("insert into challan(ChallanID, AmountPayable, DueDate, PaymentStatus) values(?,?,?,0)");
-        $stmt->execute([$challanID, $AmountPayable, $duedate]);
-
-        //populate the team table
-        $stmt = $mpdo->prepare("insert into sportsteam(TeamID, SportID, TeamName, HeadCNIC, ChallanID, AmountPayable, DueData, PaymentStatus) values(?,?,?,?,?,?,?,0)");
-        $HeadCNIC = $auth->getCNIC();
-        $stmt->execute([$teamID, $sport->SportID, $teamname, $HeadCNIC, $challanID, $AmountPayable, $duedate]);
-
-        //populate the sportsparticipant table
-        $stmt = $mpdo->prepare("insert into sportsparticipants(TeamID, ParticipantID) values(?,?)");
-        foreach($ids as $id){
-            $stmt->execute([$teamID, $id]);
-        }
-        if(isset($ambassador_id)){
-            foreach($ids as $id){
-                $stmt = $mpdo->prepare("insert into ambassador_participant(ParticipantID, AmbassadorID, EventID, SportID, ChallanID) values(?,?,?,?,?)");
-                $stmt->execute([$id, $ambassador_id, null, $sport->SportID, $challanID]);
-            }
-        }
-
-
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -215,23 +92,26 @@ if($formsubmitted){
 							<div class="modal-body">
                             <!--Insert all the errors here-->
                             <!---if there are no errors, then add a success message -->
-
-                              <form id="sportsform" method="POST">
+                            <div v-if="success" class="alert alert-success">
+                                Congratulations! Team registration successful!
+                            </div>
+                            <div class="alert alert-danger" v-if="errors.length != 0">
+                                <div class="row" v-for="error in errors">
+                                    {{ error|json }}
+                                </div>
+                            </div>
+                              <form id="sportsform" method="POST" @submit.prevent="submitForm">
                               <input id="sportid" type="hidden" name="sport">
                             <!--submit this form to /dashboard/teams/register.php with a POST request(using ajax method) -->
 							  	<div class="form-group">
 							  		<label class="control-label">
 							  		Team Name:
 							  		</label>
-							  		<input class="form-control" type="text" placeholder="Team Name" name="teamname">
+							  		<input v-model="teamname" class="form-control" type="text" placeholder="Team Name" name="teamname">
 							  	</div>
 							  	<hr>
 							  	<div class="form-group">
-							  		<label for="SearchTeamId" class="control-label">
-							  		Add a team member:
-							  		</label>
-							  		<input type="text" placeholder="User ID" class="form-control" id="SearchTeamId">
-							  		<button id="SearchBtn">Search</button>
+							  		<searchbox :members.sync="members"></searchbox>
 							  	</div>
 							  	<h3>Members added:</h3>
 							  	<div>
@@ -239,13 +119,11 @@ if($formsubmitted){
 							  	<div id="members"></div>
                                 <div class="form-group">
                                     <label class="control-label">Ambassador ID(optional)</label>
-                                    <input class="form-control" type="text" placeholder="Ambassador ID(optional)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ambassador ID(optional)'"  name="ambassador_id">
+                                    <input class="form-control" type="text" placeholder="Ambassador ID(optional)" v-model="ambassador_id" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ambassador ID(optional)'"  name="ambassador_id">
                                 </div>  
 							  	<hr>
                                 <button type="submit">Apply</button>
 							  </form>
-
-
 							</div>
 							<div class="modal-footer">
 							  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -291,17 +169,7 @@ if($formsubmitted){
                       <div class = "col-md-1"></div>
                             <div class="col-md-10 my-box ">
                             	<div class="row">
-                					<?php if( $formsubmitted && count($errors) ): ?>
-                                        <div class="col-md-10 col-md-offset-1 col-xs-12">
-                                            <div class="container-fluid">
-                                    <div  id =  'errorShow' class = "row">
-                                    <!--append errors here! -->
-                                        <?php foreach($errors as $field => $error): ?>
-                                        <div class="row"><?=$error?></div>
-                                        <?php endforeach ?>
-                                    </div>
-                                    </div></div>
-                                    <?php endif ?>
+                            
                             	</div>
                                 <h4 style="text-align:left;">Select a Sport</h4>
                                 <br>
@@ -457,96 +325,113 @@ if($formsubmitted){
             <script src="/js/classie.js"></script>
             <script src="/js/detectanimation.js"></script>
             <script src="/js/modernizr.custom.js"></script>
-            <script type="text/javascript" src="/js/timeline.js"></script>
-	<script type="text/javascript">
-	$(function(){
-		$("#SearchBtn").click(function(e){
-			console.log($("#SearchTeamId").val());
-			var destination="/dashboard/search.php";
-			$.post(destination, {'id' : $("#SearchTeamId").val()}, function(result){
-				if(result){
-					$result = JSON.parse(result);
-					console.log($result);
-					$newelement = "<div class='member'>";
-					$newelement += $result.Firstname + " " + $result.Lastname;
-					$newelement += "<input type='hidden' name='team_member_ids[]' value='"+$result.Participantid+"' >";
-					$newelement += "</div>";
-					$("#members").append($newelement);
-					console.log($newelement);
-				}
-	  		});
-			e.preventDefault();
-		});
-	});
-	</script>
+    <template id="searchbox">
+        <label for="SearchTeamId" class="control-label">
+        Add a team member:
+        </label>
+        <input type="text" v-model="term" placeholder="User ID" class="form-control" id="SearchTeamId">
+        <button id="SearchBtn" @click.prevent="search">Search</button>
+        <div v-if="result.Cnic">
+            {{ result.Cnic }} - {{ result.Firstname }} {{ result.Lastname }}
+            <button @click.prevent="add">add</button>
+        </div>
+        <hr>
+        Members Added:
+        <div v-for="member in members">
+            {{ member.Cnic }} - {{ member.Firstname }} {{ member.Lastname }}
+            <button @click.prevent="deletemember(member)">delete</button>
+        </div>
+    </template>
+   <script src="/js/vue.js" ></script>
+   <script src="/js/vue-resource.js" ></script>
+   <script src="/js/lodash.core.min.js" ></script>
+    <script>
+    Vue.http.options.emulateJSON = true;
+    Vue.component('searchbox',{
+        template: '#searchbox',
+        data: function(){return {
+            term : '',
+            result : {},
+        };},
+        props: ['members'],
+        methods: {
+            search(){
+                this.$http.post('/dashboard/search.php', {'id': this.term}).then((response)=>{
+                    console.log(this.result = JSON.parse(response.body));
+                    console.log(this.result.Participantid);
+                }, (response)=>{
+                    console.log("error");
+                });
+            },
+            add(){
+                if(!_.includes(this.members, this.result)){
 
-    <script type="text/javascript">
+                    this.members.push(this.result);
+                    console.log(this.members);
+                }
+                else{
+                    console.log("already exists");
+                }
+            },
+            deletemember(member){
+                // console.log(member);
+                var x;
+                for(var i=0;i<this.members.length;i++){
+                    if(this.members[i].Participantid == member.Participantid)
+                        x=i;
+                }
+
+                this.members.splice(x,1);
+            }
+        }
+    });
+    window.$vm = new Vue({
+        el : '#id-body',
+        data: {
+            members: [],
+            teamname : null,
+            ambassador_id : null,
+            sportid: null,
+            errors:[],
+            success:0
+        },
+        methods:{
+            resetForm: function(){
+                console.log("cleared");
+                this.members = [];
+                this.teamname = null;
+                this.ambassador_id = null;
+                this.success = 0;
+                this.errors = [];
+            },
+            submitForm: function(){
+                var ids = [];
+                for(member in this.members){
+                    ids.push(this.members[member].Participantid);
+                }
+                var formdata = {
+                    team_member_ids : ids,
+                    teamname : this.teamname,
+                    sport : this.sportid,
+                    ambassador_id: this.ambassador_id
+                }; 
+                console.log(formdata);
+                this.$http.post('/dashboard/teams/create.php', formdata).then((response)=>{
+                    console.log(response);
+                    if(response.body == "1")
+                        this.success = 1;
+                    else{
+                        this.errors = JSON.parse(response.body);
+                    } 
+                }, (response)=>{
+                    this.errors = [{'fatal':"Some error occured!"}];
+                });
+            }
+        }
+    });
+    $('#myModal').on('hidden.bs.modal', function(){window.$vm.resetForm();});
     $(document).ready(function()
     {
-
-
-        $('#myModal').on('hidden.bs.modal', function () {
-          $('#myModal').html(`
-                                    <div class="modal-dialog">
-                                    
-                                      <!-- Modal content-->
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                          <h4 class="modal-title">Modal Header</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                        <!--Insert all the errors here-->
-                                        <!---if there are no errors, then add a success message -->
-
-                                          <form id="sportsform" method="POST">
-                                          <input id="sportid" type="hidden" name="sport">
-                                        <!--submit this form to /dashboard/teams/register.php with a POST request(using ajax method) -->
-                                            <div class="form-group">
-                                                <label class="control-label">
-                                                Team Name:
-                                                </label>
-                                                <input class="form-control" type="text" placeholder="Team Name" name="teamname">
-                                            </div>
-                                            <hr>
-                                            <div class="form-group">
-                                                <label for="SearchTeamId" class="control-label">
-                                                Add a team member:
-                                                </label>
-                                                <input type="text" placeholder="User ID" class="form-control" id="SearchTeamId">
-                                                <button id="SearchBtn">Search</button>
-                                            </div>
-                                            <h3>Members added:</h3>
-                                            <div>
-                                            </div>
-                                            <div id="members"></div>
-                                            <div class="form-group">
-                                                <label class="control-label">Ambassador ID(optional)</label>
-                                                <input class="form-control" type="text" placeholder="Ambassador ID(optional)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ambassador ID(optional)'"  name="ambassador_id">
-                                            </div>  
-                                            <hr>
-                                            <button type="submit">Apply</button>
-
-                                          </form>
-
-
-                                        </div>
-                                        <div class="modal-footer">
-                                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        </div>
-                                      </div>
-                                      
-                                    </div>
-
-
-           `);
-        })
-
-
-
-
-
-
         teamEvent = ["none","Volleyball(Male)","Volleyball(Female)","Basketball(Male)","Basketball(Female)",
         "Table Tennis(Male)","Table Tennis(Female)","Badminton(Male)","Badminton(Female)",
         "Cricket","FootyMania","Call of Duty: Modern Warfare 5","Counter Strike 1.6 5",
@@ -557,21 +442,12 @@ if($formsubmitted){
         $(".modal-title").html('Register for ' +teamEvent[0]);
         
         $(document).on("click", ".btn", function () {
-
             var id = $(this).attr('id');
-            $("#sportid").val(id);
-            
-                $(".modal-title").html('Register for ' +teamEvent[id]);
-            
-
-
+            window.$vm.sportid = id;
+            $(".modal-title").html('Register for ' +teamEvent[id]);
         });
-    
-
     });
-
     </script>
-   
 </body>
 
 </html>

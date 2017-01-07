@@ -22,8 +22,9 @@
         "psr-4": {
             "Register\\": "register/",
             "App\\": "app/",
-            "Model\\Model\\": "Model/Model"
+            "Model\\Model\\": "Model/Model",
+            "OlAdmin\\" : "oladmin/"
         },
-        "files" : ["app/helpers.php", "register/helpers.php", "dashboard/helpers.php"]
+        "files" : ["app/helpers.php", "register/helpers.php", "dashboard/helpers.php", "oladmin/helpers.php"]
     }
 }
