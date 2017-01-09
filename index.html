@@ -493,18 +493,19 @@
 								</div>
 							</div>
 							<div class="col-md-6 contact_us__form">
-								<form method="POST" action="/contact/index.php">
+								<div id = "contactError" class="alert alert-danger" hidden></div>
+								<form id  = "myForm" method="POST" action="/contact/index.php">
 									<div class="row">
 										<div class="col-md-6 col-lg-6">
-											<input class="form-control  clckd" style="background:transparent; color:white" type="text" name="name" placeholder="NAME">
+											<input class="form-control  clckd" style="background:transparent; color:white" type="text" id = "contactName" name="name" placeholder="NAME">
 										</div>
 										<div class="col-md-6 col-lg-6">
-											<input class="form-control clckd" style="background:transparent; color:white" type="email" name="email" placeholder="EMAIL">
+											<input class="form-control clckd" style="background:transparent; color:white" type="email" id = "contactEmail" name="email" placeholder="EMAIL">
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-12 col-lg-12">
-											<textarea id = "txtr" class="form-control  clckd" style="background:transparent; color:white" rows="5" name="message" placeholder="MESSAGE"></textarea>
+											<textarea id = "txtr" class="form-control  clckd" style="background:transparent; color:white"  rows="5" name="message" placeholder="MESSAGE"></textarea>
 										</div>
 									</div>
 									<div class="row">
@@ -629,9 +630,7 @@
 	<script src="js/responsive-logo.js"></script>
 	<!-- countdown -->
 	<script src="countdown/cubical/countdowncube.js"></script>
-        <script>
-                    $('#counter').countdownCube({target: new Date(2017,0,10), cubeSize: 100 } );
-       </script>
+
 
    <!-- preloading flame js-->
    <script type="text/javascript" src="js/flame.js"></script>
@@ -752,6 +751,91 @@
 <script type="text/javascript" src="js/timeline.js"></script>
 <script type="text/javascript">
 		$(document).ready(function(){
+			$('#counter').countdownCube({target: new Date(2017,0,10), cubeSize: 100 } );
+
+			$("#myForm").submit(function(event){
+
+			    // Prevent default posting of form - put here to work in case of errors
+			    event.preventDefault();
+
+			    
+			    // setup some local variables
+			    var $form = $(this);
+
+			    // Let's select and cache all the fields
+			    var $inputs = $form.find("input, select, button, textarea");
+
+
+			    // Let's disable the inputs for the duration of the Ajax request.
+			    // Note: we disable elements AFTER the form data has been serialized.
+			    // Disabled form elements will not be serialized.
+			    $inputs.prop("disabled", true);
+
+			    // Fire off the request
+			    $("#contactError").toggleClass('alert-danger alert-info');
+			    $("#contactError").html("<div class = 'blink_me'><strong>Processing!</strong> Please wait!</div>");
+			    $("#contactError").show();
+			    request = $.post("/contact/index.php",
+			    {
+			        captcha: $("#g-recaptcha-response").val(),
+			        name: $("#contactName").val(),
+			        email:$("#contactEmail").val(),
+			        message:$("#txtr").val()
+			    },
+			    function(data){
+			        if(data == 1){
+			        	$("#contactError").toggleClass('alert-info alert-success');
+
+			        	$("#contactError").html("<strong>Success!</strong>We'll get back to you soon!");
+			        }
+			        else{
+			        	$("#contactError").toggleClass('alert-info alert-danger');
+
+			        	$("#contactError").html("<strong>Error!</strong> ");
+
+
+			        	var errorobj = jQuery.parseJSON( data);
+			        	jQuery.each(errorobj, function(i, val) {
+			        	  $("#contactError").append(val);
+			        	  $("#contactError").append("<br>");
+
+			        	});
+			        }
+			    });
+
+
+			    // Callback handler that will be called on failure
+			    request.fail(function (jqXHR, textStatus, errorThrown){
+			        // Log the error to the console
+			        console.error(
+			            "The following error occurred: "+
+			            textStatus, errorThrown
+			        );
+			    });
+
+			    // Callback handler that will be called regardless
+			    // if the request failed or succeeded
+			    request.always(function () {
+			        // Reenable the inputs
+			        $inputs.prop("disabled", false);
+			    });
+
+			});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			
 			$("#capt").hide();	//hussains			
 			

@@ -29,7 +29,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
  	$captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
 				[
 				"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
-				"response"	=> $_POST['g-recaptcha-response'],
+				"response"	=> $_POST['captcha'],
 				"remoteip"	=> $ipaddress
 				]);
  	if(!$captcha->success)
@@ -60,5 +60,12 @@ htmlmessage;
 if(isset($errors) && count($errors)){
 	$ajax = json_encode($errors);
 	echo $ajax;
+	exit();
 }
+else{
+echo 1;
+exit();
+
+}
+
 // \App\redirect("/");

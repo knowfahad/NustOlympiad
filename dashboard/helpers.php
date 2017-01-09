@@ -16,7 +16,7 @@ require_once(__DIR__."/../bootstrap.php");
 function getChallans($auth, $conn){
 	$stmt = $conn->prepare(
 <<<epquery
-select 		e.Name, e.EventType, e.EventFee, challan.DueDate, challan.ChallanID, ep.PaymentStatus
+select 		e.Name, e.EventType, e.EventFee, challan.DueDate, challan.ChallanID, challan.PaymentStatus
 from    	eventparticipants as ep
 inner join 	events as e
 on 			e.EventID = ep.EventID
