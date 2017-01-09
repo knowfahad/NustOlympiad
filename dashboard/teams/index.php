@@ -229,11 +229,11 @@ $auth->onlyVerified();
                                             <input type="button" id="10" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="FootyMania"/>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="button" id="11" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="COD: Modern Warfare 5"
+                                            <input type="button" id="11" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="COD: Modern Warfare"
                                             />
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="button" id="12" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Counter Strike 1.6 5"
+                                            <input type="button" id="12" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Counter Strike 1.6"
                                             />
                                         </div>
                                     </div>
@@ -241,10 +241,10 @@ $auth->onlyVerified();
 
                                      <div class="row">
                                         <div class="col-md-4">
-                                            <input type="button" id="13" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Counter Strike Go 5"/>
+                                            <input type="button" id="13" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Counter Strike Go"/>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="button" id="14" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="DOTA 2 5"
+                                            <input type="button" id="14" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="DOTA 2"
                                             />
                                         </div>
                                         <div class="col-md-4">
@@ -292,10 +292,21 @@ $auth->onlyVerified();
                                             <input type="button" id="23" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Pakistan Got Talent"
                                             />
                                         </div>
-                                        <!--<div class="col-md-4">
-                                            <input type="button" id="24" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Olympiad Feud"
+                                        <div class="col-md-4">
+                                            <input type="button" id="24" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Paintball"
                                             />
-                                        </div>-->
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                     <div class="row">
+                                        <div class="col-md-4">
+                                            <input type="button" id="25" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Minute to win it(team)"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" id="26" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Master Chef"/>
+                                        </div>
+                                        
                                     </div>
                                     <br>
 									</center>
@@ -437,7 +448,7 @@ $auth->onlyVerified();
         "Cricket","FootyMania","Call of Duty: Modern Warfare 5","Counter Strike 1.6 5",
         "Counter Strike Go 5","DOTA 2 5","Bait Bazi","Capture The Flag","Human Foosball",
         "The Crimeline Road","Mathletics","The Egg Rover Mission","Olympiad Feud","Graffiti",
-        "Pakistan Got Talent"];
+        "Pakistan Got Talent","Minute to win it(team)","Master Chef"];
 
         $(".modal-title").html('Register for ' +teamEvent[0]);
         
