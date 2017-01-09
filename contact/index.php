@@ -7,21 +7,24 @@ require_once(__DIR__."/../bootstrap.php");
 use App\OlMail;
 use Respect\Validation\Validator as v;
 
+function sanitize($data){
+    return htmlspecialchars(strip_tags($data));
+}
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
 	$errors=[];
-	if(!strlen($_POST['name'] ?? ""))
+	if(!strlen(sanitize($_POST['name'] ?? "")))
 		$errors['name'] = "Please enter a name!";
 	else
-		$name = $_POST['name'];
+		$name = sanitize($_POST['name']);
 	if(!strlen($_POST['email'] ?? ""))
 		$errors['email'] = "Please enter an email!";
 	else
-		$email = $_POST['email'];
-	if(!strlen($_POST['message'] ?? ""))
+		$email = sanitize($_POST['email']);
+	if(!strlen(sanitize($_POST['message'] ?? "")))
 		$errors['message'] = "Please enter a message!";
 	else
-		$message = $_POST['message'];
+		$message = sanitize($_POST['message']);
 	$emailvalidation = v::NotEmpty()->email();
 	if(!$emailvalidation->validate($email??''))
 		$errors['email'] = "Please enter a valid email address";
@@ -29,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
  	$captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
 				[
 				"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
-				"response"	=> $_POST['captcha'],
+				"response"	=> sanitize($_POST['captcha']),
 				"remoteip"	=> $ipaddress
 				]);
  	if(!$captcha->success)

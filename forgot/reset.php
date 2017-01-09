@@ -1,13 +1,15 @@
 <?php 
 require_once(__DIR__."/../bootstrap.php");
 use Respect\Validation\Validator as v;
-
+function sanitize($data){
+    return htmlspecialchars(strip_tags($data));
+}
 //three posibilities: 
 //1- link is invalid - token from the get request
 //2- link is valid: show email and password form - token from the get request
 
 //check if the link is valid
-$token = ($_GET['token']) ?? "";
+$token = sanitize(($_GET['token']) ?? "");
 $invalid = false;
 $errors = [];
 
@@ -23,9 +25,9 @@ else{
 }
 //if the link is valid and the email and password is provided
 if(!$invalid && isset($_POST['email']) && isset($_POST['pwd']) && isset($_POST['repwd']) ){
-	$email = $_POST['email'];
-	$pwd = $_POST['pwd'];
-	$repwd = $_POST['repwd'];
+	$email = sanitize($_POST['email']);
+	$pwd = ($_POST['pwd']);
+	$repwd = ($_POST['repwd']);
 	//now check if the data provided is valid
 	$pwdvalidation = v::notEmpty()->length(8, null);
 	$emailvalidation = v::NotEmpty()->email()->length(3,90);

@@ -2,11 +2,15 @@
 require_once(__DIR__."/../bootstrap.php");
 use Respect\Validation\Validator as v;
 $auth->onlyGuests();
+function sanitize($data){
+    return htmlspecialchars(strip_tags($data));
+}
+
 $formsubmitted = $_SERVER['REQUEST_METHOD'] == 'POST';
 $success = false;
 if($formsubmitted){
     $errors = [];
-	$email = $_POST['email'] ?? "";
+	$email = sanitize($_POST['email'] ?? "");
 	$emailvalidation = v::NotEmpty()->email();
 	if(!$emailvalidation->validate($email)){
 		$errors['email'] = "Please enter a valid email address.";

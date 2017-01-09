@@ -66,7 +66,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$ep->setParticipantCNIC($participant->getCNIC());
 			$ep->setEventID($event->getEventID());
 			$ep->setChallanID($challanid);
-			$ep->setPaymentStatus(0);
 			$ep->setDueDate("10-10-2016");
 			$ep->save();
 			//add a row in ambassador_participant if ambassador_id provided

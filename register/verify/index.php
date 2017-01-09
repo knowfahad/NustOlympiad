@@ -1,9 +1,13 @@
 <?php
 require_once(__DIR__."/../../bootstrap.php");
+function sanitize($data){
+    return htmlspecialchars(strip_tags($data));
+}
+
 if( isset($_GET['username']) && isset($_GET['activationcode']) ){
 	$error = false;
-	$URLusername = strip_tags($_GET["username"]);
-	$URLcode = strip_tags($_GET["activationcode"]);
+	$URLusername = sanitize($_GET["username"]);
+	$URLcode = sanitize($_GET["activationcode"]);
 	$stmt = $mpdo->prepare("SELECT ActivationCode FROM useraccount WHERE Username = ?") ;
 	$stmt->execute([$URLusername]);
 	if($stmt->rowCount() < 0) {

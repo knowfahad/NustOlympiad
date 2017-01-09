@@ -11,6 +11,9 @@ use Model\Model\EventsQuery;
 //blocks users who are not logged in from visiting this page
 $auth->onlyLoggedIn();
 $auth->onlyVerified();
+function sanitize($data){
+    return htmlspecialchars(strip_tags($data));
+}
 
 //find the list of events to display
 $stmt = $mpdo->prepare("select e.EventID, e.Name from events as e where e.EventType = 1 and e.EventID not in (select ep.EventID from eventparticipants as ep where ep.ParticipantCNIC = ?)");
@@ -22,7 +25,7 @@ $eventlist = $stmt->fetchAll(PDO::FETCH_ASSOC);
 //process the form if it was submitted
 $formsubmitted = $_SERVER['REQUEST_METHOD'] == 'POST';
 if($formsubmitted){
-	$eventname = $_POST['eventname'];
+	$eventname = sanitize($_POST['eventname']);
 
 	if(!strlen($eventname)){
 		$error = "Please select on option!";
@@ -67,7 +70,6 @@ if($formsubmitted){
 			$ep->setParticipantCNIC($participant->getCNIC());
 			$ep->setEventID($event->getEventID());
 			$ep->setChallanID($challanid);
-			$ep->setPaymentStatus(0);
 			$ep->setDueDate("10-10-2016");
 			$ep->save();
 			//add a row in ambassador_participant if ambassador_id provided

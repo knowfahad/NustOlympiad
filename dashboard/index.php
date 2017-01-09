@@ -198,7 +198,7 @@ if(isset($_GET['feedback'])){
                     <br>
 
                     
-                    <div class="row">
+                    <div class="row clearfix">
                         <div class="col-md-6 col-xs-12">
                             <div class="my-box challans">
                                 <h4 style="text-align:left;">Challans</h4>
@@ -308,7 +308,7 @@ if(isset($_GET['feedback'])){
                                      <?php endforeach ?>
                                      <?php endif ?> 
                                                   
-                                                </div>
+                                        <!-- </div> -->
                                     </div>
                                 
                                 </div>

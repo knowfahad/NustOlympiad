@@ -6,11 +6,16 @@ use PDO;
 use Model\Model\SportsQuery;
 use Respect\Validation\Validator as v;
 
+function sanitize($data){
+    return htmlspecialchars(strip_tags($data));
+}
+
+
 $sports = SportsQuery::create()->find();
 $formsubmitted = $_SERVER['REQUEST_METHOD'] == "POST"; 
 if($formsubmitted){
     $errors = [];
-    $ids = $_POST['team_member_ids'] ?? [];
+    $ids = sanitize($_POST['team_member_ids'] ?? []);
     if(!count($ids)){
         $errors["ids"] = "You didn't add any members to the team!";
     }
@@ -24,12 +29,12 @@ if($formsubmitted){
     }
 
 
-    $teamname = trim(strip_tags($_POST['teamname']??''));
+    $teamname = trim(sanitize($_POST['teamname']??''));
     $teamnamevalidation = v::NotEmpty()->NoWhitespace()->alnum()->length(3,20);
     if(!$teamnamevalidation->validate($teamname))
         $errors['teamname'] = "Please enter a valid team name.";
     if(isset($_POST['sport']))
-        $sport = $_POST['sport'];
+        $sport = sanitize($_POST['sport']);
     else
         $errors['sport'] = "Please select a sport";
 
@@ -109,7 +114,7 @@ if($formsubmitted){
         $stmt->execute([$challanID, $AmountPayable, $duedate]);
 
         //populate the team table
-        $stmt = $mpdo->prepare("insert into sportsteam(TeamID, SportID, TeamName, HeadCNIC, ChallanID, AmountPayable, DueData, PaymentStatus) values(?,?,?,?,?,?,?,0)");
+        $stmt = $mpdo->prepare("insert into sportsteam(TeamID, SportID, TeamName, HeadCNIC, ChallanID, AmountPayable, DueData) values(?,?,?,?,?,?,?)");
         $HeadCNIC = $auth->getCNIC();
         $stmt->execute([$teamID, $sport->SportID, $teamname, $HeadCNIC, $challanID, $AmountPayable, $duedate]);
 
