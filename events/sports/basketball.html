@@ -27,7 +27,10 @@
 
 <body id="id-body" >
 	<div class="td-preloading">
-		<span class="fa fa-spinner fa-spin"></span>
+		<!-- <span class="fa fa-spinner fa-spin"></span> -->
+    
+      <canvas id="c" width="300px" height="300px" ></canvas>
+      <img src="../../img/torch.png" widht="150px" height="150px" id="id-img-preload">
 	</div>
 
 	<div class="td-container">
@@ -80,7 +83,7 @@
         <div class="col-md-4 col-xs-12">
            <!-- two divs for holding images or any other content -->
            <div class="row">
-              <div class="col-md-12 col-xs-12  class-content">
+              <div class="col-md-12 col-xs-12 class-image class-content">
                  <!-- paste your image here -->
                  <h2>What is Lorem Ipsum?</h2>
                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
@@ -88,7 +91,7 @@
          </div>
          <br>
          <div class="row">
-          <div class="col-md-12 col-xs-12  class-content">
+          <div class="col-md-12 col-xs-12 class-image class-content">
              <!-- paste your image here -->
              <h2>What is Lorem Ipsum?</h2>
              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
@@ -100,12 +103,27 @@
 </div>
 </div>
 <script src="../../js/jquery.min.js"></script>
+<script type="text/javascript">
+      $(document).ready(function(){
+        function setPreLoadMargin(){
+          var width = $(window).width();
+          
+          $('#c').css({"position":"absolute","left":((width-300)/2)+"px"});
+          $('#id-img-preload').css({"position":"absolute","top":"50%","left":((width-95)/2)+"px"});
+        }
+        setPreLoadMargin();
+        $(window).resize(function(){setPreLoadMargin();});
+
+      });
+   </script>
 <script src="../../js/responsive.js"></script>
 <script src="../../js/perfect-scrollbar.min.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
 <script src="../../js/jquery.visible.min.js"></script>
 <script src="../../js/scriptdemo3.js"></script>
 <script src="../../js/detectanimation.js"></script>
+ <!-- preloading flame js-->
+   <script type="text/javascript" src="../../js/flame.js"></script>
 <script type="text/javascript">
   
 

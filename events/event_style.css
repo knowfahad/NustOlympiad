@@ -30,6 +30,7 @@
   .class-content{
     border: 1px solid white;
     background: rgba(255,255,255,0.15);
+
   }
   .class-separator{
     width: 2px;
@@ -38,4 +39,13 @@
   }
   .class-separator-conatiner{
     height: inherit;
+  }
+  .class-image
+  {
+    padding: 0;
+  }
+  .image
+  {
+    max-width: 100%;
+    max-height: 100%;
   }
