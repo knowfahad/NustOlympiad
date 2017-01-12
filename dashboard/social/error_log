@@ -1,0 +1,32 @@
+[10-Jan-2017 01:41:03 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'S11E101' for key 'PRIMARY' in /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php:194
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php(194): PDOStatement->execute(NULL)
+#1 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(811): Propel\Runtime\Connection\StatementWrapper->execute()
+#2 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(709): Model\Model\Base\Challan->doInsert(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#3 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(673): Model\Model\Base\Challan->doSave(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#4 [internal function]: Model\Model\Base\Challan->Model\Model\Base\{closure}()
+#5 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/Trans in /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php on line 814
+[10-Jan-2017 01:41:47 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'S1E101' for key 'PRIMARY' in /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php:194
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php(194): PDOStatement->execute(NULL)
+#1 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(811): Propel\Runtime\Connection\StatementWrapper->execute()
+#2 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(709): Model\Model\Base\Challan->doInsert(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#3 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(673): Model\Model\Base\Challan->doSave(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#4 [internal function]: Model\Model\Base\Challan->Model\Model\Base\{closure}()
+#5 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/Transa in /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php on line 814
+[10-Jan-2017 01:42:27 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'S7E101' for key 'PRIMARY' in /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php:194
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php(194): PDOStatement->execute(NULL)
+#1 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(811): Propel\Runtime\Connection\StatementWrapper->execute()
+#2 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(709): Model\Model\Base\Challan->doInsert(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#3 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(673): Model\Model\Base\Challan->doSave(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#4 [internal function]: Model\Model\Base\Challan->Model\Model\Base\{closure}()
+#5 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/Transa in /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php on line 814
+[10-Jan-2017 01:43:09 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'S7E102' for key 'PRIMARY' in /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php:194
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php(194): PDOStatement->execute(NULL)
+#1 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(811): Propel\Runtime\Connection\StatementWrapper->execute()
+#2 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(709): Model\Model\Base\Challan->doInsert(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#3 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(673): Model\Model\Base\Challan->doSave(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#4 [internal function]: Model\Model\Base\Challan->Model\Model\Base\{closure}()
+#5 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/Transa in /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php on line 814

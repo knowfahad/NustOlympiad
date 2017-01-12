@@ -25,14 +25,14 @@ $eventlist = $stmt->fetchAll(PDO::FETCH_ASSOC);
 //process the form if it was submitted
 $formsubmitted = $_SERVER['REQUEST_METHOD'] == 'POST';
 if($formsubmitted){
-	$eventname = sanitize($_POST['eventname']);
+	$eventname = $_POST['eventname'];
 
 	if(!strlen($eventname)){
 		$error = "Please select on option!";
 	}
 	else{
-		$stmt = $mpdo->prepare("select e.EventID from eventparticipants as e where e.EventID = ?");
-		$stmt->execute([$eventname]);
+		$stmt = $mpdo->prepare("select e.EventID from eventparticipants as e where e.EventID = ? AND e.ParticipantCNIC = ?");
+		$stmt->execute([$eventname, $auth->getCNIC()]);
 		if($stmt->rowCount())
 			$error = "You have already participated in this event!";
 	}
