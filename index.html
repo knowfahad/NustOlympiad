@@ -630,7 +630,8 @@
 	<!-- countdown -->
 	<script src="countdown/cubical/countdowncube.js"></script>
         <script>
-                    $('#counter').countdownCube({target: new Date(2017,0,10), cubeSize: 100 } );
+        			//here days start from 1 and months start from 0. for example for January 1st 2017 we have (new Date(2017,0,1))//
+                    $('#counter').countdownCube({target: new Date(2017,0,28), cubeSize: 100 } );
        </script>
 
    <!-- preloading flame js-->
