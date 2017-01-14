@@ -452,7 +452,7 @@ $auth->onlyVerified();
     $('#myModal').on('hidden.bs.modal', function(){window.$vm.resetForm();});
     $(document).ready(function()
     {
-         teamEvent = ["none","Volleyball(Male)","Volleyball(Female)","Basketball(Male)","Basketball(Female)",
+         var teamEvent = ["none","Volleyball(Male)","Volleyball(Female)","Basketball(Male)","Basketball(Female)",
         "Table Tennis(Male)","Table Tennis(Female)","Badminton(Male)","Badminton(Female)",
         "Cricket","FootyMania","Call of Duty 4: Modern Warfare","Counter Strike 1.6",
         "DOTA 2","Paintball","Bait Bazi","Capture The Flag","Human Foosball",
