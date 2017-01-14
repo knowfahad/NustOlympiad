@@ -4,7 +4,9 @@ require_once (__DIR__ . '/../bootstrap.php');
 use App\OlMail;
 use Respect\Validation\Validator as v;
 
-
+function sanitize($data){
+    return htmlspecialchars(strip_tags($data));
+}
 
 /**
  * function that will validate the forms
@@ -17,22 +19,22 @@ function preprocess($mpdo){
  	$errors = [];
  	$data = [];
 
- 	$data['username'] = strtolower( strip_tags( trim($_POST["username"]) ) );
- 	$data['cnic'] = strip_tags( trim($_POST["cnic"]) );
- 	$data['email'] = strtolower( strip_tags( trim($_POST["email"]) ) );
+ 	$data['username'] = strtolower( sanitize( trim($_POST["username"]) ) );
+ 	$data['cnic'] = sanitize( trim($_POST["cnic"]) );
+ 	$data['email'] = strtolower( sanitize( trim($_POST["email"]) ) );
  	$data['pwd'] = $_POST["pwd"];
  	$data['repwd'] = $_POST["repwd"];  
  	$data['gender'] = "";
- 	$data['phone'] = strip_tags( trim($_POST["mobile"]) );
- 	$data['fname'] = strtolower( strip_tags( trim($_POST["fname"]) ) );
- 	$data['lname'] = strtolower( strip_tags( trim($_POST["lname"]) ) );
- 	$data['mobile'] = strip_tags( trim($_POST["mobile"]) );
- 	$data['address'] = strtolower( strip_tags( trim($_POST["address"]) ) );
- 	$data['isNustian'] = strip_tags( trim($_POST["isNustian"]) );
- 	$data['ambassador'] = strip_tags( trim($_POST["ambassador"]) );  
+ 	$data['phone'] = sanitize( trim($_POST["mobile"]) );
+ 	$data['fname'] = strtolower( sanitize( trim($_POST["fname"]) ) );
+ 	$data['lname'] = strtolower( sanitize( trim($_POST["lname"]) ) );
+ 	$data['mobile'] = sanitize( trim($_POST["mobile"]) );
+ 	$data['address'] = strtolower( sanitize( trim($_POST["address"]) ) );
+ 	$data['isNustian'] = sanitize( trim($_POST["isNustian"]) );
+ 	$data['ambassador'] = sanitize( trim($_POST["ambassador"]) );  
  	$data['isAmbassador'] = false;
- 	$data['ambassadorid'] = strip_tags( trim($_POST["ambassador"] ?? ""));
- 	$data['institute'] = strip_tags( trim($_POST["institute"] ?? ""));
+ 	$data['ambassadorid'] = sanitize( trim($_POST["ambassador"] ?? ""));
+ 	$data['institute'] = sanitize( trim($_POST["institute"] ?? ""));
 
  	////basic validations
  	
@@ -71,15 +73,15 @@ function preprocess($mpdo){
  		$errors['repwd'] = "Repeat Password doesn't match!";
  	if(!$namevalidation->validate($data['institute']))
  		$errors['institute'] = "Please enter the valid name of your institute.";
- 	$ipaddress = \App\get_client_ip();
- 	$captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
-				[
-				"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
-				"response"	=> $_POST['g-recaptcha-response'],
-				"remoteip"	=> $ipaddress
-				]);
- 	if(!$captcha->success)
- 		$errors['captcha'] = "Captcha is required!";
+ 	// $ipaddress = \App\get_client_ip();
+ 	// $captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
+		// 		[
+		// 		"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
+		// 		"response"	=> $_POST['g-recaptcha-response'],
+		// 		"remoteip"	=> $ipaddress
+		// 		]);
+ 	// if(!$captcha->success)
+ 	// 	$errors['captcha'] = "Captcha is required!";
 
  	/////advanced checking
 
@@ -116,7 +118,7 @@ function preprocess($mpdo){
  	}
 
  	if($data['isNustian'] == "n_yes"){
-	 	$data['nustid'] = strip_tags(trim($_POST["nustid"]));
+	 	$data['nustid'] = sanitize(trim($_POST["nustid"]));
 	 	if(!$nustidvalidation->validate($data['nustid'])){
 	 		$errors['nustid'] = "Please enter a valid CMS ID";
 	 	}
@@ -252,25 +254,33 @@ function uploadimg($img, $dir, $name, $max_size){
 	$errors = [];
 	$path = "";
 	$allowed = ['jpg', 'jpeg'];
+	try{
+		$info = pathinfo($img['name']);
+		if(!isset($info['extension'])){
+			$errors[] = "Please upload an image!";
+			return $errors;
+		}
+		$ext = $info['extension'];
+		$size=$img['size']/1048576;
+		
+		if($size>$max_size){
+			$errors["size"] = "The photos must be less than ".$max_size.".";	
+		}
+		if(!in_array($ext,$allowed)){
+			$errors["ext"] = "The photo must be in JPEG format.";
+		}
+		if(!count($errors)){
+			$newname = $name.".jpg"; 
+			$target = __DIR__."/../".$dir."/".$newname;
 
-	$info = pathinfo($img['name']);
-	$ext = $info['extension'];
-	$size=$img['size']/1048576;
-	
-	if($size>$max_size){
-		$errors["size"] = "The photos must be less than ".$max_size.".";	
+			if (!move_uploaded_file($img['tmp_name'], $target))
+				$errors['An unknown error occured uploading your photo.'];
+			else
+				resize_image($target, 200, 200);
+		}
 	}
-	if(!in_array($ext,$allowed)){
-		$errors["ext"] = "The photo must be in JPEG format.";
-	}
-	if(!count($errors)){
-		$newname = $name.".jpg"; 
-		$target = __DIR__."/../".$dir."/".$newname;
-
-		if (!move_uploaded_file($img['tmp_name'], $target))
-			$errors['An unknown error occured uploading your photo.'];
-		else
-			resize_image($target, 200, 200);
+	catch(Exception $e){
+		$errors[] = "An error occured with uploading image!";
 	}
 	return $errors;
 }

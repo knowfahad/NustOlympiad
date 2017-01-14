@@ -198,7 +198,7 @@ if(isset($_GET['feedback'])){
                     <br>
 
                     
-                    <div class="row">
+                    <div class="row clearfix">
                         <div class="col-md-6 col-xs-12">
                             <div class="my-box challans">
                                 <h4 style="text-align:left;">Challans</h4>
@@ -228,28 +228,28 @@ if(isset($_GET['feedback'])){
                                         <?php endif ?>
 
 
-                                           <?php if($accomodationChallan): ?>
-                                         <div class="challan_item <?=($accomodationChallan['PaymentStatus'])?" paid ":" unpaid " ?>" >
-                                             <h5>Accomodation Challan</h4>
-                                             <div class="challan-buttons">
-                                                 <?php if(!$accomodationChallan['PaymentStatus']): ?>
-                                                 <form method="POST" action="http://ol-challan-generator.herokuapp.com/">
-                                                     <input type="hidden" value="Accomodation" name="eventname">
-                                                     <input type="hidden" value="<?= $accomodationChallan['ChallanID'] ?>" name="challanid">
-                                                     <input type="hidden" value="<?= $accomodationChallan['DueDate'] ?>" name="duedate">
-                                                     <input type="hidden" value="Accomodation" name="eventname">
-                                                     <input type="hidden" value="<?= $accomodationChallan['AmountPayable'] ?>" name="fee">
-                                                     <input type="hidden" value="accomodation" name="type">
-                                                     <button class="btn btn-xs btn-default" type="submit">Print</button> 
-                                                 </form>
-                                                 <form method="POST" action="/dashboard/challans/delete.php">
-                                                     <input type="hidden" name="challanid" value="<?=$accomodationChallan['ChallanID'] ?>">
-                                                     <button class="btn btn-xs btn-danger" type="submit">Delete</button> 
-                                                 </form>
-                                                 </div>
-                                                 <?php endif ?>
-                                         </div>
-                                         <?php endif ?>
+                                        <?php if($accomodationChallan): ?>
+                                        <div class="challan_item <?=($accomodationChallan['PaymentStatus'])?" paid ":" unpaid " ?>" >
+                                            <h5>Accomodation Challan</h4>
+                                            <?php if(!$accomodationChallan['PaymentStatus']): ?>
+                                            <div class="challan-buttons">
+                                                <form method="POST" action="http://ol-challan-generator.herokuapp.com/">
+                                                    <input type="hidden" value="Accomodation" name="eventname">
+                                                    <input type="hidden" value="<?= $accomodationChallan['ChallanID'] ?>" name="challanid">
+                                                    <input type="hidden" value="<?= $accomodationChallan['DueDate'] ?>" name="duedate">
+                                                    <input type="hidden" value="Accomodation" name="eventname">
+                                                    <input type="hidden" value="<?= $accomodationChallan['AmountPayable'] ?>" name="fee">
+                                                    <input type="hidden" value="accomodation" name="type">
+                                                    <button class="btn btn-xs btn-default" type="submit">Print</button> 
+                                                </form>
+                                                <form method="POST" action="/dashboard/challans/delete.php">
+                                                    <input type="hidden" name="challanid" value="<?=$accomodationChallan['ChallanID'] ?>">
+                                                    <button class="btn btn-xs btn-danger" type="submit">Delete</button> 
+                                                </form>
+                                            </div>
+                                            <?php endif ?>
+                                        </div>
+                                        <?php endif ?>
 
                                                  
                                      <?php foreach($challans as $challan): ?>
@@ -308,7 +308,7 @@ if(isset($_GET['feedback'])){
                                      <?php endforeach ?>
                                      <?php endif ?> 
                                                   
-                                                </div>
+                                        <!-- </div> -->
                                     </div>
                                 
                                 </div>

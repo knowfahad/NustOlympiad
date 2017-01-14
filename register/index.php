@@ -124,36 +124,78 @@ font-weight:normal;
                             <form class="form-horizontal" method="POST" id="reg_form" enctype="multipart/form-data" >
                                       <div class="h3">Create an Account</div>
                             <br>
+                            
 							<div class="form-group">
-                                <div>
-                                    <input id="username" name="username" placeholder="Username" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'UserName'"  required value="<?=$_POST['username']??''?>"
+                                <div class = row>
+                                    <div class = "col-md-3 col-xs-3">
+                                        <label for="rg-from"><b>Username:</b></label>
+                                        </div>
+                                        <div class = "col-md-9 col-xs-9">
+                                    <input id="username" name="username" placeholder="Min 3 characters" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Min 3 characters'"  required value="<?=$_POST['username']??''?>"
                                     >
+                                    </div>
                                 </div>
                             </div>
+
+                            
                             <div class="form-group">
-                                
-                                <div class="">
-                                    <input id="pwd" name="pwd" placeholder="Password (min 8 characters)" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password (min 8 characters)'"  required>
+                                <div class = row>
+                                <div class = "col-md-3 col-xs-3">
+                                    <label for="pwd"><b>Password:</b></label>
+                                        </div>
+                                        <div class = "col-md-9 col-xs-9">
+                                    <input id="pwd" name="pwd" placeholder="Min 8 characters" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Min 8 characters'"  required>
                                 </div>
                             </div>
+                            </div>
+
+
                             <div class="form-group">
-                                <div class="">
-                                    <input id="repwd" name="repwd" placeholder="Re-Enter Password" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Re-Enter Password'" required>
+                                <div class="row">
+                                    <div class = "col-md-3 col-xs-3">
+                                    <label for="repwd"><b>Repeat Password:</b></label>
+                                        </div>
+                                    <div class="col-md-9 col-xs-9">
+                                        <input id="repwd" name="repwd" placeholder="Re-Enter Password" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Re-Enter Password'" required>
+                                    </div>
                                 </div>
                             </div>
                             
+                             <div class="form-group">
+                                <div class = "row">
+                                    <div class = "col-md-3 col-xs-3">
+                                    <label for="email"><b>Email:</b></label>
+                                        </div>
+                                <div class="col-md-9 cl-xs-9">
+                                    <input id="email" name="email" placeholder="name@example.com" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'name@example.com'" required value="<?=$_POST['email']??''?>" >
+                                </div>
+                                </div>
+                            </div>
+
                             <div class="form-group">
-                                <div class="">
+                                <div class="row">
+                                    <div class = "col-md-3 col-xs-3">
+                                    <label for="fname"><b>First Name:</b></label>
+                                        </div>
+                                <div class="col-md-9 col-xs-9">
                                     <input id="fname" name="fname" placeholder="First Name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required value="<?=$_POST['fname']??''?>" >
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="">
-                                    <input  id="lname" name="lname" placeholder="Last Name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required value="<?=$_POST['lname']??''?>">
                                 </div>
                             </div>
-                            <!--insert label Gender-->
-							
+
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class = "col-md-3 col-xs-3">
+                                    <label for="lname"><b>Last Name:</b></label>
+                                        </div>
+                                <div class="col-md-9 col-xs-9">
+                                    <input  id="lname" name="lname" placeholder="Last Name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required value="<?=$_POST['lname']??''?>">
+                                </div>
+                                </div>
+                            </div>
+                          
+
 							<div class = "row">
 								<div class="form-group">
 								
@@ -174,28 +216,46 @@ font-weight:normal;
 							
                             <!--end label -->
                             <div class="form-group">
-                                <div class="">
+                                <div class="row">
+                                    <div class = "col-md-3 col-xs-3">
+                                    <label for="cnic"><b>CNIC:</b></label>
+                                        </div>
+                                <div class="col-md-9 cl-xs-9">
                                     <input id="cnic" name="cnic" placeholder="CNIC/ B.Form Number (Without Dashes)" type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'CNIC/ B.Form Number (Without Dashes)'" required value="<?=$_POST['cnic']??''?>" >
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="">
-                                    <input id="mobile" name="mobile" placeholder="Mobile Number" type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mobile Number'" required value="<?=$_POST['mobile']??''?>" >
                                 </div>
                             </div>
+
+
                             <div class="form-group">
-                                <div class="">
-                                    <input id="email" name="email" placeholder="Email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required value="<?=$_POST['email']??''?>" >
+                                <div class ="row">
+                                    <div class = "col-md-3 col-xs-3">
+                                    <label for="mobile"><b>Mobile No:</b></label>
+                                        </div>
+                                <div class="col-md-9 cl-xs-9">
+                                    <input id="mobile" name="mobile" placeholder="Format: 03xxxxxxxxx" type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Format: 03xxxxxxxxx'" required value="<?=$_POST['mobile']??''?>" >
+                                </div>
                                 </div>
                             </div>
+
                             <div class="form-group">
-                                <div class=""> 
+                                <div class = "row">
+                                    <div class = "col-md-3 col-xs-3">
+                                    <label for="address"><b>Address:</b></label>
+                                        </div>
+                                <div class="col-md-9 cl-xs-9"> 
                                     <input id="address" name="address" placeholder="Address" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address'" required value="<?=$_POST['address']??''?>" >
+                                </div>
                                 </div>
                             </div>
                             <div class="form-group" style="margin-bottom: 1%">
-                                <div class=""> 
+                                <div class = "row">
+                                    <div class = "col-md-3 col-xs-3">
+                                    <label for="institute"><b>Institute:</b></label>
+                                        </div>
+                                <div class="col-md-9 cl-xs-9"> 
                                     <input id="institute" name="institute" placeholder="Institute" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Institute'" required value="<?=$_POST['institute']??''?>" >
+                                </div>
                                 </div>
                             </div>
                         
@@ -245,10 +305,13 @@ font-weight:normal;
 							<div class = "row">
 								<div class="form-group makeinline" >
 							   
-									<h5 class="col-md-8 col-xs-6 makeline" style="color:white; font-weight:normal;">Upload an image</h5>
-									<input class="col-md-4 col-xs-6"   name="img" accept="image/*" type="file">
+									<h5 class="col-md-4 col-xs-6 makeline" style="color:white; font-weight:normal;">Upload an image</h5>
+									<input class="col-md-8 col-xs-6"   name="img" accept="image/*" type="file">
 								</div>
                             </div>
+                            <div class = "row">
+                                <p style="color:orange;">*Image must be in JPEG or JPG format and 1 MB max.</p>
+                                </div>
 
                             <div class="form-group">
                                 <div class="g-recaptcha" data-sitekey="6Ldgtg0UAAAAAIGYMROWOzYRwq_qKR3dFWoRbqA9"></div>

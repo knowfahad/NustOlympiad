@@ -11,6 +11,9 @@ use Model\Model\EventsQuery;
 //blocks users who are not logged in from visiting this page
 $auth->onlyLoggedIn();
 $auth->onlyVerified();
+function sanitize($data){
+    return htmlspecialchars(strip_tags($data));
+}
 
 //find the list of events to display
 $stmt = $mpdo->prepare("select e.EventID, e.Name from events as e where e.EventType = 1 and e.EventID not in (select ep.EventID from eventparticipants as ep where ep.ParticipantCNIC = ?)");
@@ -22,7 +25,7 @@ $eventlist = $stmt->fetchAll(PDO::FETCH_ASSOC);
 //process the form if it was submitted
 $formsubmitted = $_SERVER['REQUEST_METHOD'] == 'POST';
 if($formsubmitted){
-	$eventname = $_POST['eventname'];
+	$eventname = sanitize($_POST['eventname']);
 
 	if(!strlen($eventname)){
 		$error = "Please select on option!";
@@ -67,7 +70,6 @@ if($formsubmitted){
 			$ep->setParticipantCNIC($participant->getCNIC());
 			$ep->setEventID($event->getEventID());
 			$ep->setChallanID($challanid);
-			$ep->setPaymentStatus(0);
 			$ep->setDueDate("10-10-2016");
 			$ep->save();
 			//add a row in ambassador_participant if ambassador_id provided
@@ -114,7 +116,7 @@ if($formsubmitted){
 
 <script type="text/javascript">
 var IndividualEventsList = ["None","Funkaar","Pair’em Up","Hurdle Marathon","Wall Climbing","Archery","Air-Gun Shooting",
-"Nose Dive","Minute to win it","Live Charcoal","Pakistan Got Talent","Table Tennis(Males)","Table Tennis(Females)",
+"Nose Dive","Minute to win it(individual)","Live Charcoal","Pakistan Got Talent","Table Tennis(Males)","Table Tennis(Females)",
 "Badminton(Males)","Badminton(Females)","Chess","Squash(Males)","Squash(Females)","FIFA","Need for Speed: Most Wanted","Short Put","Long Jump",
 "100 Meters Race(Males)","100 Meters Race(Females)","200 Meters Race(Males)","200 Meters Race(Females)",
 "4*100 Meters Relay(Males)","4*100 Meters Relay(Females)","4*200 Meters Relay(Males)","4*200 Meters Relay(Females)","Essay Writing Competition","Who wants to be a millionaire"];
@@ -305,7 +307,7 @@ $(document).ready(function()
 											<input type="button" id = "7" class="btn btn-default btn-sm my-btn" value="Nose Dive" data-toggle="modal" data-target="#myModal"  />
 										</div>
 										<div class = "col-md-4">
-											<input type="button" id = "8" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Minute to win it" />
+											<input type="button" id = "8" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Minute to win it(individual)" />
 										</div>
                                         <div class = "col-md-4">
 											<input type="button" id = "9" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Live Charcoal" />

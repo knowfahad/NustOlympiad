@@ -41,3 +41,7 @@ function send_post($url, $data = []){
 
 	return json_decode($result);
 }
+
+function sanitize($data){
+    return htmlspecialchars(strip_tags($data));
+}

@@ -109,12 +109,13 @@ font-weight:normal;
 					</div>
 					
                         <div class="col-md-10 col-md-offset-1">
+                            
                             <div class="row">
                                  <div class="col-md-12  col-xs-12">
                                      <div class="container-fluid">
                                          <center><h2>Please verify your email to continue</h2></center>
                                          <br><br>
-                                         <h4 style="text-align:center;">To complete your registration, please check your email for account activation instructions.</h4><p style="text-align:center;">Make sure to check your spam-folder, the activation email might be marked as spam!<br><a href="/register/resend" style="text-decoration: underline;">Resend email</a></p>
+                                         <h4 style="text-align:center;">To complete your registration, please check your email for account activation instructions.</h4><p style="text-align:center;">Make sure to check your spam-folder, the activation email might be marked as spam!<br><a href="/register/resend" style="text-decoration: underline;">Resend email</a> | <a href="../../logout">Logout</a></p>
                               </div>
                                  </div>
                             </div>
