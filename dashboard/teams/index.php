@@ -92,9 +92,7 @@ $auth->onlyVerified();
 							<div class="modal-body">
                             <!--Insert all the errors here-->
                             <!---if there are no errors, then add a success message -->
-                            <div v-if="success" class="alert alert-success">
-                                Congratulations! Team registration successful!
-                            </div>
+                            
                             <div class="alert alert-danger" v-if="errors.length != 0">
                                 <div class="row" v-for="error in errors">
                                     {{ error|json }}
@@ -176,6 +174,9 @@ $auth->onlyVerified();
 								<br>
                                 <!--new -->
                                 <div class="row">
+                                <div v-if="success" class="alert alert-success">
+                                    Congratulations! Team registration successful!
+                                </div>
                                     <div class = "col-md-2 col-xs-3"></div>
 									<div class = "col-md-8 col-xs-6">
 									<center>
@@ -346,6 +347,9 @@ $auth->onlyVerified();
             {{ result.Cnic }} - {{ result.Firstname }} {{ result.Lastname }}
             <button @click.prevent="add">add</button>
         </div>
+        <div v-if="noresult">
+            Participant ID not found!
+        </div>
         <hr>
         Members Added:
         <div v-for="member in members">
@@ -363,6 +367,7 @@ $auth->onlyVerified();
         data: function(){return {
             term : '',
             result : {},
+            noresult: false
         };},
         props: ['members'],
         methods: {
@@ -370,8 +375,9 @@ $auth->onlyVerified();
                 this.$http.post('/dashboard/search.php', {'id': this.term}).then((response)=>{
                     console.log(this.result = JSON.parse(response.body));
                     console.log(this.result.Participantid);
+                    this.noresult = 0;
                 }, (response)=>{
-                    console.log("error");
+                    this.noresult = 1;
                 });
             },
             add(){
@@ -412,7 +418,6 @@ $auth->onlyVerified();
                 this.members = [];
                 this.teamname = null;
                 this.ambassador_id = null;
-                this.success = 0;
                 this.errors = [];
             },
             submitForm: function(){
@@ -429,8 +434,10 @@ $auth->onlyVerified();
                 console.log(formdata);
                 this.$http.post('/dashboard/teams/create.php', formdata).then((response)=>{
                     console.log(response);
-                    if(response.body == "1")
+                    if(response.body == "1"){
                         this.success = 1;
+                        $("#myModal").modal('toggle');
+                    }
                     else{
                         this.errors = JSON.parse(response.body);
                     } 
@@ -448,7 +455,7 @@ $auth->onlyVerified();
         "Cricket","FootyMania","Call of Duty: Modern Warfare 5","Counter Strike 1.6 5",
         "Counter Strike Go 5","DOTA 2 5","Bait Bazi","Capture The Flag","Human Foosball",
         "The Crimeline Road","Mathletics","The Egg Rover Mission","Olympiad Feud","Graffiti",
-        "Pakistan Got Talent","Minute to win it(team)","Master Chef"];
+        "Pakistan Got Talent", "Paintball","Minute to win it(team)","Master Chef"];
 
         $(".modal-title").html('Register for ' +teamEvent[0]);
         

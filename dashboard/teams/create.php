@@ -93,6 +93,9 @@ if($formsubmitted){
         // check if the total number of members are within range
         if($numOfMembers < $sport->MinParticipants || $numOfMembers > $sport->MaxParticipants){
         	$errors['NoOfMembers'] = "Number of team members should be between ".$sport->MinParticipants." and " .$sport->MaxParticipants." members";
+            if($sport->MinParticipants == $sport->MaxParticipants){
+                $errors['NoOfMembers'] = "Number of team members should be exactly ". $sport->MinParticipants;
+            }
         }
     }
 

@@ -94,7 +94,7 @@ $auth->onlyAdmin();
                                             </div> <!-- col end -->
 											</a>
 										
-										<a href="./team" id="team_challan">
+										<a href="/oladmin/teams" id="team_challan">
                                             <div class="col-xs-6 col-sm-6 col-md-3">
                                                 <div class="panel panel-default">
                                                     <div class="panel-body panel-body-top-br" style="background-color:#FFC300;">

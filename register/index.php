@@ -10,7 +10,7 @@ if ($formsubmitted){
     if(!count($errors)){
         $errors = persistUser($data, $mpdo);
         if(!count($errors))
-                \App\redirect("/login");
+                \App\redirect("/login?success=1");
     }   
 }
 ?>
