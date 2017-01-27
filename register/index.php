@@ -82,7 +82,7 @@ font-weight:normal;
         <!-- <span class="fa fa-spinner fa-spin"></span> -->
 		
 			<canvas id="c" width="300px" height="300px" ></canvas>
-			<img src="/img/torch.png" widht="150px" height="150px" id="id-img-preload">
+			<img src="../img/torch.png" widht="150px" height="150px" id="id-img-preload">
     </div>
     
     <div class="td-container">
@@ -406,7 +406,7 @@ font-weight:normal;
            
             <script type="text/javascript" src="../js/timeline.js"></script>
             <!-- preloading flame js-->
-   <script type="text/javascript" src="/js/flame.js"></script>
+   <script type="text/javascript" src="../js/flame.js"></script>
            
 </body>
 
