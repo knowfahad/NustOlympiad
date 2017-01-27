@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>NUST Olympiad '17</title>
+	<link rel="stylesheet" type="text/css" href="css/timeline.css">
+	<link href="css/lato.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/themify-icons.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel='stylesheet' href='css/perfect-scrollbar.min.css' />
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/buttons.css"/>
+	<link rel="stylesheet" href="css/animate.css"/>
+	<link rel="stylesheet" href="css/tooltip.css"/>
+	<link rel="stylesheet" href="css/style.css"/>
+	<link rel="stylesheet" href="css/demo3.css"/>
+	<link rel="stylesheet" href="css/contactus.css">
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+
+	
+	<link rel="stylesheet" href="countdown/cubical/countdowncube.css">
+    <style class="inlinestyle">#counter
+    {
+       margin: 10 auto;
+       text-align: center;
+    }</style>
+
+
+
+
+</head>
+<body id="id-body">
+	<div class="td-preloading">
+		<!-- <span class="fa fa-spinner fa-spin"></span> -->
+		
+			<canvas id="c" width="300px" height="300px" ></canvas>
+			<img src="img/torch.png" widht="150px" height="150px" id="id-img-preload">
+				
+		</div>
+	</div>
+	<div class="td-container">
+		<div class="td-menu">
+		</div>
+		<div class="td-sheets-container td-hide td-sheet-active-1">
+			<div id="scrollbar-container" class="td-sheet active">
+				<div class="td-sheet-icon">
+					<i class="ti-home"></i>
+				</div>
+				<div class="td-sheet-title">Home</div>
+					<div class="" style="position:absolute; float:left; top:45%; left:1%; display: flex; justify-content: flex-start;" onclick="leftArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-left arrow-inside" ></i>
+						</div>
+					</div>
+					<div class="" style="position:absolute; float:right; right:1%; top:45%; display: flex; justify-content: flex-end;" onclick="rightArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-right arrow-inside" ></i>
+						</div>
+					</div>
+				<div class="container-fluid"><!--fizza-->
+					<div class="row homepage" style="margin-bottom: 0px;">
+						<br><br>
+						<div data-animation="fadeInDown" data-animation-delay="100" style="display: flex; flex-direction: row;" id="id-div-logo">
+							<img src="img/cube.png" alt="Logo" style="" id="id-img-logo" class="img-responsive"/>
+					</div>
+						
+					</div>
+				</div>
+			</div>
+
+			<!-- countdown by mukarram -->
+			<div class="td-sheet">
+				<div class="td-sheet-icon">
+					<i class="ti-pencil-alt"></i>
+				</div>
+				<div class="td-sheet-title">Register</div>
+					<div class="" style="position:absolute; float:left; top:45%; left:1%; display: flex; justify-content: flex-start;z-index:9999;" onclick="leftArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-left arrow-inside" ></i>
+						</div>
+					</div>
+					<div class="" style="position:absolute; float:right; right:1%; top:45%; display: flex; justify-content: flex-end;z-index:9999;" onclick="rightArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-right arrow-inside" ></i>
+						</div>
+					</div>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 col-lg-12 text-center">
+							<div class="page-header">
+								<h1>Registration Open In:</h1>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+					<center>
+						<div class="col-md-12 col-lg-12 col-xs-12">
+							
+							<div class="row">
+								<div class="col-md-8 col-lg-8 col-md-push-2 col-lg-push-2" id='counter'></div>
+							</div>
+					
+
+							
+						</div></center>
+
+						
+					</div>
+
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 col-xs-12" id="id-calendar">
+							<center class = "blink_me" style="font-size: 30px; font-weight: bold;">
+								<dd style="font-weight: 200;">Mark Your Calendars</dd>
+								<dd style="font-weight: 200;">28<sup style = "text-transform: lowercase; ">th</sup> January, 2017</dd>
+							</center>
+						</div>
+					</div>
+				</div>
+			</div>
+
+<!-- changes usama start -->
+<!--	<div class="td-sheet">
+				<div class="td-sheet-icon">
+					<i class="ti-pencil-alt"></i>
+				</div>
+				<div class="td-sheet-title">Image Upload</div>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 text-center col-xs-12">
+							<div class="page-header">
+								<h1>Image Upload Module</h1>
+							</div>
+						</div>
+					</div>
+					<br><br>
+					<div class="row">
+					<center>
+						<div class="col-md-4 col-md-offset-4 col-xs-12">
+						<script>
+							function readURL(input) {
+        						if (input.files && input.files[0]) {
+            						var reader = new FileReader();
+            						reader.onload = function (e) {
+                					$('#blah')
+                    				.attr('src', e.target.result)
+                    				.width(250)
+                    				.height(250);
+            								};
+
+            						reader.readAsDataURL(input.files[0]);
+        }
+    }
+						</script>
+						<img id = "blah" src="img/dummy.png" height="250px" width="250px" alt="Uploaded Image" class = "img-thumbnail" />
+						<span class="btn btn-default btn-file">
+						Browse <input type="file" onchange="readURL(this);" />
+						</span>
+						</div>
+						</center>
+
+
+
+
+					</div>
+				</div>
+			</div>
+-->
+<!-- changes usama end -->
+
+
+			<div class="td-sheet">
+				<div class="td-sheet-icon">
+					<i class="ti-announcement"></i>
+				</div>
+				<div class="td-sheet-title">Services</div>
+
+					<div class="" style="position:absolute; float:left; top:45%; left:1%; display: flex; justify-content: flex-start;z-index:9999;" onclick="leftArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-left arrow-inside" ></i>
+						</div>
+					</div>
+					<div class="" style="position:absolute; float:right; right:1%; top:45%; display: flex; justify-content: flex-end;z-index:9999;" onclick="rightArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-right arrow-inside" ></i>
+						</div>
+					</div>
+
+				<div class="container">
+					<div class="row">
+					<div class="col-md-12 col-lg-12 text-center">
+							<div class="page-header">
+								<h1>What Olympiad offers</h1>
+							</div>
+						</div>
+						
+						<div class="row">
+							
+						<div class="class-desktop col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+							<div class="class-wrapper">
+								<div class="class-flip-container class-5px-downward" ontouchstart="this.classList.toggle('hover');">
+									<div class="class-flipper">
+										<div class="class-front td-aboutus">
+											<!-- front content -->
+											<img src="img/sports.png"  class="img-responsive">
+										</div>
+										<div class="class-back center-block">
+											<!-- back content -->
+											<div class="vertically-center">
+												<a href="events/sports.html" target="_blank" class="btn btn-default fadeInLeft">SEE SPORTS</a>
+												<br><span class="ti-line-double"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="class-vertical-line class-large"></div>
+								
+							</div>
+							<div class="class-wrapper class-overlap">
+								<div class="class-flip-container class-5px-downward" ontouchstart="this.classList.toggle('hover');">
+									<div class="class-flipper">
+										<div class="class-front td-aboutus">
+											<!-- front content -->
+											<img src="img/other.png"  class="img-responsive">
+										</div>
+										<div class="class-back center-block">
+											<!-- back content -->
+											<div class="vertically-center">
+												<a href="events/events.html" target="_blank" class="btn btn-default fadeInLeft">SEE ALL EVENTS</a>
+												<br><span class="ti-line-double"></span>
+											</div>
+										</div>
+									</div>
+								
+								</div>
+								<div class="class-vertical-line class-large"></div>
+								
+							</div>
+							<div class="class-wrapper class-overlap">
+								<div class="class-flip-container class-5px-downward" ontouchstart="this.classList.toggle('hover');">
+								
+									<div class="class-flipper">
+										<div class="class-front td-aboutus">
+											<!-- front content -->
+											<img src="img/social.png"  class="img-responsive">
+										</div>
+										<div class="class-back center-block">
+											<!-- back content -->
+											<div class="vertically-center">
+												<a href="events/social-events.html" target="_blank" class="btn btn-default fadeInLeft">SEE SOCIALS</a>
+												<br><span class="ti-line-double"></span>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+								<div class="class-vertical-line class-large"></div>
+								
+							</div>
+							<div class="class-wrapper class-overlap">
+								<div class="class-flip-container class-5px-downward" ontouchstart="this.classList.toggle('hover');">
+									<div class="class-flipper">
+										<div class="class-front td-aboutus">
+											<!-- front content -->
+											<img src="img/acomodation.png"  class="img-responsive">
+										</div>
+										<div class="class-back">
+											<!-- back content -->
+											<p class="">Olympiad '17 will provide accommodation to outstation participants on first come first serve basis.
+							<br><span class="ti-line-double"></span>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="class-vertical-line class-large"></div>
+							</div>
+							<div class="class-base-line"></div>
+							
+
+
+						</div>
+
+						<!-- mobile and tablet friendly view of timeline -->
+						<div class="class-mobile col-md-8 col-xs-12">
+							<div class="class-wrapper class-50px-downward">
+								<div class="class-base-line"></div>
+								<div class="class-horizontal-line class-large"></div>
+								<div class="class-flip-container" ontouchstart="this.classList.toggle('hover');">
+									<div class="class-flipper">
+										<div class="class-front">
+											<!-- front content -->
+											<img src="img/sports.png"  class="" width="100%" height="100%">
+										</div>
+										<div class="class-back center-block">
+											<!-- back content -->
+											<div class="vertically-center">
+												<a href="events/sports.html" target="_blank" class="btn btn-default fadeInLeft animated" data-animation-delay="700" style="opacity: 1;">SEE SPORTS</a>
+												<br><span class="ti-line-double"></span>
+											</div>
+											
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<div class="class-wrapper">
+
+								<div class="class-base-line"></div>
+								<div class="class-horizontal-line class-small"></div>
+								<div class="class-flip-container" ontouchstart="this.classList.toggle('hover');">
+									<div class="class-flipper">
+										<div class="class-front">
+											<!-- front content -->
+											<img src="img/other.png"  class="" width="100%" height="100%">
+										</div>
+										<div class="class-back center-block">
+											<!-- back content -->
+											<div class="vertically-center">
+												<a href="events/events.html" target="_blank" class="btn btn-default fadeInLeft">SEE ALL EVENTS</a>
+												<br><span class="ti-line-double"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<div class="class-wrapper">
+								<div class="class-base-line"></div>
+								<div class="class-horizontal-line class-large"></div>
+								<div class="class-flip-container" ontouchstart="this.classList.toggle('hover');">
+									<div class="class-flipper">
+										<div class="class-front">
+											<!-- front content -->
+											<img src="img/social.png"  class="" width="100%" height="100%">
+										</div>
+										<div class="class-back center-block">
+											<!-- back content -->
+											<div class="vertically-center">
+												<a href="events/social-events.html" target="_blank" class="btn btn-default fadeInLeft">SEE SOCIALS</a>
+												<br><span class="ti-line-double"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<div class="class-wrapper">
+								<div class="class-base-line"></div>
+								<div class="class-horizontal-line class-small"></div>
+								<div class="class-flip-container" ontouchstart="this.classList.toggle('hover');">
+									<div class="class-flipper">
+										<div class="class-front">
+											<!-- front content -->
+											<img src="img/acomodation.png"  class="" width="100%" height="100%">
+										</div>
+										<div class="class-back">
+											<!-- back content -->
+											<p class="">Olympiad'17 will provide accomodation to outstation participants in the hostels of NUST.
+											<br>
+											<span class="ti-line-double"></span>
+											</p>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							
+
+						</div>
+						
+						</div>
+					</div>
+				</div>
+				
+			</div>
+
+			<div class="td-sheet">
+				<div class="td-sheet-icon">
+					<i class="ti-info-alt"></i>
+				</div>
+				<div class="td-sheet-title">About</div>
+
+					<div class="" style="position:absolute; float:left; top:45%; left:1%; display: flex; justify-content: flex-start;z-index:9999;" onclick="leftArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-left arrow-inside" ></i>
+						</div>
+					</div>
+					<div class="" style="position:absolute; float:right; right:1%; top:45%; display: flex; justify-content: flex-end;z-index:9999;" onclick="rightArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-right arrow-inside" ></i>
+						</div>
+					</div>
+
+				<div class="container">
+				<!--Hira Naveed-->
+
+					<div class="row">
+						<div class="col-md-12 col-lg-12 text-center">
+							<div class="page-header">
+								<h1>About Olympiad '17</h1>
+							</div>
+						</div>
+					</div>
+
+					<div class="row text-center whitelinks" style="display: flex; flex-direction: row;">
+						
+
+						
+						<div class="col-md-8 col-md-push-2 col-lg-8 col-lg-push-2" data-animation="fadeIn" data-animation-delay="100" style="margin-top: -2%">
+							<div data-animation="fadeIn" data-animation-delay="100" style="margin-bottom:26px;">
+								<img class="img-responsive" src="img/cube2.png" alt="LOGO" style="margin-left: auto; margin-right: auto; height:180px; width:300px"/>
+							</div>
+							<p style="text-align:justify;font-size: 15px;text-transform: none;text-align: center; margin-bottom:0px;">
+									Every person has a unique set of skills that deserve to be showcased, admired and even rewarded. This belief forms the basis for NUST Olympiad 2017, where different societies of NUST will collaborate to deliver one of the leading events in Pakistan. Olympiad, spanning over four days, will comprise of 30+ versatile events to accommodate everyone, 3 social events to add just the right spin and thrill to your competitive days and finally, an unparalleled welcome, cordiality and a wide, unrestrained space to explore your potential and your surroundings. 
+							</p>
+
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+			<!-- contact-us sheet, starting here-->
+			<div class="td-sheet">
+				<div class="td-sheet-icon">
+					<i class="ti-email"></i>
+				</div>
+
+				<div class="td-sheet-title">Contact</div>
+
+					<div class="" style="position:absolute; float:left; top:45%; left:1%; display: flex; justify-content: flex-start;z-index:9999;" onclick="leftArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-left arrow-inside" ></i>
+						</div>
+					</div>
+					<div class="" style="position:absolute; float:right; right:1%; top:45%; display: flex; justify-content: flex-end;z-index:9999;" onclick="rightArrowClick()">
+						<div class="arrows">
+							<i class="fa fa-angle-right arrow-inside" ></i>
+						</div>
+					</div>
+
+				<div class="container">
+					<div style="margin-bottom: 10px" class="row">
+						<div class="col-md-12 text-center">
+							<div class="page-header">
+								<h1>Contact</h1>
+							</div>
+						</div>
+					</div>
+
+					
+
+
+					<div id="parent" class="contact_us col-md-8 col-lg-8 col-md-push-2 col-lg-push-2" style="display: flex; flex-direction: row;">
+					<div style="margin-top: -2%">
+					
+						<div class="row" style="margin-top:5%;">
+							
+							<div class="col-md-6 col-lg-6">
+								<div class="row">
+									<div class="col-md-6 col-lg-6 contact_us__address" style="height:160px;text-align:left;">
+										<div class="h3" style="margin-top:0px;">
+											<i class="fa fa-map-marker" aria-hidden="true"></i>
+											Address
+										</div>
+										National University of Sciences and Technology. NUST Campus, H-12, Islamabad, Pakistan.
+
+									</div>
+									<div class="col-md-6 col-lg-6 contact_us__phone" style = " text-align: left;">
+										<div class="h3" style="margin-top:0px;">
+											<i class="fa fa-phone" aria-hidden="true"></i>
+											Phone
+										</div>
+											Director Registrations: <br> 0305 5374683 <br><br>
+											External Relations: <br> 0323 5315135 
+									</div>
+								</div>
+								<div class="row">
+									<div style="display: table; margin: 0 auto;" >
+										<ul style="list-style: none;padding: 20px;">
+											<li style = "display: inline;"><a href="https://www.facebook.com/NUST.Olympiad" target="_blank" ><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a></li>
+
+											<li style = "display: inline;margin-right: 10px;margin-left: 10px;"><a href="https://twitter.com/OlympiadNUST" target="_blank"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a></li>
+
+											<li style = "display: inline;">
+												<a href="https://www.instagram.com/nust.olympiad/" target="_blank">
+												<i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+												</a>
+												</li>
+											</ul>
+										</div>
+								</div>
+							</div>
+							<div class="col-md-6 contact_us__form">
+								<div id = "contactError" class="alert alert-danger" hidden></div>
+								<form id  = "myForm" method="POST" action="/contact/index.php">
+									<div class="row">
+										<div class="col-md-6 col-lg-6">
+											<input class="form-control  clckd" style="background:transparent; color:white" type="text" id = "contactName" name="name" placeholder="NAME">
+										</div>
+										<div class="col-md-6 col-lg-6">
+											<input class="form-control clckd" style="background:transparent; color:white" type="email" id = "contactEmail" name="email" placeholder="EMAIL">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12 col-lg-12">
+											<textarea id = "txtr" class="form-control  clckd" style="background:transparent; color:white"  rows="5" name="message" placeholder="MESSAGE"></textarea>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12 col-lg-12">
+											<div id = "capt" class="form-group">
+												<div class="g-recaptcha" data-sitekey="6Ldgtg0UAAAAAIGYMROWOzYRwq_qKR3dFWoRbqA9"></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
+											<button class="btn btn-default btn-lg" type="submit">Submit</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+				</div>
+			<!--/fizza, end-->
+
+	<!-- Modals 
+	<div class="modal fade" id="modalSuccess" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title">Modal title</h4>
+		  </div>
+		  <div class="modal-body">
+			...
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-success">Save changes</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="modalInfo" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title">Modal title</h4>
+		  </div>
+		  <div class="modal-body">
+			...
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-info">Save changes</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="modalWarning" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title">Modal title</h4>
+		  </div>
+		  <div class="modal-body">
+			...
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-warning">Save changes</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="modalDanger" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title">Modal title</h4>
+		  </div>
+		  <div class="modal-body">
+			...
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-danger">Save changes</button>
+		  </div>
+		</div>
+	  </div>
+	</div>-->
+    <script src="js/jquery.min.js"></script>
+     <script type="text/javascript">
+   		$(document).ready(function(){
+   			function setPreLoadMargin(){
+   				var width = $(window).width();
+   				
+   				$('#c').css({"position":"absolute","left":((width-300)/2)+"px"});
+   				$('#id-img-preload').css({"position":"absolute","top":"50%","left":((width-95)/2)+"px"});
+   			}
+   			setPreLoadMargin();
+   			$(window).resize(function(){setPreLoadMargin();});
+
+   		});
+   </script>
+	<script src="js/responsive.js"></script>
+	<script src="js/perfect-scrollbar.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.visible.min.js"></script>
+	<script src="js/scriptdemo3.js"></script>
+	<script src="js/classie.js"></script>
+	<script src="js/detectanimation.js"></script>
+	<script src="js/modernizr.custom.js"></script>
+	<script src="js/responsive-logo.js"></script>
+	<!-- countdown -->
+	<script src="countdown/cubical/countdowncube.js"></script>
+
+
+   <!-- preloading flame js-->
+   <script type="text/javascript" src="js/flame.js"></script>
+
+
+	<!-- <script src="compiled/flipclock.js"></script>
+
+    <script type="text/javascript">
+			var clock;
+
+			$(document).ready(function() {
+
+				// Grab the current date
+				var currentDate = new Date();
+
+				// Set some date in the future. In this case, it's always Jan 1
+				var futureDate  = new Date(currentDate.getFullYear(), 11, 14);
+
+				// Calculate the difference in seconds between the future and current date
+				var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
+
+				// Instantiate a coutdown FlipClock
+				clock = $('.countClock').FlipClock(diff, {
+					clockFace: 'DailyCounter',
+					countdown: true
+				});
+			});
+	</script> -->
+
+
+	<!-- countdown  -->
+
+
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="countdown/js/jquery.knob.js"></script>
+<script src="countdown/js/jquery.throttle.js"></script>
+
+<script src="countdown/js/jquery.classycountdown.js"></script>
+
+<script>
+    $(document).ready(function() {
+
+        // Grab the current date
+        var currentDate = new Date();
+
+        // Set some date in the future. In this case, it's always Jan 1
+        var futureDate  = new Date(currentDate.getFullYear() + 1, 2, 3);
+
+        // Calculate the difference in seconds between the future and current date
+        var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
+
+        $('#countdown9').ClassyCountdown({
+            end: diff+'',
+            now: '0',
+            labels: true,
+            style: {
+                element: "",
+                textResponsive: .5,
+                days: {
+                    gauge: {
+                        thickness: .05,
+                        bgColor: "rgba(0,0,0,0)",
+                        fgColor: "#1abc9c",
+                        lineCap: 'round'
+                    },
+                    textCSS: 'font-family:\'Open Sans\'; font-size:25px; font-weight:300; color:#34495e;'
+                },
+                hours: {
+                    gauge: {
+                        thickness: .05,
+                        bgColor: "rgba(0,0,0,0)",
+                        fgColor: "#2980b9",
+                        lineCap: 'round'
+                    },
+                    textCSS: 'font-family:\'Open Sans\'; font-size:25px; font-weight:300; color:#34495e;'
+                },
+                minutes: {
+                    gauge: {
+                        thickness: .05,
+                        bgColor: "rgba(0,0,0,0)",
+                        fgColor: "#8e44ad",
+                        lineCap: 'round'
+                    },
+                    textCSS: 'font-family:\'Open Sans\'; font-size:25px; font-weight:300; color:#34495e;'
+                },
+                seconds: {
+                    gauge: {
+                        thickness: .05,
+                        bgColor: "rgba(0,0,0,0)",
+                        fgColor: "#f39c12",
+                        lineCap: 'round'
+                    },
+                    textCSS: 'font-family:\'Open Sans\'; font-size:25px; font-weight:300; color:#34495e;'
+                }
+
+            },
+            onEndCallback: function() {
+                console.log("Time out!");
+            }
+        });
+
+    });
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>-->
+<script type="text/javascript" src="js/timeline.js"></script>
+<script type="text/javascript">
+		$(document).ready(function(){
+			$('#counter').countdownCube({target: new Date(2017,0,29), cubeSize: 100 } );
+
+			$("#myForm").submit(function(event){
+
+			    // Prevent default posting of form - put here to work in case of errors
+			    event.preventDefault();
+
+			    
+			    // setup some local variables
+			    var $form = $(this);
+
+			    // Let's select and cache all the fields
+			    var $inputs = $form.find("input, select, button, textarea");
+
+
+			    // Let's disable the inputs for the duration of the Ajax request.
+			    // Note: we disable elements AFTER the form data has been serialized.
+			    // Disabled form elements will not be serialized.
+			    $inputs.prop("disabled", true);
+
+			    // Fire off the request
+			    $("#contactError").toggleClass('alert-danger alert-info');
+			    $("#contactError").html("<div class = 'blink_me'><strong>Processing!</strong> Please wait!</div>");
+			    $("#contactError").show();
+			    request = $.post("/contact/index.php",
+			    {
+			        captcha: $("#g-recaptcha-response").val(),
+			        name: $("#contactName").val(),
+			        email:$("#contactEmail").val(),
+			        message:$("#txtr").val()
+			    },
+			    function(data){
+			        if(data == 1){
+			        	$("#contactError").toggleClass('alert-info alert-success');
+
+			        	$("#contactError").html("<strong>Success!</strong>We'll get back to you soon!");
+			        }
+			        else{
+			        	$("#contactError").toggleClass('alert-info alert-danger');
+
+			        	$("#contactError").html("<strong>Error!</strong> ");
+
+
+			        	var errorobj = jQuery.parseJSON( data);
+			        	jQuery.each(errorobj, function(i, val) {
+			        	  $("#contactError").append(val);
+			        	  $("#contactError").append("<br>");
+
+			        	});
+			        }
+			    });
+
+
+			    // Callback handler that will be called on failure
+			    request.fail(function (jqXHR, textStatus, errorThrown){
+			        // Log the error to the console
+			        console.error(
+			            "The following error occurred: "+
+			            textStatus, errorThrown
+			        );
+			    });
+
+			    // Callback handler that will be called regardless
+			    // if the request failed or succeeded
+			    request.always(function () {
+			        // Reenable the inputs
+			        $inputs.prop("disabled", false);
+			    });
+
+			});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			
+			$("#capt").hide();	//hussains			
+			
+			if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+			alert('Browser not supported!  Please use Chrome, Mozilla Firefox, Opera or Internet Explorer for best Experience :)');
+			}
+//Hussain's work
+//hiding captcha and decreasing rows			
+			$(".clckd").click(function(){
+				$("#txtr").attr('rows',2); 
+				$("#capt").show(1000);
+				
+			})
+
+//end of Hussain's works
+			
+			
+		});
+	</script>
+<script type="text/javascript">
+	
+	function rightArrowClick(){
+		var e = jQuery.Event("keydown");
+		e.which = 40;
+		e.keyCode = 40; // # Some key code value
+		$("body").trigger(e);
+		
+	}
+	function leftArrowClick(){
+		var e = jQuery.Event("keydown");
+		e.which = 38;
+		e.keyCode = 38; // # Some key code value
+		$("body").trigger(e);
+		
+	}
+</script>
+</body>
+</html>
