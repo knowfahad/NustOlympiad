@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speed Programming | NUST Olympiad '17</title>
+  <link rel="stylesheet" type="text/css" href="../../css/timeline.css">
+
+  <link rel="stylesheet" href="../../css/themify-icons.css">
+  <link rel="stylesheet" href="../../css/font-awesome.min.css">
+  <link rel='stylesheet' href='../../css/perfect-scrollbar.min.css' />
+  <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../css/buttons.css" />
+  <link rel="stylesheet" href="../../css/animate.css" />
+  <link rel="stylesheet" href="../../css/tooltip.css" />
+  <link rel="stylesheet" href="../event_style.css" />
+  <link rel="stylesheet" href="../../css/demo3.css" />
+
+  <link rel="stylesheet" href="../../css/style2.css" />
+  <script type="text/javascript" src="../../js/jquery.min.js"></script>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+   
+
+</head>
+
+<body id="id-body" >
+  <div class="td-preloading">
+    <!-- <span class="fa fa-spinner fa-spin"></span> -->
+    
+      <canvas id="c" width="300px" height="300px" ></canvas>
+      <img src="../../img/torch.png" widht="150px" height="150px" id="id-img-preload">
+  </div>
+
+  <div class="td-container">
+        
+        <div class="td-sheets-container td-hide td-sheet-active-1">
+           <div class="row">
+
+           </div>
+           <div id="scrollbar-container" class="td-sheet active">
+              <div class="container-fluid">
+
+                 <div class = "row">
+                    <div class = "col-md-3 col-centered col-sm-3" >
+                       <a href="../../index.html">
+                          <img src="../../img/logo.png" class="img-responsive" alt="LOGO"/>
+                      </a>  
+                  </div>
+              </div>  
+
+              <div class="row homepage" >
+               <div class="col-md-4 col-xs-12">
+                  <span>
+                     <a href="../../index.html">Home</a> | <a href="../events.html">Back To Events</a>
+                 </span>
+             </div> 
+         </div>
+         <hr>
+         <div class="row">
+            <div class="col-md-1 col-xs-12"></div>
+            <div class="col-md-5 col-xs-12 class-content">
+               <h2>Speed Programming</h2>
+        
+               <h5>Procedure</h5>
+               <ul>
+
+<li>This is a team event with minimum 2 and 5 participants at max</li>
+
+<li>The participants will be provided access to computers and required resources.</li>
+
+<li>The teams will be given detailed instructions before the start of timing</li>
+<li>The event will be of 3 hours consisting of 3 programming problems.</li>
+<li>The team to finish the 3 problems first will have it's output checked by the judges.</li>
+
+<li>In case of a tie, the code of the teams will be checked and decision will be made on the basis of coding practices used which includes use of comments, efficient running times, use of classes and indentations</li>
+<li>If no team is able to solve the 3 problems, a time extension will be given based on the decision of judges</li>
+<li>In case teams are unable to solve the problems in extended time period, then the decision will be made on the current progress of teams</li>
+
+</ul>
+
+<h5>Rules and Regulations:</h5>
+
+<ul>
+<li>Allowed programming languages are C/C++, C#, Java and JavaScript </li>
+<li>Use of python or any other language is restricted and will lead to disqualification if used</li>
+<li>Use of USB's and any device on the systems is prohibited and failure to comply will lead to immediate disqualification</li>
+<li>A team if shows incomplete or wrong output 3 times will be disqualified</li>
+<li>The decision of judges will be fair and final</li>
+<li>The teams must report at the required time. Reaching late will lead to disqualification</li>
+</ul>
+
+        </div>
+       <!-- separator line -->
+        <div class="col-md-1 class-separator-conatiner center-block"><div class=" class-separator"></div></div>
+        
+        <div class="col-md-4 col-xs-12">
+           <!-- two divs for holding images or any other content -->
+           <div class="row">
+              <div class="col-md-12 col-xs-12 class-image class-content" >
+                 <!-- paste your image here -->
+                 <img class="image" src="../images/sp1.jpg">
+             </div>
+         </div>
+         <br><br><br><br>
+         <div class="row">
+          <div class="col-md-12 col-xs-12 class-image class-content">
+             <!-- paste your image here -->
+             <img class="image" src="../images/sp2.jpg">
+         </div>
+    </div>
+ </div>
+ <div class="col-md-1 col-xs-12"></div>
+</div>
+</div>
+</div>
+<script src="../../js/jquery.min.js"></script>
+<script type="text/javascript">
+      $(document).ready(function(){
+        function setPreLoadMargin(){
+          var width = $(window).width();
+          
+          $('#c').css({"position":"absolute","left":((width-300)/2)+"px"});
+          $('#id-img-preload').css({"position":"absolute","top":"50%","left":((width-95)/2)+"px"});
+        }
+        setPreLoadMargin();
+        $(window).resize(function(){setPreLoadMargin();});
+
+      });
+   </script>
+<script src="../../js/responsive.js"></script>
+<script src="../../js/perfect-scrollbar.min.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/jquery.visible.min.js"></script>
+<script src="../../js/scriptdemo3.js"></script>
+<script src="../../js/detectanimation.js"></script>
+<!-- preloading flame js-->
+   <script type="text/javascript" src="../../js/flame.js"></script>
+<script type="text/javascript">
+  
+
+</script>
+
+</body>
+
+</html>
