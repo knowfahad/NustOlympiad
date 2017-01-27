@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Minute to Win it | NUST Olympiad '17</title>
+	<link rel="stylesheet" type="text/css" href="../../css/timeline.css">
+
+	<link rel="stylesheet" href="../../css/themify-icons.css">
+	<link rel="stylesheet" href="../../css/font-awesome.min.css">
+	<link rel='stylesheet' href='../../css/perfect-scrollbar.min.css' />
+	<link rel="stylesheet" href="../../css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../../css/buttons.css" />
+	<link rel="stylesheet" href="../../css/animate.css" />
+	<link rel="stylesheet" href="../../css/tooltip.css" />
+  <link rel="stylesheet" href="../event_style.css" />
+	<link rel="stylesheet" href="../../css/demo3.css" />
+
+	<link rel="stylesheet" href="../../css/style2.css" />
+	<script type="text/javascript" src="../../js/jquery.min.js"></script>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+   .btn-outlined {
+  border: 1px solid white;
+    background: rgba(255,255,255,0.1);
+    border-radius: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    
+
+}
+.btn-outlined:hover {
+  color: white;
+}
+</style>
+  
+
+</head>
+
+<body id="id-body" >
+	<div class="td-preloading">
+		<!-- <span class="fa fa-spinner fa-spin"></span> -->
+    
+      <canvas id="c" width="300px" height="300px" ></canvas>
+      <img src="../../img/torch.png" widht="150px" height="150px" id="id-img-preload">
+	</div>
+
+	<div class="td-container">
+
+    <div class="td-sheets-container td-hide td-sheet-active-1">
+     <div class="row">
+
+     </div>
+     <div id="scrollbar-container" class="td-sheet active">
+      <div class="container-fluid">
+
+       <div class = "row">
+        <div class = "col-md-3 col-centered col-sm-3" >
+         <a href="../../index.html">
+          <img src="../../img/logo.png" class="img-responsive" alt="LOGO"/>
+        </a>	
+      </div>
+    </div>  
+
+    <div class="row homepage" >
+     <div class="col-md-4 col-xs-12">
+      <span>
+       <a href="../../index.html">Home</a> | <a href="../events.html">Back To Events</a>
+     </span>
+   </div>	
+ </div>
+ <hr>
+ <div class="row">
+  <div class="col-md-1 col-xs-12"></div>
+  <div class="col-md-4 col-xs-12 class-content">
+   <h2>Minute to Win it</h2>
+
+
+   <ul>
+
+    <li> All the applicants will go through a primary qualification round, similar to the hot seat round, where they will be asked general IQ questions.</li>
+
+    <li> 8-10 contestants who score the highest will make it to the final hot seat round.</li>
+
+
+    <li> Questions will be of general knowledge and IQ.</li>
+
+
+    <li> Each question will have four options, and only one from them will be correct.</li>
+
+
+    <li> Each correct answer will get the candidate a specific point.</li>
+
+
+    <li> The contestant having the highest points in the end of the hot seat round will win.</li>
+
+
+    <li> On giving a wrong answer, game over.</li>
+
+
+    <li> The winner, and runner up will be given prize money and gift hampers.</li>
+
+
+    <li> A contestant will be given total of 4 lives which can help them in answering the questions. They will be: 
+     <ul>
+       <li> Audience pool</li>
+
+       <li> Call a friend</li>
+
+
+       <li> 50-50</li>
+
+
+       <li> Change the question</li>
+       </ul>
+     </li>
+
+     <li>Each of these lives can be used only once by each contestant.</li>
+
+   </ul>
+
+   <div class="col-md-12 text-center col-xs-12 buttonpage" >
+     <a href="individual.html" class="btn btn-outlined" style="width:55%;
+    margin-bottom: 10px;">Individual</a>
+   </div>
+
+
+
+
+ </div>
+ <!-- separator line -->
+ <div class="col-md-2 class-separator-conatiner center-block"><div class=" class-separator"></div></div>
+
+ <div class="col-md-4 col-xs-12">
+   <!-- two divs for holding images or any other content -->
+   <div class="row">
+              <div class="col-md-12 col-xs-12 class-image class-content" >
+                 <!-- paste your image here -->
+                 <img class="image" src="../images/minute.jpg">
+             </div>
+         </div>
+
+ <br>
+ <div class="row">
+              <div class="col-md-12 col-xs-12 class-image class-content" >
+                 <!-- paste your image here -->
+                 <img class="image" src="../images/minute1.jpg">
+             </div>
+         </div>
+
+</div>
+</div>
+<div class="col-md-1 col-xs-12"></div>
+</div>
+</div>
+</div>
+<script src="../../js/jquery.min.js"></script>
+<script type="text/javascript">
+      $(document).ready(function(){
+        function setPreLoadMargin(){
+          var width = $(window).width();
+          
+          $('#c').css({"position":"absolute","left":((width-300)/2)+"px"});
+          $('#id-img-preload').css({"position":"absolute","top":"50%","left":((width-95)/2)+"px"});
+        }
+        setPreLoadMargin();
+        $(window).resize(function(){setPreLoadMargin();});
+
+      });
+   </script>
+<script src="../../js/responsive.js"></script>
+<script src="../../js/perfect-scrollbar.min.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/jquery.visible.min.js"></script>
+<script src="../../js/scriptdemo3.js"></script>
+<script src="../../js/detectanimation.js"></script>
+<!-- preloading flame js-->
+   <script type="text/javascript" src="../../js/flame.js"></script>
+<script type="text/javascript">
+
+
+</script>
+
+</body>
+
+</html>

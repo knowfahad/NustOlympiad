@@ -27,8 +27,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$error = "Please select on option!";
 	}
 	else{
-		$stmt = $mpdo->prepare("select e.EventID from eventparticipants as e where e.EventID = ? AND e.ParticipantCNIC = ?");
-		$stmt->execute([$eventname, $auth->getCNIC()]);
+		$stmt = $mpdo->prepare("select e.EventID from eventparticipants as e where e.EventID = ?");
+		$stmt->execute([$eventname]);
 		if($stmt->rowCount())
 			$error = "You have already participated in this event!";
 	}
@@ -207,7 +207,10 @@ $(document).on("click", ".btn", function () {
 						</div>
 					  </div>
     <div class="td-preloading">
-        <span class="fa fa-spinner fa-spin"></span>
+        <!-- <span class="fa fa-spinner fa-spin"></span> -->
+		
+			<canvas id="c" width="300px" height="300px" ></canvas>
+			<img src="../../img/torch.png" widht="150px" height="150px" id="id-img-preload">
     </div>
     <div class="td-container">
         <!--<div class="row">
@@ -288,6 +291,19 @@ $(document).on("click", ".btn", function () {
 			
 					  
             <script src="/js/jquery.min.js"></script>
+			<script type="text/javascript">
+   		$(document).ready(function(){
+   			function setPreLoadMargin(){
+   				var width = $(window).width();
+   				
+   				$('#c').css({"position":"absolute","left":((width-300)/2)+"px"});
+   				$('#id-img-preload').css({"position":"absolute","top":"50%","left":((width-95)/2)+"px"});
+   			}
+   			setPreLoadMargin();
+   			$(window).resize(function(){setPreLoadMargin();});
+
+   		});
+   </script>
             <script src="/js/responsive.js"></script>
             <script src="/js/perfect-scrollbar.min.js"></script>
             <script src="/js/bootstrap.min.js"></script>
@@ -297,6 +313,7 @@ $(document).on("click", ".btn", function () {
             <script src="/js/detectanimation.js"></script>
             <script src="/js/modernizr.custom.js"></script>
             <!-- <script type="text/javascript" src="/js/timeline.js"></script> -->
+			<!-- preloading flame js-->
+   <script type="text/javascript" src="../../js/flame.js"></script>
 </body>
-
 </html>

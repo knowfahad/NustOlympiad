@@ -15,11 +15,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $participant = $auth->getParticipant();
         $gender = ($participant->getGender() == "M") ? "m" : "f";
         $challanid = "AC" . $participant->getParticipantID() .  $gender;
-        $stmt = $mpdo->prepare("select AccomodationChallanID from participant where ParticipantID = ? and AccomodationChallanID != null");
-        $stmt->execute([$participant->getParticipantid()]);
-        if($stmt->rowCount()){
-            \App\redirect("\dashboard");
-        }
         $challan = new Challan();
         $challan->setChallanID($challanid);
         $challan->setAmountPayable(1000);
@@ -116,7 +111,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 <body id="id-body">
     <div class="td-preloading">
-        <span class="fa fa-spinner fa-spin"></span>
+        <!-- <span class="fa fa-spinner fa-spin"></span> -->
+		
+			<canvas id="c" width="300px" height="300px" ></canvas>
+			<img src="../../img/torch.png" widht="150px" height="150px" id="id-img-preload">
     </div>
     <div class="td-container">
         <!--<div class="row">
@@ -155,21 +153,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1 clearfix">
-                                <ul id="makeborder" style="text-align: left; margin-left: 40px !important; padding-left:40px; text-shadow: 1px 0px 2px #222; font-size: 14px;">
-                                    <li >Participants are required to stay in their respective residing areas. All the rules for participants are same as those applicable for the NUST Hostilities. </li>
-                                    <li >You are advised to be inside university premises by 2200 hours, whereas hostel gates will strictly close at 2230 hours and attendance will be marked.</li>
-                                    <li >Breakfast will be the only meal provided to the participants between timings 0700 – 0900 Hours. </li>
-                                    <li >Laundry service, available to all participants, can be found on the first floor from 0830 – 2200 Hours. </li>
-                                    <li >Carry your valuables with you at all times and keep your luggage locked while unattended. University will not be responsible for any loss or theft of valuables.</li>
-                                    <li >Be considerate of others’ comfort and adhere to the lowest of noise levels.</li>
-                                    <li >In case of any property damage, the defaulter would be liable for compensation. </li>
-                                    <li >In case of any emergency, participants may leave after getting the permission of the warden, obtaining an out pass and informing the respective hostel accommodation team member.</li>
-                                    <li >DRUGS/Weaponry of any kind is not allowed inside NUST premises. Anyone found having them would immediately be removed from campus. </li>
-                                    <li >Smoking is prohibited on campus.   </li>
-                                    <li >For further queries, contact respective accommodation team members.
-
-                                </ul>
+                            <div class="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1">
+                                <p id="makeborder" style="font-family:Montserrat-Light;">
+                                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+                                    The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,
+                                    as opposed to using 'Content here, content here', making it look like readable English.
+                                    Many desktop publishing packages and web page editors now use Lorem Ipsum as their default
+                                    model text, and a search for 'lorem ipsum' will uncover many web sites still in their
+                                    infancy. Various versions have evolved over the years, sometimes by accident, sometimes
+                                    on purpose (injected humour and the like).
+                                </p>
                             </div>
                         </div>
                         <br>
@@ -201,12 +194,27 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         </div>
                         </div>
                         <?php else: ?>
+                        <center>
                         <h2 styles="text-align: center;">Your challan has already been generated!</h2>
                         <?php endif ?> 
+                        </center>
                     </div>
                 </div>
             </div>
             <script src="/js/jquery.min.js"></script>
+            <script type="text/javascript">
+   		$(document).ready(function(){
+   			function setPreLoadMargin(){
+   				var width = $(window).width();
+   				
+   				$('#c').css({"position":"absolute","left":((width-300)/2)+"px"});
+   				$('#id-img-preload').css({"position":"absolute","top":"50%","left":((width-95)/2)+"px"});
+   			}
+   			setPreLoadMargin();
+   			$(window).resize(function(){setPreLoadMargin();});
+
+   		});
+   </script>
             <script src="/js/responsive.js"></script>
             <script src="/js/perfect-scrollbar.min.js"></script>
             <script src="/js/bootstrap.min.js"></script>
@@ -215,6 +223,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             <!--<script src="/js/classie.js"></script>-->
             <script src="/js/detectanimation.js"></script>
             <script src="/js/modernizr.custom.js"></script>
+            <!-- preloading flame js-->
+   <script type="text/javascript" src="../../js/flame.js"></script>
 </body>
-    
+
 </html>
