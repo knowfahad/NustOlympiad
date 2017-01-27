@@ -160,7 +160,9 @@ $auth->onlyVerified();
 
                     </div>
                     <div class="row">
-                        <div class="col-md-10 col-xs-5 col-sm-7"></div>
+                        <div class="col-md-10 col-xs-5 col-sm-7">
+                            <a href="../">Back to Dashboard</a>
+                        </div>
                         <div class="col-md-2 col-xs-7 col-sm-5">
                             <div id="userId">
                                 <p style="display:inline;color:orange;">User Id:<?=$auth->getParticipant()->getParticipantID()?></p><span> | </span><a href="#">Logout</a></div>
@@ -174,7 +176,7 @@ $auth->onlyVerified();
                             	<div class="row">
                             
                             	</div>
-                                <h4 style="text-align:left;">Select a Sport</h4>
+                                <h4 style="text-align:left;">Select a Team Event</h4>
                                 <br>
 								<br>
                                 <!--new -->

@@ -108,16 +108,18 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1">
-                                <p id="makeborder" style="font-family:Montserrat-Light;">
-                                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                                    The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,
-                                    as opposed to using 'Content here, content here', making it look like readable English.
-                                    Many desktop publishing packages and web page editors now use Lorem Ipsum as their default
-                                    model text, and a search for 'lorem ipsum' will uncover many web sites still in their
-                                    infancy. Various versions have evolved over the years, sometimes by accident, sometimes
-                                    on purpose (injected humour and the like).
-                                </p>
+                            <div class="col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2">
+                                <div id="makeborder" style="font-family:Montserrat-Light;">
+                                    <ul style = "text-align:left; line-height:25px;">
+                                        <li>You can register only for team events here. </li>
+                                            <li>The captain of the team must register the entire team.</li>
+                                        <li>The applicant creating the team, i.e. the captain, <span style = "color:orange;">SHOULD add him/herself</span> in the team by clicking on the add yourself button.</li>
+                                        <li>Add a new member in the team or search for an existing member using only <span style = "color:orange;">User ID</span>
+                                            provided by portal.</li>
+                                            
+                                    </ul>
+                                    
+                                </div>
                             </div>
                         </div>
                         <br>
