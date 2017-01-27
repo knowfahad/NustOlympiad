@@ -194,8 +194,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         </div>
                         </div>
                         <?php else: ?>
+                        <center>
                         <h2 styles="text-align: center;">Your challan has already been generated!</h2>
                         <?php endif ?> 
+                        </center>
                     </div>
                 </div>
             </div>
