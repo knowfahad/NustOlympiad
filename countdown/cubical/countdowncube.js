@@ -373,7 +373,7 @@
     	    	secondsToShow = diffTime.getSeconds();
     	    	minutesToShow = diffTime.getMinutes();
     			hoursToShow   = diffTime.getHours();
-    			hoursToShow += 18;
+    			
     			
     	    	/* make each cube an object on its own with a feature to shift it!*/
     	    	this.shiftCube( element, options, secCube, secondsToShow );

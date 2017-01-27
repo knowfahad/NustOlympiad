@@ -751,7 +751,9 @@
 <script type="text/javascript" src="js/timeline.js"></script>
 <script type="text/javascript">
 		$(document).ready(function(){
-			$('#counter').countdownCube({target: new Date(2017,0,29), cubeSize: 100 } );
+			var ddate = new Date(2017,0,28);
+			ddate.setHours(18);
+			$('#counter').countdownCube({target: ddate, cubeSize: 100 } );
 
 			$("#myForm").submit(function(event){
 
