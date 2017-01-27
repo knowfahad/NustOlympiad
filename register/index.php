@@ -155,32 +155,23 @@ font-weight:normal;
 
                             <div class="form-group">
                                 <div class="row">
-                                    <div class = "col-md-3 col-xs-3">
+                                    <div class = "col-md-3 col-xs-5">
                                     <label for="repwd">Repeat Password:</label>
                                         </div>
-                                    <div class="col-md-9 col-xs-9">
+                                    <div class="col-md-9 col-xs-7">
                                         <input id="repwd" name="repwd" placeholder="Re-Enter Password" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Re-Enter Password'" required>
                                     </div>
                                 </div>
                             </div>
                             
-                             <div class="form-group">
-                                <div class = "row">
-                                    <div class = "col-md-3 col-xs-3">
-                                    <label for="email">Email:</label>
-                                        </div>
-                                <div class="col-md-9 cl-xs-9">
-                                    <input id="email" name="email" placeholder="name@example.com" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'name@example.com'" required value="<?=$_POST['email']??''?>" >
-                                </div>
-                                </div>
-                            </div>
+                             
 
                             <div class="form-group">
                                 <div class="row">
-                                    <div class = "col-md-3 col-xs-3">
+                                    <div class = "col-md-3 col-xs-5">
                                     <label for="fname">First Name:</label>
                                         </div>
-                                <div class="col-md-9 col-xs-9">
+                                <div class="col-md-9 col-xs-7">
                                     <input id="fname" name="fname" placeholder="First Name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required value="<?=$_POST['fname']??''?>" >
                                 </div>
                                 </div>
@@ -189,10 +180,10 @@ font-weight:normal;
 
                             <div class="form-group">
                                 <div class="row">
-                                    <div class = "col-md-3 col-xs-3">
+                                    <div class = "col-md-3 col-xs-5">
                                     <label for="lname">Last Name:</label>
                                         </div>
-                                <div class="col-md-9 col-xs-9">
+                                <div class="col-md-9 col-xs-7">
                                     <input  id="lname" name="lname" placeholder="Last Name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required value="<?=$_POST['lname']??''?>">
                                 </div>
                                 </div>
@@ -216,6 +207,17 @@ font-weight:normal;
 									
 								</div>
 							</div>
+
+                            <div class="form-group">
+                                <div class = "row">
+                                    <div class = "col-md-3 col-xs-3">
+                                    <label for="email">Email:</label>
+                                        </div>
+                                <div class="col-md-9 cl-xs-9">
+                                    <input id="email" name="email" placeholder="name@example.com" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'name@example.com'" required value="<?=$_POST['email']??''?>" >
+                                </div>
+                                </div>
+                            </div>
 							
                             <!--end label -->
                             <div class="form-group">
@@ -318,8 +320,8 @@ font-weight:normal;
                                 <p style="color:orange;">*Image must be in JPEG or JPG format and 2 MB max.</p>
                                 </div>
 
-                            <div class="form-group">
-                                <div class="g-recaptcha" data-sitekey="6Ldgtg0UAAAAAIGYMROWOzYRwq_qKR3dFWoRbqA9"></div>
+                            <div class="form-group row">
+                                <div class="g-recaptcha col-md-6 cl-md-offset-3" data-sitekey="6Ldgtg0UAAAAAIGYMROWOzYRwq_qKR3dFWoRbqA9"></div>
                             </div>
                         
 							<div class = "row">
