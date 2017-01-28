@@ -115,9 +115,14 @@ if($formsubmitted){
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script> -->
 
 <script type="text/javascript">
-var IndividualEventsList = ["None","Essay Writing","Hurdle Marathon","Wall Climbing","Archery","Air-Gun Shooting","Graffiti","Charcoal Drawing","Master Chef","Minute to win it(individual)","Public Speaking Challenge","Pakistan Got Talent","Table Tennis(Males)","Table Tennis(Females)",
-"Badminton(Males)","Badminton(Females)","Chess","Squash(Males)","Squash(Females)","FIFA","Need for Speed: Most Wanted","Short Put","Long Jump",
-"100 Meters Race","200 Meters Race"];
+var IndividualEventsList = ["None","Essay Writing","Hurdle Marathon","Wall Climbing","Archery",
+       "Air-Gun Shooting","Graffiti","Charcoal Drawing","Master Chef","Minute to win it(individual)",
+       "Public Speaking Challenge","Pakistan Got Talent","Table Tennis(Males)","Table Tennis(Females)",
+       "Badminton(Males)","Badminton(Females)","Chess","Squash(Males)","Squash(Females)","FIFA",
+       "Need for Speed: Most Wanted","Mad Hunt","Product Photography",
+       "Marathon Male","Marathon Female","Nust Youth Parliament"];
+
+
 $(document).ready(function()
 {
 	$(document).on("click", ".btn", function () {
@@ -313,7 +318,7 @@ $(document).ready(function()
 											<input type="button" id = "8" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Master Chef" />
 										</div>
                                         <div class = "col-md-4">
-											<input type="button" id = "9" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Minute to win it(individual)" />
+											<input type="button" id = "9" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Minute to win it ( I )" />
 										</div>
 									
 									
@@ -324,13 +329,13 @@ $(document).ready(function()
 									
 										
 										<div class = "col-md-4">
-											<input type="button" id = "10" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Public Speaking Challenge" />
+											<input type="button" id = "10" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal" style = "padding-left:0; padding-right:0;" value="Public Speaking Challenge" />
 										</div>
 										<div class = "col-md-4">
-											<input type="button" id = "11" class="btn btn-default btn-sm my-btn" value="'Pakistan Got Talent" data-toggle="modal" data-target="#myModal"  />
+											<input type="button" id = "11" class="btn btn-default btn-sm my-btn" value="Pakistan Got Talent" data-toggle="modal" data-target="#myModal"  />
 										</div>
 										<div class = "col-md-4">
-											<input type="button" id = "12" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Table Tennis(Males)" />
+											<input type="button" id = "12" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Table Tennis (Males)" />
 										</div>
 									
 									
@@ -340,13 +345,13 @@ $(document).ready(function()
                                     <div class = "row">
 									
 										<div class = "col-md-4">
-											<input type="button" id = "13" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Table Tennis(Females)" />
+											<input type="button" id = "13" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Table Tennis (F)" />
 										</div>
 										<div class = "col-md-4">
-											<input type="button" id = "14" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Badminton(Males)" />
+											<input type="button" id = "14" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Badminton (Males)" />
 										</div>
 										<div class = "col-md-4">
-											<input type="button" id = "15" class="btn btn-default btn-sm my-btn" value="Badminton(Females)" data-toggle="modal" data-target="#myModal"  />
+											<input type="button" id = "15" class="btn btn-default btn-sm my-btn" value="Badminton (Females)" data-toggle="modal" data-target="#myModal"  />
 										</div>
 										
 									
@@ -358,10 +363,10 @@ $(document).ready(function()
 											<input type="button" id = "16" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Chess" />
 										</div>
                                         <div class = "col-md-4">
-											<input type="button" id = "17" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Squash(Males)" />
+											<input type="button" id = "17" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Squash (Males)" />
 										</div>
 										<div class = "col-md-4">
-											<input type="button" id = "18" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Squash(Females)" />
+											<input type="button" id = "18" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Squash (Females)" />
 										</div>
                                          </div>
                                     <br>
@@ -373,12 +378,12 @@ $(document).ready(function()
 											<input type="button" id = "19" class="btn btn-default btn-sm my-btn" value="FIFA" data-toggle="modal" data-target="#myModal"  />
 										</div>
                                              <div class = "col-md-4">
-											<input type="button" id = "20" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Need for Speed: Most Wanted" />
+											<input type="button" id = "20" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Need for Speed: MW" />
 										</div>
                                         
 
 										<div class = "col-md-4">
-											<input type="button" id = "21" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Short Put" />
+											<input type="button" id = "21" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Mad Hunt" />
 										</div>
 										
 									
@@ -390,14 +395,26 @@ $(document).ready(function()
                                         
                                        
 										<div class = "col-md-4">
-											<input type="button" id = "22" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Long Jump" />
+											<input type="button" id = "22" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Product Photography" />
 										</div>
                                         <div class = "col-md-4">
-											<input type="button" id = "23" class="btn btn-default btn-sm my-btn" value="100 Meters Race" data-toggle="modal" data-target="#myModal"  />
+											<input type="button" id = "23" class="btn btn-default btn-sm my-btn" value="Marathon Male" data-toggle="modal" data-target="#myModal"  />
 										</div>
 										<div class = "col-md-4">
-											<input type="button" id = "24" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="200 Meters Race" />
+											<input type="button" id = "24" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Marathon Female" />
 										</div>
+									
+									
+									</div>
+                                    <br>
+
+									 <div class = "row">
+                                        
+                                       
+										<div class = "col-md-4">
+											<input type="button" id = "25" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Nust Youth Parliament" />
+										</div>
+                                        
 									
 									
 									</div>
