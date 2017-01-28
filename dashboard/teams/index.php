@@ -90,6 +90,9 @@ $auth->onlyVerified();
 							  <h4 class="modal-title">Modal Header</h4>
 							</div>
 							<div class="modal-body">
+                                <div id = "mbs">
+                                    
+                                </div>
                             <!--Insert all the errors here-->
                             <!---if there are no errors, then add a success message -->
                             
@@ -107,7 +110,7 @@ $auth->onlyVerified();
 							  		</label>
 							  		<input v-model="teamname" class="form-control" type="text" placeholder="Team Name" name="teamname">
 							  	</div>
-							  	<hr>
+							  
 							  	<div class="form-group">
 							  		<searchbox :members.sync="members"></searchbox>
 							  	</div>
@@ -119,7 +122,7 @@ $auth->onlyVerified();
                                     <label class="control-label">Ambassador ID(optional)</label>
                                     <input class="form-control" type="text" placeholder="Ambassador ID(optional)" v-model="ambassador_id" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ambassador ID(optional)'"  name="ambassador_id">
                                 </div>  
-							  	<hr>
+							  	
                                 <button type="submit">Apply</button>
 							  </form>
 							</div>
@@ -171,7 +174,7 @@ $auth->onlyVerified();
                             	<div class="row">
                             
                             	</div>
-                                <h4 style="text-align:left;">Select a Sport</h4>
+                                <h4 style="text-align:left;">Select a Event</h4>
                                 <br>
 								<br>
                                 <!--new -->
@@ -244,7 +247,7 @@ $auth->onlyVerified();
 
                                      <div class="row">
                                         <div class="col-md-4">
-                                            <input type="button" id="13" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Counter Strike Go"/>
+                                            <input type="button" id="13" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Make it Right"/>
                                         </div>
                                         <div class="col-md-4">
                                             <input type="button" id="14" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="DOTA 2"
@@ -289,7 +292,7 @@ $auth->onlyVerified();
 
                                       <div class="row">
                                         <div class="col-md-4">
-                                            <input type="button" id="22" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Graffiti"/>
+                                            <input type="button" id="22" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Funkaar"/>
                                         </div>
                                         <div class="col-md-4">
                                             <input type="button" id="23" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Pakistan Got Talent"
@@ -303,26 +306,22 @@ $auth->onlyVerified();
                                     <br>
 
                                      <div class="row">
-                                        <div class="col-md-4">
-                                            <input type="button" id="25" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Make it Right"/>
+                                        <div class="col-md-6">
+                                            <input type="button" id="25" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Minute to win it (Team)"/>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <input type="button" id="26" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" style="padding-left:0;padding-right:0;" value="Speed Programming"/>
                                         </div>
-                                         <div class="col-md-4">
-                                            <input type="button" id="27" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Funkaar"/>
-                                        </div>
+                                         
                                         
                                     </div>
                                     <br>
 
                                      <div class="row">
                                         
-                                        <div class="col-md-6">
-                                            <input type="button" id="28" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Minute to win it (Team)"/>
-                                        </div>
-                                         <div class="col-md-6">
-                                            <input type="button" id="29" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" style="padding-left:0;padding-right:0;" value="Virtual Stock Simulator"/>
+                                       
+                                         <div class="col-md-6 col-md-offset-3">
+                                            <input type="button" id="27" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" style="padding-left:0;padding-right:0;" value="Virtual Stock Simulator"/>
                                         </div>
                                         
                                     </div>
@@ -471,17 +470,54 @@ $auth->onlyVerified();
         teamEvent = ["none","Volleyball(Male)","Volleyball(Female)","Basketball(Male)","Basketball(Female)",
         "Table Tennis(Male)","Table Tennis(Female)","Badminton(Male)","Badminton(Female)",
         "Cricket","FootyMania","Call of Duty: Modern Warfare","Counter Strike 1.6",
-        "Counter Strike Go","DOTA 2","Bait Bazi","Capture The Flag","Human Foosball",
-        "The Crimeline Road","Mathletics","The Egg Rover Mission","Olympiad Feud","Graffiti",
-        "Pakistan Got Talent", "Paintball","Make it Right","Speed Programming","Funkaar","Minute to win it(team)"
-        ,"Virtual Stock Simulator"];
+        "Make it Right","DOTA 2","Bait Bazi","Capture The Flag","Human Foosball",
+        "The Crimeline Road","Mathletics","The Egg Rover Mission","Olympiad Feud","Funkaar",
+        "Pakistan Got Talent", "Paintball","Minute to win it(team)","Speed Programming",
+        "Virtual Stock Simulator"];
 
-        $(".modal-title").html('Register for ' +teamEvent[0]);
+       
+
+var infoTeam = ["NONE","Event Fee: Rs. 3500 <br>Minimun Participants: 5 <br> Max. Participants: 7 <br><br><a style = 'color: blue' href ='../../events/sports/volleyball.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 2500 <br>Minimun Participants: 5 <br> Max. Participants: 7 <br><br><a style = 'color: blue' href ='../../events/sports/volleyball.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 4000 <br>Minimun Participants: 5 <br> Max. Participants: 7 <br><br><a style = 'color: blue' href ='../../events/sports/basketball.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 3500 <br>Minimun Participants: 5 <br> Max. Participants: 7 <br><br><a style = 'color: blue' href ='../../events/sports/basketball.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 1000 <br>Minimun Participants: 2 <br> Max. Participants: 2 <br><br><a style = 'color: blue' href ='../../events/sports/table-tennis.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 800 <br>Minimun Participants: 2 <br> Max. Participants: 2 <br><br><a style = 'color: blue' href ='../../events/sports/table-tennis.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 2000 <br>Minimun Participants: 2 <br> Max. Participants: 2 <br><br><a style = 'color: blue' href ='../../events/sports/badminton.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 1600 <br>Minimun Participants: 2 <br> Max. Participants: 2 <br><br><a style = 'color: blue' href ='../../events/sports/badminton.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 6000 <br>Minimun Participants: 11 <br> Max. Participants:13 <br><br><a style = 'color: blue' href ='../../events/sports/cricket.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 4000 <br>Minimun Participants: 5 <br> Max. Participants: 9 <br><br><a style = 'color: blue' href ='../../events/sports/footy-mania.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 2500 <br>Minimun Participants: 5 <br> Max. Participants: 5 <br><br><a style = 'color: blue' href ='../../events/all-events/e-gaming.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 2500 <br>Minimun Participants: 5 <br> Max. Participants: 5 <br><br><a style = 'color: blue' href ='../../events/all-events/e-gaming.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 800 <br>Minimun Participants: 5 <br> Max. Participants: 5 <br><br><a style = 'color: blue' href ='../../events/events.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 2500 <br>Minimun Participants: 5 <br> Max. Participants: 5 <br><br><a style = 'color: blue' href ='../../events/all-events/e-gaming.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 400 <br>Minimun Participants: 1 <br> Max. Participants: 2 <br><br><a style = 'color: blue' href ='../../events/all-events/bait-bazi.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 1500 <br>Minimun Participants: 7 <br> Max. Participants:10 <br><br><a style = 'color: blue' href ='../../events/all-events/capture-the-flag.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 2500 <br>Minimun Participants: 5 <br> Max. Participants: 7 <br><br><a style = 'color: blue' href ='../../events/all-events/human-foosball.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 1500 <br>Minimun Participants: 2 <br> Max. Participants: 3 <br><br><a style = 'color: blue' href ='../../events/all-events/crimeline.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 1200 <br>Minimun Participants: 2 <br> Max. Participants: 3 <br><br><a style = 'color: blue' href ='../../events/all-events/matheletics.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 1200 <br>Minimun Participants: 2 <br> Max. Participants: 3 <br><br><a style = 'color: blue' href ='../../events/all-events/egg-rover.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 1500 <br>Minimun Participants: 3 <br> Max. Participants: 5 <br><br><a style = 'color: blue' href ='../../events/all-events/olympiad-feud.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 500 <br>Minimun Participants: 1 <br> Max. Participants: 3 <br><br><a style = 'color: blue' href ='../../events/all-events/funkaar.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 4000 <br>Minimun Participants: 3 <br> Max. Participants: 5 <br><br><a style = 'color: blue' href ='../../events/all-events/pak-got-talent.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 5000 <br>Minimun Participants: 5 <br> Max. Participants: 5 <br><br><a style = 'color: blue' href ='../../events/all-events/paintball.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 500 <br>Minimun Participants: 1 <br> Max. Participants: 3 <br><br><a style = 'color: blue' href ='../../events/all-events/minute-to-win-it.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 2500 <br>Minimun Participants: 2 <br> Max. Participants: 5<br><br><a style = 'color: blue' href ='../../events/all-events/speedprogramming.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 800 <br>Minimun Participants: 5 <br> Max. Participants: 5<br><br><a style = 'color: blue' href ='../../events/events.html' target = '_blank'>View Event Details and Rules</a><br><br>"
+
+       
+       
+       ];
+// end
+
+
         
         $(document).on("click", ".btn", function () {
             var id = $(this).attr('id');
             window.$vm.sportid = id;
             $(".modal-title").html('Register for ' +teamEvent[id]);
+             $("#mbs").html(infoTeam[id]);
+        
         });
     });
     </script>
