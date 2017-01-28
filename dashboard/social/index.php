@@ -58,7 +58,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$challan = new Challan();
 			$challan->setChallanID($challanid);
 			$challan->setAmountPayable($event->getEventFee());
-			$challan->setDueDate("10-10-2016");
+			$duedate = Carbon::today()->addWeeks(2)->toDateString();
+			$challan->setDueDate($duedate);
 			$challan->setPaymentStatus(0);
 			$challan->save();
 			//then add a row in the eventsparticipants table 

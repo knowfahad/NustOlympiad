@@ -43,15 +43,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 	$emailvalidation = v::NotEmpty()->email();
 	if(!$emailvalidation->validate($email))
 		$error['email'] = "Please enter a valid email address";
-	$ipaddress = \App\get_client_ip();
-	$captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
-				[
-				"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
-				"response"	=> $_POST['g-recaptcha-response'],
-				"remoteip"	=> $ipaddress
-				]);
-	if(!$captcha->success)
-		$error['captcha'] = "Captcha is required!";
+	// $ipaddress = \App\get_client_ip();
+	// $captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
+	// 			[
+	// 			"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
+	// 			"response"	=> $_POST['g-recaptcha-response'],
+	// 			"remoteip"	=> $ipaddress
+	// 			]);
+	// if(!$captcha->success)
+	// 	$error['captcha'] = "Captcha is required!";
 
 
 	if(!count($error)){
@@ -125,7 +125,7 @@ In case of any query or ambiguity, please contact er@nustolympiad.com.
 <p>
 The following link is the Facebook Group for the Ambassadors. Please Join this group and we will brief you about the next step. 
 <br>
-https://www.facebook.com/groups/1619115995060964/ 
+<a href="https://www.facebook.com/groups/1619115995060964/">https://www.facebook.com/groups/1619115995060964/</a> 
 </p>
 Regards,
 External Relations Team

@@ -55,7 +55,7 @@ $brmessage
 </body>
 </html>
 htmlmessage;
-		$mail = new OlMail(["name"=>"Web&IT Olympiad", "email"=>"web_it@nustolympiad.com"],"A new message!", $htmlmessage, $txtmessage);
+		$mail = new OlMail(["name"=>"Web&IT Olympiad", "email"=>"er@nustolympiad.com"],"A new message!", $htmlmessage, $txtmessage);
 		$mail->send();
 	}
 

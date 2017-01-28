@@ -1,13 +1,14 @@
 <?php 
 namespace Dashboard;
 require(__DIR__ . '/../../bootstrap.php');
-use PDO;
+use Carbon\Carbon;
 use Model\Model\AmbassadorParticipant;
 use Model\Model\AmbassadorQuery;
 use Model\Model\Challan;
 use Model\Model\Eventparticipants;
 use Model\Model\EventparticipantsQuery;
 use Model\Model\EventsQuery;
+use PDO;
 //blocks users who are not logged in from visiting this page
 $auth->onlyLoggedIn();
 $auth->onlyVerified();
@@ -54,6 +55,7 @@ if($formsubmitted){
 		}
 		if(!isset($error)){
 			//first generate challan
+			
 			$participant = $auth->getParticipant();
 			$challanid = "IC"
 						.$participant->getParticipantID()
@@ -62,8 +64,12 @@ if($formsubmitted){
 			$challan = new Challan();
 			$challan->setChallanID($challanid);
 			$challan->setAmountPayable($event->getEventFee());
-			$challan->setDueDate("10-10-2016");
-			$challan->setPaymentStatus(0);
+			$duedate = Carbon::today()->addWeeks(2)->toDateString();
+			$challan->setDueDate($duedate);
+			if($event->getEventID() == 22 || $event->getEventID() == 23 )
+				$challan->setPaymentStatus(1);
+			else
+				$challan->setPaymentStatus(0);
 			$challan->save();
 			//then add a row in the eventsparticipants table 
 			$ep = new Eventparticipants;
@@ -133,6 +139,7 @@ $(document).ready(function()
 		 $(".modal-title").html( 'Register for ' + IndividualEventsList[id]);
 		 
 });
+	$('#')
 });
 
 </script>

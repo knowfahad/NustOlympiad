@@ -16,7 +16,8 @@
         "swiftmailer/swiftmailer": "^5.4",
         "guzzlehttp/guzzle": "^6.2",
         "php-http/guzzle6-adapter": "^1.1",
-        "sparkpost/sparkpost": "^2.0"
+        "sparkpost/sparkpost": "^2.0",
+        "nesbot/carbon": "^1.22"
     },
     "autoload": {
         "psr-4": {

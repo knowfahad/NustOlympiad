@@ -101,25 +101,25 @@ $auth->onlyVerified();
                               <form id="sportsform" method="POST" @submit.prevent="submitForm">
                               <input id="sportid" type="hidden" name="sport">
                             <!--submit this form to /dashboard/teams/register.php with a POST request(using ajax method) -->
-							  	<div class="form-group">
-							  		<label class="control-label">
-							  		Team Name:
-							  		</label>
-							  		<input v-model="teamname" class="form-control" type="text" placeholder="Team Name" name="teamname">
-							  	</div>
-							  	<hr>
-							  	<div class="form-group">
-							  		<searchbox :members.sync="members"></searchbox>
-							  	</div>
-							  	<h3>Members added:</h3>
-							  	<div>
-							  	</div>
-							  	<div id="members"></div>
+                                <div class="form-group">
+                                    <label class="control-label">
+                                    Team Name:
+                                    </label>
+                                    <input v-model="teamname" class="form-control" type="text" placeholder="Team Name" name="teamname">
+                                </div>
+                                <hr>
+                                <div class="form-group">
+                                    <searchbox :members.sync="members"></searchbox>
+                                </div>
+
+                                <div>
+                                </div>
+                                <div id="members"></div>
                                 <div class="form-group">
                                     <label class="control-label">Ambassador ID(optional)</label>
                                     <input class="form-control" type="text" placeholder="Ambassador ID(optional)" v-model="ambassador_id" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ambassador ID(optional)'"  name="ambassador_id">
                                 </div>  
-							  	<hr>
+                                <hr>
                                 <button type="submit">Apply</button>
 							  </form>
 							</div>
@@ -361,6 +361,7 @@ $auth->onlyVerified();
         </label>
         <input type="text" v-model="term" placeholder="User ID" class="form-control" id="SearchTeamId">
         <button id="SearchBtn" @click.prevent="search">Search</button>
+        <button v-if="(addedMyself == 0)" @click.prevent="addYourself">Add Yourself!</button>
         <div v-if="result.Cnic">
             {{ result.Cnic }} - {{ result.Firstname }} {{ result.Lastname }}
             <button @click.prevent="add">add</button>
@@ -370,6 +371,7 @@ $auth->onlyVerified();
         </div>
         <hr>
         Members Added:
+        <div v-if="addedMyself == 0" class="alert alert-warning">You haven't added yourself(not required)</div>
         <div v-for="member in members">
             {{ member.Cnic }} - {{ member.Firstname }} {{ member.Lastname }}
             <button @click.prevent="deletemember(member)">delete</button>
@@ -385,10 +387,23 @@ $auth->onlyVerified();
         data: function(){return {
             term : '',
             result : {},
-            noresult: false
+            noresult: false,
+            addedMyself: 0
+
         };},
         props: ['members'],
         methods: {
+            addYourself: function(){
+                this.members.push(
+                    {
+                        Participantid: "<?=$auth->getParticipant()->getParticipantID()?>",
+                        Cnic: "<?=$auth->getParticipant()->getCnic()?>",
+                        Firstname: "<?=$auth->getParticipant()->getFirstname()?>",
+                        Lastname: "<?=$auth->getParticipant()->getLastname()?>"
+                        }
+                );
+                this.addedMyself = 1;
+            },
             search(){
                 this.$http.post('/dashboard/search.php', {'id': this.term}).then((response)=>{
                     console.log(this.result = JSON.parse(response.body));
@@ -412,6 +427,9 @@ $auth->onlyVerified();
                 // console.log(member);
                 var x;
                 for(var i=0;i<this.members.length;i++){
+                    if(this.members[i].Participantid == "<?=$auth->getParticipant()->getParticipantID()?>" ){
+                        this.addedMyself = 0;
+                    }
                     if(this.members[i].Participantid == member.Participantid)
                         x=i;
                 }
@@ -428,9 +446,10 @@ $auth->onlyVerified();
             ambassador_id : null,
             sportid: null,
             errors:[],
-            success:0
+            success:0,
         },
         methods:{
+
             resetForm: function(){
                 console.log("cleared");
                 this.members = [];
