@@ -251,17 +251,50 @@ $htmlmessage =
 <<<emailmessage
 <html>
 <body>
-<h2>$heading</h2>
-<p>Plese click on this link to verify your email:</p>
+<p>
+Dear Participant,<br>
+Thank you for registering with NUST Olympiad '17.
+</p>
+
+<p>
+To activate your account, please visit the link below: <br>
 <a href="$link">$link</a>
+<br>
+<i>If the above link does not work, please copy and paste it into your browser</i>
+</p>
+<p>
+We look forward to see your exuberant participation in the biggest Olympiad of the year!
+</p>
+<hr>
+<p>
+This message is generated automatically, please do not reply to this email. If you have any questions or suggestions, please send an email to <a href="mailto:er@nustolympiad.com>er@nustolympiad.com</a>
+</p>
+
+Regards,
+NUST Olympiad team
 <hr />
 </body>
 </html>
 emailmessage;
 
-$txtmessage = "$heading /n Please open this link in your browser to verify your email: $link /n /n If the link does not open, copy and paste it in the browser/n";
+$txtmessage = "Dear Participant, \n
+
+Thank you for registering with NUST Olympiad '17.\n
+
+To activate your account, please visit the link below: \n
+
+$link\n
+
+(If the above link does not work, please copy and paste it into your browser) \n
+
+We look forward to see your exuberant participation in the biggest Olympiad of the year!\n
+
+This message is generated automatically, please do not reply to this email. If you have any questions or suggestions, please send an email to er@nustolympiad.com\n
+
+Regards,
+NUST Olympiad team";
 	
-	$mail = new OlMail(['name'=>$data['username'], 'email'=>$data['email']], 'Verify your account | NUST OLYMPIAD 17', $htmlmessage, $txtmessage );
+	$mail = new OlMail(['name'=>$data['username'], 'email'=>$data['email']], 'Verify your account | NUST Olympiad 17', $htmlmessage, $txtmessage );
 	$mail->send();
 
 	return $errors;

@@ -128,6 +128,32 @@ var IndividualEventsList = ["None","Essay Writing","Hurdle Marathon","Wall Climb
        "Need for Speed: Most Wanted","Mad Hunt","Product Photography",
        "Marathon Male","Marathon Female","Nust Youth Parliament"];
 
+var IndText = ["NONE","Event Fee: Rs. 400<br><br><a style = 'color: blue' href ='../../events/all-events/essay-writing.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/all-events/hurdle-marathon.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/sports/wall-climbing.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/sports/archery.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/all-events/air-gun-shooting.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 1000<br><br><a style = 'color: blue' href ='../../events/all-events/graffiti.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 1000<br><br><a style = 'color: blue' href ='../../events/all-events/live-charcoal.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 1000<br><br><a style = 'color: blue' href ='../../events/all-events/master-chef.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/all-events/minute-to-win-it(individual).html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/events.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 2000<br><br><a style = 'color: blue' href ='../../events/all-events/pak-got-talent.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 600<br><br><a style = 'color: blue' href ='../../events/sports/table-tennis.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 600<br><br><a style = 'color: blue' href ='../../events/sports/table-tennis.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 1000<br><br><a style = 'color: blue' href ='../../events/sports/badminton.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 800<br><br><a style = 'color: blue' href ='../../events/sports/badminton.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/sports/chess.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 1000<br><br><a style = 'color: blue' href ='../../events/sports/squash.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 800<br><br><a style = 'color: blue' href ='../../events/sports/squash.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/all-events/e-gaming.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/all-events/e-gaming.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/events.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 600<br><br><a style = 'color: blue' href ='../../events/events.html' target = '_blank'>View Event Details and Rules</a><br>",
+"No Fee!<br><br><a style = 'color: blue' href ='../../events/sports.html' target = '_blank'>View Event Details and Rules</a><br>",
+"No Fee!<br><br><a style = 'color: blue' href ='../../events/sports.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 400<br><br><a style = 'color: blue' href ='../../events/events.html' target = '_blank'>View Event Details and Rules</a><br>"
+];
 
 $(document).ready(function()
 {
@@ -137,6 +163,7 @@ $(document).ready(function()
 		 $("#eventname").val(id);
 		 
 		 $(".modal-title").html( 'Register for ' + IndividualEventsList[id]);
+		 $("#modalBodyDesc").html(IndText[id]);
 		 
 });
 	$('#')
@@ -185,6 +212,14 @@ $(document).ready(function()
         {
             width: 90%;
         }
+		
+ .modal-header{
+    background-color: orange;
+    color: white;
+}
+.modal-body{
+        background-color: rgba(204, 204, 204, 0.58);
+}
     </style>
 </head>
 
@@ -199,27 +234,28 @@ $(document).ready(function()
 							  <button type="button" class="close" data-dismiss="modal">&times;</button>
 							  <h4 class="modal-title">Modal Header</h4>
 							</div>
-							<div class="modal-body">
+							<div  class="modal-body">
+								<div id = "modalBodyDesc"></div>
 							  
-							  <h4>Details:</h4>
-							  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-							  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+							  
 							  <hr>
 							  <form method="POST">
 							  	<input id="eventname" type="hidden" name="eventname">
-							  	<div class="form-group">
+							  	
+								  <div class="form-group">
 							  		<label class="control-label">Ambassador ID(optional)</label>
+									  <div class = "row">
+										  <div class = "col-md-4 ">
 							  		<input class="form-control" type="text" placeholder="Ambassador ID(optional)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ambassador ID(optional)'"  name="ambassador_id">
-							  	</div>	
-							  	<button type="submit">Apply!</button>							
+							  	  </div>
+									</div>
+								  </div>	
+								  
+							  	<button class = "btn btn-success" type="submit">Apply!</button>							
 							  </form>
 							</div>
 							<div class="modal-footer">
-							  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 							</div>
 						  </div>
 						  
