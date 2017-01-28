@@ -199,7 +199,10 @@ function persistUser($data, $mpdo){ //execution will only start if there are no 
     if($stmt = $mpdo->prepare("INSERT INTO challan (ChallanID, AmountPayable, DueDate, PaymentStatus) VALUES (?,?,?,?)")){
 		$date= '20170101';
 		$am = 1000;
-		$s= 0;
+		if(strlen($data['nustid']))
+			$s= 1;
+		else
+			$s = 0;
 		$stmt->execute([$regChallan,$am,$date, $s]);
 	}
 	else{

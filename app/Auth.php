@@ -89,4 +89,8 @@ class Auth
 	public function getCNIC(){
 		return $this->getParticipant()->getCNIC();
 	}
+
+	public function isNustian(){
+		return ($this->getParticipant()->getNUSTRegNo());
+	}
 }

@@ -12,6 +12,9 @@ $teamChallans = teamChallans($auth, $mpdo);
 
 if(!$auth->getParticipant()->isPaid()){
     $errorMessage = "You must pay the registration challan to complete registration!";
+} 
+elseif($auth->isNustian()){
+    $infoMessage = "You don't need to pay registration fee if you're a NUSTian.";
 }
 
 $message = 0;
@@ -129,13 +132,18 @@ if(isset($_GET['feedback'])){
                                 </div>
                             </div>
                             <?php endif ?>
-                            <?php if(isset($errorMessage)): ?> 
                                 <div id='errorShow' class="row">
+                                <?php if(isset($errorMessage)): ?> 
                                 <div class="col-md-8 col-md-offset-2 alert alert-danger">
                                     <?=$errorMessage?>
                                 </div>
+                                <?php endif ?>
+                                <?php if(isset($infoMessage)): ?>
+                                    <div class="col-md-8 col-md-offset-2 alert alert-info">
+                                        <?=$infoMessage?>
+                                    </div>
+                                <?php endif ?>
                                 </div>
-                            <?php endif ?>
             
                         </div>
                     </div>
