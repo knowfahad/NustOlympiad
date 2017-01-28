@@ -72,7 +72,7 @@
                             
             this.classes = [ 'front','back', 'right', 'left', 'top', 'bottom' ];	
                     this.topTags = ['year','month','day','hour', 'minute', 'second' ];
-                    this.loadingTags = [ 'LO', 'AD', 'IN', 'G...'];
+                    this.loadingTags = [ 'LO', 'AD', '0', '0','0','0'];
                     this.transformNames =  [ '-webkit-transform', '-moz-transform', '-o-transform', 'transform' ];
                     
                     cubes = [];
