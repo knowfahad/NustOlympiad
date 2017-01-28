@@ -2,5 +2,7 @@
 /vendor
 /propel
 *.tar
-generated-conf/config.php
-OlAssets/dbconnect.php
+<<<<<<< HEAD
+/OlAssets/
+/generated-conf/
+

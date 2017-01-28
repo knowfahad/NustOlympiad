@@ -15,6 +15,17 @@ if($formsubmitted){
 	if(!$emailvalidation->validate($email)){
 		$errors['email'] = "Please enter a valid email address.";
 	}
+    $ipaddress = \App\get_client_ip();
+    $captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
+            [
+            "secret"    => "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
+            "response"  => $_POST['g-recaptcha-response'],
+            "remoteip"  => $ipaddress
+            ]);
+    if(!$captcha->success){
+        $errors['captcha'] = "Captcha is required!";
+    }
+
 
 	if(!count($errors)){
 		$stmt = $mpdo->prepare("SELECT * FROM useraccount WHERE email = ?");
@@ -43,8 +54,8 @@ $txtMessage
 htmlMessage;
 		$mail = new App\OlMail(["name"=>$userdetails->Username, "email"=>$email], "Reset Your Olympiad Password", $txtMessage.$link, $htmlmessage);
 		$mail->send();
-	}
-    $success = true;
+        $success = true;
+    }
 
 }
 
@@ -142,7 +153,7 @@ font-weight:normal;
                         <div  id =  'errorShow' class = "row">
                         <!--append errors here! -->
                             <?php foreach($errors as $error): ?>
-                            <div class="row"><?=$error?></div>
+                            <div class="row alert alert-danger"><?=$error?></div>
                             <?php endforeach ?>
                         </div>
                         </div></div>
@@ -169,7 +180,10 @@ font-weight:normal;
                                             <div class="">
                                             <input id="email" name="email" placeholder="Enter Your Email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Your Email'" required>
                                             </div>
-                                        </div>                             
+                                        </div>  
+                                        <div class="form-group">
+                                            <div class="g-recaptcha" data-sitekey="6Ldgtg0UAAAAAIGYMROWOzYRwq_qKR3dFWoRbqA9"></div>
+                                        </div>                           
             							<div class = "row">
                                             <div class="form-group"> 
                                                 <center>

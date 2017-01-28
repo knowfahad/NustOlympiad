@@ -12,20 +12,23 @@ $auth->onlyVerified();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if(isset($_POST['agree'])){
-        $participant = $auth->getParticipant();
-        $gender = ($participant->getGender() == "M") ? "m" : "f";
-        $challanid = "AC" . $participant->getParticipantID() .  $gender;
-        $challan = new Challan();
-        $challan->setChallanID($challanid);
-        $challan->setAmountPayable(1000);
-        $challan->setDueDate("10-10-2016");
-        $challan->setPaymentStatus(0);
-        $challan->save();
+        if( !strlen($auth->getParticipant()->getAccomodationChallanID()) ){
+            $participant = $auth->getParticipant();
+            $gender = ($participant->getGender() == "M") ? "m" : "f";
+            $challanid = "AC" . $participant->getParticipantID() .  $gender;
+            $challan = new Challan();
+            $challan->setChallanID($challanid);
+            $challan->setAmountPayable(1000);
+            $challan->setDueDate("10-10-2016");
+            $challan->setPaymentStatus(0);
+            $challan->save();
 
-        $participant->setAccomodationChallanID($challanid);
-        $participant->save();
-        if(strlen($auth->getParticipant()->getAccomodationChallanID()))
-            \App\redirect("/dashboard/?feedback=accomodation");
+            $participant->setAccomodationChallanID($challanid);
+            $participant->save();
+            if(strlen($auth->getParticipant()->getAccomodationChallanID()))
+                \App\redirect("/dashboard/?feedback=accomodation");
+        }
+        \App\redirect("/dashboard/accomodation");
     }
 }
 
