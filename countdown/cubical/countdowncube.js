@@ -374,6 +374,11 @@
     	    	minutesToShow = diffTime.getMinutes();
     			hoursToShow   = diffTime.getHours();
     			
+    			//at final date all are zeros
+			if(options.target <= new Date()){
+				yearsToShow = monthsToShow = daysToShow = hoursToShow = minutesToShow = secondsToShow = 0;
+			}
+    			
     			
     	    	/* make each cube an object on its own with a feature to shift it!*/
     	    	this.shiftCube( element, options, secCube, secondsToShow );
