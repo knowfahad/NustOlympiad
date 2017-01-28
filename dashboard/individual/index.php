@@ -205,6 +205,14 @@ $(document).ready(function()
         {
             width: 90%;
         }
+		
+ .modal-header{
+    background-color: orange;
+    color: white;
+}
+.modal-body{
+        background-color: rgba(204, 204, 204, 0.58);
+}
     </style>
 </head>
 
@@ -226,15 +234,21 @@ $(document).ready(function()
 							  <hr>
 							  <form method="POST">
 							  	<input id="eventname" type="hidden" name="eventname">
-							  	<div class="form-group">
+							  	
+								  <div class="form-group">
 							  		<label class="control-label">Ambassador ID(optional)</label>
+									  <div class = "row">
+										  <div class = "col-md-4 ">
 							  		<input class="form-control" type="text" placeholder="Ambassador ID(optional)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ambassador ID(optional)'"  name="ambassador_id">
-							  	</div>	
-							  	<button type="submit">Apply!</button>							
+							  	  </div>
+									</div>
+								  </div>	
+								  
+							  	<button class = "btn btn-success" type="submit">Apply!</button>							
 							  </form>
 							</div>
 							<div class="modal-footer">
-							  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 							</div>
 						  </div>
 						  
