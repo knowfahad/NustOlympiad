@@ -186,7 +186,7 @@ function test_input($data) {
 			  <div class="input-group">
 			  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 			  <input  name="first_name" placeholder="First Name" class="form-control" 
-			  value="<?=$_POST['first_name']?? ''?>"  type="text">
+			  <?php if(!$success): ?>value="<?=$_POST['first_name']?? ''?> <?php endif ?>"  type="text">
 				</div>
 			  </div>
 			</div>
@@ -198,7 +198,7 @@ function test_input($data) {
 				<div class="col-md-4 inputGroupContainer">
 				<div class="input-group">
 			  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-			  <input value="<?=$_POST['last_name']?? ''?>" name="last_name" placeholder="Last Name" class="form-control"  type="text">
+			  <input <?php if(!$success): ?> value="<?=$_POST['last_name']?? ''?>" <?php endif ?> name="last_name" placeholder="Last Name" class="form-control"  type="text">
 				</div>
 			  </div>
 			</div>
@@ -209,7 +209,7 @@ function test_input($data) {
 				<div class="col-md-4 inputGroupContainer">
 				<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-			  <input value="<?=$_POST['email']?? ''?>" name="email" placeholder="E-Mail Address e.g., nust@gmail.com" class="form-control"  type="text">
+			  <input <?php if(!$success): ?> value="<?=$_POST['email']?? ''?>" <?php endif ?>name="email" placeholder="E-Mail Address e.g., nust@gmail.com" class="form-control"  type="text">
 				</div>
 			  </div>
 			</div>
@@ -222,7 +222,7 @@ function test_input($data) {
 				<div class="col-md-4 inputGroupContainer">
 				<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-			  <input value="<?=$_POST['phone']?? ''?>" name="phone" placeholder="0313XXXXXXX" class="form-control" type="text">
+			  <input <?php if(!$success): ?> value="<?=$_POST['phone']?? ''?>" <?php endif ?> name="phone" placeholder="0313XXXXXXX" class="form-control" type="text">
 				</div>
 			  </div>
 			</div>
@@ -234,7 +234,7 @@ function test_input($data) {
 				<div class="col-md-4 inputGroupContainer">
 				<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-			  <input value="<?=$_POST['cnic']?? ''?>"  name="cnic" placeholder="CNIC without dashes" class="form-control" type="numeric">
+			  <input <?php if(!$success): ?> value="<?=$_POST['cnic']?? ''?>" <?php endif ?>  name="cnic" placeholder="CNIC without dashes" class="form-control" type="numeric">
 				</div>
 			  </div>
 			</div>
@@ -246,7 +246,7 @@ function test_input($data) {
 				<div class="col-md-4 inputGroupContainer">
 				<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-			  <input value="<?=$_POST['institution']?? ''?>" name="institution" placeholder="Institution Name e.g., NUST" class="form-control"  type="text">
+			  <input <?php if(!$success): ?> value="<?=$_POST['institution']?? ''?>" <?php endif ?> name="institution" placeholder="Institution Name e.g., NUST" class="form-control"  type="text">
 				</div>
 			  </div>
 			</div> 

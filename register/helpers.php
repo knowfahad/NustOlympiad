@@ -79,7 +79,7 @@ function preprocess($mpdo){
  	$pwdvalidation = v::notEmpty()->length(8, null);
  	$phonevalidation = v::notEmpty()->digit()->between(3000000000, 3499999999);
  	$namevalidation = v::notEmpty()->alpha()->length(1,50);
- 	$nustidvalidation = v::notEmpty()->digit()->between(100000, 99999999);
+ 	$nustidvalidation = v::notEmpty()->digit()->between(10000, 99999999);
  	if(!$usernamevalidation->validate($data['username']))
  		$errors['username'] = "Please enter a valid username!";
  	if(!$cnicvalidation->validate($data['cnic']))
