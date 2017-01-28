@@ -240,7 +240,9 @@ $(document).ready(function()
                     <div class="row homepage">
                         
                     <div class="row">
-                        <div class="col-md-10 col-xs-5 col-sm-7"></div>
+                        <div class="col-md-10 col-xs-5 col-sm-7">
+							&nbsp;<a href="../">Back to Dashboard</a>
+						</div>
                         <div class="col-md-2 col-xs-7 col-sm-5">
                             <div id="userId">
                                 <p style="display:inline;color:orange;">User Id:<?=$auth->getParticipant()->getParticipantID()?></p><span> | </span><a href="#">Logout</a></div>
@@ -250,7 +252,7 @@ $(document).ready(function()
 						
                     <div class="row">
                       <div class = "col-md-1"></div>
-                            <div class="col-md-12 my-box ">
+                            <div class="col-md-10 my-box ">
                             	<div class="row">
 	            					<?php if( $formsubmitted && isset($error) ): ?>
 	                                    <div class="col-md-10 col-md-offset-1 col-xs-12">
@@ -443,4 +445,6 @@ $(document).ready(function()
 			<!-- preloading flame js-->
    <script type="text/javascript" src="../../js/flame.js"></script>
 </body>
+
+
 </html>

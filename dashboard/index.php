@@ -187,7 +187,7 @@ if(isset($_GET['feedback'])){
                                         </div>
                                     <div class="col-md-4 col-xs-8">
                                     <a href="/dashboard/accomodation" class="btn btn-default btn-sm my-btn">
-                                      ACCOMODATION
+                                      ACCOMMODATION
                                     </a>
                                     </div>
                                     <div class="col-md-2 col-xs-1"></div>
@@ -384,4 +384,5 @@ if(isset($_GET['feedback'])){
             <!-- preloading flame js-->
    <script type="text/javascript" src="../js/flame.js"></script>
 </body>
+
 </html>
