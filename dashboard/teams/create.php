@@ -102,7 +102,7 @@ if($formsubmitted){
     if(!count($errors)){
 		 
         // populate the challan table
-        $duedate = "12-10-17";
+        $duedate = Carbon::today()->addWeeks(2)->toDateString();
         $AmountPayable = $numOfMembers * $sport->FeePerParticipant + $sport->RegistrationFee;
         //find the new team ID first
         $stmt = $mpdo->prepare("select max(TeamID) as max from sportsteam");

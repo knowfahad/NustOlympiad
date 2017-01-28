@@ -1,6 +1,7 @@
 <?php
 namespace Dashboard;
 
+use Carbon\Carbon;
 use Model\Model\Challan;
 use Model\Model\ChallanQuery;
 use Model\Model\ParticipantQuery;
@@ -19,7 +20,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $challan = new Challan();
             $challan->setChallanID($challanid);
             $challan->setAmountPayable(1000);
-            $challan->setDueDate("10-10-2016");
+            $duedate = Carbon::today()->addWeeks(2)->toDateString();
+            $challan->setDueDate($duedate);
             $challan->setPaymentStatus(0);
             $challan->save();
 
