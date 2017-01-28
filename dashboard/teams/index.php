@@ -155,7 +155,9 @@ $auth->onlyVerified();
 
                     </div>
                     <div class="row">
-                        <div class="col-md-10 col-xs-5 col-sm-7"></div>
+                        <div class="col-md-10 col-xs-5 col-sm-7">
+                            <a href="../">Back to Dashboard</a>
+                        </div>
                         <div class="col-md-2 col-xs-7 col-sm-5">
                             <div id="userId">
                                 <p style="display:inline;color:orange;">User Id:<?=$auth->getParticipant()->getParticipantID()?></p><span> | </span><a href="#">Logout</a></div>
@@ -204,7 +206,7 @@ $auth->onlyVerified();
                                             />
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="button" id="6" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Table Tennis(Female)"
+                                            <input type="button" id="6" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" style = "padding-left:0;padding-right:0;"value="TableTennis(Female)"
                                             />
                                         </div>
                                     </div>
@@ -230,7 +232,7 @@ $auth->onlyVerified();
                                             <input type="button" id="10" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="FootyMania"/>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="button" id="11" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="COD: Modern Warfare"
+                                            <input type="button" id="11" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="COD 4: MW"
                                             />
                                         </div>
                                         <div class="col-md-4">
@@ -264,7 +266,7 @@ $auth->onlyVerified();
                                             />
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="button" id="18" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="The Crimeline Road"
+                                            <input type="button" id="18" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Crimeline Road"
                                             />
                                         </div>
                                     </div>
@@ -275,7 +277,7 @@ $auth->onlyVerified();
                                             <input type="button" id="19" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Mathletics"/>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="button" id="20" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="The Egg Rover Mission"
+                                            <input type="button" id="20" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Egg Rover Mission"
                                             />
                                         </div>
                                         <div class="col-md-4">
@@ -302,14 +304,30 @@ $auth->onlyVerified();
 
                                      <div class="row">
                                         <div class="col-md-4">
-                                            <input type="button" id="25" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Minute to win it(team)"/>
+                                            <input type="button" id="25" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Make it Right"/>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="button" id="26" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Master Chef"/>
+                                            <input type="button" id="26" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" style="padding-left:0;padding-right:0;" value="Speed Programming"/>
+                                        </div>
+                                         <div class="col-md-4">
+                                            <input type="button" id="27" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Funkaar"/>
                                         </div>
                                         
                                     </div>
                                     <br>
+
+                                     <div class="row">
+                                        
+                                        <div class="col-md-6">
+                                            <input type="button" id="28" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Minute to win it (Team)"/>
+                                        </div>
+                                         <div class="col-md-6">
+                                            <input type="button" id="29" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" style="padding-left:0;padding-right:0;" value="Virtual Stock Simulator"/>
+                                        </div>
+                                        
+                                    </div>
+                                    <br>
+
 									</center>
 									</div>
 									<div class = "col-md-2 col-xs-3"></div>
@@ -452,10 +470,11 @@ $auth->onlyVerified();
     {
         teamEvent = ["none","Volleyball(Male)","Volleyball(Female)","Basketball(Male)","Basketball(Female)",
         "Table Tennis(Male)","Table Tennis(Female)","Badminton(Male)","Badminton(Female)",
-        "Cricket","FootyMania","Call of Duty: Modern Warfare 5","Counter Strike 1.6 5",
-        "Counter Strike Go 5","DOTA 2 5","Bait Bazi","Capture The Flag","Human Foosball",
+        "Cricket","FootyMania","Call of Duty: Modern Warfare","Counter Strike 1.6",
+        "Counter Strike Go","DOTA 2","Bait Bazi","Capture The Flag","Human Foosball",
         "The Crimeline Road","Mathletics","The Egg Rover Mission","Olympiad Feud","Graffiti",
-        "Pakistan Got Talent", "Paintball","Minute to win it(team)","Master Chef"];
+        "Pakistan Got Talent", "Paintball","Make it Right","Speed Programming","Funkaar","Minute to win it(team)"
+        ,"Virtual Stock Simulator"];
 
         $(".modal-title").html('Register for ' +teamEvent[0]);
         
