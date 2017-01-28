@@ -183,12 +183,11 @@ $(document).on("click", ".btn", function () {
 							</div>
 							<div class="modal-body">
 								<h4>Details:</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-								consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-								cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-								proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+								<ul>
+									<li>Fee for Carnival is Rs. 400</li>
+									<li>Fee for Concert is Rs. 850</li>
+									
+								</ul>
 								<hr>
 								<form method="POST">
 									<input id="eventname" type="hidden" name="eventname">
@@ -236,7 +235,9 @@ $(document).on("click", ".btn", function () {
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-10 col-xs-5 col-sm-7"></div>
+                        <div class="col-md-10 col-xs-5 col-sm-7">
+							<a href="../">Back to Dashboard</a>
+						</div>
                         <div class="col-md-2 col-xs-7 col-sm-5">
                             <div id="userId">
                                 <p style="display:inline;color:orange;">User Id:<?= $auth->getParticipant()->getParticipantID(); ?></p><span> | </span><a href="#">Logout</a></div>
@@ -316,5 +317,4 @@ $(document).on("click", ".btn", function () {
 			<!-- preloading flame js-->
    <script type="text/javascript" src="../../js/flame.js"></script>
 </body>
-
 </html>

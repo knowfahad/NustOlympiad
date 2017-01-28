@@ -12,20 +12,23 @@ $auth->onlyVerified();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if(isset($_POST['agree'])){
-        $participant = $auth->getParticipant();
-        $gender = ($participant->getGender() == "M") ? "m" : "f";
-        $challanid = "AC" . $participant->getParticipantID() .  $gender;
-        $challan = new Challan();
-        $challan->setChallanID($challanid);
-        $challan->setAmountPayable(500);
-        $challan->setDueDate("10-10-2016");
-        $challan->setPaymentStatus(0);
-        $challan->save();
+        if( !strlen($auth->getParticipant()->getAccomodationChallanID()) ){
+            $participant = $auth->getParticipant();
+            $gender = ($participant->getGender() == "M") ? "m" : "f";
+            $challanid = "AC" . $participant->getParticipantID() .  $gender;
+            $challan = new Challan();
+            $challan->setChallanID($challanid);
+            $challan->setAmountPayable(1000);
+            $challan->setDueDate("10-10-2016");
+            $challan->setPaymentStatus(0);
+            $challan->save();
 
-        $participant->setAccomodationChallanID($challanid);
-        $participant->save();
-        if(strlen($auth->getParticipant()->getAccomodationChallanID()))
-            \App\redirect("/dashboard/?feedback=accomodation");
+            $participant->setAccomodationChallanID($challanid);
+            $participant->save();
+            if(strlen($auth->getParticipant()->getAccomodationChallanID()))
+                \App\redirect("/dashboard/?feedback=accomodation");
+        }
+        \App\redirect("/dashboard/accomodation");
     }
 }
 
@@ -133,6 +136,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                 <img src="/img/logo.png" class="img-responsive" alt="LOGO" />
                             </a>
                         </div>
+
+                        <div class="row">
+                        <div class="col-md-10 col-xs-5 col-sm-7">
+							&nbsp;<a href="../">Back to Dashboard</a>
+						</div>
+                        <div class="col-md-2 col-xs-7 col-sm-5">
+                            <div id="userId">
+                                <p style="display:inline;color:orange;">User Id:<?=$auth->getParticipant()->getParticipantID()?></p><span> | </span><a href="#">Logout</a></div>
+                        </div>
+
+                        <hr>
+
                     </div>
                     <br>
                     <div class="row homepage">
@@ -145,7 +160,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                 <div class="col-md-12  col-xs-12">
                                     <div class="container-fluid">
                                         <center>
-                                            <h2 style="font-family:Montserrat font-weight:200;">Instructions for accomodation</h2>
+                                            <h2 style="font-family:Montserrat font-weight:200;color:orange;">Instructions for Accommodation</h2>
                                         </center>
                                         <br>
                                     </div>
@@ -153,16 +168,34 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1">
-                                <p id="makeborder" style="font-family:Montserrat-Light;">
-                                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                                    The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,
-                                    as opposed to using 'Content here, content here', making it look like readable English.
-                                    Many desktop publishing packages and web page editors now use Lorem Ipsum as their default
-                                    model text, and a search for 'lorem ipsum' will uncover many web sites still in their
-                                    infancy. Various versions have evolved over the years, sometimes by accident, sometimes
-                                    on purpose (injected humour and the like).
-                                </p>
+                            <div class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 ">
+                                <div id="makeborder" style="font-family:Montserrat-Light;">
+                                    <ul style = "text-align:left;line-height:25px;">
+                                        <li>The accommodation charges are Rs.1000.</li>
+                                        <li>Accommodation will be given on first come first serve basis.</li>
+                                        <li>Participants are required to stay in their respective residing areas. All the rules for participants
+                                            are same as those applicable for the NUST Hostelities.</li>
+                                        <li> You are advised to be inside university premises by 2200 hours, whereas hostel gates will strictly
+                                            close at 2230 hours and attendance will be marked.</li>
+                                        <li>Breakfast will be the only meal provided to the participants between timings 0700 – 0900 Hours.</li>
+                                        <li>Laundry service, available to all participants, can be found on the first floor from 0830 – 2200
+                                            Hours.</li>
+                                        <li>Carry your valuables with you at all times and keep your luggage locked while unattended.</li>
+                                        <li>University will not be responsible for any loss or theft of valuables.</li>
+                                        <li>Be considerate of others’ comfort and adhere to the lowest of noise levels.</li>
+                                        <li>In case of any property damage, the defaulter would be liable for compensation.</li>
+                                        <li>In case of any emergency, participants may leave after getting the permission of the warden,
+                                        obtaining an out pass and informing the respective hostel accommodation team member.</li>
+                                        <li>DRUGS/Weaponry of any kind is not allowed inside NUST premises. Anyone found having them
+                                        would immediately be removed from campus.</li>
+                                        <li>Smoking is prohibited on campus.</li>
+                                        <li>For further queries, contact respective accommodation team members.</li>
+
+                                        
+                                    </ul>
+                                    
+                                </div>
+                                
                             </div>
                         </div>
                         <br>
@@ -194,8 +227,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         </div>
                         </div>
                         <?php else: ?>
+                        <center>
                         <h2 styles="text-align: center;">Your challan has already been generated!</h2>
                         <?php endif ?> 
+                        </center>
                     </div>
                 </div>
             </div>
@@ -224,5 +259,5 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             <!-- preloading flame js-->
    <script type="text/javascript" src="../../js/flame.js"></script>
 </body>
-    
+
 </html>

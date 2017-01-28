@@ -92,9 +92,7 @@ $auth->onlyVerified();
 							<div class="modal-body">
                             <!--Insert all the errors here-->
                             <!---if there are no errors, then add a success message -->
-                            <div v-if="success" class="alert alert-success">
-                                Congratulations! Team registration successful!
-                            </div>
+                            
                             <div class="alert alert-danger" v-if="errors.length != 0">
                                 <div class="row" v-for="error in errors">
                                     {{ error|json }}
@@ -133,10 +131,7 @@ $auth->onlyVerified();
 						</div>
 					  </div>
     <div class="td-preloading">
-         <!-- <span class="fa fa-spinner fa-spin"></span> -->
-		
-			<canvas id="c" width="300px" height="300px" ></canvas>
-			<img src="../../img/torch.png" widht="150px" height="150px" id="id-img-preload">
+        <span class="fa fa-spinner fa-spin"></span>
     </div>
     <div class="td-container">
         <!--<div class="row">
@@ -160,7 +155,9 @@ $auth->onlyVerified();
 
                     </div>
                     <div class="row">
-                        <div class="col-md-10 col-xs-5 col-sm-7"></div>
+                        <div class="col-md-10 col-xs-5 col-sm-7">
+                            <a href="../">Back to Dashboard</a>
+                        </div>
                         <div class="col-md-2 col-xs-7 col-sm-5">
                             <div id="userId">
                                 <p style="display:inline;color:orange;">User Id:<?=$auth->getParticipant()->getParticipantID()?></p><span> | </span><a href="#">Logout</a></div>
@@ -179,6 +176,9 @@ $auth->onlyVerified();
 								<br>
                                 <!--new -->
                                 <div class="row">
+                                <div v-if="success" class="alert alert-success">
+                                    Congratulations! Team registration successful!
+                                </div>
                                     <div class = "col-md-2 col-xs-3"></div>
 									<div class = "col-md-8 col-xs-6">
 									<center>
@@ -206,7 +206,7 @@ $auth->onlyVerified();
                                             />
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="button" id="6" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Table Tennis(Female)"
+                                            <input type="button" id="6" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" style = "padding-left:0;padding-right:0;"value="TableTennis(Female)"
                                             />
                                         </div>
                                     </div>
@@ -232,7 +232,7 @@ $auth->onlyVerified();
                                             <input type="button" id="10" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="FootyMania"/>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="button" id="11" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="COD 4: Modern Warfare"
+                                            <input type="button" id="11" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="COD 4: MW"
                                             />
                                         </div>
                                         <div class="col-md-4">
@@ -243,13 +243,11 @@ $auth->onlyVerified();
                                     <br>
 
                                      <div class="row">
-                                     
                                         <div class="col-md-4">
-                                            <input type="button" id="13" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="DOTA 2"
-                                            />
+                                            <input type="button" id="13" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Counter Strike Go"/>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="button" id="14" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Paintball"
+                                            <input type="button" id="14" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="DOTA 2"
                                             />
                                         </div>
                                         <div class="col-md-4">
@@ -268,7 +266,7 @@ $auth->onlyVerified();
                                             />
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="button" id="18" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="The Crimeline Road"
+                                            <input type="button" id="18" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Crimeline Road"
                                             />
                                         </div>
                                     </div>
@@ -279,7 +277,7 @@ $auth->onlyVerified();
                                             <input type="button" id="19" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Mathletics"/>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="button" id="20" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Egg Drop"
+                                            <input type="button" id="20" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Egg Rover Mission"
                                             />
                                         </div>
                                         <div class="col-md-4">
@@ -290,37 +288,46 @@ $auth->onlyVerified();
                                     <br>
 
                                       <div class="row">
-                                        
                                         <div class="col-md-4">
-                                            <input type="button" id="22" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Pakistan Got Talent"
+                                            <input type="button" id="22" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Graffiti"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" id="23" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Pakistan Got Talent"
                                             />
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="button" id="23" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Minute to win it(team)"/>
+                                            <input type="button" id="24" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Paintball"
+                                            />
                                         </div>
-                                        <div class="col-md-4">
-                                            <input type="button" id="24" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Funkaar"/>
-                                        </div>
-                                        
-
                                     </div>
                                     <br>
 
                                      <div class="row">
-                                     
-                                         <div class="col-md-4">
-                                            <input type="button" id="25" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="100m Relay"
-                                            />
+                                        <div class="col-md-4">
+                                            <input type="button" id="25" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Make it Right"/>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="button" id="26" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="200m Relay"
-                                            />
+                                            <input type="button" id="26" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" style="padding-left:0;padding-right:0;" value="Speed Programming"/>
                                         </div>
-                                         
-                                        
+                                         <div class="col-md-4">
+                                            <input type="button" id="27" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Funkaar"/>
+                                        </div>
                                         
                                     </div>
                                     <br>
+
+                                     <div class="row">
+                                        
+                                        <div class="col-md-6">
+                                            <input type="button" id="28" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" value="Minute to win it (Team)"/>
+                                        </div>
+                                         <div class="col-md-6">
+                                            <input type="button" id="29" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm my-btn" style="padding-left:0;padding-right:0;" value="Virtual Stock Simulator"/>
+                                        </div>
+                                        
+                                    </div>
+                                    <br>
+
 									</center>
 									</div>
 									<div class = "col-md-2 col-xs-3"></div>
@@ -340,19 +347,6 @@ $auth->onlyVerified();
 			
 					  
             <script src="/js/jquery.min.js"></script>
-            <script type="text/javascript">
-   		$(document).ready(function(){
-   			function setPreLoadMargin(){
-   				var width = $(window).width();
-   				
-   				$('#c').css({"position":"absolute","left":((width-300)/2)+"px"});
-   				$('#id-img-preload').css({"position":"absolute","top":"50%","left":((width-95)/2)+"px"});
-   			}
-   			setPreLoadMargin();
-   			$(window).resize(function(){setPreLoadMargin();});
-
-   		});
-   </script>
             <script src="/js/responsive.js"></script>
             <script src="/js/perfect-scrollbar.min.js"></script>
             <script src="/js/bootstrap.min.js"></script>         
@@ -361,9 +355,6 @@ $auth->onlyVerified();
             <script src="/js/classie.js"></script>
             <script src="/js/detectanimation.js"></script>
             <script src="/js/modernizr.custom.js"></script>
-            <!-- preloading flame js-->
-   <script type="text/javascript" src="../../js/flame.js"></script>
-   
     <template id="searchbox">
         <label for="SearchTeamId" class="control-label">
         Add a team member:
@@ -373,6 +364,9 @@ $auth->onlyVerified();
         <div v-if="result.Cnic">
             {{ result.Cnic }} - {{ result.Firstname }} {{ result.Lastname }}
             <button @click.prevent="add">add</button>
+        </div>
+        <div v-if="noresult">
+            Participant ID not found!
         </div>
         <hr>
         Members Added:
@@ -391,6 +385,7 @@ $auth->onlyVerified();
         data: function(){return {
             term : '',
             result : {},
+            noresult: false
         };},
         props: ['members'],
         methods: {
@@ -398,8 +393,9 @@ $auth->onlyVerified();
                 this.$http.post('/dashboard/search.php', {'id': this.term}).then((response)=>{
                     console.log(this.result = JSON.parse(response.body));
                     console.log(this.result.Participantid);
+                    this.noresult = 0;
                 }, (response)=>{
-                    console.log("error");
+                    this.noresult = 1;
                 });
             },
             add(){
@@ -440,7 +436,6 @@ $auth->onlyVerified();
                 this.members = [];
                 this.teamname = null;
                 this.ambassador_id = null;
-                this.success = 0;
                 this.errors = [];
             },
             submitForm: function(){
@@ -457,8 +452,10 @@ $auth->onlyVerified();
                 console.log(formdata);
                 this.$http.post('/dashboard/teams/create.php', formdata).then((response)=>{
                     console.log(response);
-                    if(response.body == "1")
+                    if(response.body == "1"){
                         this.success = 1;
+                        $("#myModal").modal('toggle');
+                    }
                     else{
                         this.errors = JSON.parse(response.body);
                     } 
@@ -471,12 +468,13 @@ $auth->onlyVerified();
     $('#myModal').on('hidden.bs.modal', function(){window.$vm.resetForm();});
     $(document).ready(function()
     {
-         var teamEvent = ["none","Volleyball(Male)","Volleyball(Female)","Basketball(Male)","Basketball(Female)",
+        teamEvent = ["none","Volleyball(Male)","Volleyball(Female)","Basketball(Male)","Basketball(Female)",
         "Table Tennis(Male)","Table Tennis(Female)","Badminton(Male)","Badminton(Female)",
-        "Cricket","FootyMania","Call of Duty 4: Modern Warfare","Counter Strike 1.6",
-        "DOTA 2","Paintball","Bait Bazi","Capture The Flag","Human Foosball",
-        "The Crimeline Road","Mathletics","Egg Drop","Olympiad Feud",
-        "Pakistan Got Talent","Minute to win it(team)","Funkaar","100m relay","200m relay"];
+        "Cricket","FootyMania","Call of Duty: Modern Warfare","Counter Strike 1.6",
+        "Counter Strike Go","DOTA 2","Bait Bazi","Capture The Flag","Human Foosball",
+        "The Crimeline Road","Mathletics","The Egg Rover Mission","Olympiad Feud","Graffiti",
+        "Pakistan Got Talent", "Paintball","Make it Right","Speed Programming","Funkaar","Minute to win it(team)"
+        ,"Virtual Stock Simulator"];
 
         $(".modal-title").html('Register for ' +teamEvent[0]);
         

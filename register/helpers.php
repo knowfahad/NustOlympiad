@@ -37,11 +37,40 @@ function preprocess($mpdo){
  	$data['institute'] = sanitize( trim($_POST["institute"] ?? ""));
 
  	////basic validations
- 	
- 	if(!isset($_FILES['img']))
-	 	$errors["file"] = "Please upload your photo";
-	else
+ 	$allowed = ['jpg', 'jpeg', 'JPG', 'JPEG'];
+ 	$max_size = 2;
+	$ipaddress = \App\get_client_ip();
+	$captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
+			[
+			"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
+			"response"	=> $_POST['g-recaptcha-response'],
+			"remoteip"	=> $ipaddress
+			]);
+	if(!$captcha->success)
+		$errors['captcha'] = "Captcha is required!";	
+ 	if(isset($_FILES['img'])){
 		$data['img'] = $_FILES['img'];
+		$info = pathinfo($data['img']['name']);
+		if(!isset($info['extension'])){
+			$errors["file"] = "Please upload an image!";
+		}
+		else{
+			$ext = $info['extension'];
+			$size = $data['img']['size']/1048576;
+			
+			if($size>$max_size){
+				$errors["size"] = "The photos must be less than ".$max_size." MBs.";	
+			}
+			if(!in_array($ext,$allowed)){
+				$errors["ext"] = "The photo must be in JPEG format.";
+			}
+		}
+	}
+	else{
+	 	$errors["file"] = "Please upload your photo";
+	}
+	if(count($errors))
+		return [$errors, $data];
  	
  	$usernamevalidation = v::NotEmpty()->NoWhitespace()->alnum()->length(3,15);
  	$cnicvalidation = v::NotEmpty()->noWhitespace()
@@ -50,7 +79,7 @@ function preprocess($mpdo){
  	$pwdvalidation = v::notEmpty()->length(8, null);
  	$phonevalidation = v::notEmpty()->digit()->between(3000000000, 3499999999);
  	$namevalidation = v::notEmpty()->alpha()->length(1,50);
- 	$nustidvalidation = v::notEmpty()->digit()->between(100000, 99999999);
+ 	$nustidvalidation = v::notEmpty()->digit()->between(10000, 99999999);
  	if(!$usernamevalidation->validate($data['username']))
  		$errors['username'] = "Please enter a valid username!";
  	if(!$cnicvalidation->validate($data['cnic']))
@@ -73,17 +102,13 @@ function preprocess($mpdo){
  		$errors['repwd'] = "Repeat Password doesn't match!";
  	if(!$namevalidation->validate($data['institute']))
  		$errors['institute'] = "Please enter the valid name of your institute.";
- 	// $ipaddress = \App\get_client_ip();
- 	// $captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
-		// 		[
-		// 		"secret" 	=> "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
-		// 		"response"	=> $_POST['g-recaptcha-response'],
-		// 		"remoteip"	=> $ipaddress
-		// 		]);
- 	// if(!$captcha->success)
- 	// 	$errors['captcha'] = "Captcha is required!";
+ 	
 
  	/////advanced checking
+
+ 	if(count($errors)){
+ 		return [$errors, $data];
+ 	}
 
 
  	//check if username already exists!
@@ -220,7 +245,7 @@ function persistUser($data, $mpdo){ //execution will only start if there are no 
 // sending mail
 
 	$heading = "Welcome to NUST OLYMPIAD!";
-	$link = $_SERVER['SERVER_NAME']."/register/verify/?username=".$data['username']."&activationcode=$acCode";
+	$link = "http://".$_SERVER['SERVER_NAME']."/register/verify/?username=".$data['username']."&activationcode=$acCode";
 
 $htmlmessage = 
 <<<emailmessage
@@ -234,7 +259,7 @@ $htmlmessage =
 </html>
 emailmessage;
 
-$txtmessage = "$heading /n Please open this link to verify your email: $link";
+$txtmessage = "$heading /n Please open this link in your browser to verify your email: $link /n /n If the link does not open, copy and paste it in the browser/n";
 	
 	$mail = new OlMail(['name'=>$data['username'], 'email'=>$data['email']], 'Verify your account | NUST OLYMPIAD 17', $htmlmessage, $txtmessage );
 	$mail->send();

@@ -15,7 +15,7 @@ $sports = SportsQuery::create()->find();
 $formsubmitted = $_SERVER['REQUEST_METHOD'] == "POST"; 
 if($formsubmitted){
     $errors = [];
-    $ids = sanitize($_POST['team_member_ids'] ?? []);
+    $ids = $_POST['team_member_ids'] ?? [];
     if(!count($ids)){
         $errors["ids"] = "You didn't add any members to the team!";
     }
@@ -93,6 +93,9 @@ if($formsubmitted){
         // check if the total number of members are within range
         if($numOfMembers < $sport->MinParticipants || $numOfMembers > $sport->MaxParticipants){
         	$errors['NoOfMembers'] = "Number of team members should be between ".$sport->MinParticipants." and " .$sport->MaxParticipants." members";
+            if($sport->MinParticipants == $sport->MaxParticipants){
+                $errors['NoOfMembers'] = "Number of team members should be exactly ". $sport->MinParticipants;
+            }
         }
     }
 

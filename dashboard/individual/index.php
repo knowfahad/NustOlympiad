@@ -115,9 +115,40 @@ if($formsubmitted){
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script> -->
 
 <script type="text/javascript">
-var IndividualEventsList = ["None","Essay Writing","Hurdle Marathon","Wall Climbing","Archery","Air-Gun Shooting","Graffiti","Charcoal Drawing","Master Chef","Minute to win it(individual)","Public Speaking Challenge","Pakistan Got Talent","Table Tennis(Males)","Table Tennis(Females)",
-"Badminton(Males)","Badminton(Females)","Chess","Squash(Males)","Squash(Females)","FIFA","Need for Speed: Most Wanted","Short Put","Long Jump",
-"100 Meters Race","200 Meters Race"];
+var IndividualEventsList = ["None","Essay Writing","Hurdle Marathon","Wall Climbing","Archery",
+       "Air-Gun Shooting","Graffiti","Charcoal Drawing","Master Chef","Minute to win it(individual)",
+       "Public Speaking Challenge","Pakistan Got Talent","Table Tennis(Males)","Table Tennis(Females)",
+       "Badminton(Males)","Badminton(Females)","Chess","Squash(Males)","Squash(Females)","FIFA",
+       "Need for Speed: Most Wanted","Mad Hunt","Product Photography",
+       "Marathon Male","Marathon Female","Nust Youth Parliament"];
+
+var IndText = ["NONE","Event Fee: Rs. 400<br><br><a style = 'color: blue' href ='../../events/all-events/essay-writing.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/all-events/hurdle-marathon.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/sports/wall-climbing.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/sports/archery.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/all-events/air-gun-shooting.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 1000<br><br><a style = 'color: blue' href ='../../events/all-events/graffiti.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 1000<br><br><a style = 'color: blue' href ='../../events/all-events/live-charcoal.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 1000<br><br><a style = 'color: blue' href ='../../events/all-events/master-chef.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/all-events/minute-to-win-it(individual).html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/events.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 2000<br><br><a style = 'color: blue' href ='../../events/all-events/pak-got-talent.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 600<br><br><a style = 'color: blue' href ='../../events/sports/table-tennis.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 600<br><br><a style = 'color: blue' href ='../../events/sports/table-tennis.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 1000<br><br><a style = 'color: blue' href ='../../events/sports/badminton.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 800<br><br><a style = 'color: blue' href ='../../events/sports/badminton.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/sports/chess.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 1000<br><br><a style = 'color: blue' href ='../../events/sports/squash.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 800<br><br><a style = 'color: blue' href ='../../events/sports/squash.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/all-events/e-gaming.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/all-events/e-gaming.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/events.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 600<br><br><a style = 'color: blue' href ='../../events/events.html' target = '_blank'>View Event Details and Rules</a><br>",
+"No Fee!<br><br><a style = 'color: blue' href ='../../events/sports.html' target = '_blank'>View Event Details and Rules</a><br>",
+"No Fee!<br><br><a style = 'color: blue' href ='../../events/sports.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 400<br><br><a style = 'color: blue' href ='../../events/events.html' target = '_blank'>View Event Details and Rules</a><br>"
+];
+
 $(document).ready(function()
 {
 	$(document).on("click", ".btn", function () {
@@ -126,6 +157,7 @@ $(document).ready(function()
 		 $("#eventname").val(id);
 		 
 		 $(".modal-title").html( 'Register for ' + IndividualEventsList[id]);
+		 $("#modalBodyDesc").html(IndText[id]);
 		 
 });
 });
@@ -187,15 +219,10 @@ $(document).ready(function()
 							  <button type="button" class="close" data-dismiss="modal">&times;</button>
 							  <h4 class="modal-title">Modal Header</h4>
 							</div>
-							<div class="modal-body">
+							<div  class="modal-body">
+								<div id = "modalBodyDesc"></div>
 							  
-							  <h4>Details:</h4>
-							  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-							  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+							  
 							  <hr>
 							  <form method="POST">
 							  	<input id="eventname" type="hidden" name="eventname">
@@ -240,7 +267,9 @@ $(document).ready(function()
                     <div class="row homepage">
                         
                     <div class="row">
-                        <div class="col-md-10 col-xs-5 col-sm-7"></div>
+                        <div class="col-md-10 col-xs-5 col-sm-7">
+							&nbsp;<a href="../">Back to Dashboard</a>
+						</div>
                         <div class="col-md-2 col-xs-7 col-sm-5">
                             <div id="userId">
                                 <p style="display:inline;color:orange;">User Id:<?=$auth->getParticipant()->getParticipantID()?></p><span> | </span><a href="#">Logout</a></div>
@@ -250,7 +279,7 @@ $(document).ready(function()
 						
                     <div class="row">
                       <div class = "col-md-1"></div>
-                            <div class="col-md-12 my-box ">
+                            <div class="col-md-10 my-box ">
                             	<div class="row">
 	            					<?php if( $formsubmitted && isset($error) ): ?>
 	                                    <div class="col-md-10 col-md-offset-1 col-xs-12">
@@ -311,7 +340,7 @@ $(document).ready(function()
 											<input type="button" id = "8" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Master Chef" />
 										</div>
                                         <div class = "col-md-4">
-											<input type="button" id = "9" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Minute to win it(individual)" />
+											<input type="button" id = "9" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Minute to win it ( I )" />
 										</div>
 									
 									
@@ -322,13 +351,13 @@ $(document).ready(function()
 									
 										
 										<div class = "col-md-4">
-											<input type="button" id = "10" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Public Speaking Challenge" />
+											<input type="button" id = "10" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal" style = "padding-left:0; padding-right:0;" value="Public Speaking Challenge" />
 										</div>
 										<div class = "col-md-4">
-											<input type="button" id = "11" class="btn btn-default btn-sm my-btn" value="'Pakistan Got Talent" data-toggle="modal" data-target="#myModal"  />
+											<input type="button" id = "11" class="btn btn-default btn-sm my-btn" value="Pakistan Got Talent" data-toggle="modal" data-target="#myModal"  />
 										</div>
 										<div class = "col-md-4">
-											<input type="button" id = "12" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Table Tennis(Males)" />
+											<input type="button" id = "12" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Table Tennis (Males)" />
 										</div>
 									
 									
@@ -338,13 +367,13 @@ $(document).ready(function()
                                     <div class = "row">
 									
 										<div class = "col-md-4">
-											<input type="button" id = "13" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Table Tennis(Females)" />
+											<input type="button" id = "13" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Table Tennis (F)" />
 										</div>
 										<div class = "col-md-4">
-											<input type="button" id = "14" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Badminton(Males)" />
+											<input type="button" id = "14" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Badminton (Males)" />
 										</div>
 										<div class = "col-md-4">
-											<input type="button" id = "15" class="btn btn-default btn-sm my-btn" value="Badminton(Females)" data-toggle="modal" data-target="#myModal"  />
+											<input type="button" id = "15" class="btn btn-default btn-sm my-btn" value="Badminton (Females)" data-toggle="modal" data-target="#myModal"  />
 										</div>
 										
 									
@@ -356,10 +385,10 @@ $(document).ready(function()
 											<input type="button" id = "16" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Chess" />
 										</div>
                                         <div class = "col-md-4">
-											<input type="button" id = "17" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Squash(Males)" />
+											<input type="button" id = "17" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Squash (Males)" />
 										</div>
 										<div class = "col-md-4">
-											<input type="button" id = "18" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Squash(Females)" />
+											<input type="button" id = "18" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Squash (Females)" />
 										</div>
                                          </div>
                                     <br>
@@ -371,12 +400,12 @@ $(document).ready(function()
 											<input type="button" id = "19" class="btn btn-default btn-sm my-btn" value="FIFA" data-toggle="modal" data-target="#myModal"  />
 										</div>
                                              <div class = "col-md-4">
-											<input type="button" id = "20" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Need for Speed: Most Wanted" />
+											<input type="button" id = "20" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Need for Speed: MW" />
 										</div>
                                         
 
 										<div class = "col-md-4">
-											<input type="button" id = "21" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Short Put" />
+											<input type="button" id = "21" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Mad Hunt" />
 										</div>
 										
 									
@@ -388,14 +417,26 @@ $(document).ready(function()
                                         
                                        
 										<div class = "col-md-4">
-											<input type="button" id = "22" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Long Jump" />
+											<input type="button" id = "22" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Product Photography" />
 										</div>
                                         <div class = "col-md-4">
-											<input type="button" id = "23" class="btn btn-default btn-sm my-btn" value="100 Meters Race" data-toggle="modal" data-target="#myModal"  />
+											<input type="button" id = "23" class="btn btn-default btn-sm my-btn" value="Marathon Male" data-toggle="modal" data-target="#myModal"  />
 										</div>
 										<div class = "col-md-4">
-											<input type="button" id = "24" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="200 Meters Race" />
+											<input type="button" id = "24" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Marathon Female" />
 										</div>
+									
+									
+									</div>
+                                    <br>
+
+									 <div class = "row">
+                                        
+                                       
+										<div class = "col-md-4">
+											<input type="button" id = "25" class="btn btn-default btn-sm my-btn" data-toggle="modal" data-target="#myModal"  value="Nust Youth Parliament" />
+										</div>
+                                        
 									
 									
 									</div>
@@ -443,5 +484,6 @@ $(document).ready(function()
 			<!-- preloading flame js-->
    <script type="text/javascript" src="../../js/flame.js"></script>
 </body>
+
 
 </html>

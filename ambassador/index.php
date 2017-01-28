@@ -1,9 +1,8 @@
 <?php
 namespace Register;
-require (__DIR__.'/../../bootstrap.php');
+require (__DIR__.'/../bootstrap.php');
 use App\OlMail;
 use Respect\Validation\Validator as v;
-$auth->onlyGuests();
 $error = [];
 $success = 0;
 if($_SERVER['REQUEST_METHOD'] == "POST"){
@@ -86,12 +85,51 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 		$stmt = $mpdo->prepare("INSERT INTO ambassador (AmbassadorID, CNIC, FirstName, LastName, phone_number, Email, Institution) VALUES (?, ?, ?, ?, ?,?, ?)");
 		if($stmt->execute([$AmbassadorID, $cnic, $first_name, $last_name, $phone, $email, $institution])){
 			$success = 1;
-			$txtMessage = "Congratulations, \n \n You have been selected as an Ambassador for NUST Olympiad'17. \n These are your details as entered in the google form:\n \n Ambassador ID: $AmbassadorID \n Name: $first_name $last_name \n CNIC: $cnic \n Phone Number: $phone \n Institution:  $institution \n \n \n Please use the Ambassador ID above for future references. \n In case of any query or ambiguity, please contact er@nustolympiad.com.";
+			$txtMessage = "
+			Dear Ambassador, \n \n 
+			Congratulations on becoming a part of the NUST Olympiad'17. We hope that you perform to the best of your abilities and help us make this event a success! \n  \n 
+			Ambassador ID: $AmbassadorID \n Name: $first_name $last_name \n CNIC: $cnic \n Phone Number: $phone \n Institution:  $institution \n \n \n Please use the Ambassador ID above for future references. \n In case of any query or ambiguity, please contact er@nustolympiad.com. \n \n
+The following link is the Facebook Group for the Ambassadors. Please Join this group and we will brief you about the next step. 
+\n \n
+https://www.facebook.com/groups/1619115995060964/ 
+\n \n
+Regards,
+External Relations Team
+NUST Olympiad 2017";
 			$brmessage = nl2br($txtMessage);
 			$htmlMessage = <<<htmlMessage
 <html>
 <body>
-$brmessage
+Dear Ambassador,
+<p>
+Congratulations on becoming a part of the NUST Olympiad'17. We hope that you perform to the best of your abilities and help us make this event a success! 
+</p>
+
+<p>
+Ambassador ID: $AmbassadorID 
+<br>
+Name: $first_name $last_name 
+<br>
+CNIC: $cnic 
+<br>
+Phone Number: $phone 
+<br>
+Institution: $institution
+
+<p>
+Please use the Ambassador ID above for future references.
+<br>
+In case of any query or ambiguity, please contact er@nustolympiad.com.
+</p>
+
+<p>
+The following link is the Facebook Group for the Ambassadors. Please Join this group and we will brief you about the next step. 
+<br>
+https://www.facebook.com/groups/1619115995060964/ 
+</p>
+Regards,
+External Relations Team
+NUST Olympiad 2017
 </body>
 </html>
 htmlMessage;
@@ -132,8 +170,8 @@ function test_input($data) {
 		<?php endif ?>
 		<?php if($success): ?>
 		<!-- Success message -->
-		<div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Thanks for contacting us, we will get back to you shortly.</div>
-		<?php else: ?>
+		<div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i></div>
+		<?php endif ?>
 		<form class="well form-horizontal" method="post" id="contact_form" >
 			<fieldset>
 
@@ -148,7 +186,7 @@ function test_input($data) {
 			  <div class="input-group">
 			  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 			  <input  name="first_name" placeholder="First Name" class="form-control" 
-			  value="<?=$_POST['first_name']?? ''?>"  type="text">
+			  <?php if(!$success): ?>value="<?=$_POST['first_name']?? ''?> <?php endif ?>"  type="text">
 				</div>
 			  </div>
 			</div>
@@ -160,7 +198,7 @@ function test_input($data) {
 				<div class="col-md-4 inputGroupContainer">
 				<div class="input-group">
 			  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-			  <input value="<?=$_POST['last_name']?? ''?>" name="last_name" placeholder="Last Name" class="form-control"  type="text">
+			  <input <?php if(!$success): ?> value="<?=$_POST['last_name']?? ''?>" <?php endif ?> name="last_name" placeholder="Last Name" class="form-control"  type="text">
 				</div>
 			  </div>
 			</div>
@@ -171,7 +209,7 @@ function test_input($data) {
 				<div class="col-md-4 inputGroupContainer">
 				<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-			  <input value="<?=$_POST['email']?? ''?>" name="email" placeholder="E-Mail Address e.g., nust@gmail.com" class="form-control"  type="text">
+			  <input <?php if(!$success): ?> value="<?=$_POST['email']?? ''?>" <?php endif ?>name="email" placeholder="E-Mail Address e.g., nust@gmail.com" class="form-control"  type="text">
 				</div>
 			  </div>
 			</div>
@@ -184,7 +222,7 @@ function test_input($data) {
 				<div class="col-md-4 inputGroupContainer">
 				<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-			  <input value="<?=$_POST['phone']?? ''?>" name="phone" placeholder="0313XXXXXXX" class="form-control" type="text">
+			  <input <?php if(!$success): ?> value="<?=$_POST['phone']?? ''?>" <?php endif ?> name="phone" placeholder="0313XXXXXXX" class="form-control" type="text">
 				</div>
 			  </div>
 			</div>
@@ -196,7 +234,7 @@ function test_input($data) {
 				<div class="col-md-4 inputGroupContainer">
 				<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-			  <input value="<?=$_POST['cnic']?? ''?>"  name="cnic" placeholder="CNIC without dashes" class="form-control" type="numeric">
+			  <input <?php if(!$success): ?> value="<?=$_POST['cnic']?? ''?>" <?php endif ?>  name="cnic" placeholder="CNIC without dashes" class="form-control" type="numeric">
 				</div>
 			  </div>
 			</div>
@@ -208,7 +246,7 @@ function test_input($data) {
 				<div class="col-md-4 inputGroupContainer">
 				<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-			  <input value="<?=$_POST['institution']?? ''?>" name="institution" placeholder="Institution Name e.g., NUST" class="form-control"  type="text">
+			  <input <?php if(!$success): ?> value="<?=$_POST['institution']?? ''?>" <?php endif ?> name="institution" placeholder="Institution Name e.g., NUST" class="form-control"  type="text">
 				</div>
 			  </div>
 			</div> 
@@ -227,7 +265,6 @@ function test_input($data) {
 
 	</fieldset>
 	</form>
-	<?php endif ?>
 		</div> <!-- /.container -->
 
 		<!--- Scripts-->

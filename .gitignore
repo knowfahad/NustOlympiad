@@ -2,3 +2,7 @@
 /vendor
 /propel
 *.tar
+<<<<<<< HEAD
+/OlAssets/
+/generated-conf/
+
