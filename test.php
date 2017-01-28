@@ -1,13 +1,22 @@
 <?php 
 require("bootstrap.php");
+if(isset($_FILES['file'])){
+	$info = pathinfo($_FILES['file']['name']);
+	var_dump($info);
+	var_dump($_FILES['file']);
+	echo "size is " . $_FILES['file']['size']/1048576;
+}
+?>
 
-	$username = "adamsmith";
- 	if ($stmt = $mpdo->prepare("SELECT * FROM useraccount WHERE Username =?")) {
-	 	$stmt->execute([$username]);
-	 	if($stmt->rowCount() > 0) {
-	 		
-	 		//return error
-	 		echo ("username already exists!");
-	 	}
- 	}
-
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<form enctype="multipart/form-data" method="POST">
+	<input type="file" name="file">
+	<input type="submit" name="submit" value="submit">
+</form>
+</body>
+</html>

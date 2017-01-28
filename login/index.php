@@ -5,17 +5,43 @@ if($auth->loggedIn()){
     \App\redirect("/dashboard");
 }
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    //form was submitted
-    $username = strip_tags(strtolower(trim($_POST['username'] ?? '')));
-    $password = strip_tags($_POST['password']??'');
-    if(!strlen($username) || !strlen($password))
-        $error = "Please enter username and password!";
-    else{
-        if($auth->login($_POST['username'], $_POST['password'])){
-            \App\redirect('/dashboard');
+    $continue = 0;
+    if(isset($_SESSION['failed']) && $_SESSION['failed'] > 3){
+        $ipaddress = \App\get_client_ip();
+        $captcha = \App\send_post("https://www.google.com/recaptcha/api/siteverify", 
+                [
+                "secret"    => "6Ldgtg0UAAAAAHx4_kcm5G95hD8CCnEd_AcQeY6k",
+                "response"  => $_POST['g-recaptcha-response'],
+                "remoteip"  => $ipaddress
+                ]);
+        if(!$captcha->success){
+            $error = "Captcha is required!";
         }
         else{
-            $error = "Username and password didn't match!";
+            $continue = 1;
+        }
+    }
+    else $continue = 1;
+
+    //form was submitted
+    if($continue){
+        $username = strip_tags(strtolower(trim($_POST['username'] ?? '')));
+        $password = strip_tags($_POST['password']??'');
+        if(!strlen($username) || !strlen($password))
+            $error = "Please enter username and password!";
+        else{
+            if($auth->login($_POST['username'], $_POST['password'])){
+                \App\redirect('/dashboard');
+                unset($_SESSION['failed']);
+            }
+            else{
+                $error = "Username and password didn't match!";
+                if(isset($_SESSION['failed'])){
+                    $_SESSION['failed'] += 1;
+                }
+                else
+                    $_SESSION['failed'] = 1;
+            }
         }
     }
 }
@@ -118,7 +144,15 @@ font-weight:normal;
                             <!--append errors here! -->
                                 <div class="alert alert-danger"><?=$error?></div>
                         </div>
+                        <?php elseif(isset($_GET['success'])): ?>
+                        <div class="col-md-10 col-md-offset-1 col-xs-12">
+                            <!--append errors here! -->
+                                <div class="alert alert-success">
+                                Your account has been registered! You'll need to verify email to continue.
+                                </div>
+                        </div>
                         <?php endif ?>
+
                     </div>
                     
 					
@@ -140,6 +174,11 @@ font-weight:normal;
                                     <input id="pwd" name="password" placeholder="Password" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'"  required>
                                 </div>
                             </div>
+                            <?php if(isset($_SESSION['failed']) && $_SESSION['failed']>3): ?>
+                            <div class="form-group">
+                                <div class="g-recaptcha" data-sitekey="6Ldgtg0UAAAAAIGYMROWOzYRwq_qKR3dFWoRbqA9"></div>
+                            </div>
+                            <?php endif ?>
                         <!--lol-->
                         <!--lol-->
 							<!--<div class = "row">

@@ -1,9 +1,8 @@
 <?php
 namespace Register;
-require (__DIR__.'/../../bootstrap.php');
+require (__DIR__.'/../bootstrap.php');
 use App\OlMail;
 use Respect\Validation\Validator as v;
-$auth->onlyGuests();
 $error = [];
 $success = 0;
 if($_SERVER['REQUEST_METHOD'] == "POST"){
@@ -86,12 +85,51 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 		$stmt = $mpdo->prepare("INSERT INTO ambassador (AmbassadorID, CNIC, FirstName, LastName, phone_number, Email, Institution) VALUES (?, ?, ?, ?, ?,?, ?)");
 		if($stmt->execute([$AmbassadorID, $cnic, $first_name, $last_name, $phone, $email, $institution])){
 			$success = 1;
-			$txtMessage = "Congratulations, \n \n You have been selected as an Ambassador for NUST Olympiad'17. \n These are your details as entered in the google form:\n \n Ambassador ID: $AmbassadorID \n Name: $first_name $last_name \n CNIC: $cnic \n Phone Number: $phone \n Institution:  $institution \n \n \n Please use the Ambassador ID above for future references. \n In case of any query or ambiguity, please contact er@nustolympiad.com.";
+			$txtMessage = "
+			Dear Ambassador, \n \n 
+			Congratulations on becoming a part of the NUST Olympiad'17. We hope that you perform to the best of your abilities and help us make this event a success! \n  \n 
+			Ambassador ID: $AmbassadorID \n Name: $first_name $last_name \n CNIC: $cnic \n Phone Number: $phone \n Institution:  $institution \n \n \n Please use the Ambassador ID above for future references. \n In case of any query or ambiguity, please contact er@nustolympiad.com. \n \n
+The following link is the Facebook Group for the Ambassadors. Please Join this group and we will brief you about the next step. 
+\n \n
+https://www.facebook.com/groups/1619115995060964/ 
+\n \n
+Regards,
+External Relations Team
+NUST Olympiad 2017";
 			$brmessage = nl2br($txtMessage);
 			$htmlMessage = <<<htmlMessage
 <html>
 <body>
-$brmessage
+Dear Ambassador,
+<p>
+Congratulations on becoming a part of the NUST Olympiad'17. We hope that you perform to the best of your abilities and help us make this event a success! 
+</p>
+
+<p>
+Ambassador ID: $AmbassadorID 
+<br>
+Name: $first_name $last_name 
+<br>
+CNIC: $cnic 
+<br>
+Phone Number: $phone 
+<br>
+Institution: $institution
+
+<p>
+Please use the Ambassador ID above for future references.
+<br>
+In case of any query or ambiguity, please contact er@nustolympiad.com.
+</p>
+
+<p>
+The following link is the Facebook Group for the Ambassadors. Please Join this group and we will brief you about the next step. 
+<br>
+https://www.facebook.com/groups/1619115995060964/ 
+</p>
+Regards,
+External Relations Team
+NUST Olympiad 2017
 </body>
 </html>
 htmlMessage;
@@ -132,8 +170,8 @@ function test_input($data) {
 		<?php endif ?>
 		<?php if($success): ?>
 		<!-- Success message -->
-		<div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Thanks for contacting us, we will get back to you shortly.</div>
-		<?php else: ?>
+		<div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i></div>
+		<?php endif ?>
 		<form class="well form-horizontal" method="post" id="contact_form" >
 			<fieldset>
 
@@ -227,7 +265,6 @@ function test_input($data) {
 
 	</fieldset>
 	</form>
-	<?php endif ?>
 		</div> <!-- /.container -->
 
 		<!--- Scripts-->

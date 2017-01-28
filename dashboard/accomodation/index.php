@@ -17,7 +17,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $challanid = "AC" . $participant->getParticipantID() .  $gender;
         $challan = new Challan();
         $challan->setChallanID($challanid);
-        $challan->setAmountPayable(500);
+        $challan->setAmountPayable(1000);
         $challan->setDueDate("10-10-2016");
         $challan->setPaymentStatus(0);
         $challan->save();
@@ -256,5 +256,5 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             <!-- preloading flame js-->
    <script type="text/javascript" src="../../js/flame.js"></script>
 </body>
-    
+
 </html>

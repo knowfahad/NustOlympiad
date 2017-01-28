@@ -30,7 +30,7 @@ if($formsubmitted){
 		$link = $_SERVER['SERVER_NAME']."/forgot/reset.php?token=".$resetcode;
         $stmt = $mpdo->prepare("update useraccount set ResetCode = ? where email = ?");
         $stmt->execute([$resetcode, $email]);
-		$txtMessage = "Dear ".$userdetails->Username."/n You have requested to reset your Olympiad Password. Click on the link to reset the password \n";
+		$txtMessage = "Dear ".$userdetails->Username."/n You have requested to reset your Olympiad Password. Click on the link to reset the password /n";
 		$htmlmessage = 
 <<<htmlMessage
 <!doctype html>

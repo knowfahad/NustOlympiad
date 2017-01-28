@@ -317,5 +317,4 @@ $(document).on("click", ".btn", function () {
 			<!-- preloading flame js-->
    <script type="text/javascript" src="../../js/flame.js"></script>
 </body>
-
 </html>

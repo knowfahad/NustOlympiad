@@ -89,6 +89,7 @@ function enrolledTeams($auth, $conn){
 	$stmt->execute([$ParticipantID]);
 	$stmt->bindColumn(1, $tempteamid);
 	while($stmt->fetch(PDO::FETCH_BOUND)){
+
 		$teamids[] = $tempteamid;
 	}
 	foreach($teamids as $teamid){

@@ -1,0 +1,136 @@
+[10-Jan-2017 01:26:30 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.ParticipantID' in 'where clause' in /home1/nustolympiad/public_html/test/dashboard/individual/index.php:34
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/dashboard/individual/index.php(34): PDO->prepare('select e.EventI...')
+#1 {main}
+  thrown in /home1/nustolympiad/public_html/test/dashboard/individual/index.php on line 34
+[10-Jan-2017 01:26:31 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.ParticipantID' in 'where clause' in /home1/nustolympiad/public_html/test/dashboard/individual/index.php:34
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/dashboard/individual/index.php(34): PDO->prepare('select e.EventI...')
+#1 {main}
+  thrown in /home1/nustolympiad/public_html/test/dashboard/individual/index.php on line 34
+[10-Jan-2017 01:26:42 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.ParticipantID' in 'where clause' in /home1/nustolympiad/public_html/test/dashboard/individual/index.php:34
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/dashboard/individual/index.php(34): PDO->prepare('select e.EventI...')
+#1 {main}
+  thrown in /home1/nustolympiad/public_html/test/dashboard/individual/index.php on line 34
+[10-Jan-2017 01:27:00 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.ParticipantID' in 'where clause' in /home1/nustolympiad/public_html/test/dashboard/individual/index.php:34
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/dashboard/individual/index.php(34): PDO->prepare('select e.EventI...')
+#1 {main}
+  thrown in /home1/nustolympiad/public_html/test/dashboard/individual/index.php on line 34
+[10-Jan-2017 01:27:12 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.ParticipantID' in 'where clause' in /home1/nustolympiad/public_html/test/dashboard/individual/index.php:34
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/dashboard/individual/index.php(34): PDO->prepare('select e.EventI...')
+#1 {main}
+  thrown in /home1/nustolympiad/public_html/test/dashboard/individual/index.php on line 34
+[10-Jan-2017 01:27:25 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.ParticipantID' in 'where clause' in /home1/nustolympiad/public_html/test/dashboard/individual/index.php:34
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/dashboard/individual/index.php(34): PDO->prepare('select e.EventI...')
+#1 {main}
+  thrown in /home1/nustolympiad/public_html/test/dashboard/individual/index.php on line 34
+[10-Jan-2017 01:28:06 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.ParticipantID' in 'where clause' in /home1/nustolympiad/public_html/test/dashboard/individual/index.php:34
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/dashboard/individual/index.php(34): PDO->prepare('select e.EventI...')
+#1 {main}
+  thrown in /home1/nustolympiad/public_html/test/dashboard/individual/index.php on line 34
+[10-Jan-2017 01:28:11 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.ParticipantID' in 'where clause' in /home1/nustolympiad/public_html/test/dashboard/individual/index.php:34
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/dashboard/individual/index.php(34): PDO->prepare('select e.EventI...')
+#1 {main}
+  thrown in /home1/nustolympiad/public_html/test/dashboard/individual/index.php on line 34
+[10-Jan-2017 01:31:08 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'IC9E30' for key 'PRIMARY' in /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php:194
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php(194): PDOStatement->execute(NULL)
+#1 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(811): Propel\Runtime\Connection\StatementWrapper->execute()
+#2 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(709): Model\Model\Base\Challan->doInsert(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#3 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(673): Model\Model\Base\Challan->doSave(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#4 [internal function]: Model\Model\Base\Challan->Model\Model\Base\{closure}()
+#5 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/Transa in /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php on line 814
+[10-Jan-2017 01:31:34 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'IC9E10' for key 'PRIMARY' in /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php:194
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php(194): PDOStatement->execute(NULL)
+#1 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(811): Propel\Runtime\Connection\StatementWrapper->execute()
+#2 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(709): Model\Model\Base\Challan->doInsert(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#3 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(673): Model\Model\Base\Challan->doSave(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#4 [internal function]: Model\Model\Base\Challan->Model\Model\Base\{closure}()
+#5 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/Transa in /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php on line 814
+[10-Jan-2017 01:31:52 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'IC9E10' for key 'PRIMARY' in /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php:194
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php(194): PDOStatement->execute(NULL)
+#1 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(811): Propel\Runtime\Connection\StatementWrapper->execute()
+#2 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(709): Model\Model\Base\Challan->doInsert(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#3 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(673): Model\Model\Base\Challan->doSave(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#4 [internal function]: Model\Model\Base\Challan->Model\Model\Base\{closure}()
+#5 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/Transa in /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php on line 814
+[10-Jan-2017 01:33:25 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'IC9E10' for key 'PRIMARY' in /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php:194
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php(194): PDOStatement->execute(NULL)
+#1 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(811): Propel\Runtime\Connection\StatementWrapper->execute()
+#2 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(709): Model\Model\Base\Challan->doInsert(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#3 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(673): Model\Model\Base\Challan->doSave(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#4 [internal function]: Model\Model\Base\Challan->Model\Model\Base\{closure}()
+#5 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/Transa in /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php on line 814
+[10-Jan-2017 01:33:58 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'IC9E10' for key 'PRIMARY' in /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php:194
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php(194): PDOStatement->execute(NULL)
+#1 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(811): Propel\Runtime\Connection\StatementWrapper->execute()
+#2 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(709): Model\Model\Base\Challan->doInsert(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#3 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(673): Model\Model\Base\Challan->doSave(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#4 [internal function]: Model\Model\Base\Challan->Model\Model\Base\{closure}()
+#5 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/Transa in /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php on line 814
+[10-Jan-2017 01:34:49 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'IC9E8' for key 'PRIMARY' in /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php:194
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php(194): PDOStatement->execute(NULL)
+#1 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(811): Propel\Runtime\Connection\StatementWrapper->execute()
+#2 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(709): Model\Model\Base\Challan->doInsert(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#3 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(673): Model\Model\Base\Challan->doSave(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#4 [internal function]: Model\Model\Base\Challan->Model\Model\Base\{closure}()
+#5 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/Transac in /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php on line 814
+[10-Jan-2017 01:34:54 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'IC1E10' for key 'PRIMARY' in /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php:194
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php(194): PDOStatement->execute(NULL)
+#1 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(811): Propel\Runtime\Connection\StatementWrapper->execute()
+#2 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(709): Model\Model\Base\Challan->doInsert(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#3 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(673): Model\Model\Base\Challan->doSave(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#4 [internal function]: Model\Model\Base\Challan->Model\Model\Base\{closure}()
+#5 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/Transa in /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php on line 814
+[10-Jan-2017 01:35:03 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'IC1E1' for key 'PRIMARY' in /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php:194
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php(194): PDOStatement->execute(NULL)
+#1 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(811): Propel\Runtime\Connection\StatementWrapper->execute()
+#2 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(709): Model\Model\Base\Challan->doInsert(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#3 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(673): Model\Model\Base\Challan->doSave(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#4 [internal function]: Model\Model\Base\Challan->Model\Model\Base\{closure}()
+#5 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/Transac in /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php on line 814
+[10-Jan-2017 01:36:26 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'IC9E5' for key 'PRIMARY' in /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php:194
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php(194): PDOStatement->execute(NULL)
+#1 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(811): Propel\Runtime\Connection\StatementWrapper->execute()
+#2 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(709): Model\Model\Base\Challan->doInsert(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#3 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(673): Model\Model\Base\Challan->doSave(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#4 [internal function]: Model\Model\Base\Challan->Model\Model\Base\{closure}()
+#5 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/Transac in /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php on line 814
+[10-Jan-2017 01:37:10 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'IC9E3' for key 'PRIMARY' in /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php:194
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php(194): PDOStatement->execute(NULL)
+#1 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(811): Propel\Runtime\Connection\StatementWrapper->execute()
+#2 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(709): Model\Model\Base\Challan->doInsert(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#3 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(673): Model\Model\Base\Challan->doSave(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#4 [internal function]: Model\Model\Base\Challan->Model\Model\Base\{closure}()
+#5 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/Transac in /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php on line 814
+[10-Jan-2017 01:37:38 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'IC9E6' for key 'PRIMARY' in /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php:194
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php(194): PDOStatement->execute(NULL)
+#1 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(811): Propel\Runtime\Connection\StatementWrapper->execute()
+#2 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(709): Model\Model\Base\Challan->doInsert(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#3 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(673): Model\Model\Base\Challan->doSave(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#4 [internal function]: Model\Model\Base\Challan->Model\Model\Base\{closure}()
+#5 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/Transac in /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php on line 814
+[10-Jan-2017 01:37:55 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'IC1E1' for key 'PRIMARY' in /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php:194
+Stack trace:
+#0 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/StatementWrapper.php(194): PDOStatement->execute(NULL)
+#1 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(811): Propel\Runtime\Connection\StatementWrapper->execute()
+#2 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(709): Model\Model\Base\Challan->doInsert(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#3 /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php(673): Model\Model\Base\Challan->doSave(Object(Propel\Runtime\Connection\ConnectionWrapper))
+#4 [internal function]: Model\Model\Base\Challan->Model\Model\Base\{closure}()
+#5 /home1/nustolympiad/public_html/test/vendor/propel/propel/src/Propel/Runtime/Connection/Transac in /home1/nustolympiad/public_html/test/Model/Model/Base/Challan.php on line 814
