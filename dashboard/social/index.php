@@ -1,6 +1,7 @@
 <?php 
 namespace Dashboard;
 require(__DIR__ . '/../../bootstrap.php');
+use Carbon\Carbon;
 use Model\Model\AmbassadorParticipant;
 use Model\Model\AmbassadorQuery;
 use Model\Model\Challan;
@@ -27,8 +28,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$error = "Please select on option!";
 	}
 	else{
-		$stmt = $mpdo->prepare("select e.EventID from eventparticipants as e where e.EventID = ?");
-		$stmt->execute([$eventname]);
+		$stmt = $mpdo->prepare("select e.EventID from eventparticipants as e where e.EventID = ? and e.ParticipantCNIC = ?");
+		$stmt->execute([$eventname, $auth->getCNIC()]);
 		if($stmt->rowCount())
 			$error = "You have already participated in this event!";
 	}
@@ -116,7 +117,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 $(document).ready(function()
 {
 
-$(document).on("click", ".btn", function () {
+$(document).on("click", ".my-btn", function () {
     
 	 var id = $(this).attr('id');
      $("#eventname").val(id);

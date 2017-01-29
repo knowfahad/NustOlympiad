@@ -560,7 +560,7 @@ var infoTeam = ["NONE","Event Fee: Rs. 3500 <br>Minimun Participants: 5 <br> Max
 
 
         
-        $(document).on("click", ".btn", function () {
+$(document).on("click", ".my-btn", function () {
             var id = $(this).attr('id');
             window.$vm.sportid = id;
             $(".modal-title").html('Register for ' +teamEvent[id]);

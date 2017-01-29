@@ -32,8 +32,8 @@ if($formsubmitted){
 		$error = "Please select on option!";
 	}
 	else{
-		$stmt = $mpdo->prepare("select e.EventID from eventparticipants as e where e.EventID = ?");
-		$stmt->execute([$eventname]);
+		$stmt = $mpdo->prepare("select e.EventID from eventparticipants as e where e.EventID = ? and e.ParticipantCNIC = ?");
+		$stmt->execute([$eventname, $auth->getCNIC()]);
 		if($stmt->rowCount())
 			$error = "You have already participated in this event!";
 	}
@@ -66,7 +66,7 @@ if($formsubmitted){
 			$challan->setAmountPayable($event->getEventFee());
 			$duedate = Carbon::today()->addWeeks(2)->toDateString();
 			$challan->setDueDate($duedate);
-			if($event->getEventID() == 22 || $event->getEventID() == 23 )
+			if($event->getEventID() == 24 || $event->getEventID() == 23 || $event->getEventID() == 21 )
 				$challan->setPaymentStatus(1);
 			else
 				$challan->setPaymentStatus(0);
@@ -157,7 +157,7 @@ var IndText = ["NONE","Event Fee: Rs. 400<br><br><a style = 'color: blue' href =
 
 $(document).ready(function()
 {
-	$(document).on("click", ".btn", function () {
+	$(document).on("click", ".my-btn", function () {
 	    
 		 var id = $(this).attr('id');
 		 $("#eventname").val(id);

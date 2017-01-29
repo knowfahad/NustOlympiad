@@ -2,6 +2,7 @@
 namespace Register;
 require_once (__DIR__ . '/../bootstrap.php');
 use App\OlMail;
+use Carbon\Carbon;
 use Respect\Validation\Validator as v;
 
 function sanitize($data){
@@ -195,7 +196,7 @@ function persistUser($data, $mpdo){ //execution will only start if there are no 
     $regChallan = "RC";
     $regChallan .= $nextid;
 	$regChallan .= ($data['isAmbassador']) ? '1' : '0';
-	
+	$duedate = Carbon::today()->addWeeks(2)->toDateString();
     if($stmt = $mpdo->prepare("INSERT INTO challan (ChallanID, AmountPayable, DueDate, PaymentStatus) VALUES (?,?,?,?)")){
 		$date= '20170101';
 		$am = 1000;
@@ -203,7 +204,7 @@ function persistUser($data, $mpdo){ //execution will only start if there are no 
 			$s= 1;
 		else
 			$s = 0;
-		$stmt->execute([$regChallan,$am,$date, $s]);
+		$stmt->execute([$regChallan,$am,$duedate, $s]);
 	}
 	else{
 		$errors['Fatal'] =("\ninsert challan not executed!\n");
@@ -270,7 +271,7 @@ We look forward to see your exuberant participation in the biggest Olympiad of t
 </p>
 <hr>
 <p>
-This message is generated automatically, please do not reply to this email. If you have any questions or suggestions, please send an email to <a href="mailto:er@nustolympiad.com>er@nustolympiad.com</a>
+This message is generated automatically, please do not reply to this email. If you have any questions or suggestions, please send an email to <a href="mailto:er@nustolympiad.com">er@nustolympiad.com</a>
 </p>
 
 Regards,

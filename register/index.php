@@ -279,7 +279,7 @@ font-weight:normal;
                                  >No</option>
                                 <option value="n_yes" style="color:black;"
                                 <?php
-                                if( !((isset($_POST['isNustian']) && $_POST['isNustian'] != "n_yes")) ): ?>
+                                if( ((isset($_POST['isNustian']) && $_POST['isNustian'] != "n_yes")) ): ?>
                                  selected="selected"
                                 <?php endif ?>
                                 >Yes</option>
