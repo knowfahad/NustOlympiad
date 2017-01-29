@@ -72,7 +72,7 @@
                             
             this.classes = [ 'front','back', 'right', 'left', 'top', 'bottom' ];	
                     this.topTags = ['year','month','day','hour', 'minute', 'second' ];
-                    this.loadingTags = [ 'LO', 'AD', 'IN', 'G...'];
+                    this.loadingTags = [ 'LO', 'AD', '0', '0','0','0'];
                     this.transformNames =  [ '-webkit-transform', '-moz-transform', '-o-transform', 'transform' ];
                     
                     cubes = [];
@@ -373,6 +373,11 @@
     	    	secondsToShow = diffTime.getSeconds();
     	    	minutesToShow = diffTime.getMinutes();
     			hoursToShow   = diffTime.getHours();
+    			
+    			//at final date all are zeros
+			if(options.target <= new Date()){
+				yearsToShow = monthsToShow = daysToShow = hoursToShow = minutesToShow = secondsToShow = 0;
+			}
     			
     			
     	    	/* make each cube an object on its own with a feature to shift it!*/
