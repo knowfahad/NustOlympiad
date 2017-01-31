@@ -11,13 +11,12 @@ $auth->onlyLoggedIn();
 $auth->onlyVerified();
 ?>
 
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sports | NUST Olympiad '17</title>
+    <title>Team Events | NUST Olympiad '17</title>
     <link rel="stylesheet" type="text/css" href="../css/timeline.css">
     <link rel="stylesheet" href="/css/themify-icons.css">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
@@ -30,7 +29,7 @@ $auth->onlyVerified();
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <link rel="stylesheet" href="/css/style2.css" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>Sports | NUST Olympiad '17</title>
+   
     <script type="text/javascript" src="/js/jquery.min.js"></script>
 
     <style>
@@ -537,7 +536,7 @@ var infoTeam = ["NONE","Event Fee: Rs. 3500 <br>Minimun Participants: 5 <br> Max
        "Event Fee: Rs. 4000 <br>Minimun Participants: 5 <br> Max. Participants: 9 <br><br><a style = 'color: blue' href ='../../events/sports/footy-mania.html' target = '_blank'>View Event Details and Rules</a><br><br>",
        "Event Fee: Rs. 2500 <br>Minimun Participants: 5 <br> Max. Participants: 5 <br><br><a style = 'color: blue' href ='../../events/all-events/e-gaming.html' target = '_blank'>View Event Details and Rules</a><br><br>",
        "Event Fee: Rs. 2500 <br>Minimun Participants: 5 <br> Max. Participants: 5 <br><br><a style = 'color: blue' href ='../../events/all-events/e-gaming.html' target = '_blank'>View Event Details and Rules</a><br><br>",
-       "Event Fee: Rs. 800 <br>Minimun Participants: 5 <br> Max. Participants: 5 <br><br><a style = 'color: blue' href ='../../events/events.html' target = '_blank'>View Event Details and Rules</a><br><br>",
+       "Event Fee: Rs. 4000 <br>Minimun Participants: 5 <br> Max. Participants: 5 <br><br><a style = 'color: blue' href ='../../events/all-events/make_it_right.html' target = '_blank'>View Event Details and Rules</a><br><br>",
        "Event Fee: Rs. 2500 <br>Minimun Participants: 5 <br> Max. Participants: 5 <br><br><a style = 'color: blue' href ='../../events/all-events/e-gaming.html' target = '_blank'>View Event Details and Rules</a><br><br>",
        "Event Fee: Rs. 400 <br>Minimun Participants: 1 <br> Max. Participants: 2 <br><br><a style = 'color: blue' href ='../../events/all-events/bait-bazi.html' target = '_blank'>View Event Details and Rules</a><br><br>",
        "Event Fee: Rs. 1500 <br>Minimun Participants: 7 <br> Max. Participants:10 <br><br><a style = 'color: blue' href ='../../events/all-events/capture-the-flag.html' target = '_blank'>View Event Details and Rules</a><br><br>",
@@ -551,7 +550,7 @@ var infoTeam = ["NONE","Event Fee: Rs. 3500 <br>Minimun Participants: 5 <br> Max
        "Event Fee: Rs. 5000 <br>Minimun Participants: 5 <br> Max. Participants: 5 <br><br><a style = 'color: blue' href ='../../events/all-events/paintball.html' target = '_blank'>View Event Details and Rules</a><br><br>",
        "Event Fee: Rs. 500 <br>Minimun Participants: 1 <br> Max. Participants: 3 <br><br><a style = 'color: blue' href ='../../events/all-events/minute-to-win-it.html' target = '_blank'>View Event Details and Rules</a><br><br>",
        "Event Fee: Rs. 2500 <br>Minimun Participants: 2 <br> Max. Participants: 5<br><br><a style = 'color: blue' href ='../../events/all-events/speedprogramming.html' target = '_blank'>View Event Details and Rules</a><br><br>",
-       "Event Fee: Rs. 800 <br>Minimun Participants: 5 <br> Max. Participants: 5<br><br><a style = 'color: blue' href ='../../events/events.html' target = '_blank'>View Event Details and Rules</a><br><br>"
+       "Event Fee: Rs. 4000 <br>Minimun Participants: 5 <br> Max. Participants: 5<br><br><a style = 'color: blue' href ='../../events/all-events/virtual_stock_simulator.html' target = '_blank'>View Event Details and Rules</a><br><br>"
 
        
        

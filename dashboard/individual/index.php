@@ -100,7 +100,7 @@ if($formsubmitted){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events | NUST Olympiad '17</title>
+    <title>Individual Events | NUST Olympiad '17</title>
     <link rel="stylesheet" type="text/css" href="/css/timeline.css">
     <link rel="stylesheet" href="/css/themify-icons.css">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
@@ -113,7 +113,7 @@ if($formsubmitted){
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <link rel="stylesheet" href="/css/style2.css" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>Sports | NUST Olympiad '17</title>
+    
     <!--<script type="text/javascript" async="" src="Register_files/recaptcha__en.js"></script><script src="Register_files/jquery.js"></script> -->
     <!-- <script src="https://maxdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
     <!--<script src="Register_files/api.js"></script> -->
@@ -126,7 +126,7 @@ var IndividualEventsList = ["None","Essay Writing","Hurdle Marathon","Wall Climb
        "Public Speaking Challenge","Pakistan Got Talent","Table Tennis(Males)","Table Tennis(Females)",
        "Badminton(Males)","Badminton(Females)","Chess","Squash(Males)","Squash(Females)","FIFA",
        "Need for Speed: Most Wanted","Mad Hunt","Product Photography",
-       "Marathon Male","Marathon Female","Nust Youth Parliament"];
+       "Marathon Male","Marathon Female","NUST Youth Parliament"];
 
 var IndText = ["NONE","Event Fee: Rs. 400<br><br><a style = 'color: blue' href ='../../events/all-events/essay-writing.html' target = '_blank'>View Event Details and Rules</a><br>",
 "Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/all-events/hurdle-marathon.html' target = '_blank'>View Event Details and Rules</a><br>",
@@ -148,11 +148,11 @@ var IndText = ["NONE","Event Fee: Rs. 400<br><br><a style = 'color: blue' href =
 "Event Fee: Rs. 800<br><br><a style = 'color: blue' href ='../../events/sports/squash.html' target = '_blank'>View Event Details and Rules</a><br>",
 "Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/all-events/e-gaming.html' target = '_blank'>View Event Details and Rules</a><br>",
 "Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/all-events/e-gaming.html' target = '_blank'>View Event Details and Rules</a><br>",
-"Event Fee: Rs. 500<br><br><a style = 'color: blue' href ='../../events/events.html' target = '_blank'>View Event Details and Rules</a><br>",
-"Event Fee: Rs. 600<br><br><a style = 'color: blue' href ='../../events/events.html' target = '_blank'>View Event Details and Rules</a><br>",
-"No Fee!<br><br><a style = 'color: blue' href ='../../events/sports.html' target = '_blank'>View Event Details and Rules</a><br>",
-"No Fee!<br><br><a style = 'color: blue' href ='../../events/sports.html' target = '_blank'>View Event Details and Rules</a><br>",
-"Event Fee: Rs. 400<br><br><a style = 'color: blue' href ='../../events/events.html' target = '_blank'>View Event Details and Rules</a><br>"
+"Free of cost event! Details will published soon!<br><br><a style = 'color: blue' href ='../../events/all-events/mad-hunt.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 600<br><br><a style = 'color: blue' href ='../../events/all-events/product_photography.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Free Event!<br><br><a style = 'color: blue' href ='../../events/sports/marathon.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Free Event!<br><br><a style = 'color: blue' href ='../../events/sports/marathon.html' target = '_blank'>View Event Details and Rules</a><br>",
+"Event Fee: Rs. 400<br><br><a style = 'color: blue' href ='../../events/all-events/NUST_youth_parliament.html' target = '_blank'>View Event Details and Rules</a><br>"
 ];
 
 $(document).ready(function()
